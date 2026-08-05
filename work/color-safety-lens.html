@@ -437,7 +437,8 @@
 
     <h2 class="h2" style="margin-top:var(--gap-l);" data-reveal>Use it</h2>
 
-    <div class="embed" data-embed data-reveal>
+    <div class="embed embed--fit embed--bleed" data-embed data-reveal
+         data-embed-w="1280" data-embed-h="860">
       <div class="embed__bar">
         <span class="meta">Color Safety Lens — running live</span>
         <a class="btn" href="tools/color-safety-lens.html" target="_blank" rel="noopener">Open full screen</a>
@@ -450,7 +451,7 @@
       <p class="embed__note">
         The actual tool, not a screenshot. Load a palette, ramp the tints, and run the
         colour-vision simulation — the same linear-RGB pipeline described above.
-        Best on a desktop viewport.
+        <span data-scale-out></span>
       </p>
     </div>
 
@@ -507,6 +508,7 @@
     });
   })();
 </script>
+<script src="../js/embed.js"></script>
 <script src="../js/theme.js"></script>
 <script type="module" src="../js/motion.js"></script>
 <script type="module">

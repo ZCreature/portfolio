@@ -564,6 +564,36 @@ section { padding-block: var(--gap-xl); }
   display: block;
 }
 
+/* Fit-to-width variant.
+
+   Both embedded tools are laid out for one viewport size — no media
+   queries, several position:fixed panels — so narrowing the frame clips
+   them rather than reflowing. Instead the iframe is given its natural
+   size and scaled down to whatever width is available, so the whole
+   interface is always visible and nothing is cut off. Interaction still
+   works normally; only the rendered scale changes. */
+.embed--fit .embed__frame {
+  height: auto;
+  overflow: hidden;
+}
+
+.embed--fit .embed__frame iframe {
+  width: var(--embed-w, 1440px);
+  height: var(--embed-h, 900px);
+  transform: scale(var(--embed-scale, 1));
+  transform-origin: top left;
+}
+
+/* Full-bleed: escape the reading column so the scale factor stays high. */
+.embed--bleed {
+  width: min(96vw, 92rem);
+  margin-inline: calc(50% - min(48vw, 46rem));
+}
+
+@media (max-width: 46rem) {
+  .embed--bleed { width: 100%; margin-inline: 0; }
+}
+
 /* Shown until the iframe reports load — these are heavy documents. */
 .embed__loading {
   position: absolute;

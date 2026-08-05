@@ -68,7 +68,7 @@
   </section>
 
   <!-- ============ Live ============ -->
-  <section class="shell shell--narrow" style="padding-block: var(--gap-l);">
+  <section class="shell" style="padding-block: var(--gap-l);">
     <div class="prose" data-reveal>
       <p class="meta">01 — The map</p>
       <h2>Running here, in the page</h2>
@@ -79,7 +79,8 @@
       </p>
     </div>
 
-    <div class="embed" data-embed data-reveal>
+    <div class="embed embed--fit embed--bleed" data-embed data-reveal
+         data-embed-w="1440" data-embed-h="900">
       <div class="embed__bar">
         <span class="meta">North American gas prices — interactive</span>
         <a class="btn" href="tools/gas-prices.html" target="_blank" rel="noopener">Open full screen</a>
@@ -90,9 +91,10 @@
                 title="Interactive map of North American gas prices"></iframe>
       </div>
       <p class="embed__note">
-        R + Leaflet output, embedded unmodified. It carries its own Leaflet, Proj4 and
-        jQuery — about 6&nbsp;MB, loaded only when you scroll to it. The basemap tiles
-        come from CartoDB, so this panel needs a connection.
+        Built for a 1440&nbsp;×&nbsp;900 viewport with no responsive breakpoints, so it
+        renders at full size and scales to fit rather than reflowing.
+        <span data-scale-out></span> Basemap tiles come from CartoDB, so this panel
+        needs a connection.
       </p>
     </div>
   </section>
@@ -161,6 +163,7 @@
     });
   })();
 </script>
+<script src="../js/embed.js"></script>
 <script src="../js/theme.js"></script>
 <script type="module" src="../js/motion.js"></script>
 </body>
