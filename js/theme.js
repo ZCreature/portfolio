@@ -27,8 +27,9 @@ function set(mode) {
   const meta = document.querySelector('meta[name="theme-color"]');
   if (meta) meta.setAttribute('content', dark ? '#0b0b0c' : '#fbfbfa');
 
-  document.querySelectorAll('[data-theme-set]').forEach((btn) => {
-    btn.setAttribute('aria-pressed', String(btn.dataset.themeSet === (dark ? 'dark' : 'light')));
+  document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {
+    btn.setAttribute('aria-pressed', String(dark));
+    btn.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
   });
 
   // Charts carry their own per-theme palettes — a single series palette can't
@@ -42,8 +43,8 @@ function init() {
   // Reflect whatever the pre-paint snippet decided.
   set(current());
 
-  document.querySelectorAll('[data-theme-set]').forEach((btn) => {
-    btn.addEventListener('click', () => set(btn.dataset.themeSet));
+  document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {
+    btn.addEventListener('click', () => set(current() === 'dark' ? 'light' : 'dark'));
   });
 }
 

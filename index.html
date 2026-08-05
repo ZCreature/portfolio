@@ -24,14 +24,16 @@
   <div class="shell masthead__inner">
     <a class="wordmark" href="/">Chris Almaguer</a>
     <nav class="nav" aria-label="Primary">
-      <a href="#work">Work</a>
-      <a href="#tools">Tools</a>
+      <a href="#current">Current work</a>
+      <a href="#past">Past work</a>
       <a href="about.html">About</a>
-      <a class="nav--keep" href="mailto:calmaguer.design@gmail.com">Email</a>
-      <span class="seg seg--theme" role="group" aria-label="Colour theme">
-        <button type="button" data-theme-set="light" aria-pressed="true">Light</button>
-        <button type="button" data-theme-set="dark" aria-pressed="false">Dark</button>
-      </span>
+      <button class="theme-toggle" type="button" data-theme-toggle
+              aria-label="Switch to dark theme" aria-pressed="false">
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+          <circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M8 0.75 A7.25 7.25 0 0 0 8 15.25 Z" fill="currentColor"/>
+        </svg>
+      </button>
     </nav>
   </div>
 </header>
@@ -42,22 +44,9 @@
   <section class="shell" style="padding-block: clamp(2rem,6vw,4rem) var(--gap-l);">
     <div class="nameplate" data-reveal>
       <h1>Chris Almaguer</h1>
+      <p class="nameplate__sub">Data visualization designer — dashboards, data
+      storytelling, executive reporting</p>
     </div>
-
-    <dl class="spec" data-reveal style="--reveal-delay:60ms;">
-      <dt>Discipline</dt>
-      <dd>Data visualization &amp; dashboard design</dd>
-      <dt>Current</dt>
-      <dd>Sr. Designer, Data Intelligence &amp; Visualization — Vizient</dd>
-      <dt>Before</dt>
-      <dd>News designer — SF, Silicon Valley &amp; Sacramento Business Journals</dd>
-      <dt>Experience</dt>
-      <dd>Twelve years. Print production, newsroom, enterprise analytics.</dd>
-      <dt>Based</dt>
-      <dd>Stockton, California</dd>
-      <dt>Status</dt>
-      <dd>Open to senior roles — SF Bay Area, on-site, hybrid or remote</dd>
-    </dl>
 
     <div data-reveal style="--reveal-delay:120ms; margin-top: var(--gap-l);">
       <p class="lede tight">
@@ -209,10 +198,10 @@
     <div class="colophon">
       <span class="meta">Chris Almaguer · Stockton, CA</span>
       <nav class="nav" aria-label="Elsewhere">
-        <a class="nav--keep" href="about.html">About</a>
-        <a class="nav--keep" href="https://www.linkedin.com/in/almaguer1/" rel="noopener">LinkedIn</a>
-        <a class="nav--keep" href="https://dribbble.com/chrisalmaguer" rel="noopener">Dribbble</a>
-        <a class="nav--keep" href="https://github.com/ZCreature" rel="noopener">GitHub</a>
+        <a href="about.html">About</a>
+        <a href="https://www.linkedin.com/in/almaguer1/" rel="noopener">LinkedIn</a>
+        <a href="https://dribbble.com/chrisalmaguer" rel="noopener">Dribbble</a>
+        <a href="https://github.com/ZCreature" rel="noopener">GitHub</a>
       </nav>
     </div>
   </section>

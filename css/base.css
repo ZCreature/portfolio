@@ -251,13 +251,30 @@ section { padding-block: var(--gap-xl); }
 .seg button:hover { color: var(--ink); }
 .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
 
-.seg--theme button { padding: 0.35rem 0.55rem; }
+/* ---- 5c. Theme toggle ------------------------------------
+   A half-filled circle: the light/dark relationship itself, so
+   it needs no label and reads in any language.              */
 
-/* On narrow screens the wordmark shortens and the text nav drops to the
-   footer, but the theme control always stays reachable. */
+.theme-toggle {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0.35rem;
+  margin-left: 0.25rem;
+  cursor: pointer;
+  color: var(--ink-3);
+  display: grid;
+  place-items: center;
+  transition: color var(--t-fast) linear, transform var(--t-fast) var(--ease);
+}
+
+.theme-toggle svg { width: 16px; height: 16px; }
+.theme-toggle:hover { color: var(--ink); }
+.theme-toggle[aria-pressed="true"] svg { transform: rotate(180deg); }
+
 @media (max-width: 34rem) {
-  .nav a { display: none; }
-  .nav a.nav--keep { display: inline; }
+  .nav { gap: 0.85rem; }
+  .nav a { font-size: 0.75rem; }
 }
 
 /* ---- 6. Nameplate ----------------------------------------
@@ -266,18 +283,24 @@ section { padding-block: var(--gap-xl); }
    filed underneath it as specification.                     */
 
 .nameplate {
-  border-top: 2px solid var(--ink);
-  border-bottom: 1px solid var(--ink);
-  padding-block: clamp(0.75rem, 2vw, 1.5rem);
+  padding-block: 0 clamp(0.75rem, 2vw, 1.5rem);
 }
 
 .nameplate h1 {
-  font-size: clamp(2.5rem, 12.5vw, 9rem);
-  line-height: 0.92;
-  letter-spacing: -0.028em;
+  font-size: clamp(1.5rem, 6.25vw, 4.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
   font-weight: 700;
   text-transform: uppercase;
   margin: 0;
+}
+
+.nameplate__sub {
+  margin-top: 0.6rem;
+  max-width: 42ch;
+  font-size: clamp(0.9375rem, 1.5vw, 1.125rem);
+  line-height: 1.35;
+  color: var(--ink-3);
 }
 
 /* Specification block — label / value rows, the way a spec sheet

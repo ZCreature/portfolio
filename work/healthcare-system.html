@@ -64,13 +64,16 @@
   <div class="shell masthead__inner">
     <a class="wordmark" href="../index.html">Chris Almaguer</a>
     <nav class="nav" aria-label="Primary">
-      <a href="../index.html#work">Work</a>
+      <a href="../index.html#current">Current work</a>
+      <a href="../index.html#past">Past work</a>
       <a href="../about.html">About</a>
-      <a href="mailto:calmaguer.design@gmail.com">Email</a>
-      <span class="seg seg--theme" role="group" aria-label="Colour theme">
-        <button type="button" data-theme-set="light" aria-pressed="true">Light</button>
-        <button type="button" data-theme-set="dark" aria-pressed="false">Dark</button>
-      </span>
+      <button class="theme-toggle" type="button" data-theme-toggle
+              aria-label="Switch to dark theme" aria-pressed="false">
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+          <circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M8 0.75 A7.25 7.25 0 0 0 8 15.25 Z" fill="currentColor"/>
+        </svg>
+      </button>
     </nav>
   </div>
 </header>
