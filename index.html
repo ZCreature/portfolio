@@ -56,65 +56,100 @@
       <span class="meta">Three case studies</span>
     </div>
 
-    <div class="ledger" data-reveal-group data-reveal-step="70">
+    <div class="tiles" data-reveal-group data-reveal-step="60">
 
-      <article class="entry" data-reveal>
-        <span class="entry__num num">01</span>
-        <div>
-          <h3 class="entry__title">
-            <a class="entry__link" href="work/healthcare-system.html">A colour standard for healthcare dashboards</a>
-            <span class="arrow" aria-hidden="true">→</span>
-          </h3>
-          <p class="entry__sub">
-            Fifty dashboards needed one answer to "is this readable?" — not fifty.
-            The WCAG 2.1 AA study that produced it.
-          </p>
-          <div class="entry__tags" style="margin-top:0.7rem;">
-            <span class="tag tag--live">Live in page</span>
+      <article class="tile" data-reveal>
+        <div class="tile__thumb">
+          <!-- four series descending: the dashboard system -->
+          <svg viewBox="0 0 160 100" preserveAspectRatio="none" aria-hidden="true">
+            <g fill="none" stroke-width="2.5" stroke-linecap="round">
+              <path d="M12 30 L46 34 L80 28 L114 38 L148 34" stroke="var(--tile-1)"/>
+              <path d="M12 48 L46 44 L80 52 L114 46 L148 56" stroke="var(--tile-2)"/>
+              <path d="M12 62 L46 66 L80 60 L114 68 L148 64" stroke="var(--tile-3)"/>
+              <path d="M12 80 L46 76 L80 82 L114 74 L148 78" stroke="var(--tile-4)"/>
+            </g>
+          </svg>
+        </div>
+        <div class="tile__body">
+          <div class="tile__head">
+            <h3 class="tile__title">
+              <a class="tile__link" href="work/healthcare-system.html">A colour standard for healthcare dashboards</a>
+            </h3>
+            <span class="meta">2022—</span>
+          </div>
+          <p class="tile__sub">Fifty dashboards, one WCAG&nbsp;2.1&nbsp;AA answer.</p>
+          <div class="tile__tags">
+            <span class="tag tag--live">Live</span>
             <span class="tag">Vizient</span>
-            <span class="tag">Design system</span>
           </div>
         </div>
-        <span class="meta">2022—</span>
       </article>
 
-      <article class="entry" data-reveal>
-        <span class="entry__num num">02</span>
-        <div>
-          <h3 class="entry__title">
-            <a class="entry__link" href="work/color-safety-lens.html">Color Safety Lens</a>
-            <span class="arrow" aria-hidden="true">→</span>
-          </h3>
-          <p class="entry__sub">
-            Shipped an accessibility auditor. Then found my own colour maths was
-            wrong by ΔE 17.
-          </p>
-          <div class="entry__tags" style="margin-top:0.7rem;">
-            <span class="tag tag--live">Live in page</span>
-            <span class="tag">Accessibility</span>
+      <article class="tile" data-reveal>
+        <div class="tile__thumb">
+          <!-- tint ramp collapsing: the colour auditor -->
+          <svg viewBox="0 0 160 100" preserveAspectRatio="none" aria-hidden="true">
+            <g>
+              <rect x="12"  y="20" width="26" height="26" fill="var(--tile-1)"/>
+              <rect x="42"  y="20" width="26" height="26" fill="var(--tile-1)" opacity="0.6"/>
+              <rect x="72"  y="20" width="26" height="26" fill="var(--tile-1)" opacity="0.3"/>
+              <rect x="102" y="20" width="26" height="26" fill="var(--tile-1)" opacity="0.12"/>
+              <rect x="12"  y="54" width="26" height="26" fill="var(--tile-3)"/>
+              <rect x="42"  y="54" width="26" height="26" fill="var(--tile-3)" opacity="0.6"/>
+              <rect x="72"  y="54" width="26" height="26" fill="var(--tile-3)" opacity="0.3"/>
+              <rect x="102" y="54" width="26" height="26" fill="var(--tile-3)" opacity="0.12"/>
+            </g>
+          </svg>
+        </div>
+        <div class="tile__body">
+          <div class="tile__head">
+            <h3 class="tile__title">
+              <a class="tile__link" href="work/color-safety-lens.html">Color Safety Lens</a>
+            </h3>
+            <span class="meta">2026</span>
+          </div>
+          <p class="tile__sub">Shipped it. Then found my colour maths was wrong.</p>
+          <div class="tile__tags">
+            <span class="tag tag--live">Live</span>
             <span class="tag">Open source</span>
           </div>
         </div>
-        <span class="meta">2026</span>
       </article>
 
-      <article class="entry" data-reveal>
-        <span class="entry__num num">03</span>
-        <div>
-          <h3 class="entry__title">
-            <a class="entry__link" href="work/lap-times.html">115 laps at Thunderhill</a>
-            <span class="arrow" aria-hidden="true">→</span>
-          </h3>
-          <p class="entry__sub">
-            A year of my own telemetry. 1:39 down to 1:28, against a
-            theoretical-best floor.
-          </p>
-          <div class="entry__tags" style="margin-top:0.7rem;">
-            <span class="tag tag--live">Live in page</span>
+      <article class="tile" data-reveal>
+        <div class="tile__thumb">
+          <!-- scatter descending over a floor line: the lap times -->
+          <svg viewBox="0 0 160 100" preserveAspectRatio="none" aria-hidden="true">
+            <g fill="var(--tile-3)">
+              <circle cx="16" cy="30" r="3.5"/><circle cx="26" cy="26" r="3.5"/>
+              <circle cx="36" cy="34" r="3.5"/><circle cx="48" cy="31" r="3.5"/>
+              <circle cx="60" cy="40" r="3.5"/><circle cx="70" cy="37" r="3.5"/>
+              <circle cx="82" cy="45" r="3.5"/><circle cx="94" cy="43" r="3.5"/>
+              <circle cx="118" cy="56" r="3.5"/><circle cx="128" cy="61" r="3.5"/>
+              <circle cx="140" cy="58" r="3.5"/><circle cx="150" cy="63" r="3.5"/>
+            </g>
+            <g fill="var(--tile-1)">
+              <circle cx="100" cy="16" r="3.5"/><circle cx="108" cy="24" r="3.5"/>
+              <circle cx="112" cy="34" r="3.5"/>
+            </g>
+            <g stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.85">
+              <path d="M14 46 L52 46"/><path d="M58 56 L96 56"/><path d="M116 72 L152 72"/>
+            </g>
+          </svg>
+        </div>
+        <div class="tile__body">
+          <div class="tile__head">
+            <h3 class="tile__title">
+              <a class="tile__link" href="work/lap-times.html">115 laps at Thunderhill</a>
+            </h3>
+            <span class="meta">2025</span>
+          </div>
+          <p class="tile__sub">A year of my own telemetry. 1:39 to 1:28.</p>
+          <div class="tile__tags">
+            <span class="tag tag--live">Live</span>
             <span class="tag">Personal data</span>
           </div>
         </div>
-        <span class="meta">2025</span>
       </article>
 
     </div>
@@ -181,54 +216,42 @@
       <span class="meta">2011 — 2022</span>
     </div>
 
-    <div class="ledger" data-reveal-group data-reveal-step="70">
+    <div class="tiles" data-reveal-group data-reveal-step="60">
 
-      <article class="entry" data-reveal>
-        <span class="entry__num num">04</span>
-        <div>
-          <h3 class="entry__title">Editorial &amp; news design</h3>
-          <p class="entry__sub">
-            Four years of deadline graphics for the San Francisco, Silicon Valley and
-            Sacramento Business Journals. Strict grids, standing type, print and digital.
-          </p>
-          <div class="entry__tags" style="margin-top:0.7rem;">
-            <span class="tag">ACBJ</span>
-            <span class="tag">Samples on request</span>
+      <article class="tile tile--quiet" data-reveal>
+        <div class="tile__thumb"></div>
+        <div class="tile__body">
+          <div class="tile__head">
+            <h3 class="tile__title">Editorial &amp; news design</h3>
+            <span class="meta">2018—22</span>
           </div>
+          <p class="tile__sub">Deadline graphics for three California business journals.</p>
+          <div class="tile__tags"><span class="tag">ACBJ</span><span class="tag">On request</span></div>
         </div>
-        <span class="meta">2018—22</span>
       </article>
 
-      <article class="entry" data-reveal>
-        <span class="entry__num num">05</span>
-        <div>
-          <h3 class="entry__title">Logo &amp; identity</h3>
-          <p class="entry__sub">
-            Identity work for regional businesses and personal brands — adaptable
-            systems rather than single marks.
-          </p>
-          <div class="entry__tags" style="margin-top:0.7rem;">
-            <span class="tag">Branding</span>
-            <span class="tag">Samples on request</span>
+      <article class="tile tile--quiet" data-reveal>
+        <div class="tile__thumb"></div>
+        <div class="tile__body">
+          <div class="tile__head">
+            <h3 class="tile__title">Logo &amp; identity</h3>
+            <span class="meta">2013—17</span>
           </div>
+          <p class="tile__sub">Identity systems for regional businesses.</p>
+          <div class="tile__tags"><span class="tag">Branding</span><span class="tag">On request</span></div>
         </div>
-        <span class="meta">2013—17</span>
       </article>
 
-      <article class="entry" data-reveal>
-        <span class="entry__num num">06</span>
-        <div>
-          <h3 class="entry__title">Print production</h3>
-          <p class="entry__sub">
-            Signage, wide format, and colour management. The unglamorous end of the
-            trade, where a mistake costs material — and where I learned specifications.
-          </p>
-          <div class="entry__tags" style="margin-top:0.7rem;">
-            <span class="tag">Production</span>
-            <span class="tag">Colour management</span>
+      <article class="tile tile--quiet" data-reveal>
+        <div class="tile__thumb"></div>
+        <div class="tile__body">
+          <div class="tile__head">
+            <h3 class="tile__title">Print production</h3>
+            <span class="meta">2011—17</span>
           </div>
+          <p class="tile__sub">Signage, wide format, colour management.</p>
+          <div class="tile__tags"><span class="tag">Production</span></div>
         </div>
-        <span class="meta">2011—17</span>
       </article>
 
     </div>

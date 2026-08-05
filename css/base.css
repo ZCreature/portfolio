@@ -449,6 +449,96 @@ section { padding-block: var(--gap-xl); }
   .entry__tags { grid-column: 2; justify-content: flex-start; max-width: none; }
 }
 
+/* ---- 7b. Work tiles --------------------------------------
+   A grid, not a reading list. Each thumbnail is a vector
+   reduction of the actual work rather than a screenshot.   */
+
+:root {
+  --tile-1: #003353;
+  --tile-2: #a1002a;
+  --tile-3: #107c7f;
+  --tile-4: #c68301;
+}
+
+:root[data-theme="dark"] {
+  --tile-1: #1372b0;
+  --tile-2: #fc5562;
+  --tile-3: #21c9ce;
+  --tile-4: #fedab0;
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+}
+
+.tile {
+  position: relative;
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  transition: background 90ms linear, color 90ms linear;
+}
+
+.tile:hover, .tile:focus-within { background: var(--ink); color: var(--paper); }
+.tile:hover .tile__sub, .tile:focus-within .tile__sub,
+.tile:hover .meta,     .tile:focus-within .meta { color: var(--paper); opacity: 0.7; }
+.tile:hover .tile__thumb, .tile:focus-within .tile__thumb { border-bottom-color: var(--paper); }
+.tile:hover .tag, .tile:focus-within .tag { color: var(--paper); border-color: var(--paper); opacity: 0.7; }
+
+.tile__thumb {
+  aspect-ratio: 16 / 10;
+  border-bottom: 1px solid var(--rule);
+  overflow: hidden;
+  background: var(--paper-2);
+  transition: border-color 90ms linear;
+}
+
+.tile:hover .tile__thumb { background: var(--paper-2); }
+.tile__thumb svg { width: 100%; height: 100%; display: block; }
+
+.tile__body {
+  padding: 1.1rem clamp(1rem, 2vw, 1.35rem) 1.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.tile__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.tile__title {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -0.018em;
+  line-height: 1.2;
+}
+
+.tile__sub {
+  font-size: 0.875rem;
+  color: var(--ink-3);
+  line-height: 1.45;
+}
+
+.tile__tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: auto; padding-top: 0.7rem; }
+
+.tile__link::before { content: ""; position: absolute; inset: 0; }
+
+/* Past work has no live data behind it yet — a ruled field holds the
+   slot until real assets land, rather than a fake image. */
+.tile--quiet .tile__thumb {
+  background-image: repeating-linear-gradient(
+    45deg, var(--rule-soft) 0 8px, transparent 8px 16px);
+}
+
 /* ---- 8. Tool cards --------------------------------------- */
 
 .grid-tools {
