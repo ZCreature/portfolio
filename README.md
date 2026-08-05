@@ -51,4 +51,18 @@ numbers on screen and must not contradict themselves.
   set `meta.reconstruction` to `false`.
 - No images yet — the site is deliberately type-driven. Drop assets in
   `assets/img/`.
-- Not yet deployed. Target: GitHub Pages under `ZCreature`.
+- **Not deployed, and no domain chosen.** `og:image`, `og:url` and `canonical`
+  need an absolute origin to work, so they are deliberately absent. Once the
+  URL is known, add to every page `<head>`:
+
+      <link rel="canonical" href="ORIGIN/PATH">
+      <meta property="og:url" content="ORIGIN/PATH">
+      <meta property="og:image" content="ORIGIN/assets/img/og.png">
+      <meta property="og:image:width" content="1200">
+      <meta property="og:image:height" content="630">
+      <meta name="twitter:image" content="ORIGIN/assets/img/og.png">
+
+  Until then the share card falls back to title and description with no image.
+  A `robots.txt` also needs the origin for its `Sitemap:` line.
+- The GitHub links in the footer point at `github.com/ZCreature`, inferred from
+  the git remote on the local Color-Safety-Lens repo. Verify before publishing.
