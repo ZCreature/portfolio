@@ -470,14 +470,19 @@ section { padding-block: var(--gap-xl); }
    as matching blocks rather than reflowing independently. */
 .tiles--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .tiles--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.tiles--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 
+
+@media (max-width: 74rem) {
+  .tiles--4 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
 
 @media (max-width: 64rem) {
-  .tiles--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tiles--3, .tiles--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 30rem) {
-  .tiles--2, .tiles--3 { grid-template-columns: minmax(0, 1fr); }
+  .tiles--2, .tiles--3, .tiles--4 { grid-template-columns: minmax(0, 1fr); }
 }
 
 .tile {
@@ -550,6 +555,18 @@ section { padding-block: var(--gap-xl); }
 .tile__tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: auto; padding-top: 0.7rem; }
 
 .tile__link::before { content: ""; position: absolute; inset: 0; }
+
+/* Reserved slot. Holds the grid square until real work fills it — visibly
+   empty rather than a fake card, and skipped by assistive tech. */
+.tile--empty { background: var(--paper); }
+.tile--empty:hover { background: var(--paper); color: inherit; }
+.tile--empty .tile__thumb {
+  background: transparent;
+  background-image: repeating-linear-gradient(
+    45deg, var(--rule-soft) 0 7px, transparent 7px 14px);
+  border-bottom-color: var(--rule-soft);
+}
+.tile--empty .tile__body { min-height: 5.5rem; }
 
 /* Past work has no live data behind it yet — a ruled field holds the
    slot until real assets land, rather than a fake image. */
