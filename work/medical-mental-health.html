@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Medical student mental health — Chris Almaguer</title>
+<meta name="description" content="A heat map study of medical student burnout and anxiety, built in Tableau for the Cleartelligence Chart Champ competition.">
+<meta name="theme-color" content="#fbfbfa">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Chris Almaguer">
+<meta property="og:title" content="Medical student mental health — Chris Almaguer">
+<meta property="og:description" content="A heat map study of medical student burnout and anxiety, built in Tableau for the Cleartelligence Chart Champ competition.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Medical student mental health — Chris Almaguer">
+<meta name="twitter:description" content="A heat map study of medical student burnout and anxiety, built in Tableau.">
+<meta name="author" content="Chris Almaguer">
+<script>
+  try {
+    if (localStorage.getItem('ca-theme') === 'dark')
+      document.documentElement.setAttribute('data-theme', 'dark');
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="../css/base.css">
+<style>
+  /* Tableau sets x-frame-options: SAMEORIGIN, so a plain iframe is refused.
+     Their embedding API mounts the viz in a shadow root instead. */
+  .viz-embed { width: 100%; min-height: 40rem; }
+  tableau-viz { width: 100%; display: block; }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="shell masthead__inner">
+    <a class="wordmark" href="../index.html">Chris Almaguer</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="../index.html#current">Current work</a>
+      <a href="../index.html#past">Past work</a>
+      <a href="../about.html">About</a>
+      <button class="theme-toggle" type="button" data-theme-toggle
+              aria-label="Switch to dark theme" aria-pressed="false">
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+          <circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M8 0.75 A7.25 7.25 0 0 0 8 15.25 Z" fill="currentColor"/>
+        </svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ Hero ============ -->
+  <section class="shell case-hero" style="padding-bottom: var(--gap-m);">
+    <p class="meta" data-reveal>Case study — 05 / Competition</p>
+    <h1 class="h1" data-reveal style="--reveal-delay:70ms; margin-top: var(--gap-s);">
+      Burnout as a heat map
+    </h1>
+    <p class="lede tight" data-reveal style="--reveal-delay:140ms; margin-top: var(--gap-m);">
+      A study of medical student mental health, measured on two validated
+      instruments and read as density rather than as points.
+    </p>
+
+    <div class="case-facts" style="margin-top: var(--gap-l);" data-reveal>
+      <div><p class="meta fact__label">Role</p><p class="fact__value">Design, analysis, build</p></div>
+      <div><p class="meta fact__label">Year</p><p class="fact__value">2023</p></div>
+      <div><p class="meta fact__label">Tool</p><p class="fact__value">Tableau</p></div>
+      <div><p class="meta fact__label">Context</p><p class="fact__value">Cleartelligence Chart Champ</p></div>
+    </div>
+  </section>
+
+  <!-- ============ Live ============ -->
+  <section class="shell" style="padding-block: var(--gap-m) var(--gap-l);">
+    <div class="embed" data-reveal style="border:1px solid var(--rule);">
+      <div class="embed__bar">
+        <span class="meta">Medical Student Mental Health — live</span>
+        <a class="btn" href="https://public.tableau.com/app/profile/creature/viz/MedicalStudentMentalHealthChartChamp/Dashboard1"
+           target="_blank" rel="noopener">Open on Tableau Public</a>
+      </div>
+      <div class="viz-embed">
+        <tableau-viz id="viz"
+          src="https://public.tableau.com/views/MedicalStudentMentalHealthChartChamp/Dashboard1"
+          hide-tabs toolbar="bottom"></tableau-viz>
+      </div>
+      <p class="embed__note">
+        The live workbook, served by Tableau Public. It sets
+        <span class="num">x-frame-options: SAMEORIGIN</span>, so this uses Tableau's
+        embedding API rather than an iframe — which means this panel needs a connection.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ The instruments ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l);">
+    <div class="prose" data-reveal>
+      <p class="meta">01 — The measures</p>
+      <h2>Two instruments, one grid</h2>
+      <p>
+        The dashboard reads two validated scales side by side. <b>MBI</b> — the Maslach
+        Burnout Inventory, here its academic efficacy subscale — and <b>STAI</b>, the
+        State-Trait Anxiety Inventory. Both are ordinal, both are collected per student,
+        and both are the kind of measure that looks like noise as a scatter plot.
+      </p>
+      <p>
+        Density is the honest encoding for that. A heat map says <em>how many students
+        sit here</em>, which is the question, rather than plotting every respondent and
+        letting overlap decide what you see.
+      </p>
+    </div>
+
+    <p class="pull" data-reveal>
+      A scatter plot of survey responses shows you the range. A heat map shows you where
+      people actually are.
+    </p>
+  </section>
+
+  <!-- ============ Next ============ -->
+  <section class="shell" style="padding-block:0 var(--gap-xl);">
+    <hr class="rule">
+    <div class="ledger" style="border-top:0;">
+      <article class="entry" data-reveal>
+        <span class="entry__num num">03</span>
+        <div>
+          <h3 class="entry__title">
+            <a class="entry__link" href="lap-times.html">115 laps at Thunderhill</a>
+          </h3>
+          <p class="entry__sub">A year of my own telemetry, against a theoretical-best floor.</p>
+        </div>
+        <span class="meta">Next</span>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
+<script src="../js/theme.js"></script>
+<script type="module" src="../js/motion.js"></script>
+</body>
+</html>
