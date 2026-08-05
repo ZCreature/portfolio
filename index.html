@@ -57,14 +57,15 @@
     </div>
   </section>
 
-  <!-- ============ Selected work ============ -->
-  <section class="shell" id="current" style="padding-top: var(--gap-m);">
+  <!-- ============ Work: two 2x2 galleries, side by side ============ -->
+  <div class="shell duo" style="margin-top: var(--gap-m);">
+  <section id="current">
     <div class="section-head">
       <h2 class="meta">Current work</h2>
-      <span class="meta">Four case studies</span>
+      <span class="meta">Four</span>
     </div>
 
-    <div class="tiles" data-reveal-group data-reveal-step="60">
+    <div class="tiles tiles--2" data-reveal-group data-reveal-step="60">
 
       <article class="tile" data-reveal>
         <div class="tile__thumb">
@@ -81,7 +82,7 @@
         <div class="tile__body">
           <div class="tile__head">
             <h3 class="tile__title">
-              <a class="tile__link" href="work/healthcare-system.html">A colour standard for healthcare dashboards</a>
+              <a class="tile__link" href="work/healthcare-system.html">Healthcare colour standard</a>
             </h3>
             <span class="meta">2022—</span>
           </div>
@@ -196,54 +197,26 @@
     </p>
   </section>
 
-  <!-- ============ Tools ============ -->
-  <section class="shell" id="tools">
+  <section id="tools">
     <div class="section-head">
       <h2 class="meta">Tools I built</h2>
-      <span class="meta">Four shipped</span>
+      <span class="meta">Four</span>
     </div>
 
-    <div class="tiles" data-reveal-group data-reveal-step="60">
-
+      <div class="tiles tiles--2" data-reveal-group data-reveal-step="60">
       <article class="tile" data-reveal>
-        <div class="tile__thumb">
-          <!-- character grid: the ASCII camera -->
-          <svg viewBox="0 0 160 100" aria-hidden="true">
-            <g font-family="monospace" font-size="9" fill="currentColor">
-              <text y="18"><tspan x="14">@</tspan><tspan x="28">#</tspan><tspan x="42">%</tspan><tspan x="56">*</tspan><tspan x="70">+</tspan><tspan x="84">=</tspan><tspan x="98">-</tspan><tspan x="112">:</tspan><tspan x="126">.</tspan><tspan x="140"> </tspan></text>
-              <text y="34" opacity="0.85"><tspan x="14">#</tspan><tspan x="28">@</tspan><tspan x="42">#</tspan><tspan x="56">%</tspan><tspan x="70">*</tspan><tspan x="84">+</tspan><tspan x="98">=</tspan><tspan x="112">-</tspan><tspan x="126">:</tspan><tspan x="140">.</tspan></text>
-              <text y="50" opacity="0.7"><tspan x="14">%</tspan><tspan x="28">#</tspan><tspan x="42">@</tspan><tspan x="56">@</tspan><tspan x="70">#</tspan><tspan x="84">%</tspan><tspan x="98">*</tspan><tspan x="112">+</tspan><tspan x="126">-</tspan><tspan x="140">:</tspan></text>
-              <text y="66" opacity="0.55"><tspan x="14">*</tspan><tspan x="28">%</tspan><tspan x="42">#</tspan><tspan x="56">@</tspan><tspan x="70">@</tspan><tspan x="84">#</tspan><tspan x="98">%</tspan><tspan x="112">*</tspan><tspan x="126">+</tspan><tspan x="140">=</tspan></text>
-              <text y="82" opacity="0.4"><tspan x="14">+</tspan><tspan x="28">*</tspan><tspan x="42">%</tspan><tspan x="56">#</tspan><tspan x="70">#</tspan><tspan x="84">@</tspan><tspan x="98">#</tspan><tspan x="112">%</tspan><tspan x="126">*</tspan><tspan x="140">+</tspan></text>
-            </g>
-          </svg>
-        </div>
+        <div class="tile__thumb"><img src="assets/img/tools/color-safety-lens.png" alt="Color Safety Lens interface showing tint ramps with WCAG pass badges" loading="lazy"></div>
         <div class="tile__body">
           <div class="tile__head">
-            <h3 class="tile__title">ASCII Glitch Camera</h3>
-            <span class="meta">iOS</span>
+            <h3 class="tile__title"><a class="tile__link" href="work/color-safety-lens.html">Color Safety Lens</a></h3>
+            <span class="meta">Web</span>
           </div>
-          <p class="tile__sub">Real-time ASCII from the camera feed.</p>
-          <div class="tile__tags"><span class="tag tag--live">App Store</span></div>
+          <p class="tile__sub">WCAG ramps, CVD simulation, ΔE checking.</p>
+          <div class="tile__tags"><span class="tag tag--live">Live</span><span class="tag">Open source</span></div>
         </div>
       </article>
-
       <article class="tile" data-reveal>
-        <div class="tile__thumb">
-          <!-- treemap: the disk visualiser -->
-          <svg viewBox="0 0 160 100" aria-hidden="true">
-            <g stroke="var(--paper-2)" stroke-width="1.5">
-              <rect x="12" y="14" width="58" height="46" fill="var(--tile-1)"/>
-              <rect x="70" y="14" width="40" height="26" fill="var(--tile-3)"/>
-              <rect x="110" y="14" width="38" height="26" fill="var(--tile-1)" opacity="0.55"/>
-              <rect x="70" y="40" width="78" height="20" fill="var(--tile-4)"/>
-              <rect x="12" y="60" width="34" height="26" fill="var(--tile-3)" opacity="0.6"/>
-              <rect x="46" y="60" width="24" height="26" fill="var(--tile-1)" opacity="0.35"/>
-              <rect x="70" y="60" width="46" height="26" fill="var(--tile-2)"/>
-              <rect x="116" y="60" width="32" height="26" fill="var(--tile-4)" opacity="0.5"/>
-            </g>
-          </svg>
-        </div>
+        <div class="tile__thumb"><img src="assets/img/tools/diskmap.png" alt="Disk Map treemap showing disk usage by folder and file type" loading="lazy"></div>
         <div class="tile__body">
           <div class="tile__head">
             <h3 class="tile__title">Disk Map</h3>
@@ -253,23 +226,17 @@
           <div class="tile__tags"><span class="tag">Utility</span></div>
         </div>
       </article>
-
-      <article class="tile" data-reveal>
-        <div class="tile__thumb">
-          <!-- arc gauge: the track dashboard -->
-          <svg viewBox="0 0 160 100" aria-hidden="true">
-            <g fill="none" stroke-linecap="round">
-              <path d="M40 76 A40 40 0 1 1 120 76" stroke="currentColor" stroke-width="2" opacity="0.22"/>
-              <path d="M40 76 A40 40 0 0 1 52 47" stroke="var(--tile-3)" stroke-width="5"/>
-              <path d="M52 47 A40 40 0 0 1 96 41" stroke="var(--tile-4)" stroke-width="5"/>
-              <path d="M96 41 A40 40 0 0 1 120 76" stroke="var(--tile-2)" stroke-width="5"/>
-            </g>
-            <g stroke="currentColor" stroke-width="1.5" opacity="0.5">
-              <path d="M80 76 L102 52"/>
-            </g>
-            <circle cx="80" cy="76" r="3.5" fill="currentColor"/>
-          </svg>
-        </div>
+      <article class="tile tile--novisual" data-reveal>
+        <div class="tile__thumb"><svg viewBox="0 0 160 100" aria-hidden="true">
+              <g fill="none" stroke-linecap="round">
+                <path d="M40 76 A40 40 0 1 1 120 76" stroke="currentColor" stroke-width="2" opacity="0.22"/>
+                <path d="M40 76 A40 40 0 0 1 52 47" stroke="var(--tile-3)" stroke-width="5"/>
+                <path d="M52 47 A40 40 0 0 1 96 41" stroke="var(--tile-4)" stroke-width="5"/>
+                <path d="M96 41 A40 40 0 0 1 120 76" stroke="var(--tile-2)" stroke-width="5"/>
+              </g>
+              <path d="M80 76 L102 52" stroke="currentColor" stroke-width="1.5" opacity="0.5" fill="none"/>
+              <circle cx="80" cy="76" r="3.5" fill="currentColor"/>
+            </svg></div>
         <div class="tile__body">
           <div class="tile__head">
             <h3 class="tile__title">TrackDash</h3>
@@ -279,35 +246,27 @@
           <div class="tile__tags"><span class="tag">In testing</span></div>
         </div>
       </article>
-
-      <article class="tile" data-reveal>
-        <div class="tile__thumb">
-          <!-- swatches splitting into simulated pairs: the colour auditor -->
-          <svg viewBox="0 0 160 100" aria-hidden="true">
-            <g>
-              <rect x="14" y="20" width="30" height="28" fill="var(--tile-1)"/>
-              <rect x="48" y="20" width="30" height="28" fill="var(--tile-2)"/>
-              <rect x="82" y="20" width="30" height="28" fill="var(--tile-3)"/>
-              <rect x="116" y="20" width="30" height="28" fill="var(--tile-4)"/>
-              <rect x="14" y="52" width="30" height="28" fill="var(--tile-1)" opacity="0.45"/>
-              <rect x="48" y="52" width="30" height="28" fill="var(--tile-3)" opacity="0.55"/>
-              <rect x="82" y="52" width="30" height="28" fill="var(--tile-3)" opacity="0.5"/>
-              <rect x="116" y="52" width="30" height="28" fill="var(--tile-4)" opacity="0.4"/>
-            </g>
-          </svg>
-        </div>
+      <article class="tile tile--novisual" data-reveal>
+        <div class="tile__thumb"><svg viewBox="0 0 160 100" aria-hidden="true"><g font-family="monospace" font-size="9" fill="currentColor">
+              <text y="18"><tspan x="14">@</tspan><tspan x="28">#</tspan><tspan x="42">%</tspan><tspan x="56">*</tspan><tspan x="70">+</tspan><tspan x="84">=</tspan><tspan x="98">-</tspan><tspan x="112">:</tspan><tspan x="126">.</tspan></text>
+              <text y="34" opacity="0.85"><tspan x="14">#</tspan><tspan x="28">@</tspan><tspan x="42">#</tspan><tspan x="56">%</tspan><tspan x="70">*</tspan><tspan x="84">+</tspan><tspan x="98">=</tspan><tspan x="112">-</tspan><tspan x="126">:</tspan></text>
+              <text y="50" opacity="0.7"><tspan x="14">%</tspan><tspan x="28">#</tspan><tspan x="42">@</tspan><tspan x="56">@</tspan><tspan x="70">#</tspan><tspan x="84">%</tspan><tspan x="98">*</tspan><tspan x="112">+</tspan><tspan x="126">-</tspan></text>
+              <text y="66" opacity="0.55"><tspan x="14">*</tspan><tspan x="28">%</tspan><tspan x="42">#</tspan><tspan x="56">@</tspan><tspan x="70">@</tspan><tspan x="84">#</tspan><tspan x="98">%</tspan><tspan x="112">*</tspan><tspan x="126">+</tspan></text>
+              <text y="82" opacity="0.4"><tspan x="14">+</tspan><tspan x="28">*</tspan><tspan x="42">%</tspan><tspan x="56">#</tspan><tspan x="70">#</tspan><tspan x="84">@</tspan><tspan x="98">#</tspan><tspan x="112">%</tspan><tspan x="126">*</tspan></text>
+            </g></svg></div>
         <div class="tile__body">
           <div class="tile__head">
-            <h3 class="tile__title">Color Safety Lens</h3>
-            <span class="meta">Web</span>
+            <h3 class="tile__title">ASCII Glitch Camera</h3>
+            <span class="meta">iOS</span>
           </div>
-          <p class="tile__sub">WCAG ramps, CVD simulation, ΔE checking.</p>
-          <div class="tile__tags"><span class="tag">Open source</span></div>
+          <p class="tile__sub">Real-time ASCII from the camera feed.</p>
+          <div class="tile__tags"><span class="tag">App Store</span></div>
         </div>
       </article>
-
-    </div>
+      </div>
   </section>
+  </div>
+
 
   <!-- ============ Past work ============ -->
   <section class="shell" id="past">
@@ -316,7 +275,7 @@
       <span class="meta">2011 — 2022</span>
     </div>
 
-    <div class="tiles" data-reveal-group data-reveal-step="60">
+    <div class="tiles tiles--2" data-reveal-group data-reveal-step="60">
 
       <article class="tile tile--quiet" data-reveal>
         <div class="tile__thumb"></div>

@@ -1,0 +1,28 @@
+{
+  "note": "Tearsheet manifest for work/editorial.html. Drop page images into assets/img/editorial/ and set `file` to the filename. Any entry with file:null renders as an empty slot, so the grid is honest about what hasn't been added yet.",
+  "publications": [
+    { "id": "sac", "name": "Sacramento Business Journal", "short": "Sacramento" },
+    { "id": "sv",  "name": "Silicon Valley Business Journal", "short": "Silicon Valley" },
+    { "id": "sf",  "name": "San Francisco Business Times", "short": "San Francisco" }
+  ],
+  "items": [
+    { "file": null, "pub": "sac", "kind": "cover",  "year": "", "title": "Editorial cover story" },
+    { "file": null, "pub": "sv",  "kind": "data",   "year": "", "title": "Data visualization story" },
+    { "file": null, "pub": "sf",  "kind": "data",   "year": "", "title": "" },
+    { "file": null, "pub": "sac", "kind": "info",   "year": "", "title": "" },
+    { "file": null, "pub": "sv",  "kind": "cover",  "year": "", "title": "" },
+    { "file": null, "pub": "sf",  "kind": "spread", "year": "", "title": "" },
+    { "file": null, "pub": "sac", "kind": "data",   "year": "", "title": "" },
+    { "file": null, "pub": "sv",  "kind": "info",   "year": "", "title": "" },
+    { "file": null, "pub": "sf",  "kind": "cover",  "year": "", "title": "" },
+    { "file": null, "pub": "sac", "kind": "spread", "year": "", "title": "" },
+    { "file": null, "pub": "sv",  "kind": "data",   "year": "", "title": "" },
+    { "file": null, "pub": "sf",  "kind": "info",   "year": "", "title": "" }
+  ],
+  "kinds": [
+    { "id": "cover",  "name": "Covers" },
+    { "id": "data",   "name": "Data" },
+    { "id": "info",   "name": "Infographics" },
+    { "id": "spread", "name": "Spreads" }
+  ]
+}
