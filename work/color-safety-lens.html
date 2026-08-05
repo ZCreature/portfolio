@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Color Safety Lens — Chris Almaguer</title>
+<meta name="description" content="Building a colour-vision auditing tool, shipping it wrong, and what it took to make the colour maths correct.">
+<meta name="theme-color" content="#fbfbfa">
+<script>
+  try {
+    if (localStorage.getItem('ca-theme') === 'dark')
+      document.documentElement.setAttribute('data-theme', 'dark');
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="../css/base.css">
+<style>
+  /* Page-local components: the interactive colour instruments. */
+
+  .swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(6.5rem, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+
+  .swatch {
+    background: var(--paper);
+    display: flex;
+    flex-direction: column;
+    min-height: 8.5rem;
+  }
+
+  .swatch__chip {
+    flex: 1;
+    display: grid;
+    place-items: center;
+    min-height: 4.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.04em;
+    transition: background 320ms var(--ease);
+  }
+
+  .swatch__foot {
+    padding: 0.5rem 0.6rem 0.6rem;
+    border-top: 1px solid var(--rule-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .ratio {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+
+  /* Status is carried by weight and a glyph, never by hue — the same rule
+     this case study argues for. */
+  .verdict {
+    font-family: var(--font-mono);
+    font-size: 0.5625rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .verdict[data-pass="pass"]::before { content: "✓ "; }
+  .verdict[data-pass="fail"] { color: var(--ink); font-weight: 700; }
+  .verdict[data-pass="fail"]::before { content: "✕ "; }
+
+  /* Controls */
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+    align-items: center;
+    margin-bottom: 1.25rem;
+  }
+
+  .slider-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    flex: 1 1 12rem;
+    min-width: 11rem;
+  }
+
+  input[type="range"] {
+    flex: 1;
+    accent-color: var(--ink);
+    height: 1.25rem;
+  }
+
+  /* The bug comparison */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+
+  .compare__col { background: var(--paper); padding: 1rem; }
+
+  .compare__label {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .strip { display: flex; height: 3.25rem; border: 1px solid var(--rule-soft); }
+  .strip > div { flex: 1; transition: background 320ms var(--ease); }
+
+  .de-row {
+    display: flex;
+    margin-top: 0.4rem;
+    gap: 0;
+  }
+  .de-row > span {
+    flex: 1;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-3);
+  }
+  .de-row > span[data-over="true"] {
+    color: var(--ink);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  @media (max-width: 40rem) {
+    .compare { grid-template-columns: 1fr; }
+  }
+
+  .readout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule-soft);
+  }
+  .readout__n {
+    font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="shell masthead__inner">
+    <a class="wordmark" href="../index.html">Chris Almaguer</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="../index.html#work">Work</a>
+      <a href="../about.html">About</a>
+      <a href="mailto:calmaguer.design@gmail.com">Email</a>
+      <span class="seg seg--theme" role="group" aria-label="Colour theme">
+        <button type="button" data-theme-set="light" aria-pressed="true">Light</button>
+        <button type="button" data-theme-set="dark" aria-pressed="false">Dark</button>
+      </span>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ Hero ============ -->
+  <section class="shell case-hero">
+    <p class="meta" data-reveal>Case study — 02 / Tooling &amp; accessibility</p>
+    <h1 class="h1" data-reveal style="--reveal-delay:70ms; margin-top: var(--gap-s); max-width: 20ch;">
+      I built an accessibility tool, shipped it, and found my own colour maths was wrong.
+    </h1>
+    <p class="lede tight" data-reveal style="--reveal-delay:140ms; margin-top: var(--gap-m);">
+      Color Safety Lens audits palettes for contrast and colour-vision deficiency.
+      The first working version produced confident, authoritative, incorrect answers —
+      off by more than ΔE&nbsp;14 on some hues, where 1.0 is the threshold of a visible
+      difference. This is how that happened and what fixing it required.
+    </p>
+
+    <div class="case-facts" style="margin-top: var(--gap-l);" data-reveal>
+      <div><p class="meta fact__label">Role</p><p class="fact__value">Design, research, build</p></div>
+      <div><p class="meta fact__label">Year</p><p class="fact__value">2026</p></div>
+      <div><p class="meta fact__label">Stack</p><p class="fact__value">Figma, VS&nbsp;Code, vanilla JS</p></div>
+      <div><p class="meta fact__label">Status</p><p class="fact__value">Open source, in use</p></div>
+    </div>
+  </section>
+
+  <!-- ============ 1. The problem ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l);">
+    <div class="prose" data-reveal>
+      <p class="meta">01 — The problem</p>
+      <h2>Brand colour almost never ships at 100%</h2>
+      <p>
+        Every brand guideline I've worked from specifies colour at full strength. But in
+        a dashboard, that colour spends most of its life at 60%, 30%, 10% — as chart
+        fills, heatmap ramps, table banding, disabled states. The guideline says nothing
+        about those, and that's exactly where accessibility quietly breaks.
+      </p>
+      <p>
+        I was checking tints one at a time on <b>webaim.org</b>, dozens per dashboard,
+        across fifty-plus dashboards. It was slow and, worse, it was <em>sampling</em> —
+        I only caught the failures I thought to look for.
+      </p>
+    </div>
+
+    <figure class="viz figure" data-reveal style="margin-top: var(--gap-l);">
+      <div class="viz__head">
+        <div>
+          <p class="viz__title">Tint ramp, audited both ways</p>
+          <p class="viz__note">Each step checked against a white label and a black one</p>
+        </div>
+      </div>
+
+      <div class="controls">
+        <div class="seg" role="group" aria-label="Base colour">
+          <button type="button" data-base="#0b5cad" aria-pressed="true">Blue</button>
+          <button type="button" data-base="#00786b" aria-pressed="false">Teal</button>
+          <button type="button" data-base="#a3341f" aria-pressed="false">Rust</button>
+          <button type="button" data-base="#5b3fa8" aria-pressed="false">Violet</button>
+        </div>
+        <p class="meta" id="ramp-verdict" style="flex:1 1 14rem; text-align:right;"></p>
+      </div>
+
+      <div class="swatches" id="ramp"></div>
+
+      <p class="source">Live · WCAG 2.1 relative luminance · 4.5:1 threshold for body text</p>
+
+      <figcaption>
+        <b>Watch the label colour flip.</b> At full strength only a white label passes;
+        one step down that reverses and only black passes. Every base colour here does
+        the same thing. <b>There is no single label colour that is safe across a tint
+        ramp</b> — so any dashboard that sets one label colour for a whole chart family
+        is failing somewhere on that ramp. That's not a judgement call, it's arithmetic,
+        and it's the sort of thing worth having a machine check.
+      </figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ 2. The bug ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l);">
+    <div class="prose" data-reveal>
+      <p class="meta">02 — The failure</p>
+      <h2>Doing the maths on the JPEG instead of the RAW</h2>
+      <p>
+        For colour-vision simulation I used the <b>Machado, Oliveira &amp; Fernandes
+        (2009)</b> model — the standard matrices for protanomaly, deuteranomaly and
+        tritanomaly. I read the values in, multiplied them through the matrix, wrote them
+        back out. It rendered. It looked plausible. I shipped it.
+      </p>
+      <p>
+        The matrices operate on <b>linear</b> RGB — light as a physical quantity. The hex
+        values in every design file are <b>gamma-encoded</b> sRGB, pre-distorted for how
+        displays and eyes actually work. I was applying a physics model directly to
+        perceptually-encoded numbers.
+      </p>
+    </div>
+
+    <p class="pull" data-reveal>
+      If you shoot photography: I was doing the maths on the JPEG instead of the RAW.
+    </p>
+
+    <figure class="viz figure" data-reveal>
+      <div class="viz__head">
+        <div>
+          <p class="viz__title">The same simulation, computed both ways</p>
+          <p class="viz__note">Deuteranomaly at full severity</p>
+        </div>
+        <div class="seg" role="group" aria-label="Deficiency type">
+          <button type="button" data-cvd="protan" aria-pressed="false">Protan</button>
+          <button type="button" data-cvd="deutan" aria-pressed="true">Deutan</button>
+          <button type="button" data-cvd="tritan" aria-pressed="false">Tritan</button>
+        </div>
+      </div>
+
+      <div class="compare">
+        <div class="compare__col">
+          <div class="compare__label">
+            <span class="meta">Wrong — gamma sRGB</span>
+            <span class="meta">v0.1</span>
+          </div>
+          <div class="strip" id="strip-wrong"></div>
+        </div>
+        <div class="compare__col">
+          <div class="compare__label">
+            <span class="meta">Correct — linear RGB</span>
+            <span class="meta">v1.0</span>
+          </div>
+          <div class="strip" id="strip-right"></div>
+          <div class="de-row" id="de-row" aria-label="Delta E per swatch"></div>
+        </div>
+      </div>
+
+      <div class="readout">
+        <div>
+          <p class="meta">Max ΔE2000</p>
+          <p class="readout__n" id="de-max">—</p>
+        </div>
+        <div>
+          <p class="meta">Mean ΔE2000</p>
+          <p class="readout__n" id="de-mean">—</p>
+        </div>
+        <div style="flex:1 1 14rem; min-width:12rem;">
+          <p class="meta">Reference</p>
+          <p class="fact__value" style="font-size:0.8125rem; color:var(--ink-3); line-height:1.45;">
+            ΔE&nbsp;1.0 is the threshold of a just-noticeable difference.
+            Anything above ~2.3 is plainly visible to an ordinary observer.
+          </p>
+        </div>
+      </div>
+
+      <p class="source">Live · Machado et&nbsp;al. 2009 matrices · CIEDE2000 difference</p>
+
+      <figcaption>
+        Both strips claim to show the same thing. Only one is a simulation; the other is
+        a picture of an arithmetic error. <b>The tool gave no indication which was
+        which</b> — that's what made it dangerous rather than merely wrong.
+      </figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ 3. The fix ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l);">
+    <div class="prose" data-reveal>
+      <p class="meta">03 — The fix</p>
+      <h2>Rebuild the pipeline, then prove it</h2>
+      <p>
+        Fixing the code was an afternoon: linearise on the way in, apply the matrix,
+        re-encode on the way out. Trusting the result again took considerably longer.
+      </p>
+      <ul>
+        <li>
+          <b>Rebuilt in linear RGB.</b> Every colour operation — simulation, tinting,
+          mixing — now happens in linear space and converts back at the boundary.
+        </li>
+        <li>
+          <b>Validated ΔE against Sharma's test suite.</b> CIEDE2000 has well-known
+          discontinuities that naive implementations get wrong; the published test data
+          exists precisely to catch them.
+        </li>
+        <li>
+          <b>Ran Okabe–Ito through the whole chain as a control.</b> It's the palette
+          designed by colourblind scientists to stay distinguishable. If my tool flagged
+          it as unsafe, my tool was still broken.
+        </li>
+      </ul>
+      <p>Five audits later, it passed clean.</p>
+    </div>
+
+    <figure class="viz figure" data-reveal>
+      <div class="viz__head">
+        <div>
+          <p class="viz__title">The corrected simulator</p>
+          <p class="viz__note">Okabe–Ito, the control palette</p>
+        </div>
+        <div class="seg" role="group" aria-label="Palette">
+          <button type="button" data-pal="okabe" aria-pressed="true">Okabe–Ito</button>
+          <button type="button" data-pal="naive" aria-pressed="false">A naive palette</button>
+        </div>
+      </div>
+
+      <div class="controls">
+        <div class="seg" role="group" aria-label="Deficiency type">
+          <button type="button" data-sim="none" aria-pressed="true">Normal</button>
+          <button type="button" data-sim="protan" aria-pressed="false">Protan</button>
+          <button type="button" data-sim="deutan" aria-pressed="false">Deutan</button>
+          <button type="button" data-sim="tritan" aria-pressed="false">Tritan</button>
+        </div>
+        <div class="slider-wrap">
+          <label class="meta" for="sev">Severity</label>
+          <input type="range" id="sev" min="0" max="100" value="100" step="5">
+          <span class="ratio" id="sev-out" style="min-width:3ch;">100</span>
+        </div>
+      </div>
+
+      <div class="strip" id="sim-strip" style="height:5rem;"></div>
+      <div class="de-row" id="sim-de"></div>
+
+      <p class="source">
+        Live · severity interpolated toward the published severity-1.0 matrices;
+        the production tool uses Machado's full per-severity tables
+      </p>
+
+      <figcaption>
+        <b>Switch to the naive palette and drag severity up.</b> Two hues that read as
+        clearly distinct at zero converge into the same colour well before full severity —
+        the failure affects roughly 1 in 12 men. Okabe–Ito holds its separation
+        throughout, which is the point of it.
+      </figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ 4. Outcome ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) var(--gap-xl);">
+    <div class="prose" data-reveal>
+      <p class="meta">04 — Where it landed</p>
+      <h2>What the tool actually changed</h2>
+      <p>
+        Verified tints now export as SVG straight back into Figma, so they land in the
+        design system instead of a screenshot folder. The audit stopped being a thing I
+        did at the end and became part of the definition of done.
+      </p>
+
+      <h3>The honest lesson</h3>
+      <p>
+        AI-assisted development got me to "working" in an evening. <b>Working and correct
+        are different claims</b>, and a tool that audits accessibility has to earn the
+        second one. The first version was fast, confident and wrong — and nothing in the
+        interface would have told a user that.
+      </p>
+      <p>
+        I'm a designer, not an engineer. What I take from this isn't that I should stop
+        building tools; it's that building them obliges me to know which claims my
+        artefacts are making on my behalf.
+      </p>
+    </div>
+
+    <div style="margin-top: var(--gap-l); display:flex; gap:var(--gap-m); flex-wrap:wrap;" data-reveal>
+      <a class="btn" href="https://github.com/ZCreature/color-safety-lens" rel="noopener">Source on GitHub</a>
+    </div>
+  </section>
+
+  <!-- ============ Next ============ -->
+  <section class="shell" style="padding-block:0 var(--gap-xl);">
+    <hr class="rule">
+    <div class="ledger" style="border-top:0;">
+      <article class="entry" data-reveal>
+        <span class="entry__num num">03</span>
+        <div>
+          <h3 class="entry__title">
+            <a class="entry__link" href="lap-times.html">115 laps at Thunderhill</a>
+            <span class="arrow" aria-hidden="true">→</span>
+          </h3>
+          <p class="entry__sub">
+            Next case study — a year of my own telemetry, and what I found reviewing my
+            own chart a year later.
+          </p>
+        </div>
+        <span class="meta">Next</span>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<script src="../js/theme.js"></script>
+<script type="module" src="../js/motion.js"></script>
+<script type="module">
+import { simulate, deltaE00, contrast, tint } from '../js/color.js';
+
+/* ---- helpers --------------------------------------------- */
+
+const $  = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+
+/** Wire a segmented control; calls back with the chosen dataset value. */
+function segment(buttons, key, onPick) {
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+      onPick(btn.dataset[key]);
+    });
+  });
+}
+
+/* ---- Demo 1: tint ramp audit ----------------------------- */
+
+const RAMP_STEPS = [100, 85, 70, 55, 40, 25, 10];
+const AA = 4.5;
+let rampBase = '#0b5cad';
+
+function drawRamp() {
+  const rows = RAMP_STEPS.map((pct) => {
+    const fill = tint(rampBase, pct);
+    return { pct, fill, w: contrast(fill, '#ffffff'), b: contrast(fill, '#101012') };
+  });
+
+  $('#ramp').innerHTML = rows.map(({ pct, fill, w, b }) => {
+    // The label colour a designer is actually allowed to use at this step.
+    const safe = w >= AA ? 'white' : b >= AA ? 'black' : 'neither';
+    const ink  = safe === 'white' ? '#ffffff' : '#101012';
+    return `
+      <div class="swatch">
+        <div class="swatch__chip" style="background:${fill}; color:${ink}">${pct}%</div>
+        <div class="swatch__foot">
+          <span class="ratio" style="color:var(--ink-3)">
+            W ${w.toFixed(1)} · B ${b.toFixed(1)}
+          </span>
+          <span class="verdict" data-pass="${safe === 'neither' ? 'fail' : 'pass'}">
+            ${safe === 'neither' ? 'no safe label' : safe + ' only'}
+          </span>
+        </div>
+      </div>`;
+  }).join('');
+
+  // State the crossover explicitly rather than making the reader find it.
+  const flip = rows.findIndex((r) => r.w < AA);
+  $('#ramp-verdict').textContent =
+    flip > 0
+      ? `Label must flip between ${rows[flip - 1].pct}% and ${rows[flip].pct}%`
+      : 'No white-safe step on this ramp';
+}
+
+segment($$('[data-base]'), 'base', (v) => { rampBase = v; drawRamp(); });
+drawRamp();
+
+/* ---- Demo 2: the bug, side by side ----------------------- */
+
+// A plausible dashboard palette. The magenta is where the two pipelines
+// diverge hardest — the divergence is hue-dependent, which is precisely
+// what made the original bug so easy to miss on blues and greens.
+const BUG_PALETTE = ['#0b5cad', '#00786b', '#c99700', '#a3341f', '#b5127a', '#6a3fd6'];
+let bugType = 'deutan';
+
+function drawBug() {
+  const wrong = BUG_PALETTE.map((c) => simulate(c, bugType, 1, false));
+  const right = BUG_PALETTE.map((c) => simulate(c, bugType, 1, true));
+  const des   = wrong.map((w, i) => deltaE00(w, right[i]));
+
+  $('#strip-wrong').innerHTML = wrong.map((c) => `<div style="background:${c}"></div>`).join('');
+  $('#strip-right').innerHTML = right.map((c) => `<div style="background:${c}"></div>`).join('');
+  $('#de-row').innerHTML = des
+    .map((d) => `<span data-over="${d > 2.3}">${d.toFixed(1)}</span>`).join('');
+
+  $('#de-max').textContent  = Math.max(...des).toFixed(1);
+  $('#de-mean').textContent = (des.reduce((a, b) => a + b, 0) / des.length).toFixed(1);
+}
+
+segment($$('[data-cvd]'), 'cvd', (v) => { bugType = v; drawBug(); });
+drawBug();
+
+/* ---- Demo 3: the corrected simulator --------------------- */
+
+const PALETTES = {
+  okabe: ['#e69f00', '#56b4e9', '#009e73', '#f0e442', '#0072b2', '#d55e00', '#cc79a7'],
+  naive: ['#d62728', '#2ca02c', '#ff7f0e', '#8c564b', '#1f77b4', '#9467bd', '#e377c2'],
+};
+
+let simPal  = 'okabe';
+let simType = 'none';
+let simSev  = 1;
+
+function drawSim() {
+  const base = PALETTES[simPal];
+  const out  = base.map((c) => simType === 'none' ? c : simulate(c, simType, simSev, true));
+
+  $('#sim-strip').innerHTML = out.map((c) => `<div style="background:${c}"></div>`).join('');
+
+  // Distance to the nearest other swatch — the number that decides whether a
+  // reader can tell two series apart.
+  $('#sim-de').innerHTML = out.map((c, i) => {
+    const nearest = Math.min(...out.filter((_, j) => j !== i).map((o) => deltaE00(c, o)));
+    return `<span data-over="${nearest < 10}" title="Nearest neighbour ΔE">${nearest.toFixed(0)}</span>`;
+  }).join('');
+}
+
+segment($$('[data-pal]'), 'pal', (v) => { simPal = v; drawSim(); });
+segment($$('[data-sim]'), 'sim', (v) => { simType = v; drawSim(); });
+
+$('#sev').addEventListener('input', (e) => {
+  simSev = Number(e.target.value) / 100;
+  $('#sev-out').textContent = e.target.value;
+  drawSim();
+});
+
+drawSim();
+</script>
+</body>
+</html>

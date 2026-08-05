@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About — Chris Almaguer</title>
+<meta name="description" content="Senior data visualization designer. Twelve years from print production to daily newsrooms to enterprise healthcare analytics.">
+<meta name="theme-color" content="#fbfbfa">
+<script>
+  try {
+    if (localStorage.getItem('ca-theme') === 'dark')
+      document.documentElement.setAttribute('data-theme', 'dark');
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="css/base.css">
+<style>
+  /* Career spine — a dated list, same voice as the work ledger. */
+  .spine { border-top: 1px solid var(--rule); }
+
+  .role {
+    display: grid;
+    grid-template-columns: 9rem minmax(0, 1fr);
+    gap: 0.75rem var(--gap-m);
+    padding-block: clamp(1.2rem, 2.6vw, 1.8rem);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .role__when { color: var(--ink-4); padding-top: 0.2rem; }
+  .role__title { font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.018em; }
+  .role__org { color: var(--ink-3); font-size: 0.9375rem; margin-top: 0.1rem; }
+  .role__note { color: var(--ink-2); font-size: 0.9375rem; margin-top: 0.6rem; max-width: 48ch; }
+
+  @media (max-width: 40rem) {
+    .role { grid-template-columns: 1fr; gap: 0.35rem; }
+  }
+
+  .cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: var(--gap-m);
+  }
+
+  .col h3 { font-size: 0.9375rem; letter-spacing: -0.015em; margin-bottom: 0.6rem; }
+  .col ul { list-style: none; margin: 0; padding: 0; }
+  .col li {
+    font-size: 0.9375rem;
+    color: var(--ink-2);
+    padding-block: 0.3rem;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="shell masthead__inner">
+    <a class="wordmark" href="index.html">Chris Almaguer</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html#work">Work</a>
+      <a href="about.html" aria-current="page">About</a>
+      <a href="mailto:calmaguer.design@gmail.com">Email</a>
+      <span class="seg seg--theme" role="group" aria-label="Colour theme">
+        <button type="button" data-theme-set="light" aria-pressed="true">Light</button>
+        <button type="button" data-theme-set="dark" aria-pressed="false">Dark</button>
+      </span>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ Lead ============ -->
+  <section class="shell" style="padding-block: clamp(4rem,11vw,8rem) var(--gap-l);">
+    <p class="meta" data-reveal>About</p>
+    <h1 class="h1" data-reveal style="--reveal-delay:70ms; margin-top: var(--gap-s); max-width: 19ch;">
+      I learned structure in print and put it to work on data.
+    </h1>
+
+    <div class="prose" data-reveal style="--reveal-delay:150ms; margin-top: var(--gap-m);">
+      <p>
+        I started in print production — signage, wide-format, colour management, the
+        unglamorous end of the trade where a mistake costs material. That taught me
+        specifications before it taught me taste.
+      </p>
+      <p>
+        Then seven years of advertising, then a hard turn into editorial. Four years
+        designing news graphics for California business journals under strict grids and
+        standing typography, on daily deadlines. A chart that needs three paragraphs of
+        explanation is a chart that failed, and a newsroom tells you that immediately.
+      </p>
+      <p>
+        Now I'm a senior designer on Vizient's custom applications team, building data
+        products for U.S. hospital systems — dashboards read by executives making
+        decisions with real consequences. The constraints changed; the discipline didn't.
+        <b>Structure first, then clarity, then, if there's room, elegance.</b>
+      </p>
+      <p>
+        Lately I've been building my own tools when the ones I need don't exist or get
+        discontinued. I'm a designer, not an engineer, and I'm careful about the
+        difference — but knowing how the thing is actually made has changed how I design
+        it.
+      </p>
+    </div>
+
+    <dl class="spec" style="margin-top: var(--gap-l);" data-reveal>
+      <dt>Status</dt>
+      <dd>Open to senior roles</dd>
+      <dt>Location</dt>
+      <dd>Stockton, CA — SF Bay Area on-site, hybrid or remote</dd>
+      <dt>Contact</dt>
+      <dd><a href="mailto:calmaguer.design@gmail.com" style="text-decoration:underline; text-underline-offset:3px;">calmaguer.design@gmail.com</a></dd>
+    </dl>
+  </section>
+
+  <!-- ============ Career ============ -->
+  <section class="shell" style="padding-top: var(--gap-m);">
+    <div class="section-head">
+      <h2 class="meta">Career</h2>
+      <span class="meta">2011 — present</span>
+    </div>
+
+    <div class="spine" data-reveal-group data-reveal-step="55">
+
+      <article class="role" data-reveal>
+        <span class="meta role__when">2022 — present</span>
+        <div>
+          <h3 class="role__title">Sr. Designer, Data Intelligence &amp; Visualization</h3>
+          <p class="role__org">Vizient · Remote</p>
+          <p class="role__note">
+            Data visualization and dashboard design for U.S. hospital systems. Built a
+            scalable, accessibility-informed visualization design system in Figma.
+            Designed 50+ executive-facing dashboards with analysts, engineers and client
+            stakeholders. Led a WCAG 2.1 AA study defining colour standards for
+            healthcare data visualization. Now also Sr. Analytics &amp; Insights Associate.
+          </p>
+        </div>
+      </article>
+
+      <article class="role" data-reveal>
+        <span class="meta role__when">2020 — 2022</span>
+        <div>
+          <h3 class="role__title">News Designer, National</h3>
+          <p class="role__org">American City Business Journals · Remote</p>
+          <p class="role__note">
+            Editorial designer for the San Francisco, Silicon Valley and Sacramento
+            business journals — data-driven infographics and visual storytelling for
+            daily news, print and digital, on deadline.
+          </p>
+        </div>
+      </article>
+
+      <article class="role" data-reveal>
+        <span class="meta role__when">2018 — 2020</span>
+        <div>
+          <h3 class="role__title">Lead Designer, Sacramento</h3>
+          <p class="role__org">American City Business Journals</p>
+          <p class="role__note">
+            Lead designer for the Sacramento Business Journal across daily and weekly
+            print and digital. Data visualizations, client-facing graphics, and event
+            collateral for conferences of 400+ attendees.
+          </p>
+        </div>
+      </article>
+
+      <article class="role" data-reveal>
+        <span class="meta role__when">2017</span>
+        <div>
+          <h3 class="role__title">Graphic Artist</h3>
+          <p class="role__org">San Joaquin Delta College</p>
+        </div>
+      </article>
+
+      <article class="role" data-reveal>
+        <span class="meta role__when">2013 — 2017</span>
+        <div>
+          <h3 class="role__title">Sr. Graphic Designer</h3>
+          <p class="role__org">Stop the Presses Printing</p>
+          <p class="role__note">Production design and colour management.</p>
+        </div>
+      </article>
+
+      <article class="role" data-reveal>
+        <span class="meta role__when">2011 — 2013</span>
+        <div>
+          <h3 class="role__title">Graphic Designer</h3>
+          <p class="role__org">ARC Document Solutions</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============ Practice ============ -->
+  <section class="shell">
+    <div class="section-head">
+      <h2 class="meta">Practice</h2>
+    </div>
+
+    <div class="cols" data-reveal-group data-reveal-step="60">
+      <div class="col" data-reveal>
+        <h3>Design</h3>
+        <ul>
+          <li>Data visualization</li>
+          <li>Dashboard &amp; product design</li>
+          <li>Design systems</li>
+          <li>Editorial &amp; information design</li>
+          <li>WCAG 2.1 accessibility</li>
+        </ul>
+      </div>
+      <div class="col" data-reveal>
+        <h3>Data</h3>
+        <ul>
+          <li>Tableau</li>
+          <li>Power BI</li>
+          <li>R</li>
+          <li>Data storytelling</li>
+          <li>Executive reporting</li>
+        </ul>
+      </div>
+      <div class="col" data-reveal>
+        <h3>Build</h3>
+        <ul>
+          <li>Figma</li>
+          <li>Adobe Creative Suite</li>
+          <li>HTML / CSS / JavaScript</li>
+          <li>SwiftUI</li>
+          <li>VS Code</li>
+        </ul>
+      </div>
+      <div class="col" data-reveal>
+        <h3>Also</h3>
+        <ul>
+          <li>Adobe Creative Ambassador</li>
+          <li>San Francisco State University</li>
+          <li>Business Leadership, McKinsey</li>
+          <li>Team Leadership, McKinsey</li>
+          <li>Shipped on the App Store</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Contact ============ -->
+  <section class="shell">
+    <hr class="rule">
+    <div style="padding-block: var(--gap-l);" data-reveal>
+      <p class="meta" style="margin-bottom: var(--gap-s);">Currently interviewing</p>
+      <a class="contact-line" href="mailto:calmaguer.design@gmail.com">calmaguer.design@gmail.com</a>
+      <p class="body muted" style="margin-top: var(--gap-m);">
+        Senior data visualization, dashboard, or design systems roles.
+        Based in Stockton, California — San Francisco Bay Area on-site, hybrid, or remote.
+      </p>
+    </div>
+
+    <div class="colophon">
+      <span class="meta">Chris Almaguer · Stockton, CA</span>
+      <nav class="nav" aria-label="Elsewhere">
+        <a class="nav--keep" href="index.html">Work</a>
+        <a class="nav--keep" href="https://www.linkedin.com/in/almaguer1/" rel="noopener">LinkedIn</a>
+        <a class="nav--keep" href="https://dribbble.com/chrisalmaguer" rel="noopener">Dribbble</a>
+        <a class="nav--keep" href="https://github.com/ZCreature" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </section>
+
+</main>
+
+<script src="js/theme.js"></script>
+<script type="module" src="js/motion.js"></script>
+</body>
+</html>

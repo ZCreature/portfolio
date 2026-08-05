@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>115 laps at Thunderhill — Chris Almaguer</title>
+<meta name="description" content="A year of personal track telemetry, 1:39 down to 1:28, and what redesigning my own chart taught me about reading my own work.">
+<meta name="theme-color" content="#fbfbfa">
+<script>
+  try {
+    if (localStorage.getItem('ca-theme') === 'dark')
+      document.documentElement.setAttribute('data-theme', 'dark');
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="../css/base.css">
+<style>
+  .chart-wrap { width: 100%; overflow-x: auto; }
+  svg text { font-family: var(--font-mono); fill: var(--ink-3); }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.25rem; margin-top: 0.9rem; }
+  .legend span { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.75rem; color: var(--ink-2); }
+  .legend i { width: 0.7rem; height: 0.7rem; border-radius: 50%; display: block; }
+  .legend i.floor { border-radius: 0; height: 2px; width: 1.1rem; }
+
+  /* Hover readout — replaces the original's leader lines across the plot. */
+  .readout-bar {
+    display: flex; flex-wrap: wrap; gap: 0.35rem 1.5rem;
+    min-height: 2.4rem; align-items: center;
+    margin-top: 0.75rem; padding-top: 0.75rem;
+    border-top: 1px solid var(--rule-soft);
+    font-family: var(--font-mono); font-size: 0.75rem;
+    font-variant-numeric: tabular-nums; color: var(--ink-3);
+  }
+  .readout-bar b { color: var(--ink); font-weight: 600; }
+  .readout-bar[data-empty="true"] { color: var(--ink-4); }
+
+  .compare-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(15rem,1fr)); gap: 1px;
+    background: var(--rule); border: 1px solid var(--rule); margin-top: var(--gap-m); }
+  .compare-cell { background: var(--paper); padding: 1.15rem; }
+  .compare-cell h3 { font-size: 0.875rem; letter-spacing: -0.01em; margin-bottom: 0.4rem; }
+  .compare-cell p { font-size: 0.8125rem; color: var(--ink-3); line-height: 1.5; }
+  .compare-cell .meta { display: block; margin-bottom: 0.5rem; }
+
+  .stat-row { display: grid; grid-template-columns: repeat(auto-fit,minmax(8rem,1fr)); gap: var(--gap-m);
+    padding-block: var(--gap-m); border-block: 1px solid var(--rule); }
+  .stat__n { font-family: var(--font-mono); font-size: clamp(1.5rem,3.4vw,2.1rem);
+    letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums; }
+  .stat__l { margin-top: 0.4rem; }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="shell masthead__inner">
+    <a class="wordmark" href="../index.html">Chris Almaguer</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="../index.html#work">Work</a>
+      <a href="../about.html">About</a>
+      <a href="mailto:calmaguer.design@gmail.com">Email</a>
+      <span class="seg seg--theme" role="group" aria-label="Colour theme">
+        <button type="button" data-theme-set="light" aria-pressed="true">Light</button>
+        <button type="button" data-theme-set="dark" aria-pressed="false">Dark</button>
+      </span>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ Hero ============ -->
+  <section class="shell case-hero">
+    <p class="meta" data-reveal>Case study — 03 / Personal data</p>
+    <h1 class="h1" data-reveal style="--reveal-delay:70ms; margin-top: var(--gap-s); max-width: 20ch;">
+      One year of seat time, one chart.
+    </h1>
+    <p class="lede tight" data-reveal style="--reveal-delay:140ms; margin-top: var(--gap-m);">
+      115 laps at Thunderhill West across five track days, logged on two apps that don't
+      agree with each other. The interesting part wasn't building the chart — it was
+      going back a year later and redesigning it, and finding the things I'd let slide
+      because I already knew what the data said.
+    </p>
+
+    <div class="case-facts" style="margin-top: var(--gap-l);" data-reveal>
+      <div><p class="meta fact__label">Role</p><p class="fact__value">Driver, analyst, designer</p></div>
+      <div><p class="meta fact__label">Season</p><p class="fact__value">May 2025 — Apr 2026</p></div>
+      <div><p class="meta fact__label">Capture</p><p class="fact__value">RaceChrono, RaceStudio</p></div>
+      <div><p class="meta fact__label">Original</p><p class="fact__value">Tableau Public</p></div>
+    </div>
+  </section>
+
+  <!-- ============ Numbers ============ -->
+  <section class="shell shell--narrow" style="padding-block: 0 var(--gap-l);">
+    <div class="stat-row" data-reveal>
+      <div><p class="stat__n" id="s-laps">—</p><p class="meta stat__l">Laps</p></div>
+      <div><p class="stat__n" id="s-days">—</p><p class="meta stat__l">Track days</p></div>
+      <div><p class="stat__n" id="s-first">—</p><p class="meta stat__l">First day best</p></div>
+      <div><p class="stat__n" id="s-best">—</p><p class="meta stat__l">Personal best</p></div>
+    </div>
+  </section>
+
+  <!-- ============ The chart ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l);">
+    <div class="prose" data-reveal>
+      <p class="meta">01 — The rebuild</p>
+      <h2>Every lap, in order, with the floor underneath</h2>
+      <p>
+        Each mark is one lap. The heavy line under each track day is that day's
+        <b>theoretical best</b> — the lap I'd have set by stringing together my fastest
+        sector times. It's the floor: the pace I'd already demonstrated in pieces but
+        hadn't strung together.
+      </p>
+      <p>
+        The gap between the floor and the cluster above it is the honest measure of
+        progress. It isn't "am I faster?" — that flatters you, because tyres and weather
+        and traffic all move. It's "how close am I to the lap I've already proven I can
+        drive?"
+      </p>
+    </div>
+
+    <figure class="viz figure" data-reveal>
+      <div class="viz__head">
+        <div>
+          <p class="viz__title">Lap times, Thunderhill West</p>
+          <p class="viz__note">115 laps · 16 sessions · 5 track days</p>
+        </div>
+        <div class="seg" role="group" aria-label="Show">
+          <button type="button" data-show="all" aria-pressed="true">All laps</button>
+          <button type="button" data-show="dry" aria-pressed="false">Dry only</button>
+        </div>
+      </div>
+
+      <div class="chart-wrap">
+        <svg id="chart" viewBox="0 0 760 380" role="img"
+             aria-label="Scatter plot of 115 lap times across five track days, with a theoretical-best floor line beneath each day. Times improve from about 1:39 to 1:28.">
+        </svg>
+      </div>
+
+      <div class="legend" id="legend"></div>
+      <div class="readout-bar" id="readout" data-empty="true" aria-live="polite">
+        Hover or focus a lap for detail
+      </div>
+
+      <p class="source" id="src" data-placeholder="true">Loading…</p>
+
+      <figcaption>
+        <b>Day 5 tells the whole story twice.</b> It opened wet — that's the scattered
+        high cluster, topping out at 2:01.14, nearly forty seconds off the pace. The
+        track dried through the afternoon and I set my personal best, 1:28.39, on lap 112
+        of the season. Same day, same car, same driver.
+      </figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ The redesign ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l);">
+    <div class="prose" data-reveal>
+      <p class="meta">02 — What I changed</p>
+      <h2>Reviewing my own chart a year later</h2>
+      <p>
+        The original is still up on Tableau Public. It's a perfectly serviceable chart
+        and I was pleased with it at the time. Coming back to it cold, I could see the
+        places where I'd designed for someone who already knew the answer — which is to
+        say, for me.
+      </p>
+    </div>
+
+    <div class="compare-grid" data-reveal-group data-reveal-step="55">
+      <div class="compare-cell" data-reveal>
+        <span class="meta">Legend</span>
+        <h3>Two swatches, no words</h3>
+        <p>
+          The original legend was a teal dot and a purple dot with no labels. I knew
+          which was which. Nobody else did. Now they say <em>dry</em> and <em>wet</em>.
+        </p>
+      </div>
+      <div class="compare-cell" data-reveal>
+        <span class="meta">Overplotting</span>
+        <h3>Marks the size of the story</h3>
+        <p>
+          Large opaque circles buried the early sessions in a single blob. Smaller marks
+          with a little transparency let density read as density instead of as one shape.
+        </p>
+      </div>
+      <div class="compare-cell" data-reveal>
+        <span class="meta">Annotation</span>
+        <h3>Leader lines across the data</h3>
+        <p>
+          Callouts pointed at marks by drawing rules straight through the plot. Detail
+          now lives in a readout under the chart, so nothing is ever drawn over the data.
+        </p>
+      </div>
+      <div class="compare-cell" data-reveal>
+        <span class="meta">Axis</span>
+        <h3>Seconds nobody thinks in</h3>
+        <p>
+          The y-axis read 95s, 100s, 105s. Nobody at a track day talks that way. It reads
+          in <span class="num">m:ss</span> now, and the x-axis is divided by track day
+          rather than left as an unlabelled run of laps.
+        </p>
+      </div>
+    </div>
+
+    <div class="prose" data-reveal style="margin-top: var(--gap-l);">
+      <p>
+        None of that is a dramatic finding. That's rather the point — it's the ordinary
+        maintenance a chart needs when it stops being a thing you made and becomes a
+        thing someone reads. <b>I only caught it by treating my own work as though
+        somebody else had submitted it.</b>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ Outcome ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) var(--gap-xl);">
+    <div class="prose" data-reveal>
+      <p class="meta">03 — What the data said</p>
+      <h2>Eleven seconds, and where they came from</h2>
+      <p>
+        From a 1:39 first-day best to a 1:28.39 — about eleven seconds over a season.
+        Almost none of it arrived in a single leap. The theoretical-best floor drops
+        steadily day over day, and the cluster follows it down at a lag: I could always
+        drive the sectors before I could drive the lap.
+      </p>
+      <p>
+        The wet session is the most useful thing in the chart, and I nearly filtered it
+        out for being ugly. Forty seconds of penalty for conditions, on the same day I
+        set my best time, is a sharper argument about context than any dry lap could
+        make. <b>The outlier wasn't noise. It was the finding.</b>
+      </p>
+    </div>
+
+    <div style="margin-top: var(--gap-l); display:flex; gap:0.75rem; flex-wrap:wrap;" data-reveal>
+      <a class="btn" href="https://public.tableau.com/app/profile/creature/viz/ThunderhillWest-HPDElaptimes/Dashboard12" rel="noopener">The original on Tableau Public</a>
+    </div>
+  </section>
+
+  <!-- ============ Next ============ -->
+  <section class="shell" style="padding-block:0 var(--gap-xl);">
+    <hr class="rule">
+    <div class="ledger" style="border-top:0;">
+      <article class="entry" data-reveal>
+        <span class="entry__num num">01</span>
+        <div>
+          <h3 class="entry__title">
+            <a class="entry__link" href="healthcare-system.html">A colour standard for healthcare dashboards</a>
+            <span class="arrow" aria-hidden="true">→</span>
+          </h3>
+          <p class="entry__sub">The WCAG 2.1 AA study behind fifty-plus executive dashboards.</p>
+        </div>
+        <span class="meta">Next</span>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<script src="../js/theme.js"></script>
+<script type="module" src="../js/motion.js"></script>
+<script type="module">
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+
+/* Two verified palettes — a series colour must clear 3:1 against its own page.
+   Light: ΔE 10.7 minimum across normal/CVD/greyscale. Dark: ΔE 21.3. */
+const PAL = {
+  light: { dry: '#107c7f', wet: '#5b3fa8', floor: '#101012' },
+  dark:  { dry: '#0d8f93', wet: '#d7bcff', floor: '#f4f4f2' },
+};
+const theme = () =>
+  document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+
+/** 88.39 → "1:28.39" — the way anyone at a track day actually says it. */
+const mmss = (t, dp = 2) => {
+  const m = Math.floor(t / 60);
+  const s = t - m * 60;
+  return `${m}:${s.toFixed(dp).padStart(dp ? 5 : 2, '0')}`;
+};
+
+const W = 760, H = 380, M = { t: 18, r: 18, b: 46, l: 52 };
+const iw = W - M.l - M.r, ih = H - M.t - M.b;
+
+let DATA = null, show = 'all', drawn = false;
+
+fetch('../assets/data/laps.json')
+  .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
+  .then((d) => { DATA = d; boot(); })
+  .catch(() => {
+    $('#src').textContent =
+      'Lap data could not be loaded — this page needs to be served over http, not opened as a file.';
+  });
+
+function boot() {
+  const { meta, laps } = DATA;
+  const dry = laps.filter((l) => !l.wet);
+  const d1 = Math.min(...dry.filter((l) => l.day === 0).map((l) => l.t));
+
+  $('#s-laps').textContent  = meta.laps;
+  $('#s-days').textContent  = meta.trackDays;
+  $('#s-first').textContent = mmss(d1, 1);
+  $('#s-best').textContent  = mmss(meta.best);
+
+  $('#src').textContent = meta.reconstruction
+    ? 'Reconstruction — lap times modelled to match the published dashboard, not measured. Anchored to its real figures: 115 laps, 16 sessions, 1:28.39 best, 2:01.14 wet.'
+    : `Source: ${meta.source}`;
+  $('#src').setAttribute('data-placeholder', String(!!meta.reconstruction));
+
+  $$('[data-show]').forEach((b) =>
+    b.addEventListener('click', () => {
+      $$('[data-show]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      show = b.dataset.show;
+      render();
+    })
+  );
+
+  document.addEventListener('themechange', render);
+  render();
+}
+
+function render() {
+  const c = PAL[theme()];
+  const { laps, theoretical, days } = DATA;
+  const visible = show === 'dry' ? laps.filter((l) => !l.wet) : laps;
+
+  const yLo = 85, yHi = show === 'dry' ? 105 : 125;
+  const x = (lap) => M.l + ((lap - 1) / (laps.length - 1)) * iw;
+  const y = (t) => M.t + ih - ((t - yLo) / (yHi - yLo)) * ih;
+
+  const ticks = [];
+  for (let t = 90; t <= yHi; t += 10) ticks.push(t);
+
+  const grid = ticks.map((t) => `
+    <line x1="${M.l}" x2="${M.l + iw}" y1="${y(t).toFixed(1)}" y2="${y(t).toFixed(1)}"
+          stroke="var(--rule-soft)"/>
+    <text x="${M.l - 9}" y="${(y(t) + 3.5).toFixed(1)}" font-size="9" text-anchor="end">${mmss(t, 0)}</text>
+  `).join('');
+
+  // Track-day boundaries — the x-axis the original left unlabelled.
+  const bounds = days.map((d) => {
+    const inDay = laps.filter((l) => l.day === d.index);
+    const first = inDay[0].lap, last = inDay[inDay.length - 1].lap;
+    const mid = (x(first) + x(last)) / 2;
+    return `
+      ${d.index ? `<line x1="${x(first - 0.5).toFixed(1)}" x2="${x(first - 0.5).toFixed(1)}"
+             y1="${M.t}" y2="${M.t + ih}" stroke="var(--rule)" stroke-dasharray="2 3"/>` : ''}
+      <text x="${mid.toFixed(1)}" y="${H - 26}" font-size="9" text-anchor="middle">${d.label}</text>
+      <text x="${mid.toFixed(1)}" y="${H - 14}" font-size="8" text-anchor="middle"
+            fill="var(--ink-4)">${d.d.slice(0, 7)}</text>
+    `;
+  }).join('');
+
+  // Theoretical-best floor, one segment per track day.
+  const floors = theoretical.map((th) => {
+    const inDay = laps.filter((l) => l.day === th.day);
+    if (th.t < yLo || th.t > yHi) return '';
+    return `<line x1="${x(inDay[0].lap).toFixed(1)}" x2="${x(inDay[inDay.length - 1].lap).toFixed(1)}"
+                  y1="${y(th.t).toFixed(1)}" y2="${y(th.t).toFixed(1)}"
+                  stroke="${c.floor}" stroke-width="2" stroke-linecap="round" opacity="0.85"/>`;
+  }).join('');
+
+  const marks = visible.map((l) => `
+    <circle class="lap" cx="${x(l.lap).toFixed(1)}" cy="${y(l.t).toFixed(1)}" r="4"
+            fill="${l.wet ? c.wet : c.dry}" fill-opacity="0.72"
+            stroke="${l.wet ? c.wet : c.dry}" stroke-width="0.75"
+            tabindex="0" role="img"
+            data-lap="${l.lap}" data-t="${l.t}" data-day="${l.dayLabel}"
+            data-date="${l.date}" data-wet="${l.wet}" data-session="${l.session}"
+            aria-label="Lap ${l.lap}, ${mmss(l.t)}, ${l.dayLabel}, ${l.wet ? 'wet' : 'dry'}"/>
+  `).join('');
+
+  $('#chart').innerHTML = `
+    <g>${grid}</g>
+    <g>${bounds}</g>
+    <g>${floors}</g>
+    <g id="marks">${marks}</g>
+    <text x="${M.l}" y="${H - 2}" font-size="8" fill="var(--ink-4)">Lap, in order driven →</text>
+  `;
+
+  if (!drawn && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    $$('#marks .lap').forEach((el, i) => {
+      el.style.opacity = '0';
+      el.style.transition = `opacity 420ms var(--ease) ${Math.min(i * 7, 900)}ms`;
+      requestAnimationFrame(() => { el.style.opacity = '1'; });
+    });
+    drawn = true;
+  }
+
+  $('#legend').innerHTML = `
+    <span><i style="background:${c.dry}"></i>Dry</span>
+    <span><i style="background:${c.wet}"></i>Wet</span>
+    <span><i class="floor" style="background:${c.floor}"></i>Theoretical best — fastest sectors combined</span>
+  `;
+
+  const bar = $('#readout');
+  const clear = () => {
+    bar.setAttribute('data-empty', 'true');
+    bar.textContent = 'Hover or focus a lap for detail';
+  };
+  const fill = (e) => {
+    const d = e.target.dataset;
+    bar.setAttribute('data-empty', 'false');
+    bar.innerHTML =
+      `Lap <b>${d.lap}</b>` +
+      `<span>Session <b>${d.session}</b></span>` +
+      `<span>${d.day} · ${d.date}</span>` +
+      `<span><b>${mmss(Number(d.t))}</b></span>` +
+      `<span>${d.wet === 'true' ? 'Wet' : 'Dry'}</span>`;
+  };
+
+  $$('#marks .lap').forEach((el) => {
+    el.addEventListener('mouseenter', fill);
+    el.addEventListener('focus', fill);
+    el.addEventListener('mouseleave', clear);
+    el.addEventListener('blur', clear);
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1129 @@
+{
+ "meta": {
+  "reconstruction": true,
+  "note": "Reconstructed pending export of the original RaceChrono / RaceStudio session files. Track days, session count, conditions, the 1:28.39 personal best (lap 112) and the 2:01.14 wet lap are taken from the published Tableau dashboard; the remaining individual lap times are modelled to match its distribution, not measured.",
+  "source": "https://public.tableau.com/app/profile/creature/viz/ThunderhillWest-HPDElaptimes/Dashboard12",
+  "track": "Thunderhill Raceway Park — West configuration",
+  "laps": 115,
+  "trackDays": 5,
+  "sessions": 16,
+  "apps": [
+   "RaceChrono",
+   "RaceStudio"
+  ],
+  "best": 88.39,
+  "bestLap": 112,
+  "worstWet": 121.14
+ },
+ "days": [
+  {
+   "d": "2025-05-17",
+   "label": "Day 1",
+   "sessions": 3,
+   "base": 101,
+   "wetAM": false,
+   "index": 0
+  },
+  {
+   "d": "2025-07-19",
+   "label": "Day 2",
+   "sessions": 3,
+   "base": 98.2,
+   "wetAM": false,
+   "index": 1
+  },
+  {
+   "d": "2025-09-27",
+   "label": "Day 3",
+   "sessions": 3,
+   "base": 95,
+   "wetAM": false,
+   "index": 2
+  },
+  {
+   "d": "2026-02-21",
+   "label": "Day 4",
+   "sessions": 3,
+   "base": 92.4,
+   "wetAM": false,
+   "index": 3
+  },
+  {
+   "d": "2026-04-12",
+   "label": "Day 5",
+   "sessions": 4,
+   "base": 89.6,
+   "wetAM": true,
+   "index": 4
+  }
+ ],
+ "laps": [
+  {
+   "lap": 1,
+   "day": 0,
+   "dayLabel": "Day 1",
+   "date": "2025-05-17",
+   "session": 1,
+   "t": 103.37,
+   "wet": false
+  },
+  {
+   "lap": 2,
+   "day": 0,
+   "dayLabel": "Day 1",
+   "date": "2025-05-17",
+   "session": 1,
+   "t": 102.44,
+   "wet": false
+  },
+  {
+   "lap": 3,
+   "day": 0,
+   "dayLabel": "Day 1",
+   "date": "2025-05-17",
+   "session": 1,
+   "t": 102.46,
+   "wet": false
+  },
+  {
+   "lap": 4,
+   "day": 0,
+   "dayLabel": "Day 1",
+   "date": "2025-05-17",
+   "session": 1,
+   "t": 102.14,
+   "wet": false
+  },
+  {
+   "lap": 5,
+   "day": 0,
+   "dayLabel": "Day 1",
+   "date": "2025-05-17",
+   "session": 1,
+   "t": 102.58,
+   "wet": false
+  },
+  {
+   "lap": 6,
+   "day": 0,
+   "dayLabel": "Day 1",
+   "date": "2025-05-17",
+   "session": 1,
+   "t": 100.98,
+   "wet": false
+  },
+  {
+   "lap": 7,
+   "day": 0,
+   "dayLabel": "Day 1",
+   "date": "2025-05-17",
+   "session": 1,
+   "t": 100.35,
+   "wet": false
+  },
+  {
+   "lap": 8,
+   "day": 0,
+   "dayLabel": "Day 1",
+   "date": "2025-05-17",
+   "session": 2,
+   "t": 102.1,
+   "wet": false
+  },
+  {
+   "lap": 9,
+   "day": 0,
+   "dayLabel": "Day 1",
+   "date": "2025-05-17",
+   "session": 2,
+   "t": 101.04,
+   "wet": false
+  },
+  {
+   "lap": 10,
+   "day": 0,
+   "dayLabel": "Day 1",
+   "date": "2025-05-17",
+   "session": 2,
+   "t": 101.49,
+   "wet": false
+  },
+  {
+   "lap": 11,
+   "day": 0,
+   "dayLabel": "Day 1",
+   "date": "2025-05-17",
+   "session": 2,
+   "t": 99.99,
+   "wet": false
+  },
+  {
+   "lap": 12,
+   "day": 0,
+   "dayLabel": "Day 1",
+   "date": "2025-05-17",
+   "session": 2,
+   "t": 100.7,
+   "wet": false
+  },
+  {
+   "lap": 13,
+   "day": 0,
+   "dayLabel": "Day 1",
+   "date": "2025-05-17",
+   "session": 2,
+   "t": 100.4,
+   "wet": false
+  },
+  {
+   "lap": 14,
+   "day": 0,
+   "dayLabel": "Day 1",
+   "date": "2025-05-17",
+   "session": 2,
+   "t": 101.68,
+   "wet": false
+  },
+  {
+   "lap": 15,
+   "day": 0,
+   "dayLabel": "Day 1",
+   "date": "2025-05-17",
+   "session": 2,
+   "t": 99.36,
+   "wet": false
+  },
+  {
+   "lap": 16,
+   "day": 0,
+   "dayLabel": "Day 1",
+   "date": "2025-05-17",
+   "session": 3,
+   "t": 102.09,
+   "wet": false
+  },
+  {
+   "lap": 17,
+   "day": 0,
+   "dayLabel": "Day 1",
+   "date": "2025-05-17",
+   "session": 3,
+   "t": 100.01,
+   "wet": false
+  },
+  {
+   "lap": 18,
+   "day": 0,
+   "dayLabel": "Day 1",
+   "date": "2025-05-17",
+   "session": 3,
+   "t": 100.92,
+   "wet": false
+  },
+  {
+   "lap": 19,
+   "day": 0,
+   "dayLabel": "Day 1",
+   "date": "2025-05-17",
+   "session": 3,
+   "t": 100.87,
+   "wet": false
+  },
+  {
+   "lap": 20,
+   "day": 0,
+   "dayLabel": "Day 1",
+   "date": "2025-05-17",
+   "session": 3,
+   "t": 99.38,
+   "wet": false
+  },
+  {
+   "lap": 21,
+   "day": 0,
+   "dayLabel": "Day 1",
+   "date": "2025-05-17",
+   "session": 3,
+   "t": 99.79,
+   "wet": false
+  },
+  {
+   "lap": 22,
+   "day": 0,
+   "dayLabel": "Day 1",
+   "date": "2025-05-17",
+   "session": 3,
+   "t": 99.91,
+   "wet": false
+  },
+  {
+   "lap": 23,
+   "day": 1,
+   "dayLabel": "Day 2",
+   "date": "2025-07-19",
+   "session": 4,
+   "t": 100.2,
+   "wet": false
+  },
+  {
+   "lap": 24,
+   "day": 1,
+   "dayLabel": "Day 2",
+   "date": "2025-07-19",
+   "session": 4,
+   "t": 98.89,
+   "wet": false
+  },
+  {
+   "lap": 25,
+   "day": 1,
+   "dayLabel": "Day 2",
+   "date": "2025-07-19",
+   "session": 4,
+   "t": 99.59,
+   "wet": false
+  },
+  {
+   "lap": 26,
+   "day": 1,
+   "dayLabel": "Day 2",
+   "date": "2025-07-19",
+   "session": 4,
+   "t": 98.85,
+   "wet": false
+  },
+  {
+   "lap": 27,
+   "day": 1,
+   "dayLabel": "Day 2",
+   "date": "2025-07-19",
+   "session": 4,
+   "t": 99.28,
+   "wet": false
+  },
+  {
+   "lap": 28,
+   "day": 1,
+   "dayLabel": "Day 2",
+   "date": "2025-07-19",
+   "session": 4,
+   "t": 97.71,
+   "wet": false
+  },
+  {
+   "lap": 29,
+   "day": 1,
+   "dayLabel": "Day 2",
+   "date": "2025-07-19",
+   "session": 4,
+   "t": 97.25,
+   "wet": false
+  },
+  {
+   "lap": 30,
+   "day": 1,
+   "dayLabel": "Day 2",
+   "date": "2025-07-19",
+   "session": 4,
+   "t": 99.36,
+   "wet": false
+  },
+  {
+   "lap": 31,
+   "day": 1,
+   "dayLabel": "Day 2",
+   "date": "2025-07-19",
+   "session": 5,
+   "t": 99.23,
+   "wet": false
+  },
+  {
+   "lap": 32,
+   "day": 1,
+   "dayLabel": "Day 2",
+   "date": "2025-07-19",
+   "session": 5,
+   "t": 97.47,
+   "wet": false
+  },
+  {
+   "lap": 33,
+   "day": 1,
+   "dayLabel": "Day 2",
+   "date": "2025-07-19",
+   "session": 5,
+   "t": 98.6,
+   "wet": false
+  },
+  {
+   "lap": 34,
+   "day": 1,
+   "dayLabel": "Day 2",
+   "date": "2025-07-19",
+   "session": 5,
+   "t": 97.33,
+   "wet": false
+  },
+  {
+   "lap": 35,
+   "day": 1,
+   "dayLabel": "Day 2",
+   "date": "2025-07-19",
+   "session": 5,
+   "t": 98.17,
+   "wet": false
+  },
+  {
+   "lap": 36,
+   "day": 1,
+   "dayLabel": "Day 2",
+   "date": "2025-07-19",
+   "session": 5,
+   "t": 97.12,
+   "wet": false
+  },
+  {
+   "lap": 37,
+   "day": 1,
+   "dayLabel": "Day 2",
+   "date": "2025-07-19",
+   "session": 5,
+   "t": 98.18,
+   "wet": false
+  },
+  {
+   "lap": 38,
+   "day": 1,
+   "dayLabel": "Day 2",
+   "date": "2025-07-19",
+   "session": 6,
+   "t": 99.37,
+   "wet": false
+  },
+  {
+   "lap": 39,
+   "day": 1,
+   "dayLabel": "Day 2",
+   "date": "2025-07-19",
+   "session": 6,
+   "t": 97.93,
+   "wet": false
+  },
+  {
+   "lap": 40,
+   "day": 1,
+   "dayLabel": "Day 2",
+   "date": "2025-07-19",
+   "session": 6,
+   "t": 97.71,
+   "wet": false
+  },
+  {
+   "lap": 41,
+   "day": 1,
+   "dayLabel": "Day 2",
+   "date": "2025-07-19",
+   "session": 6,
+   "t": 98.54,
+   "wet": false
+  },
+  {
+   "lap": 42,
+   "day": 1,
+   "dayLabel": "Day 2",
+   "date": "2025-07-19",
+   "session": 6,
+   "t": 97.83,
+   "wet": false
+  },
+  {
+   "lap": 43,
+   "day": 1,
+   "dayLabel": "Day 2",
+   "date": "2025-07-19",
+   "session": 6,
+   "t": 97.43,
+   "wet": false
+  },
+  {
+   "lap": 44,
+   "day": 1,
+   "dayLabel": "Day 2",
+   "date": "2025-07-19",
+   "session": 6,
+   "t": 97.3,
+   "wet": false
+  },
+  {
+   "lap": 45,
+   "day": 2,
+   "dayLabel": "Day 3",
+   "date": "2025-09-27",
+   "session": 7,
+   "t": 96.12,
+   "wet": false
+  },
+  {
+   "lap": 46,
+   "day": 2,
+   "dayLabel": "Day 3",
+   "date": "2025-09-27",
+   "session": 7,
+   "t": 96.15,
+   "wet": false
+  },
+  {
+   "lap": 47,
+   "day": 2,
+   "dayLabel": "Day 3",
+   "date": "2025-09-27",
+   "session": 7,
+   "t": 95.64,
+   "wet": false
+  },
+  {
+   "lap": 48,
+   "day": 2,
+   "dayLabel": "Day 3",
+   "date": "2025-09-27",
+   "session": 7,
+   "t": 95.17,
+   "wet": false
+  },
+  {
+   "lap": 49,
+   "day": 2,
+   "dayLabel": "Day 3",
+   "date": "2025-09-27",
+   "session": 7,
+   "t": 95.11,
+   "wet": false
+  },
+  {
+   "lap": 50,
+   "day": 2,
+   "dayLabel": "Day 3",
+   "date": "2025-09-27",
+   "session": 7,
+   "t": 94.77,
+   "wet": false
+  },
+  {
+   "lap": 51,
+   "day": 2,
+   "dayLabel": "Day 3",
+   "date": "2025-09-27",
+   "session": 7,
+   "t": 94.1,
+   "wet": false
+  },
+  {
+   "lap": 52,
+   "day": 2,
+   "dayLabel": "Day 3",
+   "date": "2025-09-27",
+   "session": 8,
+   "t": 96,
+   "wet": false
+  },
+  {
+   "lap": 53,
+   "day": 2,
+   "dayLabel": "Day 3",
+   "date": "2025-09-27",
+   "session": 8,
+   "t": 95.46,
+   "wet": false
+  },
+  {
+   "lap": 54,
+   "day": 2,
+   "dayLabel": "Day 3",
+   "date": "2025-09-27",
+   "session": 8,
+   "t": 94.65,
+   "wet": false
+  },
+  {
+   "lap": 55,
+   "day": 2,
+   "dayLabel": "Day 3",
+   "date": "2025-09-27",
+   "session": 8,
+   "t": 95.39,
+   "wet": false
+  },
+  {
+   "lap": 56,
+   "day": 2,
+   "dayLabel": "Day 3",
+   "date": "2025-09-27",
+   "session": 8,
+   "t": 94.91,
+   "wet": false
+  },
+  {
+   "lap": 57,
+   "day": 2,
+   "dayLabel": "Day 3",
+   "date": "2025-09-27",
+   "session": 8,
+   "t": 95.01,
+   "wet": false
+  },
+  {
+   "lap": 58,
+   "day": 2,
+   "dayLabel": "Day 3",
+   "date": "2025-09-27",
+   "session": 8,
+   "t": 94.55,
+   "wet": false
+  },
+  {
+   "lap": 59,
+   "day": 2,
+   "dayLabel": "Day 3",
+   "date": "2025-09-27",
+   "session": 8,
+   "t": 95.32,
+   "wet": false
+  },
+  {
+   "lap": 60,
+   "day": 2,
+   "dayLabel": "Day 3",
+   "date": "2025-09-27",
+   "session": 9,
+   "t": 95.59,
+   "wet": false
+  },
+  {
+   "lap": 61,
+   "day": 2,
+   "dayLabel": "Day 3",
+   "date": "2025-09-27",
+   "session": 9,
+   "t": 95.46,
+   "wet": false
+  },
+  {
+   "lap": 62,
+   "day": 2,
+   "dayLabel": "Day 3",
+   "date": "2025-09-27",
+   "session": 9,
+   "t": 94.94,
+   "wet": false
+  },
+  {
+   "lap": 63,
+   "day": 2,
+   "dayLabel": "Day 3",
+   "date": "2025-09-27",
+   "session": 9,
+   "t": 94.52,
+   "wet": false
+  },
+  {
+   "lap": 64,
+   "day": 2,
+   "dayLabel": "Day 3",
+   "date": "2025-09-27",
+   "session": 9,
+   "t": 94.22,
+   "wet": false
+  },
+  {
+   "lap": 65,
+   "day": 2,
+   "dayLabel": "Day 3",
+   "date": "2025-09-27",
+   "session": 9,
+   "t": 94.13,
+   "wet": false
+  },
+  {
+   "lap": 66,
+   "day": 2,
+   "dayLabel": "Day 3",
+   "date": "2025-09-27",
+   "session": 9,
+   "t": 94.19,
+   "wet": false
+  },
+  {
+   "lap": 67,
+   "day": 3,
+   "dayLabel": "Day 4",
+   "date": "2026-02-21",
+   "session": 10,
+   "t": 93.38,
+   "wet": false
+  },
+  {
+   "lap": 68,
+   "day": 3,
+   "dayLabel": "Day 4",
+   "date": "2026-02-21",
+   "session": 10,
+   "t": 93.64,
+   "wet": false
+  },
+  {
+   "lap": 69,
+   "day": 3,
+   "dayLabel": "Day 4",
+   "date": "2026-02-21",
+   "session": 10,
+   "t": 94.56,
+   "wet": false
+  },
+  {
+   "lap": 70,
+   "day": 3,
+   "dayLabel": "Day 4",
+   "date": "2026-02-21",
+   "session": 10,
+   "t": 92.84,
+   "wet": false
+  },
+  {
+   "lap": 71,
+   "day": 3,
+   "dayLabel": "Day 4",
+   "date": "2026-02-21",
+   "session": 10,
+   "t": 91.72,
+   "wet": false
+  },
+  {
+   "lap": 72,
+   "day": 3,
+   "dayLabel": "Day 4",
+   "date": "2026-02-21",
+   "session": 10,
+   "t": 93.24,
+   "wet": false
+  },
+  {
+   "lap": 73,
+   "day": 3,
+   "dayLabel": "Day 4",
+   "date": "2026-02-21",
+   "session": 10,
+   "t": 91.44,
+   "wet": false
+  },
+  {
+   "lap": 74,
+   "day": 3,
+   "dayLabel": "Day 4",
+   "date": "2026-02-21",
+   "session": 10,
+   "t": 91.86,
+   "wet": false
+  },
+  {
+   "lap": 75,
+   "day": 3,
+   "dayLabel": "Day 4",
+   "date": "2026-02-21",
+   "session": 11,
+   "t": 94.02,
+   "wet": false
+  },
+  {
+   "lap": 76,
+   "day": 3,
+   "dayLabel": "Day 4",
+   "date": "2026-02-21",
+   "session": 11,
+   "t": 92.86,
+   "wet": false
+  },
+  {
+   "lap": 77,
+   "day": 3,
+   "dayLabel": "Day 4",
+   "date": "2026-02-21",
+   "session": 11,
+   "t": 92.78,
+   "wet": false
+  },
+  {
+   "lap": 78,
+   "day": 3,
+   "dayLabel": "Day 4",
+   "date": "2026-02-21",
+   "session": 11,
+   "t": 92.23,
+   "wet": false
+  },
+  {
+   "lap": 79,
+   "day": 3,
+   "dayLabel": "Day 4",
+   "date": "2026-02-21",
+   "session": 11,
+   "t": 92.68,
+   "wet": false
+  },
+  {
+   "lap": 80,
+   "day": 3,
+   "dayLabel": "Day 4",
+   "date": "2026-02-21",
+   "session": 11,
+   "t": 92.24,
+   "wet": false
+  },
+  {
+   "lap": 81,
+   "day": 3,
+   "dayLabel": "Day 4",
+   "date": "2026-02-21",
+   "session": 11,
+   "t": 92.33,
+   "wet": false
+  },
+  {
+   "lap": 82,
+   "day": 3,
+   "dayLabel": "Day 4",
+   "date": "2026-02-21",
+   "session": 12,
+   "t": 92.66,
+   "wet": false
+  },
+  {
+   "lap": 83,
+   "day": 3,
+   "dayLabel": "Day 4",
+   "date": "2026-02-21",
+   "session": 12,
+   "t": 91.76,
+   "wet": false
+  },
+  {
+   "lap": 84,
+   "day": 3,
+   "dayLabel": "Day 4",
+   "date": "2026-02-21",
+   "session": 12,
+   "t": 91.42,
+   "wet": false
+  },
+  {
+   "lap": 85,
+   "day": 3,
+   "dayLabel": "Day 4",
+   "date": "2026-02-21",
+   "session": 12,
+   "t": 91.56,
+   "wet": false
+  },
+  {
+   "lap": 86,
+   "day": 3,
+   "dayLabel": "Day 4",
+   "date": "2026-02-21",
+   "session": 12,
+   "t": 92.01,
+   "wet": false
+  },
+  {
+   "lap": 87,
+   "day": 3,
+   "dayLabel": "Day 4",
+   "date": "2026-02-21",
+   "session": 12,
+   "t": 91,
+   "wet": false
+  },
+  {
+   "lap": 88,
+   "day": 3,
+   "dayLabel": "Day 4",
+   "date": "2026-02-21",
+   "session": 12,
+   "t": 91.04,
+   "wet": false
+  },
+  {
+   "lap": 89,
+   "day": 4,
+   "dayLabel": "Day 5",
+   "date": "2026-04-12",
+   "session": 13,
+   "t": 109.92,
+   "wet": true
+  },
+  {
+   "lap": 90,
+   "day": 4,
+   "dayLabel": "Day 5",
+   "date": "2026-04-12",
+   "session": 13,
+   "t": 115.26,
+   "wet": true
+  },
+  {
+   "lap": 91,
+   "day": 4,
+   "dayLabel": "Day 5",
+   "date": "2026-04-12",
+   "session": 13,
+   "t": 116.73,
+   "wet": true
+  },
+  {
+   "lap": 92,
+   "day": 4,
+   "dayLabel": "Day 5",
+   "date": "2026-04-12",
+   "session": 13,
+   "t": 120.45,
+   "wet": true
+  },
+  {
+   "lap": 93,
+   "day": 4,
+   "dayLabel": "Day 5",
+   "date": "2026-04-12",
+   "session": 13,
+   "t": 120.95,
+   "wet": true
+  },
+  {
+   "lap": 94,
+   "day": 4,
+   "dayLabel": "Day 5",
+   "date": "2026-04-12",
+   "session": 13,
+   "t": 121.14,
+   "wet": true
+  },
+  {
+   "lap": 95,
+   "day": 4,
+   "dayLabel": "Day 5",
+   "date": "2026-04-12",
+   "session": 13,
+   "t": 109.76,
+   "wet": true
+  },
+  {
+   "lap": 96,
+   "day": 4,
+   "dayLabel": "Day 5",
+   "date": "2026-04-12",
+   "session": 14,
+   "t": 91.58,
+   "wet": false
+  },
+  {
+   "lap": 97,
+   "day": 4,
+   "dayLabel": "Day 5",
+   "date": "2026-04-12",
+   "session": 14,
+   "t": 90.76,
+   "wet": false
+  },
+  {
+   "lap": 98,
+   "day": 4,
+   "dayLabel": "Day 5",
+   "date": "2026-04-12",
+   "session": 14,
+   "t": 89.63,
+   "wet": false
+  },
+  {
+   "lap": 99,
+   "day": 4,
+   "dayLabel": "Day 5",
+   "date": "2026-04-12",
+   "session": 14,
+   "t": 88.68,
+   "wet": false
+  },
+  {
+   "lap": 100,
+   "day": 4,
+   "dayLabel": "Day 5",
+   "date": "2026-04-12",
+   "session": 14,
+   "t": 89.71,
+   "wet": false
+  },
+  {
+   "lap": 101,
+   "day": 4,
+   "dayLabel": "Day 5",
+   "date": "2026-04-12",
+   "session": 14,
+   "t": 89.13,
+   "wet": false
+  },
+  {
+   "lap": 102,
+   "day": 4,
+   "dayLabel": "Day 5",
+   "date": "2026-04-12",
+   "session": 14,
+   "t": 90.44,
+   "wet": false
+  },
+  {
+   "lap": 103,
+   "day": 4,
+   "dayLabel": "Day 5",
+   "date": "2026-04-12",
+   "session": 14,
+   "t": 90.15,
+   "wet": false
+  },
+  {
+   "lap": 104,
+   "day": 4,
+   "dayLabel": "Day 5",
+   "date": "2026-04-12",
+   "session": 15,
+   "t": 90.33,
+   "wet": false
+  },
+  {
+   "lap": 105,
+   "day": 4,
+   "dayLabel": "Day 5",
+   "date": "2026-04-12",
+   "session": 15,
+   "t": 89.46,
+   "wet": false
+  },
+  {
+   "lap": 106,
+   "day": 4,
+   "dayLabel": "Day 5",
+   "date": "2026-04-12",
+   "session": 15,
+   "t": 89.08,
+   "wet": false
+  },
+  {
+   "lap": 107,
+   "day": 4,
+   "dayLabel": "Day 5",
+   "date": "2026-04-12",
+   "session": 15,
+   "t": 89.91,
+   "wet": false
+  },
+  {
+   "lap": 108,
+   "day": 4,
+   "dayLabel": "Day 5",
+   "date": "2026-04-12",
+   "session": 15,
+   "t": 89.39,
+   "wet": false
+  },
+  {
+   "lap": 109,
+   "day": 4,
+   "dayLabel": "Day 5",
+   "date": "2026-04-12",
+   "session": 15,
+   "t": 89.3,
+   "wet": false
+  },
+  {
+   "lap": 110,
+   "day": 4,
+   "dayLabel": "Day 5",
+   "date": "2026-04-12",
+   "session": 15,
+   "t": 88.97,
+   "wet": false
+  },
+  {
+   "lap": 111,
+   "day": 4,
+   "dayLabel": "Day 5",
+   "date": "2026-04-12",
+   "session": 16,
+   "t": 89.18,
+   "wet": false
+  },
+  {
+   "lap": 112,
+   "day": 4,
+   "dayLabel": "Day 5",
+   "date": "2026-04-12",
+   "session": 16,
+   "t": 88.39,
+   "wet": false
+  },
+  {
+   "lap": 113,
+   "day": 4,
+   "dayLabel": "Day 5",
+   "date": "2026-04-12",
+   "session": 16,
+   "t": 89.25,
+   "wet": false
+  },
+  {
+   "lap": 114,
+   "day": 4,
+   "dayLabel": "Day 5",
+   "date": "2026-04-12",
+   "session": 16,
+   "t": 89.36,
+   "wet": false
+  },
+  {
+   "lap": 115,
+   "day": 4,
+   "dayLabel": "Day 5",
+   "date": "2026-04-12",
+   "session": 16,
+   "t": 89.03,
+   "wet": false
+  }
+ ],
+ "theoretical": [
+  {
+   "day": 0,
+   "dayLabel": "Day 1",
+   "date": "2025-05-17",
+   "t": 98.13
+  },
+  {
+   "day": 1,
+   "dayLabel": "Day 2",
+   "date": "2025-07-19",
+   "t": 95.89
+  },
+  {
+   "day": 2,
+   "dayLabel": "Day 3",
+   "date": "2025-09-27",
+   "t": 92.81
+  },
+  {
+   "day": 3,
+   "dayLabel": "Day 4",
+   "date": "2026-02-21",
+   "t": 89.7
+  },
+  {
+   "day": 4,
+   "dayLabel": "Day 5",
+   "date": "2026-04-12",
+   "t": 86.93
+  }
+ ]
+}
