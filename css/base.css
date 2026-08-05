@@ -526,6 +526,10 @@ section { padding-block: var(--gap-xl); }
 .tile--novisual .tile__thumb { display: grid; place-items: center; }
 .tile--novisual .tile__thumb svg { width: 78%; height: 78%; }
 
+/* Tall phone captures: crop to the middle of the screen rather than the
+   top-left, so the interface shows instead of the status bar. */
+.tile--portrait .tile__thumb img { object-position: center 38%; }
+
 .tile__body {
   padding: 1.1rem clamp(1rem, 2vw, 1.35rem) 1.35rem;
   display: flex;
