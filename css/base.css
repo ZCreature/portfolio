@@ -466,26 +466,18 @@ section { padding-block: var(--gap-xl); }
   border: 1px solid var(--rule);
 }
 
-/* Fixed 2×2 — used where two galleries sit beside each other and need to
-   read as matching blocks rather than reflowing independently. */
+/* Fixed column counts — galleries that sit beside each other need to read
+   as matching blocks rather than reflowing independently. */
 .tiles--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.tiles--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
-/* Two sections side by side, each its own 2×2. */
-.duo {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(2rem, 4vw, 4rem);
-  align-items: start;
-}
-
-.duo > section { padding-block: 0; }
 
 @media (max-width: 64rem) {
-  .duo { grid-template-columns: minmax(0, 1fr); gap: var(--gap-xl); }
+  .tiles--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 30rem) {
-  .tiles--2 { grid-template-columns: minmax(0, 1fr); }
+  .tiles--2, .tiles--3 { grid-template-columns: minmax(0, 1fr); }
 }
 
 .tile {
