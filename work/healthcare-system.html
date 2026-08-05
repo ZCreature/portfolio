@@ -200,28 +200,55 @@
     </div>
 
     <figure class="viz figure" data-reveal style="margin-top: var(--gap-m);">
-      <table class="derive">
-        <caption class="meta" style="text-align:left; padding-bottom:0.6rem;">
-          Minimum pairwise ΔE2000 across normal, protan, deutan, tritan and greyscale
-        </caption>
-        <thead>
-          <tr><th scope="col">Series</th><th scope="col">Best min ΔE</th><th scope="col">vs floor of 10</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>3</td><td>23.0</td><td>comfortable</td></tr>
-          <tr><td>4</td><td>14.5</td><td>comfortable</td></tr>
-          <tr><td>5</td><td>10.7</td><td>at the limit</td></tr>
-          <tr data-fails="true"><td>6</td><td>8.5</td><td>fails</td></tr>
-        </tbody>
-      </table>
+      <div class="viz__head">
+        <div>
+          <p class="viz__title">Where the ceiling is</p>
+          <p class="viz__note">Best achievable palette at each series count — drag it</p>
+        </div>
+        <div class="seg" role="group" aria-label="Viewing condition">
+          <button type="button" data-cond="none" aria-pressed="true">Normal</button>
+          <button type="button" data-cond="deutan" aria-pressed="false">Deutan</button>
+          <button type="button" data-cond="protan" aria-pressed="false">Protan</button>
+          <button type="button" data-cond="tritan" aria-pressed="false">Tritan</button>
+          <button type="button" data-cond="grey" aria-pressed="false">Greyscale</button>
+        </div>
+      </div>
 
-      <p class="source">Derived · lightness-ladder construction · CIEDE2000</p>
+      <div class="controls" style="display:flex;gap:0.9rem;align-items:center;flex-wrap:wrap;margin-bottom:1.1rem;">
+        <label class="meta" for="nseries">Series</label>
+        <input type="range" id="nseries" min="3" max="8" value="5" step="1"
+               style="flex:1 1 12rem;min-width:10rem;accent-color:var(--ink);">
+        <span class="num" id="nout" style="font-size:1.25rem;min-width:1.5ch;">5</span>
+      </div>
+
+      <div class="strip" id="ceil-strip" style="display:flex;height:4.5rem;border:1px solid var(--rule-soft);"></div>
+      <div class="de-row" id="ceil-de" style="display:flex;margin-top:0.4rem;"></div>
+
+      <div class="readout" style="display:flex;flex-wrap:wrap;gap:1.5rem;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--rule-soft);">
+        <div>
+          <p class="meta">Worst pair, this condition</p>
+          <p class="num" id="ceil-now" style="font-size:clamp(1.5rem,3.5vw,2.25rem);letter-spacing:-0.03em;line-height:1;">—</p>
+        </div>
+        <div>
+          <p class="meta">Worst across all five</p>
+          <p class="num" id="ceil-all" style="font-size:clamp(1.5rem,3.5vw,2.25rem);letter-spacing:-0.03em;line-height:1;">—</p>
+        </div>
+        <div style="flex:1 1 12rem;min-width:11rem;">
+          <p class="meta">Verdict</p>
+          <p id="ceil-verdict" style="font-size:0.9375rem;line-height:1.4;margin-top:0.3rem;">—</p>
+        </div>
+      </div>
+
+      <p class="source">Live · lightness-ladder construction · CIEDE2000 · floor of 10</p>
 
       <figcaption>
-        Six series cannot clear ΔE&nbsp;10 in every mode — not with a better palette,
-        not with more care. Greyscale is the binding constraint: six colours means six
-        distinguishable <em>lightnesses</em>, and there aren't enough between white and
+        <b>Drag to six.</b> The worst pair drops below ΔE&nbsp;10 and stays there — not
+        because the palette is badly chosen, but because greyscale needs six
+        distinguishable <em>lightnesses</em> and there aren't enough between white and
         black. <b>Not a taste preference. A capacity limit.</b>
+        This measures separation alone. Requiring each series to also clear 3:1 against
+        the page narrows the usable lightness span and pulls the practical number down
+        again — which is why the chart above carries four series, not five.
       </figcaption>
     </figure>
   </section>
@@ -320,7 +347,8 @@
 
 <script type="module" src="../js/motion.js"></script>
 <script type="module">
-import { simulate, deltaE00, hexToRgb, rgbToHex, luminance } from '../js/color.js';
+import { simulate, deltaE00, hexToRgb, rgbToHex, luminance,
+         buildPalette, minSeparation, toGrey as greyOf } from '../js/color.js';
 
 const $  = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -444,6 +472,57 @@ $$('[data-sim]').forEach((btn) => {
 document.addEventListener('themechange', render);
 
 render();
+
+/* ---- Categorical-ceiling explorer ------------------------ */
+
+const CONDS = ['none', 'deutan', 'protan', 'tritan', 'grey'];
+const shift = (hex, c) =>
+  c === 'none' ? hex : c === 'grey' ? greyOf(hex) : simulate(hex, c, 1, true);
+
+let nSeries = 5, cond = 'none';
+
+function drawCeiling() {
+  // Separation only — the same L* 26–86 construction the derivation used.
+  // Background contrast is a further constraint, noted below the figure.
+  const base = buildPalette(nSeries);
+  const shown = base.map((c) => shift(c, cond));
+
+  $('#ceil-strip').innerHTML =
+    shown.map((c) => `<div style="flex:1;background:${c}"></div>`).join('');
+
+  // Nearest neighbour for each swatch — what decides if two series read apart.
+  $('#ceil-de').innerHTML = shown.map((c, i) => {
+    const near = Math.min(...shown.filter((_, j) => j !== i).map((o) => deltaE00(c, o)));
+    return `<span style="flex:1;text-align:center;font-size:0.625rem;
+      font-variant-numeric:tabular-nums;${near < 10 ? 'font-weight:700;text-decoration:underline;text-underline-offset:2px;color:var(--ink);' : 'color:var(--ink-3);'}"
+      >${near.toFixed(0)}</span>`;
+  }).join('');
+
+  const now = minSeparation(shown);
+  const all = Math.min(...CONDS.map((c) => minSeparation(base.map((x) => shift(x, c)))));
+
+  $('#ceil-now').textContent = now.toFixed(1);
+  $('#ceil-all').textContent = all.toFixed(1);
+  $('#ceil-verdict').innerHTML = all >= 10
+    ? `<b>${nSeries} series holds.</b> Every pair stays at least ΔE&nbsp;${all.toFixed(1)} apart in all five conditions.`
+    : `<b>${nSeries} series fails.</b> The closest pair collapses to ΔE&nbsp;${all.toFixed(1)}, under the floor of 10.`;
+}
+
+$('#nseries').addEventListener('input', (e) => {
+  nSeries = Number(e.target.value);
+  $('#nout').textContent = nSeries;
+  drawCeiling();
+});
+
+$$('[data-cond]').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    $$('[data-cond]').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+    cond = btn.dataset.cond;
+    drawCeiling();
+  });
+});
+
+drawCeiling();
 </script>
 </body>
 </html>

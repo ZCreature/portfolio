@@ -162,6 +162,88 @@ export function deltaE00(hexA, hexB) {
   );
 }
 
+/* ---- Lab / LCh construction ------------------------------
+   Used to build categorical palettes on a lightness ladder,
+   which is what makes them survive greyscale.              */
+
+function labToRgb(L, a, b) {
+  const fy = (L + 16) / 116, fx = fy + a / 500, fz = fy - b / 200;
+  const f = (t) => (t > 6 / 29 ? t * t * t : 3 * Math.pow(6 / 29, 2) * (t - 4 / 29));
+  const wp = [0.95047, 1, 1.08883];
+  const X = wp[0] * f(fx), Y = wp[1] * f(fy), Z = wp[2] * f(fz);
+  return [
+     3.2404542 * X - 1.5371385 * Y - 0.4985314 * Z,
+    -0.9692660 * X + 1.8760108 * Y + 0.0415560 * Z,
+     0.0556434 * X - 0.2040259 * Y + 1.0572252 * Z,
+  ];
+}
+
+/** LCh → hex, or null when the colour falls outside the sRGB gamut. */
+export function lchToHex(L, C, hDeg) {
+  const h = (hDeg * Math.PI) / 180;
+  const rgb = labToRgb(L, C * Math.cos(h), C * Math.sin(h));
+  if (rgb.some((v) => v < -0.003 || v > 1.003)) return null;
+  return rgbToHex(rgb.map((v) => toGamma(Math.max(0, Math.min(1, v))) * 255));
+}
+
+/** The most saturated in-gamut colour at a given lightness and hue. */
+export function maxChroma(L, hDeg) {
+  for (let C = 72; C >= 4; C -= 2) {
+    const hex = lchToHex(L, C, hDeg);
+    if (hex) return hex;
+  }
+  return null;
+}
+
+/**
+ * Best n-series categorical palette we can construct: colours spaced on an
+ * even lightness ladder — which is what carries greyscale — with the hue
+ * offset searched for the arrangement that maximises the worst pair across
+ * normal vision, all three CVD types, and greyscale.
+ *
+ * The default L* 26–86 span matches the derivation the case study cites, and
+ * measures series separation ALONE. Requiring each series to also clear 3:1
+ * against the page narrows the usable span and lowers the ceiling further —
+ * which is why the chart on that page carries four series, not five.
+ */
+export function buildPalette(n, lo = 26, hi = 86) {
+  const ladder = Array.from({ length: n }, (_, i) =>
+    Math.round(n === 1 ? (lo + hi) / 2 : lo + ((hi - lo) * i) / (n - 1)));
+
+  const CONDS = ['none', 'deutan', 'protan', 'tritan', 'grey'];
+  const shift = (hex, c) =>
+    c === 'none' ? hex : c === 'grey' ? toGrey(hex) : simulate(hex, c, 1, true);
+  const worstAcross = (set) =>
+    Math.min(...CONDS.map((c) => minSeparation(set.map((x) => shift(x, c)))));
+
+  let best = null, bestScore = -1;
+  // Deterministic sweep of hue arrangements; the same search the offline
+  // derivation used, small enough to run on every slider tick.
+  for (let t = 0; t < 90; t++) {
+    const set = ladder.map((L, i) =>
+      maxChroma(L, Math.round((i * (360 / n) + t * 37 + i * i * 13) % 360)));
+    if (set.some((c) => !c)) continue;
+    const score = worstAcross(set);
+    if (score > bestScore) { bestScore = score; best = set; }
+  }
+  return best || ladder.map((L) => maxChroma(L, 264) || '#888888');
+}
+
+/** Worst pairwise ΔE2000 in a set — the number a categorical palette lives by. */
+export function minSeparation(colors) {
+  let worst = Infinity;
+  for (let a = 0; a < colors.length; a++)
+    for (let b = a + 1; b < colors.length; b++)
+      worst = Math.min(worst, deltaE00(colors[a], colors[b]));
+  return worst;
+}
+
+/** Perceptual greyscale — the print and projector-washout case. */
+export function toGrey(hex) {
+  const g = Math.round(255 * toGamma(luminance(hex)));
+  return rgbToHex([g, g, g]);
+}
+
 /* ---- WCAG contrast --------------------------------------- */
 
 export const luminance = (hex) => {

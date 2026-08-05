@@ -73,8 +73,9 @@
       <p class="meta">01 — The map</p>
       <h2>Running here, in the page</h2>
       <p>
-        Pan and zoom it. Everything renders locally — no tile server, no API key,
-        nothing fetched at view time. The whole thing is one self-contained document.
+        Pan and zoom it. The price data is baked into the document — 1,712 vector
+        shapes, no API key, no query at view time. Only the basemap underneath is
+        fetched, from CartoDB's dark tiles.
       </p>
     </div>
 
@@ -89,9 +90,9 @@
                 title="Interactive map of North American gas prices"></iframe>
       </div>
       <p class="embed__note">
-        R + Leaflet output, embedded unmodified. It carries its own copy of Leaflet,
-        Proj4 and jQuery, so it runs offline — about 6&nbsp;MB, loaded only when you
-        scroll to it.
+        R + Leaflet output, embedded unmodified. It carries its own Leaflet, Proj4 and
+        jQuery — about 6&nbsp;MB, loaded only when you scroll to it. The basemap tiles
+        come from CartoDB, so this panel needs a connection.
       </p>
     </div>
   </section>
