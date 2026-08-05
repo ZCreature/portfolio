@@ -3,17 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>A WCAG colour standard for healthcare dashboards — Chris Almaguer</title>
-<meta name="description" content="Leading a WCAG 2.1 AA accessibility study to define colour standards for healthcare data visualization, and the design system built on top of it.">
+<title>Protected — Chris Almaguer</title>
+<meta name="description" content="Client work under NDA. Passphrase required.">
 <meta name="theme-color" content="#fbfbfa">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Chris Almaguer">
-<meta property="og:title" content="A WCAG colour standard for healthcare dashboards — Chris Almaguer">
-<meta property="og:description" content="Leading a WCAG 2.1 AA accessibility study to define colour standards for healthcare data visualization, and the design system built on top of it.">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="A WCAG colour standard for healthcare dashboards — Chris Almaguer">
-<meta name="twitter:description" content="Leading a WCAG 2.1 AA accessibility study to define colour standards for healthcare data visualization, and the design system built on top of it.">
 <meta name="author" content="Chris Almaguer">
 <script>
   try {
@@ -21,49 +14,8 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
+<meta name="robots" content="noindex">
 <link rel="stylesheet" href="../css/base.css">
-<style>
-  .nda {
-    display: flex;
-    gap: 0.9rem;
-    align-items: flex-start;
-    border: 1px solid var(--rule);
-    border-left: 2px solid var(--ink);
-    padding: 1rem 1.15rem;
-    background: var(--paper-2);
-  }
-  .nda p { font-size: 0.875rem; color: var(--ink-2); line-height: 1.55; }
-
-  .chart-wrap { width: 100%; overflow-x: auto; }
-  svg text { font-family: var(--font-mono); fill: var(--ink-3);
-             font-variant-numeric: tabular-nums; }
-  .axis line, .axis path { stroke: var(--rule); }
-
-  .legend { display: flex; flex-wrap: wrap; gap: 0.35rem 1.1rem; margin-top: 0.9rem; }
-  .legend span {
-    display: inline-flex; align-items: center; gap: 0.4rem;
-    font-size: 0.75rem; color: var(--ink-2);
-  }
-  .legend i { width: 0.75rem; height: 0.75rem; display: block; }
-
-  .rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem,1fr)); gap: 1px;
-           background: var(--rule); border: 1px solid var(--rule); }
-  .rule-card { background: var(--paper); padding: 1.25rem; }
-  .rule-card h3 { font-size: 0.9375rem; letter-spacing: -0.015em; margin-bottom: 0.4rem; }
-  .rule-card p { font-size: 0.8125rem; color: var(--ink-3); line-height: 1.5; }
-  .rule-card .num { display: block; font-size: 1.6rem; letter-spacing: -0.03em; margin-bottom: 0.5rem; }
-
-  /* Derivation table — the evidence behind the categorical ceiling. */
-  .derive { width: 100%; border-collapse: collapse; margin-top: 0.5rem; }
-  .derive th, .derive td {
-    font-family: var(--font-mono); font-size: 0.75rem; font-variant-numeric: tabular-nums;
-    text-align: right; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--rule-soft);
-  }
-  .derive th { color: var(--ink-3); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.625rem; }
-  .derive td:first-child, .derive th:first-child { text-align: left; }
-  .derive tr[data-fails="true"] td { color: var(--ink); font-weight: 700; }
-  .derive tr[data-fails="true"] td:last-child::after { content: " ✕"; }
-</style>
 </head>
 <body>
 
@@ -73,8 +25,10 @@
   <div class="shell masthead__inner">
     <a class="wordmark" href="../index.html">Chris Almaguer</a>
     <nav class="nav" aria-label="Primary">
-      <a href="../index.html#current">Current work</a>
-      <a href="../index.html#past">Past work</a>
+      <a href="../index.html#dataviz">Data viz</a>
+      <a href="../index.html#editorial">Editorial</a>
+      <a href="../index.html#uiux">UI/UX</a>
+      <a href="../index.html#healthcare">Healthcare</a>
       <a href="../about.html">About</a>
       <button class="theme-toggle" type="button" data-theme-toggle
               aria-label="Switch to dark theme" aria-pressed="false">
@@ -88,441 +42,32 @@
 </header>
 
 <main id="main">
-
-  <!-- ============ Hero ============ -->
-  <section class="shell case-hero">
-    <p class="meta" data-reveal>Case study — 01 / Design systems &amp; accessibility</p>
-    <h1 class="h1" data-reveal style="--reveal-delay:70ms; margin-top: var(--gap-s);">
-      Fifty dashboards, one standard
-    </h1>
-    <p class="lede tight" data-reveal style="--reveal-delay:140ms; margin-top: var(--gap-m);">
-      Fifty-plus executive dashboards for U.S. hospital systems. The team needed one
-      answer to "is this chart readable?" I led the study that produced it, then built
-      the Figma system that made it the default.
-    </p>
-
-    <div class="case-facts" style="margin-top: var(--gap-l);" data-reveal>
-      <div><p class="meta fact__label">Role</p><p class="fact__value">Sr. Designer, Data Intelligence &amp; Visualization</p></div>
-      <div><p class="meta fact__label">Client</p><p class="fact__value">Vizient — U.S. hospital systems</p></div>
-      <div><p class="meta fact__label">Years</p><p class="fact__value">2022 — present</p></div>
-      <div><p class="meta fact__label">Tools</p><p class="fact__value">Figma, Power&nbsp;BI, Tableau</p></div>
-    </div>
-
-    <div class="nda" style="margin-top: var(--gap-m);" data-reveal>
-      <span class="meta" style="white-space:nowrap; padding-top:0.15rem;">NDA</span>
-      <p>
-        Client data can't be shown publicly. This page is the <b>method and the
-        system</b> — the rules, the reasoning, and charts rebuilt from synthetic data
-        that obey them. Real screens on request.
+  <section class="shell" style="padding-block: clamp(4rem,12vw,9rem) var(--gap-xl);">
+    <div class="gate" data-gate="../assets/protected/healthcare.json">
+      <p class="meta">Protected</p>
+      <h1 class="h1" style="margin-top: var(--gap-s);">Client work, under NDA</h1>
+      <p class="body" style="margin-top: var(--gap-m);">
+        This case study documents the method and the design system behind fifty-plus
+        executive dashboards for U.S. hospital systems. It holds no client data and no
+        hospital figures — every chart is rebuilt from synthetic data — but the work is
+        covered by an agreement, so it sits behind a passphrase.
       </p>
+      <p class="body" style="margin-top: var(--gap-s);">Ask and I'll pass it on.</p>
+
+      <form class="gate__row" autocomplete="off">
+        <label class="skip" for="pw">Passphrase</label>
+        <input id="pw" type="password" placeholder="Passphrase" autocomplete="off" spellcheck="false">
+        <button type="submit">Unlock</button>
+      </form>
+      <p class="gate__msg" role="status" aria-live="polite"></p>
     </div>
+
+    <div data-gate-target hidden></div>
   </section>
-
-  <!-- ============ 1. Problem ============ -->
-  <section class="shell shell--narrow" style="padding-block: var(--gap-l);">
-    <div class="prose" data-reveal>
-      <p class="meta">01 — The problem</p>
-      <h2>Fifty dashboards, fifty answers</h2>
-      <p>
-        Executives read these charts to make decisions with real consequences — often
-        through a boardroom projector's washed-out colour, sometimes printed to
-        greyscale, occasionally on a phone.
-      </p>
-      <p>
-        Accessibility was handled per-dashboard, by whoever designed it. Everyone made
-        reasonable choices. Collectively there was no standard — and no definition of
-        what "compliant" even meant for a <em>chart</em>. WCAG is written for text and
-        UI components, not for eleven categorical series on a stacked bar.
-      </p>
-    </div>
-
-    <p class="pull" data-reveal>
-      WCAG tells you a label needs 4.5:1. It doesn't tell you how many series a
-      colourblind reader can tell apart.
-    </p>
-  </section>
-
-  <!-- ============ 2. The study ============ -->
-  <section class="shell shell--narrow" style="padding-block: var(--gap-l);">
-    <div class="prose" data-reveal>
-      <p class="meta">02 — The study</p>
-      <h2>What I actually tested</h2>
-      <p>
-        I audited the dashboards already shipping, not a hypothetical. Three questions,
-        in order:
-      </p>
-      <ul>
-        <li>
-          <b>Do labels pass at every tint?</b> Brand colour ships at 60%, 30%, 10%.
-          Contrast has to hold at every step, not just full strength.
-        </li>
-        <li>
-          <b>Do series survive colour-vision deficiency?</b> All three types, at
-          partial severity as well as full — most colourblind readers aren't at 100%.
-        </li>
-        <li>
-          <b>Does it survive with no colour at all?</b> Greyscale print and projector
-          washout are the same failure as CVD: colour stops carrying information.
-        </li>
-      </ul>
-    </div>
-
-    <div class="rules" style="margin-top: var(--gap-l);" data-reveal-group data-reveal-step="60">
-      <div class="rule-card" data-reveal>
-        <span class="num">4.5:1</span>
-        <h3>Text on any fill</h3>
-        <p>AA for body-size labels, checked at every tint step rather than at 100% only.</p>
-      </div>
-      <div class="rule-card" data-reveal>
-        <span class="num">3:1</span>
-        <h3>Adjacent fills</h3>
-        <p>Non-text contrast between neighbouring segments, so a boundary reads without a stroke.</p>
-      </div>
-      <div class="rule-card" data-reveal>
-        <span class="num">ΔE&nbsp;10</span>
-        <h3>Series separation</h3>
-        <p>Minimum perceptual distance between any two series after CVD simulation.</p>
-      </div>
-      <div class="rule-card" data-reveal>
-        <span class="num">5</span>
-        <h3>Categorical ceiling</h3>
-        <p>Past five categorical series, colour stops working. Group, facet, or use position instead.</p>
-      </div>
-    </div>
-
-    <div class="prose" data-reveal style="margin-top: var(--gap-l);">
-      <h3>Where the ceiling comes from</h3>
-      <p>
-        I'd been repeating "six" out of habit, so I checked. I solved for the best
-        achievable palette at each size and measured the worst pair under every viewing
-        condition at once.
-      </p>
-    </div>
-
-    <figure class="viz figure" data-reveal style="margin-top: var(--gap-m);">
-      <div class="viz__head">
-        <div>
-          <p class="viz__title">Where the ceiling is</p>
-          <p class="viz__note">Best achievable palette at each series count — drag it</p>
-        </div>
-        <div class="seg" role="group" aria-label="Viewing condition">
-          <button type="button" data-cond="none" aria-pressed="true">Normal</button>
-          <button type="button" data-cond="deutan" aria-pressed="false">Deutan</button>
-          <button type="button" data-cond="protan" aria-pressed="false">Protan</button>
-          <button type="button" data-cond="tritan" aria-pressed="false">Tritan</button>
-          <button type="button" data-cond="grey" aria-pressed="false">Greyscale</button>
-        </div>
-      </div>
-
-      <div class="controls" style="display:flex;gap:0.9rem;align-items:center;flex-wrap:wrap;margin-bottom:1.1rem;">
-        <label class="meta" for="nseries">Series</label>
-        <input type="range" id="nseries" min="3" max="8" value="5" step="1"
-               style="flex:1 1 12rem;min-width:10rem;accent-color:var(--ink);">
-        <span class="num" id="nout" style="font-size:1.25rem;min-width:1.5ch;">5</span>
-      </div>
-
-      <div class="strip" id="ceil-strip" style="display:flex;height:4.5rem;border:1px solid var(--rule-soft);"></div>
-      <div class="de-row" id="ceil-de" style="display:flex;margin-top:0.4rem;"></div>
-
-      <div class="readout" style="display:flex;flex-wrap:wrap;gap:1.5rem;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--rule-soft);">
-        <div>
-          <p class="meta">Worst pair, this condition</p>
-          <p class="num" id="ceil-now" style="font-size:clamp(1.5rem,3.5vw,2.25rem);letter-spacing:-0.03em;line-height:1;">—</p>
-        </div>
-        <div>
-          <p class="meta">Worst across all five</p>
-          <p class="num" id="ceil-all" style="font-size:clamp(1.5rem,3.5vw,2.25rem);letter-spacing:-0.03em;line-height:1;">—</p>
-        </div>
-        <div style="flex:1 1 12rem;min-width:11rem;">
-          <p class="meta">Verdict</p>
-          <p id="ceil-verdict" style="font-size:0.9375rem;line-height:1.4;margin-top:0.3rem;">—</p>
-        </div>
-      </div>
-
-      <p class="source">Live · lightness-ladder construction · CIEDE2000 · floor of 10</p>
-
-      <figcaption>
-        <b>Drag to six.</b> The worst pair drops below ΔE&nbsp;10 and stays there — not
-        because the palette is badly chosen, but because greyscale needs six
-        distinguishable <em>lightnesses</em> and there aren't enough between white and
-        black. <b>Not a taste preference. A capacity limit.</b>
-        This measures separation alone. Requiring each series to also clear 3:1 against
-        the page narrows the usable lightness span and pulls the practical number down
-        again — which is why the chart above carries four series, not five.
-      </figcaption>
-    </figure>
-  </section>
-
-  <!-- ============ 3. Live proof ============ -->
-  <section class="shell shell--narrow" style="padding-block: var(--gap-l);">
-    <div class="prose" data-reveal>
-      <p class="meta">03 — The standard, tested</p>
-      <h2>A chart that holds up</h2>
-      <p>
-        A chart built to the standard, from synthetic data. The controls run the same
-        simulation the study used. This should be boring — nothing should collapse.
-      </p>
-    </div>
-
-    <figure class="viz figure" data-reveal>
-      <div class="viz__head">
-        <div>
-          <p class="viz__title">Readmission rate by service line</p>
-          <p class="viz__note">Synthetic data · rendered live under simulation</p>
-        </div>
-        <div class="seg" role="group" aria-label="Simulation">
-          <button type="button" data-sim="none" aria-pressed="true">Normal</button>
-          <button type="button" data-sim="deutan" aria-pressed="false">Deutan</button>
-          <button type="button" data-sim="protan" aria-pressed="false">Protan</button>
-          <button type="button" data-sim="tritan" aria-pressed="false">Tritan</button>
-          <button type="button" data-sim="grey" aria-pressed="false">Greyscale</button>
-        </div>
-      </div>
-
-      <div class="chart-wrap">
-        <svg id="chart" viewBox="0 0 720 320" role="img"
-             aria-label="Grouped line chart of readmission rate by service line over eight quarters, synthetic data.">
-        </svg>
-      </div>
-      <div class="legend" id="legend"></div>
-
-      <p class="source" id="chart-source">Live · Machado et&nbsp;al. 2009 · minimum pairwise ΔE shown below</p>
-
-      <figcaption>
-        <b>Switch through every mode.</b> The series separate by lightness and position
-        as well as hue — which is what carries greyscale. A hue-only palette looks fine
-        in the first mode and fails in the other four.
-      </figcaption>
-    </figure>
-  </section>
-
-  <!-- ============ 4. System ============ -->
-  <section class="shell shell--narrow" style="padding-block: var(--gap-l);">
-    <div class="prose" data-reveal>
-      <p class="meta">04 — The system</p>
-      <h2>Making it the default</h2>
-      <p>
-        A standard nobody follows is a document. This one stuck because it went into
-        the Figma library the team already used: verified palettes as styles, chart
-        components with tints pre-applied, annotation patterns for where colour wasn't
-        enough.
-      </p>
-      <p>
-        Designers stopped picking colours per chart. They picked a component and
-        compliance came with it. <b>The accessible option became the fastest option</b> —
-        the only version that survives a deadline.
-      </p>
-
-      <h3>What it didn't solve</h3>
-      <p>
-        Legacy dashboards didn't retro-fit themselves. And the ΔE&nbsp;10 series floor
-        is my threshold, not a standards body's — I'd defend it, but it's a judgement
-        call and I flag it as one.
-      </p>
-      <p>
-        Checking the rules by hand was still slow. That led to the next project.
-      </p>
-    </div>
-
-    <div style="margin-top: var(--gap-l);" data-reveal>
-      <div class="ledger">
-        <article class="entry">
-          <span class="entry__num num">02</span>
-          <div>
-            <h3 class="entry__title">
-              <a class="entry__link" href="color-safety-lens.html">Color Safety Lens</a>
-            </h3>
-            <p class="entry__sub">
-              The tool I built to automate this audit — and the colour-maths bug that
-              made its first version confidently wrong.
-            </p>
-          </div>
-          <span class="meta">Next</span>
-        </article>
-      </div>
-    </div>
-  </section>
-
 </main>
 
+<script type="module" src="../js/gate.js"></script>
+<script src="../js/theme.js"></script>
 <script type="module" src="../js/motion.js"></script>
-<script type="module">
-import { simulate, deltaE00, hexToRgb, rgbToHex, luminance,
-         buildPalette, minSeparation, toGrey as greyOf } from '../js/color.js';
-
-const $  = (s, r = document) => r.querySelector(s);
-const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-
-/* Two palettes, one per theme.
-
-   A series colour has to clear 3:1 against the page it sits on as well as
-   ΔE 10 against its neighbours. No four-colour set clears 3:1 against BOTH a
-   near-white and a near-black page — the two lightness windows barely overlap,
-   and what's left is far too narrow to also separate in greyscale. So the
-   palette swaps with the theme, and hue identity is held constant across the
-   pair: series 1 is the blue one in either theme.
-
-   Light: L* 20/33/47/60, min pairwise ΔE2000 10.2 across all five modes.
-   Dark:  L* 46/60/74/89, min pairwise ΔE2000 10.3. Both verified. */
-const PALETTES = {
-  light: ['#003353', '#a1002a', '#107c7f', '#c68301'],
-  dark:  ['#1372b0', '#fc5562', '#21c9ce', '#fedab0'],
-};
-
-const SERIES = [
-  { name: 'Cardiology',   data: [18.2, 17.8, 17.1, 16.4, 16.6, 15.9, 15.2, 14.8] },
-  { name: 'Orthopaedics', data: [14.1, 14.4, 13.8, 13.2, 12.6, 12.9, 12.1, 11.7] },
-  { name: 'Oncology',     data: [21.4, 21.0, 20.6, 20.9, 19.8, 19.2, 19.5, 18.6] },
-  { name: 'Neurology',    data: [24.2, 23.6, 23.9, 23.1, 22.4, 22.7, 21.8, 21.3] },
-];
-
-const themeNow = () =>
-  document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
-
-const QUARTERS = ['Q1 24', 'Q2 24', 'Q3 24', 'Q4 24', 'Q1 25', 'Q2 25', 'Q3 25', 'Q4 25'];
-
-const W = 720, H = 320;
-const M = { t: 16, r: 128, b: 34, l: 40 };
-const iw = W - M.l - M.r, ih = H - M.t - M.b;
-
-const yMin = 10, yMax = 26;
-const x = (i) => M.l + (i / (QUARTERS.length - 1)) * iw;
-const y = (v) => M.t + ih - ((v - yMin) / (yMax - yMin)) * ih;
-
-const toGrey = (hex) => {
-  // Perceptual luminance, re-encoded — the print/projector failure case.
-  const l = luminance(hex);
-  const g = Math.round(255 * (l <= 0.0031308 ? l * 12.92 : 1.055 * Math.pow(l, 1 / 2.4) - 0.055));
-  return rgbToHex([g, g, g]);
-};
-
-const apply = (hex, mode) =>
-  mode === 'none' ? hex : mode === 'grey' ? toGrey(hex) : simulate(hex, mode, 1, true);
-
-let mode = 'none';
-let drawn = false;
-
-function render() {
-  const base = PALETTES[themeNow()];
-  const colors = base.map((c) => apply(c, mode));
-
-  const gridlines = [10, 14, 18, 22, 26].map((v) => `
-    <line x1="${M.l}" x2="${M.l + iw}" y1="${y(v)}" y2="${y(v)}" stroke="var(--rule-soft)"/>
-    <text x="${M.l - 8}" y="${y(v) + 3.5}" font-size="9" text-anchor="end">${v}%</text>
-  `).join('');
-
-  const ticks = QUARTERS.map((q, i) =>
-    `<text x="${x(i)}" y="${H - 12}" font-size="9" text-anchor="middle">${q}</text>`
-  ).join('');
-
-  const lines = SERIES.map((s, si) => {
-    const d = s.data.map((v, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(' ');
-    const last = s.data[s.data.length - 1];
-    return `
-      <path class="series" d="${d}" fill="none" stroke="${colors[si]}"
-            stroke-width="2.25" stroke-linejoin="round" stroke-linecap="round"/>
-      ${s.data.map((v, i) =>
-        `<circle cx="${x(i).toFixed(1)}" cy="${y(v).toFixed(1)}" r="2.6" fill="${colors[si]}"/>`
-      ).join('')}
-      <text x="${M.l + iw + 10}" y="${y(last) + 3.5}" font-size="10"
-            fill="${colors[si]}" font-weight="600">${s.name}</text>
-    `;
-  }).join('');
-
-  $('#chart').innerHTML = `
-    <g class="axis">${gridlines}${ticks}</g>
-    <g id="plot">${lines}</g>
-  `;
-
-  // Draw-in animation, once, on first paint.
-  if (!drawn && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    $$('#chart .series').forEach((p, i) => {
-      const len = p.getTotalLength();
-      p.style.strokeDasharray = len;
-      p.style.strokeDashoffset = len;
-      p.style.transition = `stroke-dashoffset 1100ms cubic-bezier(0.16,1,0.3,1) ${i * 90}ms`;
-      requestAnimationFrame(() => { p.style.strokeDashoffset = '0'; });
-    });
-    drawn = true;
-  }
-
-  $('#legend').innerHTML = SERIES.map((s, i) =>
-    `<span><i style="background:${colors[i]}"></i>${s.name}</span>`
-  ).join('');
-
-  // Report the worst pairwise separation — the number the standard governs.
-  let worst = Infinity;
-  for (let a = 0; a < colors.length; a++)
-    for (let b = a + 1; b < colors.length; b++)
-      worst = Math.min(worst, deltaE00(colors[a], colors[b]));
-
-  $('#chart-source').textContent =
-    `Live · minimum pairwise ΔE2000 in this mode: ${worst.toFixed(1)} · standard floor is 10`;
-}
-
-$$('[data-sim]').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    $$('[data-sim]').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
-    mode = btn.dataset.sim;
-    render();
-  });
-});
-
-// Repaint with the other palette when the theme flips.
-document.addEventListener('themechange', render);
-
-render();
-
-/* ---- Categorical-ceiling explorer ------------------------ */
-
-const CONDS = ['none', 'deutan', 'protan', 'tritan', 'grey'];
-const shift = (hex, c) =>
-  c === 'none' ? hex : c === 'grey' ? greyOf(hex) : simulate(hex, c, 1, true);
-
-let nSeries = 5, cond = 'none';
-
-function drawCeiling() {
-  // Separation only — the same L* 26–86 construction the derivation used.
-  // Background contrast is a further constraint, noted below the figure.
-  const base = buildPalette(nSeries);
-  const shown = base.map((c) => shift(c, cond));
-
-  $('#ceil-strip').innerHTML =
-    shown.map((c) => `<div style="flex:1;background:${c}"></div>`).join('');
-
-  // Nearest neighbour for each swatch — what decides if two series read apart.
-  $('#ceil-de').innerHTML = shown.map((c, i) => {
-    const near = Math.min(...shown.filter((_, j) => j !== i).map((o) => deltaE00(c, o)));
-    return `<span style="flex:1;text-align:center;font-size:0.625rem;
-      font-variant-numeric:tabular-nums;${near < 10 ? 'font-weight:700;text-decoration:underline;text-underline-offset:2px;color:var(--ink);' : 'color:var(--ink-3);'}"
-      >${near.toFixed(0)}</span>`;
-  }).join('');
-
-  const now = minSeparation(shown);
-  const all = Math.min(...CONDS.map((c) => minSeparation(base.map((x) => shift(x, c)))));
-
-  $('#ceil-now').textContent = now.toFixed(1);
-  $('#ceil-all').textContent = all.toFixed(1);
-  $('#ceil-verdict').innerHTML = all >= 10
-    ? `<b>${nSeries} series holds.</b> Every pair stays at least ΔE&nbsp;${all.toFixed(1)} apart in all five conditions.`
-    : `<b>${nSeries} series fails.</b> The closest pair collapses to ΔE&nbsp;${all.toFixed(1)}, under the floor of 10.`;
-}
-
-$('#nseries').addEventListener('input', (e) => {
-  nSeries = Number(e.target.value);
-  $('#nout').textContent = nSeries;
-  drawCeiling();
-});
-
-$$('[data-cond]').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    $$('[data-cond]').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
-    cond = btn.dataset.cond;
-    drawCeiling();
-  });
-});
-
-drawCeiling();
-</script>
 </body>
 </html>

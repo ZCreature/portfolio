@@ -883,3 +883,61 @@ figure { margin: 0; }
   padding: 0.6rem 1rem;
   border-radius: 0;
 }
+
+/* ---- 16. Locked section ----------------------------------
+   Client work that can't be shown openly. The card states what
+   is behind it; the page itself decrypts on the right password
+   rather than merely hiding markup. */
+
+.locked {
+  display: flex;
+  gap: clamp(1rem, 3vw, 2rem);
+  align-items: flex-start;
+  border: 1px solid var(--rule);
+  border-left: 2px solid var(--ink);
+  background: var(--paper-2);
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.locked__mark { flex: none; color: var(--ink-3); padding-top: 0.15rem; }
+.locked__mark svg { width: 26px; height: 26px; }
+.locked__title { font-size: 1.0625rem; letter-spacing: -0.018em; }
+.locked__sub {
+  margin-top: 0.5rem;
+  max-width: 52ch;
+  font-size: 0.9375rem;
+  color: var(--ink-3);
+  line-height: 1.5;
+}
+
+/* Gate shown in place of the protected page */
+.gate { max-width: 30rem; }
+.gate__row { display: flex; gap: 0.5rem; margin-top: 1.25rem; flex-wrap: wrap; }
+
+.gate input[type="password"] {
+  flex: 1 1 14rem;
+  font: inherit;
+  font-size: 0.9375rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--ink-4);
+  border-radius: 0;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.gate input[type="password"]:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+.gate button {
+  font: inherit;
+  font-size: 0.8125rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  cursor: pointer;
+  border-radius: 0;
+}
+
+.gate__msg { margin-top: 0.75rem; min-height: 1.2rem; font-size: 0.875rem; color: var(--ink-2); }
+.gate__msg[data-state="bad"] { color: var(--ink); font-weight: 700; }
+.gate__msg[data-state="bad"]::before { content: "✕ "; }

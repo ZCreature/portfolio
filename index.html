@@ -27,15 +27,18 @@
 </head>
 <body>
 
-<a class="skip" href="#current">Skip to work</a>
+<a class="skip" href="#dataviz">Skip to work</a>
 
 <header class="masthead">
   <div class="shell masthead__inner">
     <a class="wordmark" href="/">Chris Almaguer</a>
     <nav class="nav" aria-label="Primary">
-      <a href="#current">Current work</a>
-      <a href="#past">Past work</a>
+      <a href="#dataviz">Data viz</a>
+      <a href="#editorial">Editorial</a>
+      <a href="#uiux">UI/UX</a>
+      <a href="#healthcare">Healthcare</a>
       <a href="about.html">About</a>
+      
       <button class="theme-toggle" type="button" data-theme-toggle
               aria-label="Switch to dark theme" aria-pressed="false">
         <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
@@ -57,44 +60,33 @@
     </div>
   </section>
 
-  <!-- ============ Work: full-width galleries, three across ============ -->
-    <section class="shell" id="current">
-  <div class="section-head">
-    <h2 class="meta">Current work</h2>
-    <span class="meta">Five of eight</span>
-  </div>
+  <section class="shell" id="dataviz">
+    <div class="section-head">
+      <h2 class="meta">Data visualization</h2>
+      <span class="meta">Three of eight</span>
+    </div>
 
-  <div class="tiles tiles--4" data-reveal-group data-reveal-step="60">
+    <div class="tiles tiles--4" data-reveal-group data-reveal-step="50">
 
-    <article class="tile" data-reveal>
+      <article class="tile" data-reveal>
       <div class="tile__thumb">
-        <!-- four series descending: the dashboard system -->
-        <svg viewBox="0 0 160 100" preserveAspectRatio="none" aria-hidden="true">
-          <g fill="none" stroke-width="2.5" stroke-linecap="round">
-            <path d="M12 30 L46 34 L80 28 L114 38 L148 34" stroke="var(--tile-1)"/>
-            <path d="M12 48 L46 44 L80 52 L114 46 L148 56" stroke="var(--tile-2)"/>
-            <path d="M12 62 L46 66 L80 60 L114 68 L148 64" stroke="var(--tile-3)"/>
-            <path d="M12 80 L46 76 L80 82 L114 74 L148 78" stroke="var(--tile-4)"/>
-          </g>
-        </svg>
+        <img src="assets/img/tools/medical-mental-health.jpg" alt="Medical student mental health dashboard — heat map of MBI and STAI scores" loading="lazy">
       </div>
       <div class="tile__body">
         <div class="tile__head">
           <h3 class="tile__title">
-            <a class="tile__link" href="work/healthcare-system.html">Healthcare colour standard</a>
+            <a class="tile__link" href="work/medical-mental-health.html">Medical student mental health</a>
           </h3>
-          <span class="meta">2022—</span>
+          <span class="meta">2023</span>
         </div>
-        <p class="tile__sub">Fifty dashboards, one WCAG&nbsp;2.1&nbsp;AA answer.</p>
+        <p class="tile__sub">Burnout and anxiety, read as density.</p>
         <div class="tile__tags">
           <span class="tag tag--live">Live</span>
-          <span class="tag">Vizient</span>
+          <span class="tag">Tableau</span>
         </div>
       </div>
     </article>
-
-
-    <article class="tile" data-reveal>
+      <article class="tile" data-reveal>
       <div class="tile__thumb">
         <!-- scatter descending over a floor line: the lap times -->
         <svg viewBox="0 0 160 100" preserveAspectRatio="none" aria-hidden="true">
@@ -129,8 +121,7 @@
         </div>
       </div>
     </article>
-
-    <article class="tile" data-reveal>
+      <article class="tile" data-reveal>
       <div class="tile__thumb"><img src="assets/img/tools/gas-prices.jpg" alt="Global Gas Prices dashboard — price map with regional panels" loading="lazy"></div>
       <div class="tile__body">
         <div class="tile__head">
@@ -146,42 +137,18 @@
         </div>
       </div>
     </article>
-    <article class="tile" data-reveal>
-      <div class="tile__thumb">
-        <img src="assets/img/tools/mybeats.jpg" alt="MyBEATS interface — monochrome library view" loading="lazy">
-      </div>
-      <div class="tile__body">
-        <div class="tile__head">
-          <h3 class="tile__title">MyBEATS</h3>
-          <span class="meta">In progress</span>
+      <article class="tile tile--empty" aria-hidden="true">
+        <div class="tile__thumb"></div>
+        <div class="tile__body">
+          <span class="meta">Reserved</span>
         </div>
-        <p class="tile__sub">Library app for hard-drive audiophiles and collectors.</p>
-        <div class="tile__tags">
-          <span class="tag">Electron</span>
-          <span class="tag">Design system</span>
+      </article>
+      <article class="tile tile--empty" aria-hidden="true">
+        <div class="tile__thumb"></div>
+        <div class="tile__body">
+          <span class="meta">Reserved</span>
         </div>
-      </div>
-    </article>
-    <article class="tile" data-reveal>
-      <div class="tile__thumb">
-        <img src="assets/img/tools/medical-mental-health.jpg" alt="Medical student mental health dashboard — heat map of MBI and STAI scores" loading="lazy">
-      </div>
-      <div class="tile__body">
-        <div class="tile__head">
-          <h3 class="tile__title">
-            <a class="tile__link" href="work/medical-mental-health.html">Medical student mental health</a>
-          </h3>
-          <span class="meta">2023</span>
-        </div>
-        <p class="tile__sub">Burnout and anxiety, read as density.</p>
-        <div class="tile__tags">
-          <span class="tag tag--live">Live</span>
-          <span class="tag">Tableau</span>
-        </div>
-      </div>
-    </article>
-
-  
+      </article>
       <article class="tile tile--empty" aria-hidden="true">
         <div class="tile__thumb"></div>
         <div class="tile__body">
@@ -201,20 +168,107 @@
         </div>
       </article>
     </div>
+  </section>
 
-  <p class="body muted" data-reveal style="margin-top: var(--gap-m); font-size:0.9375rem;">
-    Healthcare dashboards are under NDA. Real screens on request.
-  </p>
-</section>
+  <section class="shell" id="editorial">
+    <div class="section-head">
+      <h2 class="meta">Editorial</h2>
+      <span class="meta">2018 — 2022</span>
+    </div>
+
+    <div class="tiles tiles--4" data-reveal-group data-reveal-step="50">
+
+      <article class="tile tile--quiet" data-reveal>
+        <div class="tile__thumb"></div>
+        <div class="tile__body">
+          <div class="tile__head">
+            <h3 class="tile__title">Editorial &amp; news design</h3>
+            <span class="meta">2018—22</span>
+          </div>
+          <p class="tile__sub">Deadline graphics for three California business journals.</p>
+          <div class="tile__tags"><span class="tag">ACBJ</span><span class="tag">On request</span></div>
+        </div>
+      </article>
+      <article class="tile tile--quiet" data-reveal>
+        <div class="tile__thumb"></div>
+        <div class="tile__body">
+          <div class="tile__head">
+            <h3 class="tile__title">Logo &amp; identity</h3>
+            <span class="meta">2013—17</span>
+          </div>
+          <p class="tile__sub">Identity systems for regional businesses.</p>
+          <div class="tile__tags"><span class="tag">Branding</span><span class="tag">On request</span></div>
+        </div>
+      </article>
+      <article class="tile tile--quiet" data-reveal>
+        <div class="tile__thumb"></div>
+        <div class="tile__body">
+          <div class="tile__head">
+            <h3 class="tile__title">Print production</h3>
+            <span class="meta">2011—17</span>
+          </div>
+          <p class="tile__sub">Signage, wide format, colour management.</p>
+          <div class="tile__tags"><span class="tag">Production</span></div>
+        </div>
+      </article>
+      <article class="tile tile--empty" aria-hidden="true">
+        <div class="tile__thumb"></div>
+        <div class="tile__body">
+          <span class="meta">Reserved</span>
+        </div>
+      </article>
+      <article class="tile tile--empty" aria-hidden="true">
+        <div class="tile__thumb"></div>
+        <div class="tile__body">
+          <span class="meta">Reserved</span>
+        </div>
+      </article>
+      <article class="tile tile--empty" aria-hidden="true">
+        <div class="tile__thumb"></div>
+        <div class="tile__body">
+          <span class="meta">Reserved</span>
+        </div>
+      </article>
+      <article class="tile tile--empty" aria-hidden="true">
+        <div class="tile__thumb"></div>
+        <div class="tile__body">
+          <span class="meta">Reserved</span>
+        </div>
+      </article>
+      <article class="tile tile--empty" aria-hidden="true">
+        <div class="tile__thumb"></div>
+        <div class="tile__body">
+          <span class="meta">Reserved</span>
+        </div>
+      </article>
+    </div>
+  </section>
 
   <section class="shell" id="uiux">
-  <div class="section-head">
-    <h2 class="meta">UI/UX</h2>
-    <span class="meta">Four</span>
-  </div>
+    <div class="section-head">
+      <h2 class="meta">UI/UX</h2>
+      <span class="meta">Five of eight</span>
+    </div>
 
-    <div class="tiles tiles--4" data-reveal-group data-reveal-step="60">
-    <article class="tile" data-reveal>
+    <div class="tiles tiles--4" data-reveal-group data-reveal-step="50">
+
+      <article class="tile" data-reveal>
+      <div class="tile__thumb">
+        <img src="assets/img/tools/mybeats.jpg" alt="MyBEATS interface — monochrome library view" loading="lazy">
+      </div>
+      <div class="tile__body">
+        <div class="tile__head">
+          <h3 class="tile__title">MyBEATS</h3>
+          <span class="meta">In progress</span>
+        </div>
+        <p class="tile__sub">Library app for hard-drive audiophiles and collectors.</p>
+        <div class="tile__tags">
+          <span class="tag">Electron</span>
+          <span class="tag">Design system</span>
+        </div>
+      </div>
+    </article>
+      <article class="tile" data-reveal>
       <div class="tile__thumb"><img src="assets/img/tools/color-safety-lens.jpg" alt="Color Safety Lens interface showing tint ramps with WCAG pass badges" loading="lazy"></div>
       <div class="tile__body">
         <div class="tile__head">
@@ -225,7 +279,7 @@
         <div class="tile__tags"><span class="tag tag--live">Live</span><span class="tag">Open source</span></div>
       </div>
     </article>
-    <article class="tile" data-reveal>
+      <article class="tile" data-reveal>
       <div class="tile__thumb"><img src="assets/img/tools/diskmap.jpg" alt="Disk Map treemap showing disk usage by folder and file type" loading="lazy"></div>
       <div class="tile__body">
         <div class="tile__head">
@@ -236,7 +290,7 @@
         <div class="tile__tags"><span class="tag">Utility</span></div>
       </div>
     </article>
-    <article class="tile tile--novisual" data-reveal>
+      <article class="tile tile--novisual" data-reveal>
       <div class="tile__thumb"><svg viewBox="0 0 160 100" aria-hidden="true">
           <g fill="none" stroke-linecap="round">
             <path d="M40 76 A40 40 0 1 1 120 76" stroke="currentColor" stroke-width="2" opacity="0.22"/>
@@ -256,7 +310,7 @@
         <div class="tile__tags"><span class="tag">In testing</span></div>
       </div>
     </article>
-    <article class="tile tile--novisual" data-reveal>
+      <article class="tile tile--novisual" data-reveal>
       <div class="tile__thumb"><svg viewBox="0 0 160 100" aria-hidden="true"><g font-family="monospace" font-size="9" fill="currentColor">
             <text y="18"><tspan x="14">@</tspan><tspan x="28">#</tspan><tspan x="42">%</tspan><tspan x="56">*</tspan><tspan x="70">+</tspan><tspan x="84">=</tspan><tspan x="98">-</tspan><tspan x="112">:</tspan><tspan x="126">.</tspan></text>
             <text y="34" opacity="0.85"><tspan x="14">#</tspan><tspan x="28">@</tspan><tspan x="42">#</tspan><tspan x="56">%</tspan><tspan x="70">*</tspan><tspan x="84">+</tspan><tspan x="98">=</tspan><tspan x="112">-</tspan><tspan x="126">:</tspan></text>
@@ -273,13 +327,6 @@
         <div class="tile__tags"><span class="tag">App Store</span></div>
       </div>
     </article>
-    
-      <article class="tile tile--empty" aria-hidden="true">
-        <div class="tile__thumb"></div>
-        <div class="tile__body">
-          <span class="meta">Reserved</span>
-        </div>
-      </article>
       <article class="tile tile--empty" aria-hidden="true">
         <div class="tile__thumb"></div>
         <div class="tile__body">
@@ -299,85 +346,32 @@
         </div>
       </article>
     </div>
-</section>
+  </section>
 
-
-  <!-- ============ Past work ============ -->
-  <section class="shell" id="past">
+  <section class="shell" id="healthcare">
     <div class="section-head">
-      <h2 class="meta">Past work</h2>
-      <span class="meta">2011 — 2022</span>
+      <h2 class="meta">Healthcare dashboards</h2>
+      <span class="meta">Protected</span>
     </div>
 
-    <div class="tiles tiles--4" data-reveal-group data-reveal-step="60">
-
-      <article class="tile tile--quiet" data-reveal>
-        <div class="tile__thumb"></div>
-        <div class="tile__body">
-          <div class="tile__head">
-            <h3 class="tile__title">Editorial &amp; news design</h3>
-            <span class="meta">2018—22</span>
-          </div>
-          <p class="tile__sub">Deadline graphics for three California business journals.</p>
-          <div class="tile__tags"><span class="tag">ACBJ</span><span class="tag">On request</span></div>
-        </div>
-      </article>
-
-      <article class="tile tile--quiet" data-reveal>
-        <div class="tile__thumb"></div>
-        <div class="tile__body">
-          <div class="tile__head">
-            <h3 class="tile__title">Logo &amp; identity</h3>
-            <span class="meta">2013—17</span>
-          </div>
-          <p class="tile__sub">Identity systems for regional businesses.</p>
-          <div class="tile__tags"><span class="tag">Branding</span><span class="tag">On request</span></div>
-        </div>
-      </article>
-
-      <article class="tile tile--quiet" data-reveal>
-        <div class="tile__thumb"></div>
-        <div class="tile__body">
-          <div class="tile__head">
-            <h3 class="tile__title">Print production</h3>
-            <span class="meta">2011—17</span>
-          </div>
-          <p class="tile__sub">Signage, wide format, colour management.</p>
-          <div class="tile__tags"><span class="tag">Production</span></div>
-        </div>
-      </article>
-
-    
-      <article class="tile tile--empty" aria-hidden="true">
-        <div class="tile__thumb"></div>
-        <div class="tile__body">
-          <span class="meta">Reserved</span>
-        </div>
-      </article>
-      <article class="tile tile--empty" aria-hidden="true">
-        <div class="tile__thumb"></div>
-        <div class="tile__body">
-          <span class="meta">Reserved</span>
-        </div>
-      </article>
-      <article class="tile tile--empty" aria-hidden="true">
-        <div class="tile__thumb"></div>
-        <div class="tile__body">
-          <span class="meta">Reserved</span>
-        </div>
-      </article>
-      <article class="tile tile--empty" aria-hidden="true">
-        <div class="tile__thumb"></div>
-        <div class="tile__body">
-          <span class="meta">Reserved</span>
-        </div>
-      </article>
-      <article class="tile tile--empty" aria-hidden="true">
-        <div class="tile__thumb"></div>
-        <div class="tile__body">
-          <span class="meta">Reserved</span>
-        </div>
-      </article>
+    <div class="locked" data-reveal>
+      <div class="locked__mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="4" y="10.5" width="16" height="11"/>
+          <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/>
+        </svg>
+      </div>
+      <div class="locked__body">
+        <h3 class="locked__title">A colour standard for healthcare dashboards</h3>
+        <p class="locked__sub">
+          Fifty-plus executive dashboards for U.S. hospital systems, and the WCAG&nbsp;2.1&nbsp;AA
+          study behind them. Client work under NDA — the method and the system are
+          documented, the client screens are not shown.
+        </p>
+        <p style="margin-top:1.1rem;">
+          <a class="btn" href="work/healthcare-system.html">Enter password</a>
+        </p>
+      </div>
     </div>
   </section>
 
