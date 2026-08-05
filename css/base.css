@@ -282,10 +282,16 @@ section { padding-block: var(--gap-xl); }
 
 .nameplate__sub {
   margin-top: 0.6rem;
-  max-width: 42ch;
-  font-size: clamp(0.9375rem, 1.5vw, 1.125rem);
+  font-size: clamp(0.8125rem, 1.45vw, 1.125rem);
   line-height: 1.35;
   color: var(--ink-3);
+  white-space: nowrap;
+}
+
+/* Below the width where it fits on one line, let it wrap rather than
+   overflow the page. */
+@media (max-width: 46rem) {
+  .nameplate__sub { white-space: normal; }
 }
 
 /* Specification block — label / value rows, the way a spec sheet
@@ -522,6 +528,67 @@ section { padding-block: var(--gap-xl); }
 .tile--quiet .tile__thumb {
   background-image: repeating-linear-gradient(
     45deg, var(--rule-soft) 0 8px, transparent 8px 16px);
+}
+
+/* ---- 7c. Live embeds -------------------------------------
+   The real tool, running in the page. Sandboxed in an iframe
+   so its own stylesheet can't leak into the portfolio's.    */
+
+.embed {
+  border: 1px solid var(--rule);
+  background: var(--paper-2);
+  margin-block: var(--gap-m);
+}
+
+.embed__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-s);
+  flex-wrap: wrap;
+  padding: 0.6rem 0.85rem;
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper);
+}
+
+.embed__frame {
+  position: relative;
+  height: clamp(30rem, 76vh, 46rem);
+  background: var(--paper-2);
+}
+
+.embed__frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+/* Shown until the iframe reports load — these are heavy documents. */
+.embed__loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  transition: opacity var(--t-med) linear;
+}
+
+.embed[data-loaded="true"] .embed__loading { opacity: 0; }
+
+.embed__note {
+  padding: 0.65rem 0.85rem;
+  border-top: 1px solid var(--rule);
+  background: var(--paper);
+  font-size: 0.8125rem;
+  color: var(--ink-3);
+  line-height: 1.5;
+}
+
+@media (max-width: 46rem) {
+  /* Both tools are laid out for a desktop viewport; below that, send
+     people to the full-screen version rather than a squeezed frame. */
+  .embed__frame { height: 26rem; }
 }
 
 /* ---- 8. Tool cards --------------------------------------- */

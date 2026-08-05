@@ -435,7 +435,26 @@
       </p>
     </div>
 
-    <div style="margin-top: var(--gap-l); display:flex; gap:var(--gap-m); flex-wrap:wrap;" data-reveal>
+    <h2 class="h2" style="margin-top:var(--gap-l);" data-reveal>Use it</h2>
+
+    <div class="embed" data-embed data-reveal>
+      <div class="embed__bar">
+        <span class="meta">Color Safety Lens — running live</span>
+        <a class="btn" href="tools/color-safety-lens.html" target="_blank" rel="noopener">Open full screen</a>
+      </div>
+      <div class="embed__frame">
+        <p class="embed__loading meta">Loading tool…</p>
+        <iframe src="tools/color-safety-lens.html" loading="lazy"
+                title="Color Safety Lens — palette accessibility auditor"></iframe>
+      </div>
+      <p class="embed__note">
+        The actual tool, not a screenshot. Load a palette, ramp the tints, and run the
+        colour-vision simulation — the same linear-RGB pipeline described above.
+        Best on a desktop viewport.
+      </p>
+    </div>
+
+    <div style="margin-top: var(--gap-m); display:flex; gap:var(--gap-m); flex-wrap:wrap;" data-reveal>
       <a class="btn" href="https://github.com/ZCreature/color-safety-lens" rel="noopener">Source on GitHub</a>
     </div>
   </section>
@@ -462,6 +481,32 @@
 
 </main>
 
+<script>
+  // The embedded tool keeps its own theme under "csl-theme". Same origin, so
+  // the portfolio can set it before the iframe boots and on every toggle.
+  (function () {
+    const sync = () => {
+      const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+      try { localStorage.setItem('csl-theme', dark ? 'dark' : 'light'); } catch (e) {}
+    };
+    sync();
+    document.addEventListener('themechange', () => {
+      sync();
+      document.querySelectorAll('[data-embed] iframe').forEach((f) => {
+        if (f.dataset.loaded) f.contentWindow.location.reload();
+      });
+    });
+    addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('[data-embed]').forEach((box) => {
+        const f = box.querySelector('iframe');
+        f.addEventListener('load', () => {
+          f.dataset.loaded = '1';
+          box.setAttribute('data-loaded', 'true');
+        });
+      });
+    });
+  })();
+</script>
 <script src="../js/theme.js"></script>
 <script type="module" src="../js/motion.js"></script>
 <script type="module">

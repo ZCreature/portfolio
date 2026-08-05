@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>North American gas prices — Chris Almaguer</title>
+<meta name="description" content="An interactive R and Leaflet study of North American gas prices, and what it took to get a vibe-coded map to look designed.">
+<meta name="theme-color" content="#fbfbfa">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Chris Almaguer">
+<meta property="og:title" content="North American gas prices — Chris Almaguer">
+<meta property="og:description" content="An interactive R and Leaflet study of North American gas prices, and what it took to get a vibe-coded map to look designed.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="North American gas prices — Chris Almaguer">
+<meta name="twitter:description" content="An interactive R and Leaflet study of North American gas prices, and what it took to get a vibe-coded map to look designed.">
+<meta name="author" content="Chris Almaguer">
+<script>
+  try {
+    if (localStorage.getItem('ca-theme') === 'dark')
+      document.documentElement.setAttribute('data-theme', 'dark');
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="../css/base.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="shell masthead__inner">
+    <a class="wordmark" href="../index.html">Chris Almaguer</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="../index.html#current">Current work</a>
+      <a href="../index.html#past">Past work</a>
+      <a href="../about.html">About</a>
+      <button class="theme-toggle" type="button" data-theme-toggle
+              aria-label="Switch to dark theme" aria-pressed="false">
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+          <circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M8 0.75 A7.25 7.25 0 0 0 8 15.25 Z" fill="currentColor"/>
+        </svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ Hero ============ -->
+  <section class="shell case-hero">
+    <p class="meta" data-reveal>Case study — 04 / Exploratory</p>
+    <h1 class="h1" data-reveal style="--reveal-delay:70ms; margin-top: var(--gap-s); max-width: 22ch;">
+      Anyone can prompt a map. Getting one that looks designed is the work.
+    </h1>
+    <p class="lede tight" data-reveal style="--reveal-delay:140ms; margin-top: var(--gap-m);">
+      An interactive study of North American gas prices, built in R with Leaflet.
+      I wrote it with AI assistance, which got me to a working map fast — and then
+      cost me a long evening of specifying exactly what "looks right" means.
+    </p>
+
+    <div class="case-facts" style="margin-top: var(--gap-l);" data-reveal>
+      <div><p class="meta fact__label">Role</p><p class="fact__value">Design, analysis, build</p></div>
+      <div><p class="meta fact__label">Year</p><p class="fact__value">2026</p></div>
+      <div><p class="meta fact__label">Stack</p><p class="fact__value">R, Leaflet, Proj4</p></div>
+      <div><p class="meta fact__label">Output</p><p class="fact__value">Self-contained web map</p></div>
+    </div>
+  </section>
+
+  <!-- ============ Live ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l);">
+    <div class="prose" data-reveal>
+      <p class="meta">01 — The map</p>
+      <h2>Running here, in the page</h2>
+      <p>
+        Pan and zoom it. Everything renders locally — no tile server, no API key,
+        nothing fetched at view time. The whole thing is one self-contained document.
+      </p>
+    </div>
+
+    <div class="embed" data-embed data-reveal>
+      <div class="embed__bar">
+        <span class="meta">North American gas prices — interactive</span>
+        <a class="btn" href="tools/gas-prices.html" target="_blank" rel="noopener">Open full screen</a>
+      </div>
+      <div class="embed__frame">
+        <p class="embed__loading meta">Loading map…</p>
+        <iframe src="tools/gas-prices.html" loading="lazy"
+                title="Interactive map of North American gas prices"></iframe>
+      </div>
+      <p class="embed__note">
+        R + Leaflet output, embedded unmodified. It carries its own copy of Leaflet,
+        Proj4 and jQuery, so it runs offline — about 6&nbsp;MB, loaded only when you
+        scroll to it.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ The argument ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l);">
+    <div class="prose" data-reveal>
+      <p class="meta">02 — What it took</p>
+      <h2>"Make it look good" is not a specification</h2>
+      <p>
+        The first working version arrived quickly and looked like every default R map:
+        rainbow bins, a legend in the wrong corner, state boundaries competing with the
+        data for attention.
+      </p>
+      <p>
+        Getting past that meant writing down things I normally decide by eye — bin
+        breaks that follow the distribution rather than equal intervals, a sequential
+        ramp instead of a categorical one, boundaries dropped back to a hairline,
+        labels only where they don't collide.
+      </p>
+    </div>
+
+    <p class="pull" data-reveal>
+      Every prompt that produced something worth keeping was a prompt where I'd already
+      made the design decision.
+    </p>
+
+    <div class="prose" data-reveal>
+      <p>
+        That's the honest finding, and it's the same one from the
+        <a href="color-safety-lens.html" style="text-decoration:underline; text-underline-offset:3px;">Color
+        Safety Lens</a> project from a different angle. AI-assisted development
+        collapses the distance between an idea and something that runs. It does nothing
+        for the distance between something that runs and something that's <em>right</em>
+        — <b>that gap is still the job.</b>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ Next ============ -->
+  <section class="shell" style="padding-block:0 var(--gap-xl);">
+    <hr class="rule">
+    <div class="ledger" style="border-top:0;">
+      <article class="entry" data-reveal>
+        <span class="entry__num num">02</span>
+        <div>
+          <h3 class="entry__title">
+            <a class="entry__link" href="color-safety-lens.html">Color Safety Lens</a>
+          </h3>
+          <p class="entry__sub">Shipped an accessibility auditor, then found my own colour maths was wrong.</p>
+        </div>
+        <span class="meta">Next</span>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  (function () {
+    addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('[data-embed]').forEach((box) => {
+        const f = box.querySelector('iframe');
+        f.addEventListener('load', () => box.setAttribute('data-loaded', 'true'));
+      });
+    });
+  })();
+</script>
+<script src="../js/theme.js"></script>
+<script type="module" src="../js/motion.js"></script>
+</body>
+</html>
