@@ -7,12 +7,16 @@
 /* ---- 1. Tokens ------------------------------------------- */
 
 :root {
-  /* Type. SF Pro on Apple platforms with no webfont download.
-     -apple-system resolves to SF Pro Text/Display at the right
-     optical size automatically; the rest are graceful fallbacks. */
-  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display",
-    "SF Pro Text", "Helvetica Neue", system-ui, sans-serif;
-  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace;
+  /* Type. Helvetica throughout — one family, no webfont download.
+     Installed on macOS and iOS; Windows falls back to Arial, which
+     is metrically compatible, so line breaks hold either way.
+
+     There is no monospace Helvetica, so the "label" voice is the
+     same family separated by size, caps and tracking rather than
+     by a second typeface. Anything that has to align in columns
+     carries font-variant-numeric: tabular-nums explicitly. */
+  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   /* Greys. Interface only. */
   --ink:        #101012;
@@ -77,10 +81,8 @@ body {
   color: var(--ink);
   font-family: var(--font-sans);
   font-size: 1.0625rem;
-  line-height: 1.62;
-  letter-spacing: -0.011em;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  letter-spacing: 0;
   font-synthesis-weight: none;
 }
 
@@ -89,7 +91,7 @@ img { height: auto; }
 
 a { color: inherit; text-decoration: none; }
 
-h1, h2, h3, h4 { font-weight: 600; margin: 0; text-wrap: balance; }
+h1, h2, h3, h4 { font-weight: 700; margin: 0; text-wrap: balance; }
 p { margin: 0; text-wrap: pretty; }
 
 ::selection { background: var(--ink); color: var(--paper); }
@@ -105,42 +107,44 @@ p { margin: 0; text-wrap: pretty; }
 .display {
   font-size: clamp(2.6rem, 7.2vw, 5.4rem);
   line-height: 0.98;
-  letter-spacing: -0.038em;
-  font-weight: 600;
+  letter-spacing: -0.03em;
+  font-weight: 700;
 }
 
 .h1 {
   font-size: clamp(1.9rem, 4vw, 3rem);
   line-height: 1.08;
-  letter-spacing: -0.031em;
+  letter-spacing: -0.022em;
 }
 
 .h2 {
   font-size: clamp(1.35rem, 2.2vw, 1.75rem);
   line-height: 1.2;
-  letter-spacing: -0.023em;
+  letter-spacing: -0.016em;
 }
 
 .lede {
   font-size: clamp(1.15rem, 1.9vw, 1.5rem);
   line-height: 1.42;
-  letter-spacing: -0.021em;
+  letter-spacing: -0.014em;
   color: var(--ink-2);
   text-wrap: pretty;
 }
 
 .body { max-width: var(--measure); color: var(--ink-2); }
 .body + .body { margin-top: 1.15em; }
-.body strong { color: var(--ink); font-weight: 600; }
+.body strong { color: var(--ink); font-weight: 700; }
 
-/* Metadata / labels — SF Mono, the "instrument panel" voice. */
+/* Metadata / labels. Same family as everything else — the voice comes
+   from caps, tracking and scale, which is the Swiss way of doing it. */
 .meta {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-3);
-  font-weight: 500;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
 }
 
 .num {
@@ -198,7 +202,7 @@ section { padding-block: var(--gap-xl); }
 
 .wordmark {
   font-size: 0.9375rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.02em;
   white-space: nowrap;
 }
@@ -270,7 +274,7 @@ section { padding-block: var(--gap-xl); }
 .nameplate h1 {
   font-size: clamp(2.5rem, 12.5vw, 9rem);
   line-height: 0.92;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.028em;
   font-weight: 700;
   text-transform: uppercase;
   margin: 0;
@@ -367,9 +371,9 @@ section { padding-block: var(--gap-xl); }
 
 .entry__title {
   font-size: clamp(1.25rem, 2.6vw, 1.9rem);
-  letter-spacing: -0.027em;
+  letter-spacing: -0.02em;
   line-height: 1.1;
-  font-weight: 600;
+  font-weight: 700;
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
@@ -444,7 +448,7 @@ section { padding-block: var(--gap-xl); }
 }
 
 .tool:hover { background: var(--paper-2); }
-.tool__name { font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.02em; }
+.tool__name { font-size: 1.0625rem; font-weight: 700; letter-spacing: -0.02em; }
 .tool__desc { font-size: 0.875rem; color: var(--ink-3); line-height: 1.5; }
 .tool__foot { margin-top: auto; padding-top: var(--gap-s); }
 
@@ -468,7 +472,7 @@ section { padding-block: var(--gap-xl); }
 .prose > * + * { margin-top: 1.15em; }
 .prose h2 {
   font-size: clamp(1.35rem, 2.2vw, 1.7rem);
-  letter-spacing: -0.024em;
+  letter-spacing: -0.017em;
   margin-top: 2.6em;
   margin-bottom: 0.1em;
 }
@@ -478,7 +482,7 @@ section { padding-block: var(--gap-xl); }
   margin-top: 2em;
 }
 .prose p { color: var(--ink-2); }
-.prose strong { color: var(--ink); font-weight: 600; }
+.prose strong { color: var(--ink); font-weight: 700; }
 .prose ul { margin: 0; padding-left: 1.1rem; color: var(--ink-2); }
 .prose li + li { margin-top: 0.5em; }
 
@@ -512,7 +516,7 @@ figure { margin: 0; }
 }
 .figure figcaption b {
   color: var(--ink-2);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 /* Placeholder shown until a real asset is dropped in */
@@ -545,7 +549,7 @@ figure { margin: 0; }
   margin-bottom: 1.25rem;
 }
 
-.viz__title { font-size: 0.9375rem; font-weight: 600; letter-spacing: -0.015em; }
+.viz__title { font-size: 0.9375rem; font-weight: 700; letter-spacing: -0.015em; }
 .viz__note { font-size: 0.8125rem; color: var(--ink-3); margin-top: 0.2rem; }
 
 .viz figcaption { margin-top: 1rem; }
@@ -566,7 +570,7 @@ figure { margin: 0; }
    weight and a glyph carry the signal, never hue. */
 .source[data-placeholder="true"] {
   color: var(--ink-2);
-  font-weight: 600;
+  font-weight: 700;
   border-top-color: var(--ink-4);
 }
 
@@ -628,9 +632,9 @@ figure { margin: 0; }
 
 .contact-line {
   font-size: clamp(1.6rem, 4.5vw, 3rem);
-  letter-spacing: -0.032em;
+  letter-spacing: -0.024em;
   line-height: 1.06;
-  font-weight: 600;
+  font-weight: 700;
   display: inline-block;
   position: relative;
 }

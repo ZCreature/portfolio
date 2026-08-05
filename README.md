@@ -22,9 +22,10 @@ No build step, no dependencies. Open `index.html` via a local server
 
 - **Interface is greyscale. Colour appears only inside data.** Status is
   carried by weight and glyphs, never hue.
-- **SF Pro via the system stack.** Apple's licence forbids self-hosting it
-  as a webfont; `-apple-system` renders genuine SF Pro on Apple devices
-  with no download.
+- **Helvetica throughout.** One family, no webfont. Windows falls back to
+  Arial, which is metrically compatible. There is no monospace Helvetica,
+  so the label voice comes from caps and tracking, and anything that has
+  to align in a column sets `tabular-nums` explicitly.
 - **Charts carry one palette per theme.** No four-colour set clears 3:1
   against both a near-white and a near-black page, so light and dark have
   separate verified palettes with hue identity held constant.
