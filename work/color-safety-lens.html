@@ -184,10 +184,9 @@
       I built an accessibility tool, shipped it, and found my own colour maths was wrong.
     </h1>
     <p class="lede tight" data-reveal style="--reveal-delay:140ms; margin-top: var(--gap-m);">
-      Color Safety Lens audits palettes for contrast and colour-vision deficiency.
-      The first working version produced confident, authoritative, incorrect answers —
-      off by more than ΔE&nbsp;14 on some hues, where 1.0 is the threshold of a visible
-      difference. This is how that happened and what fixing it required.
+      Color Safety Lens audits palettes for contrast and colour-vision deficiency. The
+      first working version gave confident, authoritative, wrong answers — off by more
+      than ΔE&nbsp;14 on some hues, where 1.0 is a visible difference.
     </p>
 
     <div class="case-facts" style="margin-top: var(--gap-l);" data-reveal>
@@ -204,15 +203,15 @@
       <p class="meta">01 — The problem</p>
       <h2>Brand colour almost never ships at 100%</h2>
       <p>
-        Every brand guideline I've worked from specifies colour at full strength. But in
-        a dashboard, that colour spends most of its life at 60%, 30%, 10% — as chart
-        fills, heatmap ramps, table banding, disabled states. The guideline says nothing
-        about those, and that's exactly where accessibility quietly breaks.
+        Every brand guideline specifies colour at full strength. In a dashboard that
+        colour spends its life at 60%, 30%, 10% — fills, ramps, banding, disabled
+        states. The guideline says nothing about those. That's where accessibility
+        quietly breaks.
       </p>
       <p>
         I was checking tints one at a time on <b>webaim.org</b>, dozens per dashboard,
-        across fifty-plus dashboards. It was slow and, worse, it was <em>sampling</em> —
-        I only caught the failures I thought to look for.
+        across fifty. Slow — and worse, it was <em>sampling</em>. I only caught failures
+        I thought to look for.
       </p>
     </div>
 
@@ -255,16 +254,14 @@
       <p class="meta">02 — The failure</p>
       <h2>Doing the maths on the JPEG instead of the RAW</h2>
       <p>
-        For colour-vision simulation I used the <b>Machado, Oliveira &amp; Fernandes
-        (2009)</b> model — the standard matrices for protanomaly, deuteranomaly and
-        tritanomaly. I read the values in, multiplied them through the matrix, wrote them
-        back out. It rendered. It looked plausible. I shipped it.
+        I used the <b>Machado, Oliveira &amp; Fernandes (2009)</b> model — the standard
+        CVD matrices. Read the values in, multiply through the matrix, write them back
+        out. It rendered. It looked plausible. I shipped it.
       </p>
       <p>
-        The matrices operate on <b>linear</b> RGB — light as a physical quantity. The hex
-        values in every design file are <b>gamma-encoded</b> sRGB, pre-distorted for how
-        displays and eyes actually work. I was applying a physics model directly to
-        perceptually-encoded numbers.
+        The matrices operate on <b>linear</b> RGB — light as a physical quantity. Hex
+        values in a design file are <b>gamma-encoded</b> sRGB, pre-distorted for how
+        displays and eyes work. I was running a physics model on perceptual numbers.
       </p>
     </div>
 
@@ -324,8 +321,8 @@
       <p class="source">Live · Machado et&nbsp;al. 2009 matrices · CIEDE2000 difference</p>
 
       <figcaption>
-        Both strips claim to show the same thing. Only one is a simulation; the other is
-        a picture of an arithmetic error. <b>The tool gave no indication which was
+        Both strips claim to show the same thing. One is a simulation; the other is a
+        picture of an arithmetic error. <b>The tool gave no indication which was
         which</b> — that's what made it dangerous rather than merely wrong.
       </figcaption>
     </figure>
@@ -337,23 +334,23 @@
       <p class="meta">03 — The fix</p>
       <h2>Rebuild the pipeline, then prove it</h2>
       <p>
-        Fixing the code was an afternoon: linearise on the way in, apply the matrix,
-        re-encode on the way out. Trusting the result again took considerably longer.
+        Fixing the code took an afternoon: linearise in, apply, re-encode out.
+        Trusting it again took much longer.
       </p>
       <ul>
         <li>
-          <b>Rebuilt in linear RGB.</b> Every colour operation — simulation, tinting,
-          mixing — now happens in linear space and converts back at the boundary.
+          <b>Rebuilt in linear RGB.</b> Every operation — simulation, tinting, mixing —
+          happens in linear space and converts back at the boundary.
         </li>
         <li>
-          <b>Validated ΔE against Sharma's test suite.</b> CIEDE2000 has well-known
-          discontinuities that naive implementations get wrong; the published test data
-          exists precisely to catch them.
+          <b>Validated ΔE against Sharma's test suite.</b> CIEDE2000 has known
+          discontinuities that naive implementations get wrong. The published test data
+          exists to catch them.
         </li>
         <li>
-          <b>Ran Okabe–Ito through the whole chain as a control.</b> It's the palette
-          designed by colourblind scientists to stay distinguishable. If my tool flagged
-          it as unsafe, my tool was still broken.
+          <b>Ran Okabe–Ito through as a control.</b> It's the palette designed by
+          colourblind scientists to stay distinguishable. If my tool flagged it unsafe,
+          my tool was still broken.
         </li>
       </ul>
       <p>Five audits later, it passed clean.</p>
@@ -394,10 +391,10 @@
       </p>
 
       <figcaption>
-        <b>Switch to the naive palette and drag severity up.</b> Two hues that read as
-        clearly distinct at zero converge into the same colour well before full severity —
-        the failure affects roughly 1 in 12 men. Okabe–Ito holds its separation
-        throughout, which is the point of it.
+        <b>Switch to the naive palette and drag severity up.</b> Two hues that look
+        clearly distinct at zero converge well before full severity — a failure affecting
+        roughly 1 in 12 men. Okabe–Ito holds separation throughout. That's the point of
+        it.
       </figcaption>
     </figure>
   </section>
@@ -408,22 +405,21 @@
       <p class="meta">04 — Where it landed</p>
       <h2>What the tool actually changed</h2>
       <p>
-        Verified tints now export as SVG straight back into Figma, so they land in the
-        design system instead of a screenshot folder. The audit stopped being a thing I
-        did at the end and became part of the definition of done.
+        Verified tints export as SVG straight back into Figma — into the design system,
+        not a screenshot folder. The audit stopped being a final step and became part of
+        the definition of done.
       </p>
 
       <h3>The honest lesson</h3>
       <p>
-        AI-assisted development got me to "working" in an evening. <b>Working and correct
-        are different claims</b>, and a tool that audits accessibility has to earn the
-        second one. The first version was fast, confident and wrong — and nothing in the
-        interface would have told a user that.
+        AI-assisted development got me to "working" in an evening. <b>Working and
+        correct are different claims</b>, and a tool that audits accessibility has to
+        earn the second. The first version was fast, confident and wrong — and nothing
+        in the interface said so.
       </p>
       <p>
-        I'm a designer, not an engineer. What I take from this isn't that I should stop
-        building tools; it's that building them obliges me to know which claims my
-        artefacts are making on my behalf.
+        I'm a designer, not an engineer. The lesson isn't to stop building tools. It's
+        that building them obliges me to know what my artefacts claim on my behalf.
       </p>
     </div>
 

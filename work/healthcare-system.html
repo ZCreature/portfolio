@@ -83,10 +83,9 @@
       Defining the colour standard for healthcare data visualization.
     </h1>
     <p class="lede tight" data-reveal style="--reveal-delay:140ms; margin-top: var(--gap-m);">
-      Fifty-plus executive dashboards for U.S. hospital systems, built by a team that
-      needed one answer to "is this chart readable?" — not fifty. I led the WCAG 2.1 AA
-      study that produced that answer, then built the Figma system that made it the
-      default.
+      Fifty-plus executive dashboards for U.S. hospital systems. The team needed one
+      answer to "is this chart readable?" I led the study that produced it, then built
+      the Figma system that made it the default.
     </p>
 
     <div class="case-facts" style="margin-top: var(--gap-l);" data-reveal>
@@ -99,10 +98,9 @@
     <div class="nda" style="margin-top: var(--gap-m);" data-reveal>
       <span class="meta" style="white-space:nowrap; padding-top:0.15rem;">NDA</span>
       <p>
-        Client dashboards and hospital data can't be shown publicly. Everything on this
-        page is the <b>method and the system</b> — the rules, the reasoning, and charts
-        rebuilt from synthetic data that obey those rules. Real screens available in
-        interview on request.
+        Client data can't be shown publicly. This page is the <b>method and the
+        system</b> — the rules, the reasoning, and charts rebuilt from synthetic data
+        that obey them. Real screens on request.
       </p>
     </div>
   </section>
@@ -113,18 +111,15 @@
       <p class="meta">01 — The problem</p>
       <h2>Fifty dashboards, fifty different answers</h2>
       <p>
-        Vizient's custom applications team builds analytics for hospital systems —
-        performance, quality, cost, supply. The charts are read by executives making
-        decisions with real consequences, often in a boardroom projector's washed-out
-        colour, sometimes printed to greyscale, occasionally on a phone.
+        Executives read these charts to make decisions with real consequences — often
+        through a boardroom projector's washed-out colour, sometimes printed to
+        greyscale, occasionally on a phone.
       </p>
       <p>
-        Accessibility was being handled per-dashboard, by whoever was designing it. Each
-        designer made reasonable individual choices. Collectively there was no standard,
-        which meant no way to say a chart was compliant except to check it by hand —
-        and no way to know what "compliant" even meant for a <em>chart</em>, since WCAG
-        is written primarily for text and UI components, not for eleven categorical
-        series on a stacked bar.
+        Accessibility was handled per-dashboard, by whoever designed it. Everyone made
+        reasonable choices. Collectively there was no standard — and no definition of
+        what "compliant" even meant for a <em>chart</em>. WCAG is written for text and
+        UI components, not for eleven categorical series on a stacked bar.
       </p>
     </div>
 
@@ -140,24 +135,21 @@
       <p class="meta">02 — The study</p>
       <h2>What I actually tested</h2>
       <p>
-        I ran the audit across the existing dashboard estate rather than in the abstract,
-        because the failures I cared about were the ones already shipping. Three
-        questions, in order:
+        I audited the dashboards already shipping, not a hypothetical. Three questions,
+        in order:
       </p>
       <ul>
         <li>
-          <b>Do labels pass at every tint?</b> Brand colour ships at 60%, 30%, 10% as
-          fills and ramps. Contrast has to hold at each step, not just at full strength.
+          <b>Do labels pass at every tint?</b> Brand colour ships at 60%, 30%, 10%.
+          Contrast has to hold at every step, not just full strength.
         </li>
         <li>
-          <b>Do series stay distinguishable under colour-vision deficiency?</b>
-          Protanopia, deuteranopia and tritanopia, at partial severity as well as full —
-          most colourblind readers are not at 100%.
+          <b>Do series survive colour-vision deficiency?</b> All three types, at
+          partial severity as well as full — most colourblind readers aren't at 100%.
         </li>
         <li>
-          <b>Does the chart survive without colour at all?</b> Greyscale printing and
-          projector washout are the same failure mode as CVD: colour stops carrying
-          information.
+          <b>Does it survive with no colour at all?</b> Greyscale print and projector
+          washout are the same failure as CVD: colour stops carrying information.
         </li>
       </ul>
     </div>
@@ -188,10 +180,9 @@
     <div class="prose" data-reveal style="margin-top: var(--gap-l);">
       <h3>Where the ceiling of five comes from</h3>
       <p>
-        This one I derived rather than assumed, because I'd been repeating "six" out of
-        habit. I solved for the best achievable palette at each size — colours spaced on
-        a lightness ladder, maximum in-gamut chroma — and measured the worst pair under
-        every viewing condition at once.
+        I'd been repeating "six" out of habit, so I checked. I solved for the best
+        achievable palette at each size and measured the worst pair under every viewing
+        condition at once.
       </p>
     </div>
 
@@ -214,11 +205,10 @@
       <p class="source">Derived · lightness-ladder construction · CIEDE2000</p>
 
       <figcaption>
-        Six series cannot clear a ΔE&nbsp;10 floor in every mode — not with a better
-        palette, not with more care. The binding constraint is greyscale: separating six
-        colours also means separating six <em>lightnesses</em>, and there aren't enough
-        distinguishable steps between white and black to go around.
-        <b>The ceiling isn't a taste preference, it's a capacity limit.</b>
+        Six series cannot clear ΔE&nbsp;10 in every mode — not with a better palette,
+        not with more care. Greyscale is the binding constraint: six colours means six
+        distinguishable <em>lightnesses</em>, and there aren't enough between white and
+        black. <b>Not a taste preference. A capacity limit.</b>
       </figcaption>
     </figure>
   </section>
@@ -229,9 +219,8 @@
       <p class="meta">03 — The standard, tested</p>
       <h2>A chart that holds up</h2>
       <p>
-        Below is a chart built to the standard, rendered from synthetic data. The
-        controls run the same simulation the study used. The point of a standard is
-        that this should be boring — nothing should collapse.
+        A chart built to the standard, from synthetic data. The controls run the same
+        simulation the study used. This should be boring — nothing should collapse.
       </p>
     </div>
 
@@ -260,10 +249,9 @@
       <p class="source" id="chart-source">Live · Machado et&nbsp;al. 2009 · minimum pairwise ΔE shown below</p>
 
       <figcaption>
-        <b>Switch through every mode.</b> The series stay separable because they're
-        separated by lightness and position as well as hue — which is what makes the
-        greyscale case pass too. A palette that only separates by hue looks fine in the
-        first mode and fails in all four others.
+        <b>Switch through every mode.</b> The series separate by lightness and position
+        as well as hue — which is what carries greyscale. A hue-only palette looks fine
+        in the first mode and fails in the other four.
       </figcaption>
     </figure>
   </section>
@@ -274,28 +262,25 @@
       <p class="meta">04 — The system</p>
       <h2>Making the standard the path of least resistance</h2>
       <p>
-        A standard nobody follows is a document. What made this one stick was building it
-        into the Figma library the team already worked from: verified palettes as styles,
-        chart components with the tints pre-applied, and annotation patterns for the
-        cases where colour alone wasn't enough.
+        A standard nobody follows is a document. This one stuck because it went into
+        the Figma library the team already used: verified palettes as styles, chart
+        components with tints pre-applied, annotation patterns for where colour wasn't
+        enough.
       </p>
       <p>
-        Designers stopped choosing colours per chart. They chose a component, and the
-        compliance came with it. The audit moved from the end of the process into the
-        library itself — <b>the accessible option became the fastest option</b>, which is
-        the only version of this that survives a deadline.
+        Designers stopped picking colours per chart. They picked a component and
+        compliance came with it. <b>The accessible option became the fastest option</b> —
+        the only version that survives a deadline.
       </p>
 
       <h3>What it didn't solve</h3>
       <p>
-        Legacy dashboards didn't retro-fit themselves, and the rules are stricter than
-        WCAG requires in places — the ΔE&nbsp;10 series floor is my threshold, not a
-        standards body's. I'd defend it, but it's a judgement call and I flag it as one
-        rather than dressing it up as a requirement.
+        Legacy dashboards didn't retro-fit themselves. And the ΔE&nbsp;10 series floor
+        is my threshold, not a standards body's — I'd defend it, but it's a judgement
+        call and I flag it as one.
       </p>
       <p>
-        Checking the rules by hand was still slow. That's the problem that led directly
-        to the next project.
+        Checking the rules by hand was still slow. That led to the next project.
       </p>
     </div>
 
