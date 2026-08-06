@@ -67,8 +67,8 @@
     <a class="wordmark" href="../index.html">Chris Almaguer</a>
     <nav class="nav" aria-label="Primary">
       <a href="../index.html#dataviz">Data viz</a>
-      <a href="../index.html#editorial">Editorial</a>
       <a href="../index.html#uiux">UI/UX</a>
+      <a href="../index.html#editorial">Editorial</a>
       <a href="../index.html#healthcare">Healthcare</a>
       <a href="../about.html">About</a>
       <button class="theme-toggle" type="button" data-theme-toggle
@@ -91,10 +91,9 @@
       One year, one chart
     </h1>
     <p class="lede tight" data-reveal style="--reveal-delay:140ms; margin-top: var(--gap-m);">
-      115 laps at Thunderhill West across five track days, logged on two apps that
-      disagree with each other. The interesting part wasn't building the chart. It was
-      redesigning it a year later and finding what I'd let slide because I already knew
-      the answer.
+      115 laps at Thunderhill West across five track days, May 2025 to April 2026,
+      logged with RaceChrono and RaceStudio. The chart was published on Tableau Public
+      and rebuilt here as SVG drawn in the browser from a reconstructed data file.
     </p>
 
     <div class="case-facts" style="margin-top: var(--gap-l);" data-reveal>
@@ -115,23 +114,37 @@
     </div>
   </section>
 
-  <!-- ============ The chart ============ -->
-  <section class="shell shell--narrow" style="padding-block: var(--gap-l);">
+  <!-- ============ 01 Context ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
     <div class="prose" data-reveal>
-      <p class="meta">01 — The rebuild</p>
-      <h2>Every lap, with the floor</h2>
+      <p class="meta">01 — Context</p>
+      <h2>A season of lap times</h2>
       <p>
-        Each mark is one lap. The heavy line under each track day is that day's
-        <b>theoretical best</b> — my fastest sectors, strung together. The floor: pace
-        I'd already proven in pieces but hadn't put in one lap.
+        Five track days at Thunderhill Raceway Park, West configuration, between
+        17 May 2025 and 12 April 2026: 115 laps across 16 sessions, logged with
+        RaceChrono and RaceStudio. The first four days carried 22 laps each and the
+        fifth carried 27.
       </p>
       <p>
-        The gap between floor and cluster is the honest measure. Not "am I faster?" —
-        that flatters you, because tyres and weather and traffic all move. It's "how
-        close am I to the lap I've already proven?"
+        The fastest dry lap of the first day was 1:39.36. The fastest of the season was
+        1:28.39, set on lap 112 of the last day, a difference of 10.97 seconds. The
+        steps between one day's best lap and the next were 2.24, 3.02, 3.10 and 2.61
+        seconds.
+      </p>
+      <p>
+        The season was first published as a Tableau Public dashboard, and this page
+        rebuilds that chart in the browser. The data behind the rebuild is a
+        reconstruction: the track days, the session count, the 1:28.39 best and the
+        2:01.14 wet lap are the dashboard's own figures, while the remaining individual
+        lap times were modelled to match its distribution and were not measured. The
+        data file records this in its meta block, and the reconstruction stands until
+        the original RaceChrono and RaceStudio sessions are exported.
       </p>
     </div>
+  </section>
 
+  <!-- ============ The chart ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l);">
     <figure class="viz figure" data-reveal>
       <div class="viz__head">
         <div>
@@ -158,92 +171,122 @@
       <p class="source" id="src" data-placeholder="true">Loading…</p>
 
       <figcaption>
-        <b>Day 5 tells the story twice.</b> It opened wet — the scattered high cluster,
-        topping out at 2:01.14, nearly forty seconds off pace. The track dried through
-        the afternoon and I set my best, 1:28.39, on lap 112. Same day, same car, same
-        driver.
+        <b>Day 5, 12 April 2026, ran wet and then dry.</b> Session 13 is the scattered
+        high cluster, the only wet session in the set, topping out at 2:01.14 and 32.75
+        seconds off the season best. The track dried across the three sessions that
+        followed, and the season best of 1:28.39 came on lap 112 in session 16.
       </figcaption>
     </figure>
   </section>
 
-  <!-- ============ The redesign ============ -->
-  <section class="shell shell--narrow" style="padding-block: var(--gap-l);">
+  <!-- ============ 02 Process ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
     <div class="prose" data-reveal>
-      <p class="meta">02 — What I changed</p>
-      <h2>Reviewing my own chart</h2>
+      <p class="meta">02 — Process</p>
+      <h2>Rebuilding the chart</h2>
       <p>
-        The original is still on Tableau Public. A serviceable chart; I was pleased
-        with it. Coming back cold, I could see where I'd designed for someone who
-        already knew the answer — which is to say, for me.
+        The published dashboard supplied the anchors: 115 laps, 16 sessions, a 1:28.39
+        best on lap 112, a 2:01.14 wet lap. The remaining lap times were generated to
+        fit that distribution and written to <span class="num">assets/data/laps.json</span>,
+        one record per lap with day, session, time, date and a wet flag, plus a
+        theoretical best for each day and a meta block carrying the reconstruction note.
+      </p>
+      <p>
+        The chart is drawn by a module script in the page. It fetches the JSON and
+        writes the gridlines, the day boundaries, the floor segments and the 115 circles
+        into a 760 by 380 viewBox as SVG markup. There is no build step and no static
+        fallback, so the page has to be served over http; the fetch handler prints that
+        instruction in place of the source line when the file is opened directly. One
+        bug came out of the rebuild: the m:ss helper padded seconds to a fixed five
+        characters, which printed the one-decimal first-day best as 1:039.4. The pad
+        width now follows the number of decimals asked for.
+      </p>
+      <p>
+        Colour was checked with <span class="num">js/color.js</span>, which measures
+        CIEDE2000 distance under normal vision, under Machado simulations of the three
+        dichromacies, and in greyscale. The first dark-theme wet colour, #d7bcff, failed
+        in greyscale at ΔE 9.9 against the near-white floor line and was replaced with
+        #bea2fb, which measures L* 72. The closest pair now measures ΔE 10.7 in the
+        light palette and 15.4 in the dark, greyscale in both cases.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 03 Design ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
+    <div class="prose" data-reveal>
+      <p class="meta">03 — Design</p>
+      <h2>Reading the plot</h2>
+      <p>
+        Each circle is one lap, plotted in the order driven. Seven of the 115 are wet
+        and take the second series colour. The rule under each track day is that day's
+        theoretical best: 1:38.13, 1:35.89, 1:32.81, 1:29.70 and 1:26.93. No lap in the
+        file reaches its own day's floor, and the gap from a day's best lap down to that
+        floor runs from 1.23 seconds on the first two days to 1.46 on the fifth.
+      </p>
+      <p>
+        The All laps view covers 1:25 to 2:05, the range needed to hold the wet session.
+        The Dry only view drops those seven laps and tightens the axis to 1:25–1:45,
+        which gives the dry cluster more of the plot height. Nothing is clipped in
+        either view.
+      </p>
+      <p>
+        Each theme has its own palette, and the chart re-renders when
+        <span class="num">theme.js</span> dispatches its themechange event. The
+        reconstruction caveat prints as the source line beneath the plot.
       </p>
     </div>
 
     <div class="compare-grid" data-reveal-group data-reveal-step="55">
       <div class="compare-cell" data-reveal>
-        <span class="meta">Legend</span>
-        <h3>Two swatches, no words</h3>
+        <span class="meta">Marks</span>
+        <h3>Radius 4 at 0.72 opacity</h3>
         <p>
-          A teal dot and a purple dot, unlabelled. I knew which was which. Nobody else
-          did. Now they say <em>dry</em> and <em>wet</em>.
+          115 circles, one per lap. Overlapping times in a dense session stack visibly
+          instead of merging into a single shape.
         </p>
       </div>
       <div class="compare-cell" data-reveal>
-        <span class="meta">Overplotting</span>
-        <h3>Marks the size of the story</h3>
+        <span class="meta">Axes</span>
+        <h3><span class="num">m:ss</span> and five dated bands</h3>
         <p>
-          Large opaque circles buried the early sessions in one blob. Smaller marks
-          with some transparency let density read as density.
+          Y labels are formatted <span class="num">m:ss</span> with a tick every ten
+          seconds. Dashed rules divide the x axis into one band per track day, labelled
+          with the day number and its year and month.
         </p>
       </div>
       <div class="compare-cell" data-reveal>
-        <span class="meta">Annotation</span>
-        <h3>Leader lines across the data</h3>
+        <span class="meta">Detail</span>
+        <h3>Readout bar below the plot</h3>
         <p>
-          Callouts drew rules straight through the plot. Detail now sits in a readout
-          below, so nothing is drawn over the data.
+          Hover and keyboard focus write the same line into a bar under the chart: lap,
+          session, day, date, time and condition. The bar is
+          <span class="num">aria-live</span> polite, and all 115 marks take focus.
         </p>
       </div>
       <div class="compare-cell" data-reveal>
-        <span class="meta">Axis</span>
-        <h3>Seconds nobody thinks in</h3>
+        <span class="meta">Colour</span>
+        <h3>One palette per theme</h3>
         <p>
-          It read 95s, 100s, 105s. Nobody at a track day talks that way. Now it's
-          <span class="num">m:ss</span>, and the x-axis is split by track day instead of
-          an unlabelled run.
+          Every series colour clears 3:1 against its own page background, and the
+          closest pair measures ΔE 10.7 in light and 15.4 in dark.
         </p>
       </div>
-    </div>
-
-    <div class="prose" data-reveal style="margin-top: var(--gap-l);">
-      <p>
-        None of it is dramatic. That's the point — it's the ordinary maintenance a chart
-        needs when it stops being something you made and becomes something someone reads.
-        <b>I only caught it by treating my own work as though someone else submitted
-        it.</b>
-      </p>
-    </div>
-  </section>
-
-  <!-- ============ Outcome ============ -->
-  <section class="shell shell--narrow" style="padding-block: var(--gap-l) var(--gap-xl);">
-    <div class="prose" data-reveal>
-      <p class="meta">03 — What the data said</p>
-      <h2>Where eleven seconds went</h2>
-      <p>
-        1:39 to 1:28.39 — eleven seconds over a season, almost none of it in one leap.
-        The theoretical-best floor drops steadily, and the cluster follows at a lag. I
-        could always drive the sectors before I could drive the lap.
-      </p>
-      <p>
-        The wet session is the most useful thing here, and I nearly filtered it out for
-        being ugly. Forty seconds of penalty on the same day I set my best time argues
-        about context better than any dry lap could. <b>The outlier wasn't noise. It was
-        the finding.</b>
-      </p>
     </div>
 
     <div style="margin-top: var(--gap-l); display:flex; gap:0.75rem; flex-wrap:wrap;" data-reveal>
       <a class="btn" href="https://public.tableau.com/app/profile/creature/viz/ThunderhillWest-HPDElaptimes/Dashboard12" rel="noopener">The original on Tableau Public</a>
+    </div>
+  </section>
+
+  <!-- ============ 04 Impact ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) var(--gap-xl);">
+    <div class="prose" data-reveal>
+      <p class="meta">04 — Impact</p>
+      <h2>Impact</h2>
+      <p class="impact-todo" data-todo>
+        To be supplied.
+      </p>
     </div>
   </section>
 
@@ -272,20 +315,31 @@
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
-/* Two verified palettes — a series colour must clear 3:1 against its own page.
-   Light: ΔE 10.7 minimum across normal/CVD/greyscale. Dark: ΔE 21.3. */
+/* Two verified palettes — a series colour must clear 3:1 against its own page,
+   and every pair must clear ΔE 10 in normal vision, all three CVD types, and
+   greyscale. Worst pair in both themes is greyscale, which is the usual answer:
+   greyscale is the mode that punishes colours chosen by hue alone.
+
+   Light: ΔE 10.7 minimum (dry/wet, grey).  Dark: ΔE 15.4 minimum (dry/wet, grey).
+
+   The dark "wet" was #d7bcff and failed at ΔE 9.9 — that lavender sat too close
+   in lightness to the near-white floor line, so the two collapsed into each other
+   in greyscale. Pulled down to L* 72 to separate them. */
 const PAL = {
   light: { dry: '#107c7f', wet: '#5b3fa8', floor: '#101012' },
-  dark:  { dry: '#0d8f93', wet: '#d7bcff', floor: '#f4f4f2' },
+  dark:  { dry: '#0d8f93', wet: '#bea2fb', floor: '#f4f4f2' },
 };
 const theme = () =>
   document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
 
-/** 88.39 → "1:28.39" — the way anyone at a track day actually says it. */
+/** 88.39 → "1:28.39" — the way anyone at a track day actually says it.
+    Seconds pad to two digits, so the width is 2 + "." + dp when there are
+    decimals and 2 when there aren't. Hard-coding 5 was right for dp=2 and
+    turned 1:39.4 into "1:039.4" at dp=1. */
 const mmss = (t, dp = 2) => {
   const m = Math.floor(t / 60);
   const s = t - m * 60;
-  return `${m}:${s.toFixed(dp).padStart(dp ? 5 : 2, '0')}`;
+  return `${m}:${s.toFixed(dp).padStart(dp ? dp + 3 : 2, '0')}`;
 };
 
 const W = 760, H = 380, M = { t: 18, r: 18, b: 46, l: 52 };

@@ -4,16 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Color Safety Lens — Chris Almaguer</title>
-<meta name="description" content="Building a colour-vision auditing tool, shipping it wrong, and what it took to make the colour maths correct.">
+<meta name="description" content="A palette auditor: WCAG contrast across tint ramps and colour-vision simulation, with the colour maths running live in the page.">
 <meta name="theme-color" content="#fbfbfa">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Chris Almaguer">
 <meta property="og:title" content="Color Safety Lens — Chris Almaguer">
-<meta property="og:description" content="Building a colour-vision auditing tool, shipping it wrong, and what it took to make the colour maths correct.">
+<meta property="og:description" content="A palette auditor: WCAG contrast across tint ramps and colour-vision simulation, with the colour maths running live in the page.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Color Safety Lens — Chris Almaguer">
-<meta name="twitter:description" content="Building a colour-vision auditing tool, shipping it wrong, and what it took to make the colour maths correct.">
+<meta name="twitter:description" content="A palette auditor: WCAG contrast across tint ramps and colour-vision simulation, with the colour maths running live in the page.">
 <meta name="author" content="Chris Almaguer">
 <script>
   try {
@@ -174,8 +174,8 @@
     <a class="wordmark" href="../index.html">Chris Almaguer</a>
     <nav class="nav" aria-label="Primary">
       <a href="../index.html#dataviz">Data viz</a>
-      <a href="../index.html#editorial">Editorial</a>
       <a href="../index.html#uiux">UI/UX</a>
+      <a href="../index.html#editorial">Editorial</a>
       <a href="../index.html#healthcare">Healthcare</a>
       <a href="../about.html">About</a>
       <button class="theme-toggle" type="button" data-theme-toggle
@@ -235,7 +235,7 @@
   <!-- ============ 1. The problem ============ -->
   <section class="shell shell--narrow" style="padding-block: var(--gap-l);">
     <div class="prose" data-reveal>
-      <p class="meta">01 — The problem</p>
+      <p class="meta">01 — Context</p>
       <h2>Colour never ships at 100%</h2>
       <p>
         Every brand guideline specifies colour at full strength. In a dashboard that
@@ -286,8 +286,8 @@
   <!-- ============ 2. The bug ============ -->
   <section class="shell shell--narrow" style="padding-block: var(--gap-l);">
     <div class="prose" data-reveal>
-      <p class="meta">02 — The failure</p>
-      <h2>Maths on the JPEG</h2>
+      <p class="meta">02 — Process</p>
+      <h2>The first version computed the simulation on the wrong values</h2>
       <p>
         I used the <b>Machado, Oliveira &amp; Fernandes (2009)</b> model — the standard
         CVD matrices. Read the values in, multiply through the matrix, write them back
@@ -299,10 +299,6 @@
         displays and eyes work. I was running a physics model on perceptual numbers.
       </p>
     </div>
-
-    <p class="pull" data-reveal>
-      If you shoot photography: I was doing the maths on the JPEG instead of the RAW.
-    </p>
 
     <figure class="viz figure" data-reveal>
       <div class="viz__head">
@@ -366,8 +362,8 @@
   <!-- ============ 3. The fix ============ -->
   <section class="shell shell--narrow" style="padding-block: var(--gap-l);">
     <div class="prose" data-reveal>
-      <p class="meta">03 — The fix</p>
-      <h2>Rebuild it, then prove it</h2>
+      <p class="meta">03 — Design</p>
+      <h2>Rebuilt on linear values, then checked against published figures</h2>
       <p>
         Fixing the code took an afternoon: linearise in, apply, re-encode out.
         Trusting it again took much longer.
@@ -437,24 +433,21 @@
   <!-- ============ 4. Outcome ============ -->
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) var(--gap-xl);">
     <div class="prose" data-reveal>
-      <p class="meta">04 — Where it landed</p>
-      <h2>What it changed</h2>
+      <p class="meta">04 — Impact</p>
+      <h2>Impact</h2>
       <p>
-        Verified tints export as SVG straight back into Figma — into the design system,
-        not a screenshot folder. The audit stopped being a final step and became part of
-        the definition of done.
-      </p>
-
-      <h3>The honest lesson</h3>
-      <p>
-        AI-assisted development got me to "working" in an evening. <b>Working and
-        correct are different claims</b>, and a tool that audits accessibility has to
-        earn the second. The first version was fast, confident and wrong — and nothing
-        in the interface said so.
+        The tool tests every colour pair in a palette at once. Run against the
+        dashboard palette in use at the time, it returned combinations that
+        failed WCAG&nbsp;AA.
       </p>
       <p>
-        I'm a designer, not an engineer. The lesson isn't to stop building tools. It's
-        that building them obliges me to know what my artefacts claim on my behalf.
+        Verified tints export as SVG back into Figma and into the design system
+        rather than a screenshot folder, which moved the audit from a final check
+        into the definition of done. The source is public on GitHub.
+      </p>
+      <p class="impact-todo" data-todo>
+        Confirm which palette this was run against, and add any adoption or
+        follow-on outcome.
       </p>
     </div>
 

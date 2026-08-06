@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7.9 billion — Chris Almaguer</title>
+<meta name="description" content="A broadsheet on world population: an alluvial diagram tying five continents through thirty-three countries to fifty cities, built in Illustrator.">
+<meta name="theme-color" content="#fbfbfa">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Chris Almaguer">
+<meta property="og:title" content="7.9 billion — Chris Almaguer">
+<meta property="og:description" content="A broadsheet on world population: an alluvial diagram tying five continents through thirty-three countries to fifty cities, built in Illustrator.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="7.9 billion — Chris Almaguer">
+<meta name="twitter:description" content="A broadsheet on world population, read as flow rather than as a map.">
+<meta name="author" content="Chris Almaguer">
+<script>
+  try {
+    if (localStorage.getItem('ca-theme') === 'dark')
+      document.documentElement.setAttribute('data-theme', 'dark');
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="../css/base.css">
+<style>
+  /* The poster is black-backed line art. It sits on its own ground in both
+     themes rather than inheriting the page, so the artwork is never a black
+     slab floating on white with a hairline it does not own. */
+  .poster__frame {
+    border: 1px solid var(--rule);
+    background: #000;
+    overflow: hidden;
+  }
+  .poster__frame img { width: 100%; height: auto; display: block; }
+
+  /* Continent split. The bar is data, so it may carry colour; the labels and
+     rules around it stay greyscale like the rest of the interface. */
+  .split { margin-top: var(--gap-m); }
+  .split__row {
+    display: grid;
+    grid-template-columns: 8.5rem 1fr 10.5rem;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.6rem 0;
+    border-top: 1px solid var(--rule-soft);
+  }
+  .split__row:last-child { border-bottom: 1px solid var(--rule-soft); }
+  .split__bar { height: 0.5rem; background: var(--tile-2); }
+  .split__val {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-3);
+    font-size: 0.8125rem;
+  }
+  @media (max-width: 34rem) {
+    .split__row { grid-template-columns: 6.5rem 1fr; }
+    .split__val { grid-column: 2; text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="shell masthead__inner">
+    <a class="wordmark" href="../index.html">Chris Almaguer</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="../index.html#dataviz">Data viz</a>
+      <a href="../index.html#uiux">UI/UX</a>
+      <a href="../index.html#editorial">Editorial</a>
+      <a href="../index.html#healthcare">Healthcare</a>
+      <a href="../about.html">About</a>
+      <button class="theme-toggle" type="button" data-theme-toggle
+              aria-label="Switch to dark theme" aria-pressed="false">
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+          <circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M8 0.75 A7.25 7.25 0 0 0 8 15.25 Z" fill="currentColor"/>
+        </svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ Hero ============ -->
+  <section class="shell case-hero" style="padding-bottom: var(--gap-m);">
+    <p class="meta" data-reveal>Case study — 06 / Editorial</p>
+    <h1 class="h1" data-reveal style="--reveal-delay:70ms; margin-top: var(--gap-s);">
+      7.9 billion
+    </h1>
+    <p class="lede tight" data-reveal style="--reveal-delay:140ms; margin-top: var(--gap-m);">
+      A broadsheet on where people actually live — five continents pulled down
+      through thirty-three countries into fifty cities, read as flow rather
+      than as a map.
+    </p>
+
+    <div class="case-facts" style="margin-top: var(--gap-l);" data-reveal>
+      <div><p class="meta fact__label">Role</p><p class="fact__value">Data, design, build</p></div>
+      <div><p class="meta fact__label">Year</p><p class="fact__value">2023</p></div>
+      <div><p class="meta fact__label">Tool</p><p class="fact__value">Illustrator</p></div>
+      <div><p class="meta fact__label">Format</p><p class="fact__value">Broadsheet, 16:9</p></div>
+    </div>
+  </section>
+
+  <!-- ============ The poster ============ -->
+  <section class="shell" style="padding-block: var(--gap-m) var(--gap-l);">
+    <figure class="figure" data-reveal style="margin-block:0;">
+      <div class="poster__frame">
+        <img src="../assets/img/work/overpopulation.jpg"
+             alt="The full broadsheet. Left column, an essay headed 7.9 BILLION. Centre-left, THE NUMBERS — five nested red circles scaled to New York, Los Angeles, Chicago, Houston and Philadelphia, above a line chart of population from 1950 to 2021. Centre, the alluvial: a CONTINENT axis of five labels, threads falling to a COUNTRY axis of thirty-three, then to a CITY axis of fifty, each city ending in a red circle sized by population. Right column, an essay headed FUTURE."
+             width="2400" height="1350">
+      </div>
+      <figcaption>
+        <b>7.9 billion</b> — the full sheet. Three panels of type hold the argument;
+        the alluvial in the centre carries the structure. Every rule, thread and
+        label is greyscale, and the only colour on the sheet is the population itself.
+      </figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ 01 — Why a flow ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
+    <div class="prose" data-reveal>
+      <p class="meta">01 — Context</p>
+      <h2>The question was how many people, and under which country</h2>
+      <p>
+        Population on a world map is a solved and slightly useless picture: the eye
+        goes to landmass, and landmass is the one variable that has nothing to do
+        with the question. Russia looks like the story. It is not the story.
+      </p>
+      <p>
+        So the sheet drops the map to a thumbnail and gives the centre to an
+        <strong>alluvial diagram</strong> — three stacked axes, <span class="num">continent</span>
+        to <span class="num">country</span> to <span class="num">city</span>, with a thread
+        for every city. Read down, a thread answers a chain of questions at once:
+        which continent, which country inside it, which city inside that. The
+        crossings in the middle are not noise. They are the diagram admitting that
+        rank at one level does not survive to the next.
+      </p>
+    </div>
+
+  </section>
+
+  <!-- ============ 02 — The sample ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
+    <div class="prose" data-reveal>
+      <p class="meta">02 — Process</p>
+      <h2>Ten cities per continent rather than the global top fifty</h2>
+      <p>
+        The fifty cities are not the fifty largest on Earth. They are the
+        <strong>ten largest on each of five continents</strong> — a deliberate quota,
+        and the decision that shapes everything downstream. A straight global
+        top fifty would have been an Asia list with footnotes: Asia alone
+        carries <span class="num">160.8&nbsp;million</span> across its ten,
+        more than four times North America's ten.
+      </p>
+      <p>
+        The quota costs accuracy about the world and buys legibility about the
+        continents. It is why Philadelphia, at <span class="num">1.57&nbsp;million</span>,
+        shares an axis with Shanghai at <span class="num">24.26&nbsp;million</span> —
+        fifteen times its size, and still North America's tenth city. That ratio is
+        the argument, and it only shows up because both are on the sheet.
+      </p>
+    </div>
+
+    <div class="split" data-reveal>
+      <div class="split__row">
+        <span class="meta">Asia</span>
+        <span class="split__bar" style="width:100%"></span>
+        <span class="split__val">160,840,058 · 42.3%</span>
+      </div>
+      <div class="split__row">
+        <span class="meta">Africa</span>
+        <span class="split__bar" style="width:43.6%"></span>
+        <span class="split__val">70,169,541 · 18.5%</span>
+      </div>
+      <div class="split__row">
+        <span class="meta">Europe</span>
+        <span class="split__bar" style="width:35.4%"></span>
+        <span class="split__val">56,956,851 · 15.0%</span>
+      </div>
+      <div class="split__row">
+        <span class="meta">S. America</span>
+        <span class="split__bar" style="width:34.5%"></span>
+        <span class="split__val">55,479,685 · 14.6%</span>
+      </div>
+      <div class="split__row">
+        <span class="meta">N. America</span>
+        <span class="split__bar" style="width:22.6%"></span>
+        <span class="split__val">36,399,988 · 9.6%</span>
+      </div>
+    </div>
+    <p class="source" style="margin-top:0.9rem;">
+      Ten cities per continent, fifty in all, across thirty-three countries —
+      <span class="num">379,846,123</span> people. Bars are scaled to Asia.
+    </p>
+  </section>
+
+  <!-- ============ 03 — Design ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
+    <div class="prose" data-reveal>
+      <p class="meta">03 — Design</p>
+      <h2>One hue, used only for population</h2>
+      <p>
+        The sheet is black, white, and a single red. Type, rules, threads, axis
+        labels and the locator map are all greyscale. The red appears exactly
+        twice, and both times it is a population: the nested circles in
+        <span class="num">THE NUMBERS</span>, and the row of circles closing every
+        thread on the city axis.
+      </p>
+      <p>
+        That is the whole colour system, and it is the same rule the rest of this
+        site runs on — <strong>the interface is greyscale, and colour is reserved for
+        data</strong>. On a sheet this dense it is doing real work: with one hue in play,
+        a red dot cannot mean anything except a number of people, so the bottom axis
+        reads as a scale rather than as decoration.
+      </p>
+      <p>
+        The circles are area-scaled, which is the reason Shanghai does not simply
+        obliterate the row. Against Philadelphia it is <span class="num">15.5×</span>
+        the population but only <span class="num">3.9×</span> the width. Had the
+        population driven the radius instead, Shanghai would have read as roughly
+        <span class="num">240×</span> — the classic way a bubble chart lies.
+      </p>
+      <p>
+        I re-measured the sheet rather than trusting it: sampled against the five
+        labelled circles, the encoding holds to <strong>within half a pixel on a
+        734-pixel base</strong>, and the fifty city circles carry the same constant.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 04 — Impact ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) var(--gap-xl);">
+    <div class="prose" data-reveal>
+      <p class="meta">04 — Impact</p>
+      <h2>Impact</h2>
+      <p class="impact-todo" data-todo>
+        To be supplied.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ Next ============ -->
+  <section class="shell" style="padding-block:0 var(--gap-xl);">
+    <hr class="rule">
+    <div class="ledger" style="border-top:0;">
+      <article class="entry" data-reveal>
+        <span class="entry__num num">03</span>
+        <div>
+          <h3 class="entry__title">
+            <a class="entry__link" href="lap-times.html">115 laps at Thunderhill</a>
+          </h3>
+          <p class="entry__sub">A year of my own telemetry, against a theoretical-best floor.</p>
+        </div>
+        <span class="meta">Next</span>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<script src="../js/theme.js"></script>
+<script type="module" src="../js/motion.js"></script>
+</body>
+</html>

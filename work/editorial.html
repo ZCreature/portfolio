@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deadline graphics — Chris Almaguer</title>
+<meta name="description" content="Newsroom data graphics for three California business journals — weekly list pages, scrolling data features, and quarterly market charts.">
+<meta name="theme-color" content="#fbfbfa">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Chris Almaguer">
+<meta property="og:title" content="Deadline graphics — Chris Almaguer">
+<meta property="og:description" content="Newsroom data graphics for three California business journals — weekly list pages, scrolling data features, and quarterly market charts.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Deadline graphics — Chris Almaguer">
+<meta name="twitter:description" content="Newsroom data graphics for three California business journals.">
+<meta name="author" content="Chris Almaguer">
+<script>
+  try {
+    if (localStorage.getItem('ca-theme') === 'dark')
+      document.documentElement.setAttribute('data-theme', 'dark');
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="../css/base.css">
+<style>
+  /* A ruled field holds each slot until the published file lands, rather
+     than a fake image — same convention as the quiet tiles on the index. */
+  .figure__frame--pending {
+    aspect-ratio: 16 / 10;
+    background-image: repeating-linear-gradient(
+      45deg, var(--rule-soft) 0 8px, transparent 8px 16px);
+    display: grid;
+    place-items: center;
+  }
+  .figure__frame--pending span {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    background: var(--paper);
+    padding: 0.35rem 0.7rem;
+    border: 1px solid var(--rule-soft);
+  }
+  /* Tall web features read better in a portrait slot. */
+  .figure__frame--tall { aspect-ratio: 3 / 4; }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="shell masthead__inner">
+    <a class="wordmark" href="../index.html">Chris Almaguer</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="../index.html#dataviz">Data viz</a>
+      <a href="../index.html#uiux">UI/UX</a>
+      <a href="../index.html#editorial">Editorial</a>
+      <a href="../index.html#healthcare">Healthcare</a>
+      <a href="../about.html">About</a>
+      <button class="theme-toggle" type="button" data-theme-toggle
+              aria-label="Switch to dark theme" aria-pressed="false">
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+          <circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M8 0.75 A7.25 7.25 0 0 0 8 15.25 Z" fill="currentColor"/>
+        </svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ Hero ============ -->
+  <section class="shell case-hero" style="padding-bottom: var(--gap-m);">
+    <p class="meta" data-reveal>Case study — 08 / Newsroom</p>
+    <h1 class="h1" data-reveal style="--reveal-delay:70ms; margin-top: var(--gap-s);">
+      Deadline graphics
+    </h1>
+    <p class="lede tight" data-reveal style="--reveal-delay:140ms; margin-top: var(--gap-m);">
+      Weekly list pages, quarterly market charts and scrolling data features for
+      three California business journals, in print and on the web.
+    </p>
+
+    <div class="case-facts" style="margin-top: var(--gap-l);" data-reveal>
+      <div><p class="meta fact__label">Role</p><p class="fact__value">Design, charting, production</p></div>
+      <div><p class="meta fact__label">Years</p><p class="fact__value">2018 — 2022</p></div>
+      <div><p class="meta fact__label">Titles</p><p class="fact__value">ACBJ — Silicon Valley, Sacramento, San Francisco</p></div>
+      <div><p class="meta fact__label">Output</p><p class="fact__value">Print and web</p></div>
+    </div>
+  </section>
+
+  <!-- ============ Selected work ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l);">
+    <div class="prose" data-reveal>
+      <p class="meta">01 — Context</p>
+      <h2>Recurring data pages for three California business journals</h2>
+      <p>
+        Staff design work for American City Business Journals between 2018 and
+        2022, across the Silicon Valley, Sacramento and San Francisco titles.
+        The output was print and web: the weekly List page, quarterly commercial
+        market wraps, and occasional scrolling features built around a single
+        dataset.
+      </p>
+      <p>
+        The three pieces below are representative rather than complete. Each was
+        built from a published external dataset, credited in the graphic:
+        Cushman&nbsp;&amp;&nbsp;Wakefield for the commercial market figures, Yelp
+        Economic Average for business reopenings, and the Bureau of Labor
+        Statistics for wage change.
+      </p>
+    </div>
+
+    <figure class="figure" data-reveal>
+      <div class="figure__frame figure__frame--pending" role="img"
+           aria-label="The List — SV real estate took minor hits overall in 2021. Six stacked measures of the Silicon Valley commercial market, each quarter drawn as a single blue bar.">
+        <span>Awaiting file</span>
+      </div>
+      <figcaption>
+        <b>SV real estate took minor hits overall in 2021</b> — a List page for the
+        Silicon Valley Business Journal. Six measures of the commercial market —
+        square feet under construction, net absorption, average asking retail
+        rent, vacancy rate, inventory, and vacant space listed directly by
+        landlords — each read across five quarters on a shared scale.
+        Source: Cushman&nbsp;&amp;&nbsp;Wakefield.
+      </figcaption>
+    </figure>
+
+    <figure class="figure" data-reveal>
+      <div class="figure__frame figure__frame--pending figure__frame--tall" role="img"
+           aria-label="A scrolling web feature on Sacramento business reopenings, in three ruled sections on a dark ground.">
+        <span>Awaiting file</span>
+      </div>
+      <figcaption>
+        <b>Sacramento business reopenings</b> — a scrolling web feature in three
+        movements: <i>Slower openings</i>, comparing Sacramento's restaurant and
+        food openings against the California rate; <i>A yearlong process</i>,
+        setting Q4 2020 reopenings against Q1 2021; and <i>Against the tide</i>,
+        where shopping runs the opposite direction to the statewide trend.
+        Source: Yelp Economic Average.
+      </figcaption>
+    </figure>
+
+    <figure class="figure" data-reveal>
+      <div class="figure__frame figure__frame--pending figure__frame--tall" role="img"
+           aria-label="Percentage change in average weekly wage from the third quarter of 2020 to the third quarter of 2021, with an explanatory note.">
+        <span>Awaiting file</span>
+      </div>
+      <figcaption>
+        <b>Percentage change in average weekly wage, Q3 2020 to Q3 2021</b> —
+        San Mateo and San Francisco counties ranked first and second in the
+        country, Santa Clara sixth, Placer 24th and Sacramento 55th. Figures
+        cover all workers, not only technology employees.
+        Source: Bureau of Labor Statistics, County Employment and Wages.
+      </figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ 02 — Process ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
+    <div class="prose" data-reveal>
+      <p class="meta">02 — Process</p>
+      <h2>Working from a supplied dataset to a fixed page slot</h2>
+      <p>
+        Each graphic started from a dataset that arrived from an outside source
+        on the publication's schedule, and had to land in a page slot whose
+        dimensions were set before the numbers were seen. The List page carries
+        six separate measures on one sheet; the reopenings feature splits across
+        three scrolling sections; the wage piece is a single comparison with an
+        explanatory note.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 03 — Design ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
+    <div class="prose" data-reveal>
+      <p class="meta">03 — Design</p>
+      <h2>One encoding per measure, and the source line set as type</h2>
+      <p>
+        The List page holds six measures on a single scale treatment: one bar to
+        a quarter, a shared baseline per measure, and the quarter labels set
+        directly beside the bars rather than in a legend. Two of the six switch
+        to a line where the measure is a rate rather than a volume.
+      </p>
+      <p>
+        The web features invert to a dark ground and carry their series labels as
+        captioned dots beneath each chart. On all three, the source credit is set
+        as part of the graphic rather than added underneath it.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 04 — Impact ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) var(--gap-xl);">
+    <div class="prose" data-reveal>
+      <p class="meta">04 — Impact</p>
+      <h2>Impact</h2>
+      <p class="impact-todo" data-todo>
+        To be supplied.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ Next ============ -->
+  <section class="shell" style="padding-block:0 var(--gap-xl);">
+    <hr class="rule">
+    <div class="ledger" style="border-top:0;">
+      <article class="entry" data-reveal>
+        <span class="entry__num num">06</span>
+        <div>
+          <h3 class="entry__title">
+            <a class="entry__link" href="overpopulation.html">7.9 billion</a>
+          </h3>
+          <p class="entry__sub">Fifty cities, traced back to their continents.</p>
+        </div>
+        <span class="meta">Next</span>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<script src="../js/theme.js"></script>
+<script type="module" src="../js/motion.js"></script>
+</body>
+</html>

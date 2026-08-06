@@ -38,8 +38,8 @@
     <a class="wordmark" href="../index.html">Chris Almaguer</a>
     <nav class="nav" aria-label="Primary">
       <a href="../index.html#dataviz">Data viz</a>
-      <a href="../index.html#editorial">Editorial</a>
       <a href="../index.html#uiux">UI/UX</a>
+      <a href="../index.html#editorial">Editorial</a>
       <a href="../index.html#healthcare">Healthcare</a>
       <a href="../about.html">About</a>
       <button class="theme-toggle" type="button" data-theme-toggle
@@ -95,28 +95,105 @@
     </div>
   </section>
 
-  <!-- ============ The instruments ============ -->
-  <section class="shell shell--narrow" style="padding-block: var(--gap-l);">
+  <!-- ============ 01 — Context ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
     <div class="prose" data-reveal>
-      <p class="meta">01 — The measures</p>
-      <h2>Two instruments, one grid</h2>
+      <p class="meta">01 — Context</p>
+      <h2>An entry for Chart Champ 2023</h2>
       <p>
-        The dashboard reads two validated scales side by side. <b>MBI</b> — the Maslach
-        Burnout Inventory, here its academic efficacy subscale — and <b>STAI</b>, the
-        State-Trait Anxiety Inventory. Both are ordinal, both are collected per student,
-        and both are the kind of measure that looks like noise as a scatter plot.
+        Cleartelligence held its eighth annual Chart Champ contest on 4 October
+        2023 at Boston University. The theme that year was higher education.
+        Dashboards were due on 22 September, and the five highest-placed entries
+        were presented live at the event, with $1,000 for first place.
       </p>
       <p>
-        Density is the honest encoding for that. A heat map says <em>how many students
-        sit here</em>, which is the question, rather than plotting every respondent and
-        letting overlap decide what you see.
+        This workbook was submitted to that contest. Its description on Tableau
+        Public reads “Medical Student Mental Health; Heat map study /
+        Cleartelligence Chart Champ dashboard entry”. Nothing in the workbook or
+        in this repository records how it placed.
+      </p>
+      <p>
+        The subject chosen under the theme is medical student mental health:
+        survey scores for depression, burnout and exhaustion, set against
+        curriculum year and weekly study hours. The dashboard names no source.
+        The plotted measure names correspond to columns in a public Kaggle
+        dataset of the same title, whose fields include
+        <span class="num">cesd</span>, <span class="num">stud_h</span>,
+        <span class="num">health</span> and the MBI subscales.
       </p>
     </div>
+  </section>
 
-    <p class="pull" data-reveal>
-      A scatter plot of survey responses shows you the range. A heat map shows you where
-      people actually are.
-    </p>
+  <!-- ============ 02 — Process ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
+    <div class="prose" data-reveal>
+      <p class="meta">02 — Process</p>
+      <h2>Building and publishing the workbook</h2>
+      <p>
+        The workbook was built in Tableau and first published to Tableau Public
+        on 20 September 2023, two days before the submission deadline. A second
+        publish followed on 26 September, after the deadline and before the
+        event. The stored revision string is 3.9.
+      </p>
+      <p>
+        The published file is 77,410 bytes and exposes a single view,
+        <span class="num">Dashboard1</span>. Data download is turned off, so the
+        survey table cannot be exported from Tableau Public, and no copy of it
+        is held in this repository. The publish settings hide the sheet tabs,
+        keep the toolbar and keep the Tableau Public watermark; the embed on
+        this page is configured to match.
+      </p>
+      <p>
+        The case study page was written in commit
+        <span class="num">1320fb5</span>. Tableau Public responds with
+        <span class="num">x-frame-options: SAMEORIGIN</span>, so the page loads
+        Tableau's embedding API module and mounts a
+        <span class="num">tableau-viz</span> element, which the API renders in a
+        shadow root. A local rule sets a 40rem minimum height on the wrapper,
+        because the custom element defaults to <span class="num">display:
+        inline</span> and would collapse without it. Commit
+        <span class="num">46f72d2</span> later moved the page into the site's
+        four-category structure.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 03 — Design ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
+    <div class="prose" data-reveal>
+      <p class="meta">03 — Design</p>
+      <h2>Density marks across two panels</h2>
+      <p>
+        The canvas is 1,366 by 795 and holds two panels. On the left, severity
+        of depression symptoms runs 0 to 60 on the y axis against curriculum
+        year 1 to 6, drawn on a grey-to-teal ramp. On the right, three strips
+        stack over a shared x axis of hours of study per week, 0 to 75:
+        academic burnout at 0 to 40, emotional exhaustion at 0 to 35, and mental
+        health at 1 to 6, all on a grey-to-orange-to-red ramp.
+      </p>
+      <p>
+        The marks are Tableau density marks. Enlarged, the fills are smooth
+        kernel-smoothed gradients with no cell edges, so repeated responses at
+        the same coordinates accumulate into continuous regions.
+      </p>
+      <p>
+        A pale grey silhouette of a head in profile occupies roughly the right
+        quarter of the canvas and carries no data. The published dashboard has
+        no title, subtitle, legend, annotation, units note or source line. Axis
+        titles and tick labels are the only text on it.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 04 — Impact ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) var(--gap-xl);">
+    <div class="prose" data-reveal>
+      <p class="meta">04 — Impact</p>
+      <h2>Impact</h2>
+      <p class="impact-todo" data-todo>
+        To be supplied.
+      </p>
+    </div>
   </section>
 
   <!-- ============ Next ============ -->

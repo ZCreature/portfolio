@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Color Safety Lens — Live View</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0a0a0a;
+      color: #fff;
+      font-family: "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      height: 100dvh;
+    }
+
+    button, select, a { font: inherit; cursor: pointer; border-radius: 0; }
+
+    /* ── layout ── */
+    .shell {
+      display: grid;
+      grid-template-columns: 168px 1fr;
+      height: 100vh;
+      height: 100dvh;
+      animation: page-enter 0.32s ease;
+    }
+
+    .shell.page-exit {
+      animation: page-exit 0.32s ease forwards;
+    }
+
+    @keyframes page-enter {
+      from { opacity: 0; transform: translateX(32px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes page-exit {
+      to { opacity: 0; transform: translateX(32px); }
+    }
+
+    /* ── left nav ── */
+    nav {
+      display: flex;
+      flex-direction: column;
+      background: #0d0d0d;
+      border-right: 1px solid rgba(255,255,255,.1);
+      padding: 0;
+      overflow-y: auto;
+      z-index: 10;
+    }
+
+    .nav-back {
+      display: block;
+      padding: 14px 16px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.4);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav-back:hover { color: #fff; }
+
+    .nav-section {
+      padding: 14px 14px 10px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .nav-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.28);
+      margin-bottom: 2px;
+    }
+
+    .nav-btn {
+      width: 100%;
+      height: 36px;
+      padding: 0 12px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: transparent;
+      color: rgba(255,255,255,.75);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      text-align: left;
+    }
+    .nav-btn:hover { background: rgba(255,255,255,.07); color: #fff; }
+    .nav-btn[aria-pressed="true"] { background: #fff; color: #000; border-color: #fff; }
+    .nav-btn.primary {
+      background: rgba(255,255,255,.1);
+      border-color: rgba(255,255,255,.35);
+      color: #fff;
+    }
+    .nav-btn.primary:hover { background: rgba(255,255,255,.2); }
+    .nav-btn.primary[aria-pressed="true"] {
+      background: rgba(255,60,60,.15);
+      border-color: rgba(255,80,80,.5);
+      color: rgba(255,140,140,1);
+    }
+
+    .nav-btn.alarm-on {
+      background: #ff00ff;
+      color: #000;
+      border-color: #ff00ff;
+    }
+
+    nav select {
+      width: 100%;
+      height: 36px;
+      padding: 0 10px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='rgba(255,255,255,.4)'/%3E%3C/svg%3E") no-repeat right 10px center;
+      color: rgba(255,255,255,.75);
+      font-size: 11px;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    nav select option { background: #1a1a1a; color: #fff; }
+
+    /* sample readout in nav */
+    .nav-readout {
+      padding: 14px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .nav-readout.visible { display: flex; }
+
+    .sample-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chip {
+      width: 32px;
+      height: 32px;
+      border: 1px solid rgba(255,255,255,.25);
+      flex-shrink: 0;
+    }
+
+    .hex-val {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .04em;
+    }
+
+    .ratio-val {
+      font-size: 10px;
+      color: rgba(255,255,255,.5);
+      line-height: 1.6;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 8px;
+      margin-top: 2px;
+    }
+    .badge.pass { background: #fff; color: #000; }
+    .badge.fail { border: 1px solid rgba(255,255,255,.35); color: rgba(255,255,255,.6); }
+
+    /* status at bottom of nav */
+    .nav-status {
+      margin-top: auto;
+      padding: 12px 14px;
+      font-size: 10px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.25);
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+
+    /* ── stage (canvas area) ── */
+    .stage {
+      position: relative;
+      overflow: hidden;
+      background: #111;
+    }
+
+    video { display: none; }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* viewfinder corners */
+    .corner {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid rgba(255,255,255,.4);
+      pointer-events: none;
+      z-index: 4;
+    }
+    .corner.tl { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+    .corner.tr { top: 10px; right: 10px; border-left: none; border-bottom: none; }
+    .corner.bl { bottom: 10px; left: 10px; border-right: none; border-top: none; }
+    .corner.br { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+
+    /* idle prompt */
+    .idle-prompt {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      pointer-events: none;
+      z-index: 3;
+    }
+    .idle-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 26px);
+      gap: 3px;
+      opacity: .15;
+    }
+    .idle-grid span { display: block; height: 26px; background: #fff; }
+    .idle-prompt p {
+      font-size: 11px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.3);
+    }
+
+    /* split handle */
+    .split-line {
+      position: absolute;
+      top: 0; bottom: 0;
+      left: var(--split, 50%);
+      width: 0;
+      border-left: 1.5px solid rgba(255,255,255,.7);
+      display: none;
+      z-index: 5;
+      cursor: ew-resize;
+      touch-action: none;
+    }
+    .split-line::after {
+      content: "";
+      position: absolute;
+      top: 50%; left: -10px;
+      width: 19px; height: 40px;
+      transform: translateY(-50%);
+      background: rgba(15,15,15,.9);
+      border: 1px solid rgba(255,255,255,.5);
+    }
+    .split-on .split-line { display: block; }
+
+    /* reticle */
+    .reticle {
+      position: absolute;
+      left: var(--rx, 50%);
+      top: var(--ry, 50%);
+      width: 28px; height: 28px;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 5;
+      mix-blend-mode: difference;
+    }
+    .reticle::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 1.5px solid #fff;
+    }
+    .reticle .rv {
+      position: absolute;
+      left: 50%; top: -7px; bottom: -7px;
+      width: 1.5px; transform: translateX(-50%);
+      background: #fff;
+    }
+    .reticle .rh {
+      position: absolute;
+      top: 50%; left: -7px; right: -7px;
+      height: 1.5px; transform: translateY(-50%);
+      background: #fff;
+    }
+
+    /* alarm legend */
+    .alarm-legend {
+      position: absolute;
+      top: 12px; right: 12px;
+      padding: 6px 10px;
+      background: rgba(10,10,10,.82);
+      border: 1px solid rgba(255,0,255,.5);
+      font-size: 10px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: #ff00ff;
+      display: none;
+      z-index: 4;
+      pointer-events: none;
+    }
+    .alarm-active .alarm-legend { display: block; }
+  </style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- LEFT NAV -->
+  <nav>
+    <a class="nav-back" href="color-safety-lens.html">← Back</a>
+
+    <div class="nav-section">
+      <div class="nav-label">Capture</div>
+      <button class="nav-btn primary" id="captureBtn">Start</button>
+      <button class="nav-btn" id="freezeBtn" aria-pressed="false">Freeze</button>
+      <button class="nav-btn" id="splitBtn" aria-pressed="false">Split</button>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">Vision</div>
+      <select id="visionMode" aria-label="Vision type">
+        <option value="normal">RGB view</option>
+        <option value="protanopia">Protanopia</option>
+        <option value="deuteranopia">Deuteranopia</option>
+        <option value="tritanopia">Tritanopia</option>
+        <option value="achromatopsia">Achromatopsia</option>
+      </select>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">WCAG Alarm</div>
+      <button class="nav-btn" id="alarmBtn" aria-pressed="false">Off</button>
+    </div>
+
+    <div class="nav-readout" id="readout">
+      <div class="nav-label">Sample</div>
+      <div class="sample-row">
+        <div class="chip" id="chip"></div>
+        <div class="hex-val" id="hexVal">------</div>
+      </div>
+      <div class="ratio-val" id="ratioVal">Black --:1<br>White --:1</div>
+      <div class="badge fail" id="badge">--</div>
+    </div>
+
+    <div class="nav-status" id="status">Off</div>
+  </nav>
+
+  <!-- STAGE -->
+  <div class="stage" id="stage">
+    <video id="video" playsinline muted></video>
+    <canvas id="canvas"></canvas>
+
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+
+    <div class="idle-prompt" id="idlePrompt">
+      <div class="idle-grid">
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+        <span></span><span></span><span></span>
+      </div>
+      <p>Click Start to capture screen</p>
+    </div>
+
+    <div class="split-line" id="splitLine"></div>
+
+    <div class="reticle" id="reticle" style="display:none">
+      <span class="rv"></span>
+      <span class="rh"></span>
+    </div>
+
+    <div class="alarm-legend">WCAG alarm — magenta = black text fails AA (&lt;4.5:1)</div>
+  </div>
+
+</div>
+
+<script>
+  const video      = document.querySelector("#video");
+  const canvas     = document.querySelector("#canvas");
+  const ctx        = canvas.getContext("2d", { willReadFrequently: true });
+  const stage      = document.querySelector("#stage");
+  const idlePrompt = document.querySelector("#idlePrompt");
+  const reticle    = document.querySelector("#reticle");
+  const readout    = document.querySelector("#readout");
+  const splitLine  = document.querySelector("#splitLine");
+  const captureBtn = document.querySelector("#captureBtn");
+  const freezeBtn  = document.querySelector("#freezeBtn");
+  const splitBtn   = document.querySelector("#splitBtn");
+  const alarmBtn   = document.querySelector("#alarmBtn");
+  const statusEl   = document.querySelector("#status");
+  const visionMode = document.querySelector("#visionMode");
+  const chip       = document.querySelector("#chip");
+  const hexVal     = document.querySelector("#hexVal");
+  const ratioVal   = document.querySelector("#ratioVal");
+  const badge      = document.querySelector("#badge");
+
+  // Machado et al. 2009 dichromacy matrices (severity 1.0), applied in linear
+  // RGB — same model as the main tool. Achromatopsia is linear Rec. 709 luma.
+  const MACHADO = {
+    protanopia:   [[0.152286,1.052583,-0.204868],[0.114503,0.786281,0.099216],[-0.003882,-0.048116,1.051998]],
+    deuteranopia: [[0.367322,0.860646,-0.227968],[0.280085,0.672501,0.047413],[-0.011820,0.042940,0.968881]],
+    tritanopia:   [[1.255528,-0.076749,-0.178779],[-0.078411,0.930809,0.147602],[0.004733,0.691367,0.303900]]
+  };
+
+  // sRGB <-> linear lookup tables — per-pixel Math.pow is too slow at retina
+  // resolution, and the WCAG alarm needs true relative luminance every frame.
+  const SRGB2LIN = new Float32Array(256);
+  for (let v = 0; v < 256; v++) {
+    const s = v / 255;
+    SRGB2LIN[v] = s <= 0.04045 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4);
+  }
+  const LIN2SRGB = new Uint8ClampedArray(4096);
+  for (let i = 0; i < 4096; i++) {
+    const c = i / 4095;
+    LIN2SRGB[i] = Math.round((c <= 0.0031308 ? 12.92 * c : 1.055 * Math.pow(c, 1 / 2.4) - 0.055) * 255);
+  }
+  const lin2srgb = c => LIN2SRGB[c <= 0 ? 0 : c >= 1 ? 4095 : (c * 4095 + 0.5) | 0];
+
+  let frozen = false, split = false, alarm = false, splitPct = 50;
+  let sample = { x: .5, y: .5 };
+  let frozenFrame = null;
+  let lastRaw = null, lastRawW = 0, lastRawH = 0;
+  let live = false;
+
+  // Text exclusion via local contrast variance.
+  // A dark pixel near a significantly different-brightness neighbor is text or an edge
+  // (dark glyph on any background, regardless of background color).
+  // A dark pixel whose entire neighborhood is similarly dark is a background → flag it.
+  // Uses fast gamma-space BT.601 luma (no Math.pow) for performance.
+  const TEXT_EDGE_THRESHOLD = 45; // luma difference that indicates text/edge
+  const TEXT_RADIUS = 8;          // pixel radius to sample
+  // 2D offsets, bounds-checked per axis so samples near the left/right edges
+  // don't wrap onto adjacent rows.
+  const TEXT_OFFSETS = (R => [
+    [-R, 0], [R, 0], [0, -R], [0, R],
+    [-R, -R], [R, -R], [-R, R], [R, R],
+    [-2*R, 0], [2*R, 0], [0, -2*R], [0, 2*R] // second ring for thick glyphs
+  ])(TEXT_RADIUS);
+
+  function isTextOrEdge(src, x, y, cw, ch) {
+    const i = (y * cw + x) * 4;
+    const selfLuma = src[i] * 0.299 + src[i+1] * 0.587 + src[i+2] * 0.114;
+    for (const [dx, dy] of TEXT_OFFSETS) {
+      const nx = x + dx, ny = y + dy;
+      if (nx < 0 || nx >= cw || ny < 0 || ny >= ch) continue;
+      const n = (ny * cw + nx) * 4;
+      const nLuma = src[n] * 0.299 + src[n+1] * 0.587 + src[n+2] * 0.114;
+      if (Math.abs(nLuma - selfLuma) > TEXT_EDGE_THRESHOLD) return true;
+    }
+    return false;
+  }
+
+  const clamp = v => Math.max(0, Math.min(255, Math.round(v)));
+
+  function toHex({ r, g, b }) {
+    return [r,g,b].map(v => clamp(v).toString(16).padStart(2,"0")).join("").toUpperCase();
+  }
+
+  function simulate(r, g, b, type) {
+    const rl = SRGB2LIN[r], gl = SRGB2LIN[g], bl = SRGB2LIN[b];
+    if (type === "achromatopsia") {
+      const y = lin2srgb(0.2126 * rl + 0.7152 * gl + 0.0722 * bl);
+      return { r: y, g: y, b: y };
+    }
+    const m = MACHADO[type];
+    if (!m) return { r, g, b };
+    return {
+      r: lin2srgb(rl * m[0][0] + gl * m[0][1] + bl * m[0][2]),
+      g: lin2srgb(rl * m[1][0] + gl * m[1][1] + bl * m[1][2]),
+      b: lin2srgb(rl * m[2][0] + gl * m[2][1] + bl * m[2][2])
+    };
+  }
+
+  function luminance(r, g, b) {
+    return 0.2126 * SRGB2LIN[r] + 0.7152 * SRGB2LIN[g] + 0.0722 * SRGB2LIN[b];
+  }
+
+  function contrast(L1, L2) {
+    const hi = Math.max(L1, L2), lo = Math.min(L1, L2);
+    return (hi + 0.05) / (lo + 0.05);
+  }
+
+  // Flag pixels where black text on this background fails WCAG AA (< 4.5:1).
+  // Matches the chart's "X" indicator — same threshold, same black-text-on-background check.
+  // Dark backgrounds (L < ~0.18) are the problematic zone; under CVD simulation,
+  // shifted colors that fall into this range are also caught.
+  function isAlarmPixel(r, g, b) {
+    const L = luminance(r, g, b);
+    const cBlack = (L + 0.05) / 0.05;
+    return cBlack < 4.5;
+  }
+
+  function resizeCanvas() {
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width  = Math.floor(stage.clientWidth  * dpr);
+    canvas.height = Math.floor(stage.clientHeight * dpr);
+  }
+
+  function drawFrame() {
+    if (frozen && frozenFrame) { ctx.putImageData(frozenFrame, 0, 0); return true; }
+    if (!video.videoWidth)     return false;
+    const cw = canvas.width, ch = canvas.height;
+    const vr = video.videoWidth / video.videoHeight;
+    const cr = cw / ch;
+    let dw, dh, dx, dy;
+    // contain: fit entire frame, no cropping
+    if (vr > cr) { dw = cw; dh = cw / vr; dx = 0; dy = (ch - dh) / 2; }
+    else         { dh = ch; dw = ch * vr; dy = 0; dx = (cw - dw) / 2; }
+    ctx.clearRect(0, 0, cw, ch);
+    ctx.drawImage(video, dx, dy, dw, dh);
+    return true;
+  }
+
+  function tick() {
+    if (!drawFrame()) { requestAnimationFrame(tick); return; }
+
+    const mode = visionMode.value;
+    const cw   = canvas.width, chh = canvas.height;
+    const img  = ctx.getImageData(0, 0, cw, chh);
+    const orig = new Uint8ClampedArray(img.data);
+    const d    = img.data;
+    const sx   = Math.floor(cw * splitPct / 100);
+
+    if (!frozen) { lastRaw = orig; lastRawW = cw; lastRawH = chh; }
+
+    for (let i = 0; i < d.length; i += 4) {
+      const p  = i >> 2;
+      const px = p % cw;
+      const inSimZone = !split || px < sx;
+
+      let r = orig[i], g = orig[i+1], b = orig[i+2];
+
+      if (inSimZone && mode !== "normal") {
+        const s = simulate(r, g, b, mode);
+        r = s.r; g = s.g; b = s.b;
+      }
+
+      if (alarm && isAlarmPixel(r, g, b) && !isTextOrEdge(orig, px, (p / cw) | 0, cw, chh)) {
+        d[i] = 255; d[i+1] = 0; d[i+2] = 255;
+      } else {
+        d[i] = r; d[i+1] = g; d[i+2] = b;
+      }
+    }
+
+    ctx.putImageData(img, 0, 0);
+    sampleAt(orig);
+    requestAnimationFrame(tick);
+  }
+
+  function sampleAt(src) {
+    const x   = Math.min(canvas.width-1,  Math.max(0, Math.round(sample.x * canvas.width)));
+    const y   = Math.min(canvas.height-1, Math.max(0, Math.round(sample.y * canvas.height)));
+    const idx = (y * canvas.width + x) * 4;
+    const r = src[idx], g = src[idx+1], b = src[idx+2];
+    const L  = luminance(r, g, b);
+    const bl = contrast(L, 0);
+    const wh = contrast(L, 1);
+    const hex = toHex({ r, g, b });
+    chip.style.background = `#${hex}`;
+    hexVal.textContent = hex;
+    ratioVal.innerHTML = `Black ${bl.toFixed(2)}:1<br>White ${wh.toFixed(2)}:1`;
+    const pass = Math.max(bl, wh) >= 4.5;
+    badge.textContent = pass ? "AA" : "Fail";
+    badge.className   = `badge ${pass ? "pass" : "fail"}`;
+  }
+
+  function stopCapture() {
+    if (video.srcObject) video.srcObject.getTracks().forEach(t => t.stop());
+    video.srcObject = null;
+    live = false;
+    frozen = false;
+    frozenFrame = null;
+    lastRaw = null;
+    freezeBtn.setAttribute("aria-pressed", "false");
+    freezeBtn.textContent = "Freeze";
+    idlePrompt.style.display = "";
+    reticle.style.display = "none";
+    readout.classList.remove("visible");
+    captureBtn.textContent = "Start";
+    captureBtn.setAttribute("aria-pressed", "false");
+    statusEl.textContent = "Off";
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
+  async function startCapture() {
+    try {
+      if (video.srcObject) video.srcObject.getTracks().forEach(t => t.stop());
+      const stream = await navigator.mediaDevices.getDisplayMedia({
+        video: { frameRate: { ideal: 30 }, cursor: "never" },
+        audio: false
+      });
+      video.srcObject = stream;
+      await video.play();
+      live = true;
+      idlePrompt.style.display = "none";
+      reticle.style.display = "";
+      readout.classList.add("visible");
+      captureBtn.textContent = "Stop";
+      captureBtn.setAttribute("aria-pressed", "true");
+      statusEl.textContent = "Live";
+      resizeCanvas();
+      stream.getVideoTracks()[0].addEventListener("ended", stopCapture);
+    } catch {
+      statusEl.textContent = "Cancelled";
+    }
+  }
+
+  captureBtn.addEventListener("click", () => {
+    if (live) stopCapture();
+    else startCapture();
+  });
+
+  freezeBtn.addEventListener("click", () => {
+    if (!live) return;
+    frozen = !frozen;
+    freezeBtn.setAttribute("aria-pressed", String(frozen));
+    freezeBtn.textContent = frozen ? "Unfreeze" : "Freeze";
+    // Freeze the raw pre-simulation frame; tick re-applies the current filter
+    // to it each frame, so the simulation is never applied twice and switching
+    // vision modes while frozen works.
+    frozenFrame = frozen && lastRaw
+      ? new ImageData(new Uint8ClampedArray(lastRaw), lastRawW, lastRawH)
+      : null;
+    statusEl.textContent = frozen ? "Frozen" : "Live";
+  });
+
+  splitBtn.addEventListener("click", () => {
+    split = !split;
+    splitBtn.setAttribute("aria-pressed", String(split));
+    stage.classList.toggle("split-on", split);
+  });
+
+  alarmBtn.addEventListener("click", () => {
+    alarm = !alarm;
+    alarmBtn.setAttribute("aria-pressed", String(alarm));
+    alarmBtn.textContent = alarm ? "On" : "Off";
+    alarmBtn.classList.toggle("alarm-on", alarm);
+    stage.classList.toggle("alarm-active", alarm);
+  });
+
+  stage.addEventListener("pointerdown", e => {
+    if (e.target === splitLine || !live) return;
+    const r = stage.getBoundingClientRect();
+    sample.x = (e.clientX - r.left) / r.width;
+    sample.y = (e.clientY - r.top)  / r.height;
+    stage.style.setProperty("--rx", `${sample.x * 100}%`);
+    stage.style.setProperty("--ry", `${sample.y * 100}%`);
+  });
+
+  splitLine.addEventListener("pointerdown", e => {
+    e.preventDefault();
+    splitLine.setPointerCapture(e.pointerId);
+  });
+
+  splitLine.addEventListener("pointermove", e => {
+    if (!splitLine.hasPointerCapture(e.pointerId)) return;
+    const r = stage.getBoundingClientRect();
+    splitPct = Math.min(100, Math.max(0, (e.clientX - r.left) / r.width * 100));
+    stage.style.setProperty("--split", `${splitPct}%`);
+  });
+
+  window.addEventListener("resize", resizeCanvas);
+  resizeCanvas();
+  tick();
+
+  document.querySelector(".nav-back").addEventListener("click", (event) => {
+    const link = event.currentTarget;
+    event.preventDefault();
+    const shell = document.querySelector(".shell");
+    shell.classList.add("page-exit");
+    shell.addEventListener("animationend", () => {
+      window.location.href = link.href;
+    }, { once: true });
+  });
+</script>
+</body>
+</html>

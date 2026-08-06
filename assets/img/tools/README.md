@@ -16,5 +16,5 @@ Notes:
 - Landscape suits the 16:10 tile; portrait phone shots get cropped to the
   top-left, so leave headroom or say and I'll switch that tile to `contain`.
 - Anything wider than about 1600px is downscaled — `sips -Z 1600 file.png`.
-- Keep them under ~500 KB each; the whole site is currently under 1 MB of
-  images.
+- Keep tile thumbnails under ~500 KB each. Case-study artwork in
+  `assets/img/work/` is allowed to be larger; total image weight is ~3.7 MB.

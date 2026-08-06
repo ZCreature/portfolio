@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>North American gas prices — Chris Almaguer</title>
-<meta name="description" content="An interactive R and Leaflet study of North American gas prices, and what it took to get a vibe-coded map to look designed.">
+<title>Global gas prices — Chris Almaguer</title>
+<meta name="description" content="An interactive R and Leaflet study of global gas prices, and what it took to get a vibe-coded map to look designed.">
 <meta name="theme-color" content="#fbfbfa">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Chris Almaguer">
-<meta property="og:title" content="North American gas prices — Chris Almaguer">
-<meta property="og:description" content="An interactive R and Leaflet study of North American gas prices, and what it took to get a vibe-coded map to look designed.">
+<meta property="og:title" content="Global gas prices — Chris Almaguer">
+<meta property="og:description" content="An interactive R and Leaflet study of global gas prices, and what it took to get a vibe-coded map to look designed.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="North American gas prices — Chris Almaguer">
-<meta name="twitter:description" content="An interactive R and Leaflet study of North American gas prices, and what it took to get a vibe-coded map to look designed.">
+<meta name="twitter:title" content="Global gas prices — Chris Almaguer">
+<meta name="twitter:description" content="An interactive R and Leaflet study of global gas prices, and what it took to get a vibe-coded map to look designed.">
 <meta name="author" content="Chris Almaguer">
 <script>
   try {
@@ -32,8 +32,8 @@
     <a class="wordmark" href="../index.html">Chris Almaguer</a>
     <nav class="nav" aria-label="Primary">
       <a href="../index.html#dataviz">Data viz</a>
-      <a href="../index.html#editorial">Editorial</a>
       <a href="../index.html#uiux">UI/UX</a>
+      <a href="../index.html#editorial">Editorial</a>
       <a href="../index.html#healthcare">Healthcare</a>
       <a href="../about.html">About</a>
       <button class="theme-toggle" type="button" data-theme-toggle
@@ -56,7 +56,7 @@
       Prompting is not designing
     </h1>
     <p class="lede tight" data-reveal style="--reveal-delay:140ms; margin-top: var(--gap-m);">
-      An interactive study of North American gas prices, built in R with Leaflet.
+      An interactive study of global gas prices, built in R with Leaflet.
       I wrote it with AI assistance, which got me to a working map fast — and then
       cost me a long evening of specifying exactly what "looks right" means.
     </p>
@@ -72,25 +72,31 @@
   <!-- ============ Live ============ -->
   <section class="shell" style="padding-block: var(--gap-l);">
     <div class="prose" data-reveal>
-      <p class="meta">01 — The map</p>
-      <h2>Running here, in the page</h2>
+      <p class="meta">01 — Context</p>
+      <h2>Fuel prices at two levels of detail at once</h2>
       <p>
-        Pan and zoom it. The price data is baked into the document — 1,712 vector
-        shapes, no API key, no query at view time. Only the basemap underneath is
-        fetched, from CartoDB's dark tiles.
+        Fuel prices get reported either as a national average or as a local pump
+        price, and the two are rarely shown together. This map carries both:
+        country-level figures for the wider comparison, and US state figures from
+        AAA estimates in dollars per gallon underneath them.
+      </p>
+      <p>
+        It runs in the page. The price data is baked into the document as 1,712
+        vector shapes, with no API key and no query at view time. Only the
+        basemap is fetched, from CartoDB's dark tiles.
       </p>
     </div>
 
     <div class="embed embed--fit embed--bleed" data-embed data-reveal
          data-embed-w="1440" data-embed-h="900">
       <div class="embed__bar">
-        <span class="meta">North American gas prices — interactive</span>
+        <span class="meta">Global gas prices — interactive</span>
         <a class="btn" href="tools/gas-prices.html" target="_blank" rel="noopener">Open full screen</a>
       </div>
       <div class="embed__frame">
         <p class="embed__loading meta">Loading map…</p>
         <iframe src="tools/gas-prices.html" loading="lazy"
-                title="Interactive map of North American gas prices"></iframe>
+                title="Interactive map of global gas prices"></iframe>
       </div>
       <p class="embed__note">
         Built for a 1440&nbsp;×&nbsp;900 viewport with no responsive breakpoints, so it
@@ -104,34 +110,52 @@
   <!-- ============ The argument ============ -->
   <section class="shell shell--narrow" style="padding-block: var(--gap-l);">
     <div class="prose" data-reveal>
-      <p class="meta">02 — What it took</p>
-      <h2>Not a specification</h2>
+      <p class="meta">02 — Process</p>
+      <h2>The first working version was the default R map</h2>
       <p>
-        The first working version arrived quickly and looked like every default R map:
-        rainbow bins, a legend in the wrong corner, state boundaries competing with the
-        data for attention.
+        Built in R with Leaflet, AI-assisted. A version that ran arrived quickly
+        and looked like every default R map: rainbow bins, a legend in the wrong
+        corner, and state boundaries competing with the data for attention.
       </p>
       <p>
-        Getting past that meant writing down things I normally decide by eye — bin
-        breaks that follow the distribution rather than equal intervals, a sequential
-        ramp instead of a categorical one, boundaries dropped back to a hairline,
-        labels only where they don't collide.
+        Moving past that meant writing down decisions normally made by eye. Every
+        prompt that produced something worth keeping was one where the design
+        decision had already been made. The same pattern showed up on the
+        <a href="color-safety-lens.html" style="text-decoration:underline; text-underline-offset:3px;">Color
+        Safety Lens</a> project from a different angle: the distance between an
+        idea and something that runs is now short, and the distance between
+        something that runs and something correct is unchanged.
       </p>
     </div>
+  </section>
 
-    <p class="pull" data-reveal>
-      Every prompt that produced something worth keeping was a prompt where I'd already
-      made the design decision.
-    </p>
-
+  <!-- ============ 03 — Design ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
     <div class="prose" data-reveal>
+      <p class="meta">03 — Design</p>
+      <h2>Four decisions, written down before they were prompted</h2>
       <p>
-        That's the honest finding, and it's the same one from the
-        <a href="color-safety-lens.html" style="text-decoration:underline; text-underline-offset:3px;">Color
-        Safety Lens</a> project from a different angle. AI-assisted development
-        collapses the distance between an idea and something that runs. It does nothing
-        for the distance between something that runs and something that's <em>right</em>
-        — <b>that gap is still the job.</b>
+        Bin breaks follow the distribution rather than equal intervals, so the
+        classes carry roughly comparable numbers of places instead of splitting
+        an empty range. The ramp is sequential rather than categorical, because
+        price is a quantity and a categorical set implies unordered groups.
+      </p>
+      <p>
+        Boundaries drop back to a hairline so the fill reads before the outline,
+        and labels appear only where they do not collide. Baking the data into
+        the document rather than querying it removes the failure mode where the
+        map is a blank basemap because an API is down or a key has expired.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 04 — Impact ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
+    <div class="prose" data-reveal>
+      <p class="meta">04 — Impact</p>
+      <h2>Impact</h2>
+      <p class="impact-todo" data-todo>
+        To be supplied.
       </p>
     </div>
   </section>

@@ -417,15 +417,58 @@ section { padding-block: var(--gap-xl); }
   letter-spacing: 0.07em;
   text-transform: uppercase;
   color: var(--ink-3);
+  background: transparent;
   border: 1px solid var(--rule);
-  border-radius: 0;
+  border-radius: 3px;
   padding: 0.2rem 0.45rem;
   white-space: nowrap;
 }
 
+/* ---- Tag colour families ---------------------------------
+   The one place colour enters the interface. It is safe here
+   because it is REDUNDANT: the chip already reads "Live" or
+   "Tableau", so hue reinforces a label rather than carrying
+   meaning on its own, which is what WCAG 1.4.1 asks.
+
+   Derived, not picked. Every ink clears 4.5:1 against BOTH its
+   own fill and the page — so a label stays readable even if the
+   fill never paints. Measured: text/chip 5.0–5.1, text/page
+   5.4–6.2 in light, 6.0–6.2 in dark.
+
+   The three families sit at matched lightness, so they are
+   deliberately NOT separable in greyscale. That is the correct
+   trade here — they are siblings, and the word does the work.
+   Anywhere colour is the only channel, use the tile ladder
+   instead, which is built to survive greyscale.            */
+
+:root {
+  --tag-live-fill: #defaed;  --tag-live-line: #addcc7;  --tag-live-ink: #037757;
+  --tag-tool-fill: #d6ebfe;  --tag-tool-line: #b1d6f5;  --tag-tool-ink: #036793;
+  --tag-stat-fill: #ffe2d8;  --tag-stat-line: #f6c7b8;  --tag-stat-ink: #a14425;
+}
+
+:root[data-theme="dark"] {
+  --tag-live-fill: #0b261c;  --tag-live-line: #133e2f;  --tag-live-ink: #08a479;
+  --tag-tool-fill: #062232;  --tag-tool-line: #0d3b53;  --tag-tool-ink: #2597d1;
+  --tag-stat-fill: #301a12;  --tag-stat-line: #502e22;  --tag-stat-ink: #d07657;
+}
+
 .tag--live {
-  color: var(--ink);
-  border-color: var(--ink-4);
+  background: var(--tag-live-fill);
+  border-color: var(--tag-live-line);
+  color: var(--tag-live-ink);
+}
+
+.tag--tool {
+  background: var(--tag-tool-fill);
+  border-color: var(--tag-tool-line);
+  color: var(--tag-tool-ink);
+}
+
+.tag--status {
+  background: var(--tag-stat-fill);
+  border-color: var(--tag-stat-line);
+  color: var(--tag-stat-ink);
 }
 
 /* Full-card link target without nesting interactive elements */
@@ -444,11 +487,24 @@ section { padding-block: var(--gap-xl); }
    A grid, not a reading list. Each thumbnail is a vector
    reduction of the actual work rather than a screenshot.   */
 
+/* Both ladders are verified: every pair clears ΔE 10 in normal vision, all
+   three CVD types and greyscale, and every colour clears 3:1 against the tile
+   background it sits on. Light measures ΔE 10.2 minimum, dark ΔE 10.3 — the
+   binding pair is greyscale in both, as it usually is.
+
+   --tile-4 is the tightest colour on the site at 3.03:1 against --paper-2, the
+   thumbnail surface these marks sit on, and that is forced
+   rather than careless: a 3:1 floor on light paper caps a usable series at
+   about L* 58, and the full L* 16–58 span is needed for four series to stay
+   apart in greyscale. Re-deriving all four jointly buys ΔE 10.4 instead of
+   10.2 — not worth changing four colours for. Anything lighter here fails
+   contrast; anything darker collapses into --tile-3 in greyscale. */
+
 :root {
   --tile-1: #003353;
   --tile-2: #a1002a;
   --tile-3: #107c7f;
-  --tile-4: #c68301;
+  --tile-4: #c87900;
 }
 
 :root[data-theme="dark"] {
@@ -941,3 +997,27 @@ figure { margin: 0; }
 .gate__msg { margin-top: 0.75rem; min-height: 1.2rem; font-size: 0.875rem; color: var(--ink-2); }
 .gate__msg[data-state="bad"] { color: var(--ink); font-weight: 700; }
 .gate__msg[data-state="bad"]::before { content: "✕ "; }
+
+/* ---- 14. Awaiting-copy placeholder ------------------------ */
+
+/* Marks a section whose text the author still has to supply. Deliberately
+   looks unfinished so it cannot be mistaken for published copy. */
+.impact-todo {
+  border: 1px dashed var(--rule);
+  background-image: repeating-linear-gradient(
+    45deg, var(--rule-soft) 0 8px, transparent 8px 16px);
+  padding: 1rem 1.1rem;
+  color: var(--ink-3);
+  font-size: 0.875rem;
+}
+.impact-todo::before {
+  content: "To fill";
+  display: inline-block;
+  margin-right: 0.6rem;
+  padding: 0.1rem 0.4rem;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
