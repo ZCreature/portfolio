@@ -1295,3 +1295,55 @@ figure { margin: 0; }
 
   :target, section[id] { scroll-margin-top: 5.5rem; }
 }
+
+
+/* ---- "Right now" feature ---------------------------------
+   Replaces the old nameplate. The rail already carries the
+   name, so repeating it at 4rem said nothing twice; a single
+   current piece of work says more and gets the reader into
+   the grid faster.                                        */
+
+.now { margin: 0; }
+
+.now__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--gap-m);
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: var(--gap-m);
+}
+
+.now__frame {
+  border: 1px solid var(--rule);
+  background: var(--paper-2);
+  overflow: hidden;
+  aspect-ratio: 16 / 7;
+}
+
+.now__frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.now figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1.25rem;
+  margin-top: 1rem;
+}
+
+.now__title {
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: -0.024em;
+}
+
+.now__note { color: var(--ink-3); font-size: 0.9375rem; max-width: 46ch; }
+
+/* Pills sit on their own line under the caption; the tile row's
+   margin-top: auto is meaningless outside a flex column. */
+.now__tags { flex-basis: 100%; margin-top: 0.25rem; padding-top: 0; }
+
+@media (max-width: 46rem) {
+  .now__frame { aspect-ratio: 4 / 3; }
+}
