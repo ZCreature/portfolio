@@ -7,16 +7,23 @@
 /* ---- 1. Tokens ------------------------------------------- */
 
 :root {
-  /* Type. Helvetica throughout — one family, no webfont download.
-     Installed on macOS and iOS; Windows falls back to Arial, which
-     is metrically compatible, so line breaks hold either way.
+  /* Type. SF Pro only, with no webfont download.
 
-     There is no monospace Helvetica, so the "label" voice is the
-     same family separated by size, caps and tracking rather than
-     by a second typeface. Anything that has to align in columns
-     carries font-variant-numeric: tabular-nums explicitly. */
-  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-mono: "Helvetica Neue", Helvetica, Arial, sans-serif;
+     -apple-system is the correct way to get it: on macOS and iOS the
+     browser resolves it to the real SF Pro, and picks Display or Text
+     at the right optical size on its own. Apple's licence does not
+     permit self-hosting SF as a webfont, so naming the files directly
+     is not an option — this is both the legal route and the fast one.
+     Off Apple platforms it falls through to the platform UI face.
+
+     SF Mono carries the label voice: .meta, .num, and anything that
+     has to align in a column. That pairing is the point of choosing
+     SF — it ships with a matching monospace, which Helvetica does not
+     have, so labels no longer lean on caps and tracking alone. */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "SF Pro Display", system-ui, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo,
+    "Liberation Mono", monospace;
 
   /* Greys. Interface only. */
   --ink:        #101012;
@@ -105,13 +112,13 @@ p { margin: 0; text-wrap: pretty; }
 .h1 {
   font-size: clamp(1.9rem, 4vw, 3rem);
   line-height: 1.08;
-  letter-spacing: -0.022em;
+  letter-spacing: -0.03em;
 }
 
 .lede {
   font-size: clamp(1.15rem, 1.9vw, 1.5rem);
   line-height: 1.42;
-  letter-spacing: -0.014em;
+  letter-spacing: -0.019em;
   color: var(--ink-2);
   text-wrap: pretty;
 }
@@ -120,8 +127,8 @@ p { margin: 0; text-wrap: pretty; }
 .body + .body { margin-top: 1.15em; }
 .body strong { color: var(--ink); font-weight: 700; }
 
-/* Metadata / labels. Same family as everything else — the voice comes
-   from caps, tracking and scale, which is the Swiss way of doing it. */
+/* Metadata / labels. SF Mono, so the label voice comes from a genuine
+   change of family rather than caps and tracking doing all the work. */
 .meta {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
@@ -135,7 +142,9 @@ p { margin: 0; text-wrap: pretty; }
 .num {
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
-  letter-spacing: -0.01em;
+  /* No negative tracking: SF Mono is fixed-advance, so tightening only
+     crowds the glyphs without buying back any width. */
+  letter-spacing: 0;
 }
 
 /* ---- 4. Shell -------------------------------------------- */
@@ -274,7 +283,9 @@ section { padding-block: var(--gap-xl); }
 .nameplate h1 {
   font-size: clamp(1.5rem, 6.25vw, 4.5rem);
   line-height: 0.98;
-  letter-spacing: -0.02em;
+  /* SF Pro Display sets wider than Helvetica at this size, so the nameplate
+     needs more negative tracking to keep the same density. */
+  letter-spacing: -0.03em;
   font-weight: 700;
   text-transform: uppercase;
   margin: 0;
