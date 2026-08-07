@@ -3,17 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Surgical dressing utilization — Chris Almaguer</title>
-<meta name="description" content="Six Sankey studies on advanced wound dressing utilization across knee, hip, CABG and skin procedures, built for a healthcare analytics team in 2022.">
+<title>Protected - Chris Almaguer</title>
+<meta name="description" content="Client work under NDA. Passphrase required.">
 <meta name="theme-color" content="#fbfbfa">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Chris Almaguer">
-<meta property="og:title" content="Surgical dressing utilization — Chris Almaguer">
-<meta property="og:description" content="Six Sankey studies on advanced wound dressing utilization across knee, hip, CABG and skin procedures.">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Surgical dressing utilization — Chris Almaguer">
-<meta name="twitter:description" content="Six Sankey studies on advanced wound dressing utilization.">
 <meta name="author" content="Chris Almaguer">
 <script>
   try {
@@ -21,34 +14,8 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="../css/base.css">
-<style>
-  /* The slides are 16:9 and dense, so they escape the reading column and sit
-     on a fixed light panel — they were drawn for white and do not invert. */
-  .slide { margin-block: var(--gap-l); }
-  .slide__frame {
-    width: min(96vw, 92rem);
-    margin-inline: calc(50% - min(48vw, 46rem));
-    border: 1px solid var(--rule);
-    background: #ffffff;
-    overflow: hidden;
-  }
-  .slide__frame img { width: 100%; height: auto; display: block; }
-  /* The remaining five sit in a matrix. auto-fit collapses it to two columns
-     on a laptop and one on a phone without a second breakpoint. */
-  .slide-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(21rem, 1fr));
-    gap: var(--gap-m) var(--gap-m);
-    margin-top: var(--gap-l);
-  }
-  .slide-grid figure { margin: 0; }
-  .slide-grid .slide__frame { width: 100%; margin-inline: 0; }
-
-  @media (max-width: 46rem) {
-    .slide__frame { width: 100%; margin-inline: 0; }
-  }
-</style>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../css/base.css?v=20260807q">
 </head>
 <body>
 
@@ -58,10 +25,9 @@
   <div class="shell masthead__inner">
     <a class="wordmark" href="../index.html">Chris Almaguer</a>
     <nav class="nav" aria-label="Primary">
-      <a href="../index.html#dataviz">Data viz</a>
+      <a href="../index.html#dataviz">Data visualization</a>
       <a href="../index.html#uiux">UI/UX</a>
-      <a href="../index.html#editorial">Editorial</a>
-      <a href="../index.html#healthcare">Healthcare</a>
+      <a href="../index.html#editorial">Editorial / Branding</a>
       <a href="../about.html">About</a>
       <button class="theme-toggle" type="button" data-theme-toggle
               aria-label="Switch to dark theme" aria-pressed="false">
@@ -75,201 +41,35 @@
 </header>
 
 <main id="main">
-
-
-
-  <!-- ============ Hero ============ -->
-  <section class="shell case-hero" style="padding-bottom: var(--gap-m);">
-    <p class="meta" data-reveal>Case study — 07 / Healthcare</p>
-    <h1 class="h1" data-reveal style="--reveal-delay:70ms; margin-top: var(--gap-s);">
-      Surgical dressing utilization
-    </h1>
-    <p class="lede tight" data-reveal style="--reveal-delay:140ms; margin-top: var(--gap-m);">
-      Six Sankey studies tracing surgical cases from the dressing used, through
-      patient type, to whether a complication was recorded.
-    </p>
-
-    <div class="case-facts" style="margin-top: var(--gap-l);" data-reveal>
-      <div><p class="meta fact__label">Role</p><p class="fact__value">Design</p></div>
-      <div><p class="meta fact__label">Year</p><p class="fact__value">2022</p></div>
-      <div><p class="meta fact__label">Team</p><p class="fact__value">Vizient — Data Intelligence &amp; Visualization</p></div>
-      <div><p class="meta fact__label">Output</p><p class="fact__value">Presentation slides</p></div>
-    </div>
-  </section>
-
-  <!-- ============ 01 — Context ============ -->
-  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
-    <div class="prose" data-reveal>
-      <p class="meta">01 — Context</p>
-      <h2>Whether advanced dressings change what happens after surgery</h2>
-      <p>
-        Two categories of advanced wound dressing were in question: silver
-        dressings on orthopedic cases, and negative pressure wound therapy
-        (NPWT) kits on cardiac and skin cases. Both cost more than a standard
-        dressing. The analysis asked how often each was used, and whether cases
-        that used one recorded fewer complications than cases that did not.
+  <section class="shell" style="padding-block: clamp(4rem,12vw,9rem) var(--gap-xl);">
+    <div class="gate" data-gate="../assets/protected/patient-flow.json">
+      <p class="meta">Protected</p>
+      <h1 class="h1" style="margin-top: var(--gap-s);">Client work, under NDA</h1>
+      <p class="body" style="margin-top: var(--gap-m);">
+        Six Sankey diagrams tracing surgical dressing utilization through patient
+        type to complication codes, designed for a hospital analytics client. Unlike
+        the rest of the site, these carry real clinical figures, so the artwork sits
+        inside the encrypted payload rather than as files on this server.
       </p>
-      <p>
-        The underlying table was a case-level extract with four usable columns:
-        the dressing category, whether the case was inpatient or outpatient,
-        whether a complication was flagged, and which complication codes applied.
-        Complication data existed for inpatient cases only.
+      <p class="body" style="margin-top: var(--gap-s);">
+        Same passphrase as the healthcare case study - unlock either and this opens
+        with it. Ask and I'll pass it on.
       </p>
-    </div>
-  </section>
 
-  <!-- ============ 02 — Process ============ -->
-  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
-    <div class="prose" data-reveal>
-      <p class="meta">02 — Process</p>
-      <h2>Three versions of the knee chart before the pattern was fixed</h2>
-      <p>
-        Total knee replacement was drawn first and used to settle the format.
-        The first version, shown large below, squared every flow into blocks and
-        put the cohort total in a circle at the left edge. It exposed the problem
-        that shaped everything after it: 20,333 of the cases were outpatient and
-        carried no complication data, so the largest rectangle on the slide was
-        also the one with the least to say.
-      </p>
-      <p>
-        The second version replaced the blocks with curved bands and dropped the
-        circle. Following an individual flow got easier, but the space recovered
-        went into the written insight in the left column rather than into the
-        diagram, which left the reading dependent on the prose beside it.
-      </p>
-      <p>
-        The third version kept the curves, filled the outpatient block with
-        diagonal hatching labelled in place, and ranked the complication codes
-        down the right-hand edge instead of leaving them as undifferentiated
-        endpoints. That version became the template. Hip followed it without
-        change. CABG and skin diverged where the data required it, so the four
-        procedure families could still be read against each other without
-        relearning the diagram.
-      </p>
-    </div>
-  </section>
-
-  <!-- ============ The slides ============ -->
-  <section class="shell" style="padding-block: var(--gap-l) 0;">
-
-    <figure class="slide" data-reveal>
-      <div class="slide__frame">
-        <img src="../assets/img/work/sankey/slide-1.png" loading="lazy"
-             alt="Silver dressing utilization for knee replacement, first version. A circle at the left holds the total of 36,700 knee replacements, splitting into No Dressing 25,483 in teal and Silver Dressing 11,217 in purple, then into inpatient and outpatient blocks, then into complication counts.">
-      </div>
-    </figure>
-
-    <div class="slide-grid" data-reveal-group data-reveal-step="60">
-
-      <figure data-reveal>
-        <div class="slide__frame">
-          <img src="../assets/img/work/sankey/slide-2.png" loading="lazy"
-               alt="Silver dressing utilization for knee replacement, second version. The same figures drawn as curved bands without the circle, with a longer written insight in the left column and complication codes listed at the right.">
-        </div>
-      </figure>
-
-      <figure data-reveal>
-        <div class="slide__frame">
-          <img src="../assets/img/work/sankey/slide-3.png" loading="lazy"
-               alt="Silver dressing utilization for knee replacement, third version. Outpatient blocks are filled with diagonal hatching labelled no complication data available, and thin curves fan out to ten ranked complication codes on the right.">
-        </div>
-      </figure>
-
-      <figure data-reveal>
-        <div class="slide__frame">
-          <img src="../assets/img/work/sankey/slide-4.png" loading="lazy"
-               alt="NPWT kit utilization for CABG. 9,075 cases with no dressing in teal and 2,049 with negative pressure kits in purple, resolving to wound related and non-wound related counts of 37, 535, 3 and 133.">
-        </div>
-      </figure>
-
-      <figure data-reveal>
-        <div class="slide__frame">
-          <img src="../assets/img/work/sankey/slide-5.png" loading="lazy"
-               alt="Total hip replacement. Hatched outpatient blocks and ten ranked complication codes at the right, following the knee template.">
-        </div>
-      </figure>
-
-      <figure data-reveal>
-        <div class="slide__frame">
-          <img src="../assets/img/work/sankey/slide-6.png" loading="lazy"
-               alt="Other OR therapeutic procedures on skin. Five stages ending in a wound versus non-wound split, then four ranked complication codes for each arm.">
-        </div>
-      </figure>
-
+      <form class="gate__row" autocomplete="off">
+        <label class="skip" for="pw">Passphrase</label>
+        <input id="pw" type="password" placeholder="Passphrase" autocomplete="off" spellcheck="false">
+        <button type="submit">Unlock</button>
+      </form>
+      <p class="gate__msg" role="status" aria-live="polite"></p>
     </div>
 
+    <div data-gate-target hidden></div>
   </section>
-
-  <!-- ============ 03 — Design ============ -->
-  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
-    <div class="prose" data-reveal>
-      <p class="meta">03 — Design</p>
-      <h2>Two hues, and everything else carried by structure</h2>
-      <p>
-        Colour encodes one variable only. Teal marks cases with no dressing and
-        purple marks cases with a dressing or kit, and that pairing holds across
-        all six slides. Later stages use lighter tints of whichever hue the case
-        started in, so an arm can be followed from left to right without a
-        legend.
-      </p>
-      <p>
-        Missing data is drawn rather than omitted. Outpatient cases had no
-        complication records, so those blocks are filled with diagonal hatching
-        and labelled in place. The alternative, dropping them, would have made
-        the inpatient share of each cohort look larger than it was.
-      </p>
-      <p>
-        Small values were the recurring problem. A count of 3 against a cohort
-        of 9,075 has no drawable thickness, so those flows leave the diagram as
-        thin curves and terminate in a figure and a label at full size. The CABG
-        slide is the clearest case: 9,075 cases used no dressing against 2,049
-        using negative pressure kits, and the complication counts it resolves to
-        are 37, 535, 3 and 133.
-      </p>
-      <p>
-        The last stage changes according to what was being asked. Knee and hip
-        rank the ten most frequent complication codes for each arm. CABG splits
-        wound-related from non-wound-related complications and stops there. The
-        skin procedures run to five stages, inserting that wound split before
-        the code list so the two questions resolve in sequence rather than
-        collapsing into one column. The source line on every slide reads
-        <span class="num">XXXXXXXX</span>, as the data source was withheld from
-        the deck.
-      </p>
-    </div>
-  </section>
-
-  <!-- ============ 04 — Impact ============ -->
-  <section class="shell shell--narrow" style="padding-block: var(--gap-l) var(--gap-xl);">
-    <div class="prose" data-reveal>
-      <p class="meta">04 — Impact</p>
-      <h2>Impact</h2>
-      <p class="impact-todo" data-todo>
-        To be supplied.
-      </p>
-    </div>
-  </section>
-
-  <!-- ============ Next ============ -->
-  <section class="shell" style="padding-block:0 var(--gap-xl);">
-    <hr class="rule">
-    <div class="ledger" style="border-top:0;">
-      <article class="entry" data-reveal>
-        <span class="entry__num num">01</span>
-        <div>
-          <h3 class="entry__title">
-            <a class="entry__link" href="healthcare-system.html">A colour standard for healthcare dashboards</a>
-          </h3>
-          <p class="entry__sub">The WCAG 2.1 AA study behind fifty-plus executive dashboards.</p>
-        </div>
-        <span class="meta">Next</span>
-      </article>
-    </div>
-  </section>
-
 </main>
 
-<script src="../js/theme.js"></script>
-<script type="module" src="../js/motion.js"></script>
+<script type="module" src="../js/gate.js?v=20260807q"></script>
+<script src="../js/theme.js?v=20260807q"></script>
+<script type="module" src="../js/motion.js?v=20260807q"></script>
 </body>
 </html>

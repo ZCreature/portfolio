@@ -1,5 +1,5 @@
 /* ============================================================
-   motion.js — restrained, intersection-driven motion.
+   motion.js - restrained, intersection-driven motion.
    No dependencies. Everything degrades to a static page if JS
    fails or the visitor prefers reduced motion.
    ============================================================ */
@@ -98,6 +98,40 @@ function boot() {
   initMasthead();
   initReveal();
   initScrolly();
+  initLazyVideo();
+}
+
+/* ---- 3b. Lazy video ---------------------------------------
+   A tile video is heavier than every image on the page put
+   together, so nothing is fetched until the tile is actually
+   on screen. Playback pauses again on the way out, and under
+   reduced motion the poster frame is all anyone ever gets. */
+
+function initLazyVideo() {
+  const vids = document.querySelectorAll('video[data-lazy-video]');
+  if (!vids.length) return;
+
+  if (REDUCED) return;   // poster only; preload="none" means no fetch either
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const v = entry.target;
+        if (entry.isIntersecting) {
+          if (v.preload !== 'auto') v.preload = 'auto';
+          if (!v.dataset.loaded) { v.load(); v.dataset.loaded = '1'; }
+          // Autoplay can reject (power saving, tab in background) - a paused
+          // poster is a fine outcome, so swallow it rather than log noise.
+          v.play().catch(() => {});
+        } else {
+          v.pause();
+        }
+      });
+    },
+    { rootMargin: '150px 0px', threshold: 0.25 }
+  );
+
+  vids.forEach((v) => io.observe(v));
 }
 
 if (document.readyState === 'loading') {

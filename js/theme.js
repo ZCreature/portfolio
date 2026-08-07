@@ -1,5 +1,5 @@
 /* ============================================================
-   theme.js — light/dark switch.
+   theme.js - light/dark switch.
 
    The site enters LIGHT for every first-time visitor regardless
    of their OS setting; dark is a deliberate choice that is then
@@ -20,7 +20,7 @@ function set(mode) {
   try {
     localStorage.setItem(STORE, dark ? 'dark' : 'light');
   } catch {
-    // Private browsing or storage disabled — the choice just won't persist.
+    // Private browsing or storage disabled - the choice just won't persist.
   }
 
   // Keep the address-bar / system chrome in step with the page.
@@ -32,8 +32,8 @@ function set(mode) {
     btn.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
   });
 
-  // Charts carry their own per-theme palettes — a single series palette can't
-  // clear contrast against both papers — so they need to know when to repaint.
+  // Charts carry their own per-theme palettes - a single series palette can't
+  // clear contrast against both papers - so they need to know when to repaint.
   document.dispatchEvent(
     new CustomEvent('themechange', { detail: { theme: dark ? 'dark' : 'light' } })
   );

@@ -294,6 +294,7 @@ section { padding-block: var(--gap-xl); }
   .nameplate__sub { white-space: normal; }
 }
 
+
 /* Specification block — label / value rows, the way a spec sheet
    or a chart's metadata reads. Replaces the "availability pill". */
 
@@ -471,6 +472,31 @@ section { padding-block: var(--gap-xl); }
   color: var(--tag-stat-ink);
 }
 
+/* Chart type leads every tile, so it is the one facet that carries weight
+   rather than hue — a fifth colour would turn the grid into confetti, and
+   monochrome keeps the emphasis where the eye lands first. */
+.tag--type {
+  color: var(--ink);
+  border-color: var(--ink);
+  font-weight: 700;
+}
+
+/* Local AI. Violet reads as the machine-learning family by convention and
+   sits well clear of the other three inks — minimum ΔE 21.4 in light,
+   26.3 in dark, so it never reads as a shade of the tool blue. */
+:root {
+  --tag-ai-fill: #f0e7fe;  --tag-ai-line: #d9ccf0;  --tag-ai-ink: #6c54aa;
+}
+:root[data-theme="dark"] {
+  --tag-ai-fill: #251e31;  --tag-ai-line: #3c324f;  --tag-ai-ink: #9d81dc;
+}
+
+.tag--ai {
+  background: var(--tag-ai-fill);
+  border-color: var(--tag-ai-line);
+  color: var(--tag-ai-ink);
+}
+
 /* Full-card link target without nesting interactive elements */
 .entry__link::before {
   content: "";
@@ -566,6 +592,23 @@ section { padding-block: var(--gap-xl); }
 .tile:hover .tile__thumb { background: var(--paper-2); }
 .tile__thumb svg { width: 100%; height: 100%; display: block; }
 
+/* Video thumbs. The Thunderhill capture carries a black window surround and
+   a Tableau tab bar; scaling past the frame and nudging up drops both and
+   leaves the plot centred. Poster and video share the transform so the
+   hand-off when playback starts is invisible. */
+.tile__thumb video {
+  width: 100%;
+  height: 100%;
+  /* Contain, not cover: show the recording whole rather than cropping to
+     hide its black surround — every attempt at that clipped the chart title
+     or the value axis. The source is 1.548:1 against a 1.6:1 tile, so the
+     letterbox is ~3% and disappears against the matched black ground. */
+  object-fit: contain;
+  display: block;
+  background: #000;
+}
+
+
 /* Real screenshots fill the thumb; vector stand-ins sit on the panel tint. */
 .tile__thumb img {
   width: 100%;
@@ -573,6 +616,21 @@ section { padding-block: var(--gap-xl); }
   object-fit: cover;
   object-position: center;
   display: block;
+}
+
+/* NOTE: this must stay below `.tile__thumb img` — same specificity, so
+   whichever comes last wins. Placed above it, the cover rule silently
+   overrode contain and these tiles kept cropping. */
+/* App captures sit as objects on the panel rather than bleeding to the tile
+   edge. Contain shows the window whole; the inset stops it touching the
+   border, so a 1.3:1 screenshot in a 1.6:1 slot reads as deliberate framing
+   instead of a crop that went wrong. */
+.tile__thumb--contain { background: #fff; }
+
+.tile__thumb--contain img {
+  object-fit: contain;
+  object-position: center;
+  padding: 9%;
 }
 
 /* Marks a tile whose thumbnail is an illustration, not a capture. */
@@ -606,6 +664,16 @@ section { padding-block: var(--gap-xl); }
   font-size: 0.875rem;
   color: var(--ink-3);
   line-height: 1.45;
+}
+
+/* Case-study header pills. Same vocabulary as the index tiles, so a project
+   carries one identity across the site instead of a tile of pills and a
+   separate table of fields saying the same thing more slowly. */
+.case-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: var(--gap-m);
 }
 
 .tile__tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: auto; padding-top: 0.7rem; }
@@ -889,7 +957,9 @@ figure { margin: 0; }
   display: flex;
   flex-wrap: wrap;
   gap: var(--gap-s) var(--gap-m);
-  justify-content: space-between;
+  /* Only the link nav lives here now, so flex-end keeps it on the right
+     rather than collapsing to the left the way space-between would. */
+  justify-content: flex-end;
   padding-block: var(--gap-m);
   border-top: 1px solid var(--rule);
 }

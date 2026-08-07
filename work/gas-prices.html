@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Global gas prices — Chris Almaguer</title>
+<title>Global gas prices - Chris Almaguer</title>
 <meta name="description" content="An interactive R and Leaflet study of global gas prices, and what it took to get a vibe-coded map to look designed.">
 <meta name="theme-color" content="#fbfbfa">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Chris Almaguer">
-<meta property="og:title" content="Global gas prices — Chris Almaguer">
+<meta property="og:title" content="Global gas prices - Chris Almaguer">
 <meta property="og:description" content="An interactive R and Leaflet study of global gas prices, and what it took to get a vibe-coded map to look designed.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Global gas prices — Chris Almaguer">
+<meta name="twitter:title" content="Global gas prices - Chris Almaguer">
 <meta name="twitter:description" content="An interactive R and Leaflet study of global gas prices, and what it took to get a vibe-coded map to look designed.">
 <meta name="author" content="Chris Almaguer">
 <script>
@@ -21,7 +21,7 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/base.css?v=20260807q">
 </head>
 <body>
 
@@ -31,10 +31,9 @@
   <div class="shell masthead__inner">
     <a class="wordmark" href="../index.html">Chris Almaguer</a>
     <nav class="nav" aria-label="Primary">
-      <a href="../index.html#dataviz">Data viz</a>
+      <a href="../index.html#dataviz">Data visualization</a>
       <a href="../index.html#uiux">UI/UX</a>
-      <a href="../index.html#editorial">Editorial</a>
-      <a href="../index.html#healthcare">Healthcare</a>
+      <a href="../index.html#editorial">Editorial / Branding</a>
       <a href="../about.html">About</a>
       <button class="theme-toggle" type="button" data-theme-toggle
               aria-label="Switch to dark theme" aria-pressed="false">
@@ -51,28 +50,29 @@
 
   <!-- ============ Hero ============ -->
   <section class="shell case-hero">
-    <p class="meta" data-reveal>Case study — 04 / Exploratory</p>
+    <p class="meta" data-reveal>Case study - 04 / Exploratory</p>
     <h1 class="h1" data-reveal style="--reveal-delay:70ms; margin-top: var(--gap-s);">
       Prompting is not designing
     </h1>
     <p class="lede tight" data-reveal style="--reveal-delay:140ms; margin-top: var(--gap-m);">
       An interactive study of global gas prices, built in R with Leaflet.
-      I wrote it with AI assistance, which got me to a working map fast — and then
+      I wrote it with AI assistance, which got me to a working map fast - and then
       cost me a long evening of specifying exactly what "looks right" means.
     </p>
 
-    <div class="case-facts" style="margin-top: var(--gap-l);" data-reveal>
-      <div><p class="meta fact__label">Role</p><p class="fact__value">Design, analysis, build</p></div>
-      <div><p class="meta fact__label">Year</p><p class="fact__value">2026</p></div>
-      <div><p class="meta fact__label">Stack</p><p class="fact__value">R, Leaflet, Proj4</p></div>
-      <div><p class="meta fact__label">Output</p><p class="fact__value">Self-contained web map</p></div>
-    </div>
+      <div class="case-tags" data-reveal style="--reveal-delay:200ms;">
+        <span class="tag tag--type">Choropleth</span>
+        <span class="tag">Energy</span>
+        <span class="tag tag--live">Live</span>
+        <span class="tag tag--tool">R</span>
+        <span class="tag tag--tool">Leaflet</span>
+      </div>
   </section>
 
   <!-- ============ Live ============ -->
   <section class="shell" style="padding-block: var(--gap-l);">
     <div class="prose" data-reveal>
-      <p class="meta">01 — Context</p>
+      <p class="meta">01 - Context</p>
       <h2>Fuel prices at two levels of detail at once</h2>
       <p>
         Fuel prices get reported either as a national average or as a local pump
@@ -90,7 +90,7 @@
     <div class="embed embed--fit embed--bleed" data-embed data-reveal
          data-embed-w="1440" data-embed-h="900">
       <div class="embed__bar">
-        <span class="meta">Global gas prices — interactive</span>
+        <span class="meta">Global gas prices - interactive</span>
         <a class="btn" href="tools/gas-prices.html" target="_blank" rel="noopener">Open full screen</a>
       </div>
       <div class="embed__frame">
@@ -110,7 +110,7 @@
   <!-- ============ The argument ============ -->
   <section class="shell shell--narrow" style="padding-block: var(--gap-l);">
     <div class="prose" data-reveal>
-      <p class="meta">02 — Process</p>
+      <p class="meta">02 - Process</p>
       <h2>The first working version was the default R map</h2>
       <p>
         Built in R with Leaflet, AI-assisted. A version that ran arrived quickly
@@ -129,10 +129,10 @@
     </div>
   </section>
 
-  <!-- ============ 03 — Design ============ -->
+  <!-- ============ 03 - Design ============ -->
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
     <div class="prose" data-reveal>
-      <p class="meta">03 — Design</p>
+      <p class="meta">03 - Design</p>
       <h2>Four decisions, written down before they were prompted</h2>
       <p>
         Bin breaks follow the distribution rather than equal intervals, so the
@@ -149,10 +149,10 @@
     </div>
   </section>
 
-  <!-- ============ 04 — Impact ============ -->
+  <!-- ============ 04 - Impact ============ -->
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
     <div class="prose" data-reveal>
-      <p class="meta">04 — Impact</p>
+      <p class="meta">04 - Impact</p>
       <h2>Impact</h2>
       <p class="impact-todo" data-todo>
         To be supplied.
@@ -189,8 +189,8 @@
     });
   })();
 </script>
-<script src="../js/embed.js"></script>
-<script src="../js/theme.js"></script>
-<script type="module" src="../js/motion.js"></script>
+<script src="../js/embed.js?v=20260807q"></script>
+<script src="../js/theme.js?v=20260807q"></script>
+<script type="module" src="../js/motion.js?v=20260807q"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 /* ============================================================
-   embed.js — fit a fixed-size embedded tool into whatever width
+   embed.js - fit a fixed-size embedded tool into whatever width
    the page can spare.
 
    Both tools are built for a single viewport size: no media
@@ -17,12 +17,12 @@ function fit(box) {
   const w = Number(box.dataset.embedW || 1440);
   const h = Number(box.dataset.embedH || 900);
 
-  // Measure the wrapper, not the frame — the frame's own width is about to
+  // Measure the wrapper, not the frame - the frame's own width is about to
   // be set from this and would otherwise feed back into the next reading.
   const available = box.clientWidth;
   if (!available) return;
 
-  // Never scale up past 1:1 — a stretched tool looks broken, not big.
+  // Never scale up past 1:1 - a stretched tool looks broken, not big.
   const scale = Math.min(available / w, 1);
 
   frame.style.setProperty('--embed-w', w + 'px');

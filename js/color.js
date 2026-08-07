@@ -1,5 +1,5 @@
 /* ============================================================
-   color.js — the colour engine behind the Color Safety Lens
+   color.js - the colour engine behind the Color Safety Lens
    case study. Implemented in the page so the argument can be
    demonstrated rather than asserted.
 
@@ -141,10 +141,10 @@ export function deltaE00(hexA, hexB) {
   else hbp = h1p + h2p < 360 ? (h1p + h2p + 360) / 2 : (h1p + h2p - 360) / 2;
 
   const T = 1
-    - 0.17 * Math.cos((hbp - 30) * rad)
+ - 0.17 * Math.cos((hbp - 30) * rad)
     + 0.24 * Math.cos(2 * hbp * rad)
     + 0.32 * Math.cos((3 * hbp + 6) * rad)
-    - 0.20 * Math.cos((4 * hbp - 63) * rad);
+ - 0.20 * Math.cos((4 * hbp - 63) * rad);
 
   const dTheta = 30 * Math.exp(-Math.pow((hbp - 275) / 25, 2));
   const Cbp7 = Math.pow(Cbp, 7);
@@ -197,14 +197,13 @@ export function maxChroma(L, hDeg) {
 
 /**
  * Best n-series categorical palette we can construct: colours spaced on an
- * even lightness ladder — which is what carries greyscale — with the hue
+ * even lightness ladder - which is what carries greyscale - with the hue
  * offset searched for the arrangement that maximises the worst pair across
  * normal vision, all three CVD types, and greyscale.
  *
- * The default L* 26–86 span matches the derivation the case study cites, and
+ * The default L* 26-86 span matches the derivation the case study cites, and
  * measures series separation ALONE. Requiring each series to also clear 3:1
- * against the page narrows the usable span and lowers the ceiling further —
- * which is why the chart on that page carries four series, not five.
+ * against the page narrows the usable span and lowers the ceiling further - * which is why the chart on that page carries four series, not five.
  */
 export function buildPalette(n, lo = 26, hi = 86) {
   const ladder = Array.from({ length: n }, (_, i) =>
@@ -229,7 +228,7 @@ export function buildPalette(n, lo = 26, hi = 86) {
   return best || ladder.map((L) => maxChroma(L, 264) || '#888888');
 }
 
-/** Worst pairwise ΔE2000 in a set — the number a categorical palette lives by. */
+/** Worst pairwise ΔE2000 in a set - the number a categorical palette lives by. */
 export function minSeparation(colors) {
   let worst = Infinity;
   for (let a = 0; a < colors.length; a++)
@@ -238,7 +237,7 @@ export function minSeparation(colors) {
   return worst;
 }
 
-/** Perceptual greyscale — the print and projector-washout case. */
+/** Perceptual greyscale - the print and projector-washout case. */
 export function toGrey(hex) {
   const g = Math.round(255 * toGamma(luminance(hex)));
   return rgbToHex([g, g, g]);

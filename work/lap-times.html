@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>115 laps at Thunderhill — Chris Almaguer</title>
+<title>115 laps at Thunderhill - Chris Almaguer</title>
 <meta name="description" content="A year of personal track telemetry, 1:39 down to 1:28, and what redesigning my own chart taught me about reading my own work.">
 <meta name="theme-color" content="#fbfbfa">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Chris Almaguer">
-<meta property="og:title" content="115 laps at Thunderhill — Chris Almaguer">
+<meta property="og:title" content="115 laps at Thunderhill - Chris Almaguer">
 <meta property="og:description" content="A year of personal track telemetry, 1:39 down to 1:28, and what redesigning my own chart taught me about reading my own work.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="115 laps at Thunderhill — Chris Almaguer">
+<meta name="twitter:title" content="115 laps at Thunderhill - Chris Almaguer">
 <meta name="twitter:description" content="A year of personal track telemetry, 1:39 down to 1:28, and what redesigning my own chart taught me about reading my own work.">
 <meta name="author" content="Chris Almaguer">
 <script>
@@ -21,7 +21,7 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/base.css?v=20260807q">
 <style>
   .chart-wrap { width: 100%; overflow-x: auto; }
   svg text { font-family: var(--font-mono); fill: var(--ink-3);
@@ -32,7 +32,7 @@
   .legend i { width: 0.7rem; height: 0.7rem; border-radius: 50%; display: block; }
   .legend i.floor { border-radius: 0; height: 2px; width: 1.1rem; }
 
-  /* Hover readout — replaces the original's leader lines across the plot. */
+  /* Hover readout - replaces the original's leader lines across the plot. */
   .readout-bar {
     display: flex; flex-wrap: wrap; gap: 0.35rem 1.5rem;
     min-height: 2.4rem; align-items: center;
@@ -66,10 +66,9 @@
   <div class="shell masthead__inner">
     <a class="wordmark" href="../index.html">Chris Almaguer</a>
     <nav class="nav" aria-label="Primary">
-      <a href="../index.html#dataviz">Data viz</a>
+      <a href="../index.html#dataviz">Data visualization</a>
       <a href="../index.html#uiux">UI/UX</a>
-      <a href="../index.html#editorial">Editorial</a>
-      <a href="../index.html#healthcare">Healthcare</a>
+      <a href="../index.html#editorial">Editorial / Branding</a>
       <a href="../about.html">About</a>
       <button class="theme-toggle" type="button" data-theme-toggle
               aria-label="Switch to dark theme" aria-pressed="false">
@@ -86,7 +85,7 @@
 
   <!-- ============ Hero ============ -->
   <section class="shell case-hero">
-    <p class="meta" data-reveal>Case study — 03 / Personal data</p>
+    <p class="meta" data-reveal>Case study - 03 / Personal data</p>
     <h1 class="h1" data-reveal style="--reveal-delay:70ms; margin-top: var(--gap-s);">
       One year, one chart
     </h1>
@@ -96,28 +95,29 @@
       and rebuilt here as SVG drawn in the browser from a reconstructed data file.
     </p>
 
-    <div class="case-facts" style="margin-top: var(--gap-l);" data-reveal>
-      <div><p class="meta fact__label">Role</p><p class="fact__value">Driver, analyst, designer</p></div>
-      <div><p class="meta fact__label">Season</p><p class="fact__value">May 2025 — Apr 2026</p></div>
-      <div><p class="meta fact__label">Capture</p><p class="fact__value">RaceChrono, RaceStudio</p></div>
-      <div><p class="meta fact__label">Original</p><p class="fact__value">Tableau Public</p></div>
-    </div>
+      <div class="case-tags" data-reveal style="--reveal-delay:200ms;">
+        <span class="tag tag--type">Scatter plot</span>
+        <span class="tag">Motorsport</span>
+        <span class="tag tag--live">Live</span>
+        <span class="tag tag--tool">JavaScript</span>
+        <span class="tag tag--tool">Tableau</span>
+      </div>
   </section>
 
   <!-- ============ Numbers ============ -->
   <section class="shell shell--narrow" style="padding-block: 0 var(--gap-l);">
     <div class="stat-row" data-reveal>
-      <div><p class="stat__n" id="s-laps">—</p><p class="meta stat__l">Laps</p></div>
-      <div><p class="stat__n" id="s-days">—</p><p class="meta stat__l">Track days</p></div>
-      <div><p class="stat__n" id="s-first">—</p><p class="meta stat__l">First day best</p></div>
-      <div><p class="stat__n" id="s-best">—</p><p class="meta stat__l">Personal best</p></div>
+      <div><p class="stat__n" id="s-laps"> - </p><p class="meta stat__l">Laps</p></div>
+      <div><p class="stat__n" id="s-days"> - </p><p class="meta stat__l">Track days</p></div>
+      <div><p class="stat__n" id="s-first"> - </p><p class="meta stat__l">First day best</p></div>
+      <div><p class="stat__n" id="s-best"> - </p><p class="meta stat__l">Personal best</p></div>
     </div>
   </section>
 
   <!-- ============ 01 Context ============ -->
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
     <div class="prose" data-reveal>
-      <p class="meta">01 — Context</p>
+      <p class="meta">01 - Context</p>
       <h2>A season of lap times</h2>
       <p>
         Five track days at Thunderhill Raceway Park, West configuration, between
@@ -182,7 +182,7 @@
   <!-- ============ 02 Process ============ -->
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
     <div class="prose" data-reveal>
-      <p class="meta">02 — Process</p>
+      <p class="meta">02 - Process</p>
       <h2>Rebuilding the chart</h2>
       <p>
         The published dashboard supplied the anchors: 115 laps, 16 sessions, a 1:28.39
@@ -215,7 +215,7 @@
   <!-- ============ 03 Design ============ -->
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
     <div class="prose" data-reveal>
-      <p class="meta">03 — Design</p>
+      <p class="meta">03 - Design</p>
       <h2>Reading the plot</h2>
       <p>
         Each circle is one lap, plotted in the order driven. Seven of the 115 are wet
@@ -226,7 +226,7 @@
       </p>
       <p>
         The All laps view covers 1:25 to 2:05, the range needed to hold the wet session.
-        The Dry only view drops those seven laps and tightens the axis to 1:25–1:45,
+        The Dry only view drops those seven laps and tightens the axis to 1:25-1:45,
         which gives the dry cluster more of the plot height. Nothing is clipped in
         either view.
       </p>
@@ -282,7 +282,7 @@
   <!-- ============ 04 Impact ============ -->
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) var(--gap-xl);">
     <div class="prose" data-reveal>
-      <p class="meta">04 — Impact</p>
+      <p class="meta">04 - Impact</p>
       <h2>Impact</h2>
       <p class="impact-todo" data-todo>
         To be supplied.
@@ -309,20 +309,20 @@
 
 </main>
 
-<script src="../js/theme.js"></script>
-<script type="module" src="../js/motion.js"></script>
+<script src="../js/theme.js?v=20260807q"></script>
+<script type="module" src="../js/motion.js?v=20260807q"></script>
 <script type="module">
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
-/* Two verified palettes — a series colour must clear 3:1 against its own page,
+/* Two verified palettes - a series colour must clear 3:1 against its own page,
    and every pair must clear ΔE 10 in normal vision, all three CVD types, and
    greyscale. Worst pair in both themes is greyscale, which is the usual answer:
    greyscale is the mode that punishes colours chosen by hue alone.
 
    Light: ΔE 10.7 minimum (dry/wet, grey).  Dark: ΔE 15.4 minimum (dry/wet, grey).
 
-   The dark "wet" was #d7bcff and failed at ΔE 9.9 — that lavender sat too close
+   The dark "wet" was #d7bcff and failed at ΔE 9.9 - that lavender sat too close
    in lightness to the near-white floor line, so the two collapsed into each other
    in greyscale. Pulled down to L* 72 to separate them. */
 const PAL = {
@@ -332,7 +332,7 @@ const PAL = {
 const theme = () =>
   document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
 
-/** 88.39 → "1:28.39" — the way anyone at a track day actually says it.
+/** 88.39 → "1:28.39" - the way anyone at a track day actually says it.
     Seconds pad to two digits, so the width is 2 + "." + dp when there are
     decimals and 2 when there aren't. Hard-coding 5 was right for dp=2 and
     turned 1:39.4 into "1:039.4" at dp=1. */
@@ -352,7 +352,7 @@ fetch('../assets/data/laps.json')
   .then((d) => { DATA = d; boot(); })
   .catch(() => {
     $('#src').textContent =
-      'Lap data could not be loaded — this page needs to be served over http, not opened as a file.';
+      'Lap data could not be loaded - this page needs to be served over http, not opened as a file.';
   });
 
 function boot() {
@@ -366,7 +366,7 @@ function boot() {
   $('#s-best').textContent  = mmss(meta.best);
 
   $('#src').textContent = meta.reconstruction
-    ? 'Reconstruction — lap times modelled to match the published dashboard, not measured. Anchored to its real figures: 115 laps, 16 sessions, 1:28.39 best, 2:01.14 wet.'
+    ? 'Reconstruction - lap times modelled to match the published dashboard, not measured. Anchored to its real figures: 115 laps, 16 sessions, 1:28.39 best, 2:01.14 wet.'
     : `Source: ${meta.source}`;
   $('#src').setAttribute('data-placeholder', String(!!meta.reconstruction));
 
@@ -400,7 +400,7 @@ function render() {
     <text x="${M.l - 9}" y="${(y(t) + 3.5).toFixed(1)}" font-size="9" text-anchor="end">${mmss(t, 0)}</text>
   `).join('');
 
-  // Track-day boundaries — the x-axis the original left unlabelled.
+  // Track-day boundaries - the x-axis the original left unlabelled.
   const bounds = days.map((d) => {
     const inDay = laps.filter((l) => l.day === d.index);
     const first = inDay[0].lap, last = inDay[inDay.length - 1].lap;
@@ -453,7 +453,7 @@ function render() {
   $('#legend').innerHTML = `
     <span><i style="background:${c.dry}"></i>Dry</span>
     <span><i style="background:${c.wet}"></i>Wet</span>
-    <span><i class="floor" style="background:${c.floor}"></i>Theoretical best — fastest sectors combined</span>
+    <span><i class="floor" style="background:${c.floor}"></i>Theoretical best - fastest sectors combined</span>
   `;
 
   const bar = $('#readout');

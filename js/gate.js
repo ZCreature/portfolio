@@ -1,5 +1,5 @@
 /* ============================================================
-   gate.js — password gate for protected work.
+   gate.js - password gate for protected work.
 
    This does NOT hide markup and hope nobody looks. The protected
    content is stored as AES-256-GCM ciphertext; without the

@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Color Safety Lens — Chris Almaguer</title>
+<title>Color Safety Lens - Chris Almaguer</title>
 <meta name="description" content="A palette auditor: WCAG contrast across tint ramps and colour-vision simulation, with the colour maths running live in the page.">
 <meta name="theme-color" content="#fbfbfa">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Chris Almaguer">
-<meta property="og:title" content="Color Safety Lens — Chris Almaguer">
+<meta property="og:title" content="Color Safety Lens - Chris Almaguer">
 <meta property="og:description" content="A palette auditor: WCAG contrast across tint ramps and colour-vision simulation, with the colour maths running live in the page.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Color Safety Lens — Chris Almaguer">
+<meta name="twitter:title" content="Color Safety Lens - Chris Almaguer">
 <meta name="twitter:description" content="A palette auditor: WCAG contrast across tint ramps and colour-vision simulation, with the colour maths running live in the page.">
 <meta name="author" content="Chris Almaguer">
 <script>
@@ -21,7 +21,7 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/base.css?v=20260807q">
 <style>
   /* Page-local components: the interactive colour instruments. */
 
@@ -66,7 +66,7 @@
     letter-spacing: -0.01em;
   }
 
-  /* Status is carried by weight and a glyph, never by hue — the same rule
+  /* Status is carried by weight and a glyph, never by hue - the same rule
      this case study argues for. */
   .verdict {
     font-family: var(--font-mono);
@@ -173,10 +173,9 @@
   <div class="shell masthead__inner">
     <a class="wordmark" href="../index.html">Chris Almaguer</a>
     <nav class="nav" aria-label="Primary">
-      <a href="../index.html#dataviz">Data viz</a>
+      <a href="../index.html#dataviz">Data visualization</a>
       <a href="../index.html#uiux">UI/UX</a>
-      <a href="../index.html#editorial">Editorial</a>
-      <a href="../index.html#healthcare">Healthcare</a>
+      <a href="../index.html#editorial">Editorial / Branding</a>
       <a href="../about.html">About</a>
       <button class="theme-toggle" type="button" data-theme-toggle
               aria-label="Switch to dark theme" aria-pressed="false">
@@ -193,22 +192,23 @@
 
   <!-- ============ Hero ============ -->
   <section class="shell case-hero">
-    <p class="meta" data-reveal>Case study — 02 / Tooling &amp; accessibility</p>
+    <p class="meta" data-reveal>Case study - 02 / Tooling &amp; accessibility</p>
     <h1 class="h1" data-reveal style="--reveal-delay:70ms; margin-top: var(--gap-s);">
       Auditing the auditor
     </h1>
     <p class="lede tight" data-reveal style="--reveal-delay:140ms; margin-top: var(--gap-m);">
       Color Safety Lens audits palettes for contrast and colour-vision deficiency. The
-      first working version gave confident, authoritative, wrong answers — off by more
+      first working version gave confident, authoritative, wrong answers - off by more
       than ΔE&nbsp;14 on some hues, where 1.0 is a visible difference.
     </p>
 
-    <div class="case-facts" style="margin-top: var(--gap-l);" data-reveal>
-      <div><p class="meta fact__label">Role</p><p class="fact__value">Design, research, build</p></div>
-      <div><p class="meta fact__label">Year</p><p class="fact__value">2026</p></div>
-      <div><p class="meta fact__label">Stack</p><p class="fact__value">Figma, VS&nbsp;Code, vanilla JS</p></div>
-      <div><p class="meta fact__label">Status</p><p class="fact__value">Open source, in use</p></div>
-    </div>
+      <div class="case-tags" data-reveal style="--reveal-delay:200ms;">
+        <span class="tag tag--type">Heatmap</span>
+        <span class="tag">Accessibility</span>
+        <span class="tag tag--live">Live</span>
+        <span class="tag tag--tool">JavaScript</span>
+        <span class="tag tag--status">Open source</span>
+      </div>
   </section>
 
   <!-- ============ The tool, up front ============ -->
@@ -216,17 +216,17 @@
     <div class="embed embed--fit embed--bleed" data-embed data-reveal
          data-embed-w="1280" data-embed-h="860">
       <div class="embed__bar">
-        <span class="meta">Color Safety Lens — running live</span>
+        <span class="meta">Color Safety Lens - running live</span>
         <a class="btn" href="tools/color-safety-lens.html" target="_blank" rel="noopener">Open full screen</a>
       </div>
       <div class="embed__frame">
         <p class="embed__loading meta">Loading tool…</p>
         <iframe src="tools/color-safety-lens.html" loading="lazy"
-                title="Color Safety Lens — palette accessibility auditor"></iframe>
+                title="Color Safety Lens - palette accessibility auditor"></iframe>
       </div>
       <p class="embed__note">
         The actual tool, not a screenshot. Load a palette, ramp the tints, and run the
-        colour-vision simulation — the same linear-RGB pipeline described above.
+        colour-vision simulation - the same linear-RGB pipeline described above.
         <span data-scale-out></span>
       </p>
     </div>
@@ -235,17 +235,17 @@
   <!-- ============ 1. The problem ============ -->
   <section class="shell shell--narrow" style="padding-block: var(--gap-l);">
     <div class="prose" data-reveal>
-      <p class="meta">01 — Context</p>
+      <p class="meta">01 - Context</p>
       <h2>Colour never ships at 100%</h2>
       <p>
         Every brand guideline specifies colour at full strength. In a dashboard that
-        colour spends its life at 60%, 30%, 10% — fills, ramps, banding, disabled
+        colour spends its life at 60%, 30%, 10% - fills, ramps, banding, disabled
         states. The guideline says nothing about those. That's where accessibility
         quietly breaks.
       </p>
       <p>
         I was checking tints one at a time on <b>webaim.org</b>, dozens per dashboard,
-        across fifty. Slow — and worse, it was <em>sampling</em>. I only caught failures
+        across fifty. Slow - and worse, it was <em>sampling</em>. I only caught failures
         I thought to look for.
       </p>
     </div>
@@ -276,7 +276,7 @@
         <b>Watch the label colour flip.</b> At full strength only a white label passes;
         one step down that reverses and only black passes. Every base colour here does
         the same thing. <b>There is no single label colour that is safe across a tint
-        ramp</b> — so any dashboard that sets one label colour for a whole chart family
+        ramp</b> - so any dashboard that sets one label colour for a whole chart family
         is failing somewhere on that ramp. That's not a judgement call, it's arithmetic,
         and it's the sort of thing worth having a machine check.
       </figcaption>
@@ -286,15 +286,15 @@
   <!-- ============ 2. The bug ============ -->
   <section class="shell shell--narrow" style="padding-block: var(--gap-l);">
     <div class="prose" data-reveal>
-      <p class="meta">02 — Process</p>
+      <p class="meta">02 - Process</p>
       <h2>The first version computed the simulation on the wrong values</h2>
       <p>
-        I used the <b>Machado, Oliveira &amp; Fernandes (2009)</b> model — the standard
+        I used the <b>Machado, Oliveira &amp; Fernandes (2009)</b> model - the standard
         CVD matrices. Read the values in, multiply through the matrix, write them back
         out. It rendered. It looked plausible. I shipped it.
       </p>
       <p>
-        The matrices operate on <b>linear</b> RGB — light as a physical quantity. Hex
+        The matrices operate on <b>linear</b> RGB - light as a physical quantity. Hex
         values in a design file are <b>gamma-encoded</b> sRGB, pre-distorted for how
         displays and eyes work. I was running a physics model on perceptual numbers.
       </p>
@@ -316,14 +316,14 @@
       <div class="compare">
         <div class="compare__col">
           <div class="compare__label">
-            <span class="meta">Wrong — gamma sRGB</span>
+            <span class="meta">Wrong - gamma sRGB</span>
             <span class="meta">v0.1</span>
           </div>
           <div class="strip" id="strip-wrong"></div>
         </div>
         <div class="compare__col">
           <div class="compare__label">
-            <span class="meta">Correct — linear RGB</span>
+            <span class="meta">Correct - linear RGB</span>
             <span class="meta">v1.0</span>
           </div>
           <div class="strip" id="strip-right"></div>
@@ -334,11 +334,11 @@
       <div class="readout">
         <div>
           <p class="meta">Max ΔE2000</p>
-          <p class="readout__n" id="de-max">—</p>
+          <p class="readout__n" id="de-max"> - </p>
         </div>
         <div>
           <p class="meta">Mean ΔE2000</p>
-          <p class="readout__n" id="de-mean">—</p>
+          <p class="readout__n" id="de-mean"> - </p>
         </div>
         <div style="flex:1 1 14rem; min-width:12rem;">
           <p class="meta">Reference</p>
@@ -354,7 +354,7 @@
       <figcaption>
         Both strips claim to show the same thing. One is a simulation; the other is a
         picture of an arithmetic error. <b>The tool gave no indication which was
-        which</b> — that's what made it dangerous rather than merely wrong.
+        which</b> - that's what made it dangerous rather than merely wrong.
       </figcaption>
     </figure>
   </section>
@@ -362,7 +362,7 @@
   <!-- ============ 3. The fix ============ -->
   <section class="shell shell--narrow" style="padding-block: var(--gap-l);">
     <div class="prose" data-reveal>
-      <p class="meta">03 — Design</p>
+      <p class="meta">03 - Design</p>
       <h2>Rebuilt on linear values, then checked against published figures</h2>
       <p>
         Fixing the code took an afternoon: linearise in, apply, re-encode out.
@@ -370,8 +370,7 @@
       </p>
       <ul>
         <li>
-          <b>Rebuilt in linear RGB.</b> Every operation — simulation, tinting, mixing —
-          happens in linear space and converts back at the boundary.
+          <b>Rebuilt in linear RGB.</b> Every operation - simulation, tinting, mixing - happens in linear space and converts back at the boundary.
         </li>
         <li>
           <b>Validated ΔE against Sharma's test suite.</b> CIEDE2000 has known
@@ -379,7 +378,7 @@
           exists to catch them.
         </li>
         <li>
-          <b>Ran Okabe–Ito through as a control.</b> It's the palette designed by
+          <b>Ran Okabe - Ito through as a control.</b> It's the palette designed by
           colourblind scientists to stay distinguishable. If my tool flagged it unsafe,
           my tool was still broken.
         </li>
@@ -391,10 +390,10 @@
       <div class="viz__head">
         <div>
           <p class="viz__title">The corrected simulator</p>
-          <p class="viz__note">Okabe–Ito, the control palette</p>
+          <p class="viz__note">Okabe - Ito, the control palette</p>
         </div>
         <div class="seg" role="group" aria-label="Palette">
-          <button type="button" data-pal="okabe" aria-pressed="true">Okabe–Ito</button>
+          <button type="button" data-pal="okabe" aria-pressed="true">Okabe - Ito</button>
           <button type="button" data-pal="naive" aria-pressed="false">A naive palette</button>
         </div>
       </div>
@@ -423,8 +422,8 @@
 
       <figcaption>
         <b>Switch to the naive palette and drag severity up.</b> Two hues that look
-        clearly distinct at zero converge well before full severity — a failure affecting
-        roughly 1 in 12 men. Okabe–Ito holds separation throughout. That's the point of
+        clearly distinct at zero converge well before full severity - a failure affecting
+        roughly 1 in 12 men. Okabe - Ito holds separation throughout. That's the point of
         it.
       </figcaption>
     </figure>
@@ -433,7 +432,7 @@
   <!-- ============ 4. Outcome ============ -->
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) var(--gap-xl);">
     <div class="prose" data-reveal>
-      <p class="meta">04 — Impact</p>
+      <p class="meta">04 - Impact</p>
       <h2>Impact</h2>
       <p>
         The tool tests every colour pair in a palette at once. Run against the
@@ -468,7 +467,7 @@
             <a class="entry__link" href="lap-times.html">115 laps at Thunderhill</a>
           </h3>
           <p class="entry__sub">
-            Next case study — a year of my own telemetry, and what I found reviewing my
+            Next case study - a year of my own telemetry, and what I found reviewing my
             own chart a year later.
           </p>
         </div>
@@ -505,9 +504,9 @@
     });
   })();
 </script>
-<script src="../js/embed.js"></script>
-<script src="../js/theme.js"></script>
-<script type="module" src="../js/motion.js"></script>
+<script src="../js/embed.js?v=20260807q"></script>
+<script src="../js/theme.js?v=20260807q"></script>
+<script type="module" src="../js/motion.js?v=20260807q"></script>
 <script type="module">
 import { simulate, deltaE00, contrast, tint } from '../js/color.js';
 
@@ -570,7 +569,7 @@ drawRamp();
 /* ---- Demo 2: the bug, side by side ----------------------- */
 
 // A plausible dashboard palette. The magenta is where the two pipelines
-// diverge hardest — the divergence is hue-dependent, which is precisely
+// diverge hardest - the divergence is hue-dependent, which is precisely
 // what made the original bug so easy to miss on blues and greens.
 const BUG_PALETTE = ['#0b5cad', '#00786b', '#c99700', '#a3341f', '#b5127a', '#6a3fd6'];
 let bugType = 'deutan';
@@ -609,7 +608,7 @@ function drawSim() {
 
   $('#sim-strip').innerHTML = out.map((c) => `<div style="background:${c}"></div>`).join('');
 
-  // Distance to the nearest other swatch — the number that decides whether a
+  // Distance to the nearest other swatch - the number that decides whether a
   // reader can tell two series apart.
   $('#sim-de').innerHTML = out.map((c, i) => {
     const nearest = Math.min(...out.filter((_, j) => j !== i).map((o) => deltaE00(c, o)));
