@@ -21,7 +21,7 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="../css/base.css?v=20260807x">
+<link rel="stylesheet" href="../css/base.css?v=20260808m">
 <style>
   /* Page-local components: the interactive colour instruments. */
 
@@ -171,12 +171,32 @@
 
 <header class="masthead">
   <div class="shell masthead__inner">
-    <a class="wordmark" href="../index.html">Chris Almaguer</a>
+    <img class="rail__mark" src="../assets/img/mark.png?v=20260808m" alt="" width="440" height="440" aria-hidden="true">
+
+    <a class="railmark" href="../index.html">
+      <span class="railmark__name">Chris Almaguer</span>
+      <span class="railmark__role">Data Visualization &amp; UX Designer</span>
+    </a>
+
     <nav class="nav" aria-label="Primary">
-      <a href="../index.html#dataviz">Data visualization</a>
-      <a href="../index.html#uiux">UI/UX</a>
-      <a href="../index.html#editorial">Editorial / Branding</a>
-      <a href="../about.html">About</a>
+        <a href="../index.html#dataviz">Data visualization</a>
+        <a href="../index.html#uiux">UI/UX</a>
+        <a href="../index.html#editorial">Editorial / Branding</a>
+        <a href="../about.html" class="nav__about">About</a>
+    </nav>
+
+    <div class="rail__foot">
+      <div class="rail__social">
+        <a href="https://www.linkedin.com/in/almaguer1/" aria-label="LinkedIn" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.98 3.5a2.5 2.5 0 1 1-.02 5 2.5 2.5 0 0 1 .02-5zM3 9h4v12H3zM9 9h3.8v1.65h.05a4.17 4.17 0 0 1 3.75-2.06c4.01 0 4.75 2.64 4.75 6.07V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21H9z"/></svg>
+        </a>
+        <a href="https://dribbble.com/chrisalmaguer" aria-label="Dribbble" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9.25" fill="none" stroke="currentColor" stroke-width="1.6"/><path fill="none" stroke="currentColor" stroke-width="1.6" d="M3.4 9.2c5.6.4 10.6-1 14.3-4M2.9 14.6c5-1.6 10.2-.6 13.6 3.6M8.2 3.2c3.4 3.8 5.8 8.6 6.8 15.1"/></svg>
+        </a>
+        <a href="mailto:calmaguer.design@gmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M3 6.5h18v11H3zM3.4 7l8.6 6 8.6-6"/></svg>
+        </a>
+      </div>
       <button class="theme-toggle" type="button" data-theme-toggle
               aria-label="Switch to dark theme" aria-pressed="false">
         <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
@@ -184,7 +204,7 @@
           <path d="M8 0.75 A7.25 7.25 0 0 0 8 15.25 Z" fill="currentColor"/>
         </svg>
       </button>
-    </nav>
+    </div>
   </div>
 </header>
 
@@ -204,10 +224,8 @@
 
       <div class="case-tags" data-reveal style="--reveal-delay:200ms;">
         <span class="tag tag--type">Heatmap</span>
-        <span class="tag">Accessibility</span>
         <span class="tag tag--live">Live</span>
         <span class="tag tag--tool">JavaScript</span>
-        <span class="tag tag--status">Open source</span>
       </div>
   </section>
 
@@ -504,9 +522,9 @@
     });
   })();
 </script>
-<script src="../js/embed.js?v=20260807x"></script>
-<script src="../js/theme.js?v=20260807x"></script>
-<script type="module" src="../js/motion.js?v=20260807x"></script>
+<script src="../js/embed.js?v=20260808m"></script>
+<script src="../js/theme.js?v=20260808m"></script>
+<script type="module" src="../js/motion.js?v=20260808m"></script>
 <script type="module">
 import { simulate, deltaE00, contrast, tint } from '../js/color.js';
 

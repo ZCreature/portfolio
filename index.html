@@ -23,7 +23,7 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="css/base.css?v=20260807x">
+<link rel="stylesheet" href="css/base.css?v=20260808m">
 </head>
 <body>
 
@@ -31,13 +31,32 @@
 
 <header class="masthead">
   <div class="shell masthead__inner">
-    <a class="wordmark" href="/">Chris Almaguer</a>
+    <img class="rail__mark" src="assets/img/mark.png?v=20260808m" alt="" width="440" height="440" aria-hidden="true">
+
+    <a class="railmark" href="index.html">
+      <span class="railmark__name">Chris Almaguer</span>
+      <span class="railmark__role">Data Visualization &amp; UX Designer</span>
+    </a>
+
     <nav class="nav" aria-label="Primary">
-      <a href="#dataviz">Data visualization</a>
-      <a href="#uiux">UI/UX</a>
-      <a href="#editorial">Editorial / Branding</a>
-      <a href="about.html">About</a>
-      
+        <a href="#dataviz">Data visualization</a>
+        <a href="#uiux">UI/UX</a>
+        <a href="#editorial">Editorial / Branding</a>
+        <a href="about.html" class="nav__about">About</a>
+    </nav>
+
+    <div class="rail__foot">
+      <div class="rail__social">
+        <a href="https://www.linkedin.com/in/almaguer1/" aria-label="LinkedIn" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.98 3.5a2.5 2.5 0 1 1-.02 5 2.5 2.5 0 0 1 .02-5zM3 9h4v12H3zM9 9h3.8v1.65h.05a4.17 4.17 0 0 1 3.75-2.06c4.01 0 4.75 2.64 4.75 6.07V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21H9z"/></svg>
+        </a>
+        <a href="https://dribbble.com/chrisalmaguer" aria-label="Dribbble" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9.25" fill="none" stroke="currentColor" stroke-width="1.6"/><path fill="none" stroke="currentColor" stroke-width="1.6" d="M3.4 9.2c5.6.4 10.6-1 14.3-4M2.9 14.6c5-1.6 10.2-.6 13.6 3.6M8.2 3.2c3.4 3.8 5.8 8.6 6.8 15.1"/></svg>
+        </a>
+        <a href="mailto:calmaguer.design@gmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M3 6.5h18v11H3zM3.4 7l8.6 6 8.6-6"/></svg>
+        </a>
+      </div>
       <button class="theme-toggle" type="button" data-theme-toggle
               aria-label="Switch to dark theme" aria-pressed="false">
         <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
@@ -45,14 +64,14 @@
           <path d="M8 0.75 A7.25 7.25 0 0 0 8 15.25 Z" fill="currentColor"/>
         </svg>
       </button>
-    </nav>
+    </div>
   </div>
 </header>
 
 <main>
 
   <!-- ============ Nameplate ============ -->
-  <section class="shell" style="padding-block: clamp(2rem,6vw,4rem) var(--gap-l);">
+  <section class="shell" style="padding-block: clamp(3.5rem,8vw,6rem) var(--gap-s);">
     <div class="nameplate" data-reveal>
       <p class="nameplate__sub">Data Visualization <span aria-hidden="true">|</span> Dashboards <span aria-hidden="true">|</span> Data Storytelling</p>
       <h1>Chris Almaguer</h1>
@@ -63,7 +82,7 @@
         enterprise and editorial environments, from healthcare analytics
         dashboards to breaking news infographics. Skilled in translating complex
         data into clear visual narratives that inform strategy, support business
-        decisions, and scale across design systems.
+        decisions, and scale across design&nbsp;systems.
       </p>
     </div>
 
@@ -77,7 +96,7 @@
     <div class="tiles tiles--3" data-reveal-group data-reveal-step="50">
       <article class="tile" data-reveal>
       <div class="tile__thumb">
-        <img src="assets/img/tools/population-alluvial.jpg?v=20260807x"
+        <img src="assets/img/tools/population-alluvial.jpg?v=20260808m"
              alt="The 7.9 billion broadsheet shown on a laptop - an alluvial diagram tying five continents through thirty-three countries to fifty cities, each city's population drawn as a red circle along the bottom axis."
              width="1200" height="750" loading="lazy">
       </div>
@@ -93,13 +112,12 @@
           <span class="tag tag--type">Alluvial</span>
           <span class="tag">Population</span>
           <span class="tag tag--tool">Illustrator</span>
-          <span class="tag tag--tool">RawGraphs</span>
         </div>
       </div>
     </article>
       <article class="tile" data-reveal>
       <div class="tile__thumb tile__thumb--contain">
-        <img src="assets/img/tools/medical-mental-health.jpg?v=20260807x" alt="Medical student mental health dashboard - heat map of MBI and STAI scores" loading="lazy">
+        <img src="assets/img/tools/medical-mental-health.jpg?v=20260808m" alt="Medical student mental health dashboard - heat map of MBI and STAI scores" loading="lazy">
       </div>
       <div class="tile__body">
         <div class="tile__head">
@@ -111,7 +129,6 @@
         <p class="tile__sub">Burnout and anxiety, read as density.</p>
         <div class="tile__tags">
           <span class="tag tag--type">Density plot</span>
-          <span class="tag">Mental health</span>
           <span class="tag tag--live">Live</span>
           <span class="tag tag--tool">Tableau</span>
         </div>
@@ -122,12 +139,12 @@
              contain on a white ground, inset so it reads as a screenshot
              sitting on the panel. Lazy-loaded like the other video. -->
         <video class="tile__video" data-lazy-video
-               poster="assets/img/tools/csl-poster.jpg?v=20260807x"
+               poster="assets/img/tools/csl-poster.jpg?v=20260808m"
                width="582" height="444"
                muted loop playsinline preload="none"
                style="width:100%;height:100%;object-fit:contain;display:block;background:#fff;padding:5%"
                aria-label="Screen recording of Color Safety Lens: palettes swapped, colour-vision type switched between protan and tritan, and the severity slider dragged while every tint tile re-checks its WCAG contrast.">
-          <source src="assets/video/color-safety-lens.mp4?v=20260807x" type="video/mp4">
+          <source src="assets/video/color-safety-lens.mp4?v=20260808m" type="video/mp4">
         </video></div>
       <div class="tile__body">
         <div class="tile__head">
@@ -137,10 +154,8 @@
         <p class="tile__sub">WCAG ramps, CVD simulation, ΔE checking.</p>
         <div class="tile__tags">
           <span class="tag tag--type">Heatmap</span>
-          <span class="tag">Accessibility</span>
           <span class="tag tag--live">Live</span>
           <span class="tag tag--tool">JavaScript</span>
-          <span class="tag tag--status">Open source</span>
         </div>
       </div>
     </article>
@@ -155,7 +170,7 @@
                muted loop playsinline preload="none"
                style="width:100%;height:100%;object-fit:contain;display:block;background:#fff;padding:5%"
                aria-label="Screen recording of the Thunderhill West lap-time dashboard in Tableau, hovering laps to reveal times and conditions.">
-          <source src="assets/video/thunderhill.mp4?v=20260807x" type="video/mp4">
+          <source src="assets/video/thunderhill.mp4?v=20260808m" type="video/mp4">
         </video>
       </div>
       <div class="tile__body">
@@ -168,15 +183,13 @@
         <p class="tile__sub">A year of my own telemetry. 1:39 to 1:28.</p>
         <div class="tile__tags">
           <span class="tag tag--type">Scatter plot</span>
-          <span class="tag">Motorsport</span>
           <span class="tag tag--live">Live</span>
-          <span class="tag tag--tool">JavaScript</span>
           <span class="tag tag--tool">Tableau</span>
         </div>
       </div>
     </article>
       <article class="tile" data-reveal>
-      <div class="tile__thumb"><img src="assets/img/tools/gas-prices.jpg?v=20260807x"
+      <div class="tile__thumb"><img src="assets/img/tools/gas-prices.jpg?v=20260808m"
              alt="The Global Gas Prices dashboard on a laptop resting on a concrete plinth - a dark world map with amber circles scaled to year-over-year price change, beside a ranked panel of regional averages."
              width="1200" height="750" loading="lazy"></div>
       <div class="tile__body">
@@ -189,10 +202,8 @@
         <p class="tile__sub">Live symbol map. Pulls current data, holds up on mobile.</p>
         <div class="tile__tags">
           <span class="tag tag--type">Symbol map</span>
-          <span class="tag">Energy</span>
           <span class="tag tag--live">Live</span>
           <span class="tag tag--tool">R</span>
-          <span class="tag tag--tool">Leaflet</span>
         </div>
       </div>
     </article>
@@ -218,26 +229,6 @@
     </article>
     </div>
 
-    <div class="locked" data-reveal>
-      <div class="locked__mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <rect x="4" y="10.5" width="16" height="11"/>
-          <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/>
-        </svg>
-      </div>
-      <div class="locked__body">
-        <h3 class="locked__title">A colour standard for healthcare dashboards</h3>
-        <p class="locked__sub">
-          Fifty-plus executive dashboards for U.S. hospital systems, and the WCAG&nbsp;2.1&nbsp;AA
-          study behind them. Client work under NDA - the method and the system are
-          documented, the client screens are not shown.
-        </p>
-        <p style="margin-top:1.1rem;">
-          <a class="btn" href="work/healthcare-system.html">Enter password</a>
-        </p>
-      </div>
-    </div>
-
   </section>
 
   <section class="shell" id="uiux">
@@ -246,10 +237,26 @@
     </div>
 
     <div class="tiles tiles--3" data-reveal-group data-reveal-step="50">
+      <article class="tile" data-reveal>
+      <div class="tile__thumb"><img src="assets/img/tools/trackdash.jpg?v=20260808m" alt="TrackDash running on a phone mounted in a car at night, showing a five-minute speed trace beside the instrument cluster and the CarPlay screen." width="1200" height="750" loading="lazy"></div>
+      <div class="tile__body">
+        <div class="tile__head">
+          <h3 class="tile__title">TrackDash</h3>
+          <span class="meta">CarPlay</span>
+        </div>
+        <p class="tile__sub">The car's built-in screen, not the phone.</p>
+        <div class="tile__tags">
+          <span class="tag">Mobile</span>
+          <span class="tag">Apple CarPlay</span>
+          <span class="tag tag--status">In testing</span>
+        </div>
+      </div>
+    </article>
+
 
       <article class="tile tile--mybeats" data-reveal>
       <div class="tile__thumb tile__thumb--contain">
-        <img width="1200" height="869" src="assets/img/tools/mybeats.jpg?v=20260807x" alt="The MyBEATS EQ view - a light interface with paired analogue VU meters, a stereo correlation scale, EQ sliders, and readouts for crest, centroid, BPM and key." loading="lazy">
+        <img width="1200" height="869" src="assets/img/tools/mybeats.jpg?v=20260808m" alt="The MyBEATS EQ view - a light interface with paired analogue VU meters, a stereo correlation scale, EQ sliders, and readouts for crest, centroid, BPM and key." loading="lazy">
       </div>
       <div class="tile__body">
         <div class="tile__head">
@@ -265,7 +272,7 @@
       </div>
     </article>
       <article class="tile" data-reveal>
-      <div class="tile__thumb tile__thumb--contain"><img src="assets/img/tools/diskmap.jpg?v=20260807x" alt="The DiskMap app with its scan-location dialog open, beside the Diskbot panel offering to analyse file names, sizes and dates but never file contents." loading="lazy"></div>
+      <div class="tile__thumb tile__thumb--contain"><img src="assets/img/tools/diskmap.jpg?v=20260808m" alt="The DiskMap app with its scan-location dialog open, beside the Diskbot panel offering to analyse file names, sizes and dates but never file contents." loading="lazy"></div>
       <div class="tile__body">
         <div class="tile__head">
           <h3 class="tile__title"><a class="tile__link" href="work/diskmap.html">Disk Map</a></h3>
@@ -280,28 +287,11 @@
       </div>
     </article>
       <article class="tile" data-reveal>
-      <div class="tile__thumb"><img src="assets/img/tools/trackdash.jpg?v=20260807x" alt="TrackDash running on a phone mounted in a car at night, showing a five-minute speed trace beside the instrument cluster and the CarPlay screen." width="1200" height="750" loading="lazy"></div>
-      <div class="tile__body">
-        <div class="tile__head">
-          <h3 class="tile__title">TrackDash</h3>
-          <span class="meta">CarPlay</span>
-        </div>
-        <p class="tile__sub">The car's built-in screen, not the phone.</p>
-        <div class="tile__tags">
-          <span class="tag">Mobile</span>
-          <span class="tag">Apple CarPlay</span>
-          <span class="tag tag--status">In testing</span>
-        </div>
+      <div class="tile__thumb tile__thumb--contain">
+        <img src="assets/img/tools/asciicam.jpg?v=20260808m"
+             alt="ASCII Glitch Camera on a phone: a car rendered live as dense ASCII characters, with resolution and contrast sliders and dither, enhance and invert controls beneath."
+             width="552" height="1200" loading="lazy">
       </div>
-    </article>
-      <article class="tile tile--novisual" data-reveal>
-      <div class="tile__thumb"><svg viewBox="0 0 160 100" aria-hidden="true"><g font-family="monospace" font-size="9" fill="currentColor">
-            <text y="18"><tspan x="14">@</tspan><tspan x="28">#</tspan><tspan x="42">%</tspan><tspan x="56">*</tspan><tspan x="70">+</tspan><tspan x="84">=</tspan><tspan x="98">-</tspan><tspan x="112">:</tspan><tspan x="126">.</tspan></text>
-            <text y="34" opacity="0.85"><tspan x="14">#</tspan><tspan x="28">@</tspan><tspan x="42">#</tspan><tspan x="56">%</tspan><tspan x="70">*</tspan><tspan x="84">+</tspan><tspan x="98">=</tspan><tspan x="112">-</tspan><tspan x="126">:</tspan></text>
-            <text y="50" opacity="0.7"><tspan x="14">%</tspan><tspan x="28">#</tspan><tspan x="42">@</tspan><tspan x="56">@</tspan><tspan x="70">#</tspan><tspan x="84">%</tspan><tspan x="98">*</tspan><tspan x="112">+</tspan><tspan x="126">-</tspan></text>
-            <text y="66" opacity="0.55"><tspan x="14">*</tspan><tspan x="28">%</tspan><tspan x="42">#</tspan><tspan x="56">@</tspan><tspan x="70">@</tspan><tspan x="84">#</tspan><tspan x="98">%</tspan><tspan x="112">*</tspan><tspan x="126">+</tspan></text>
-            <text y="82" opacity="0.4"><tspan x="14">+</tspan><tspan x="28">*</tspan><tspan x="42">%</tspan><tspan x="56">#</tspan><tspan x="70">#</tspan><tspan x="84">@</tspan><tspan x="98">#</tspan><tspan x="112">%</tspan><tspan x="126">*</tspan></text>
-          </g></svg></div>
       <div class="tile__body">
         <div class="tile__head">
           <h3 class="tile__title">ASCII Glitch Camera</h3>
@@ -314,21 +304,12 @@
         </div>
       </div>
     </article>
-      <article class="tile tile--novisual" data-reveal>
-      <div class="tile__thumb"><svg viewBox="0 0 160 100" aria-hidden="true">
-          <rect x="18" y="16" width="124" height="68" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35"/>
-          <path d="M18 28 H142" stroke="currentColor" stroke-width="1.5" opacity="0.35"/>
-          <g fill="currentColor" font-family="monospace" font-size="7" opacity="0.55">
-            <text x="24" y="25.5">FOCUS.EXE</text>
-          </g>
-          <g fill="currentColor" font-family="monospace" font-size="26" letter-spacing="1">
-            <text x="80" y="62" text-anchor="middle">25:00</text>
-          </g>
-          <rect x="112" y="52" width="7" height="12" fill="currentColor" opacity="0.8"/>
-          <g fill="currentColor" font-family="monospace" font-size="6" opacity="0.4">
-            <text x="80" y="76" text-anchor="middle">WORK &#183; BREAK &#183; REPEAT</text>
-          </g>
-        </svg></div>
+      <article class="tile" data-reveal>
+      <div class="tile__thumb">
+        <img src="assets/img/tools/focus.jpg?v=20260808m"
+             alt="FOCUS.EXE running a thirty minute session: a green phosphor hourglass drawn in ASCII draining above a 29:42 countdown, on black."
+             width="1200" height="750" loading="lazy">
+      </div>
       <div class="tile__body">
         <div class="tile__head">
           <h3 class="tile__title">FOCUS.EXE</h3>
@@ -338,6 +319,26 @@
         <div class="tile__tags">
           <span class="tag">macOS</span>
           <span class="tag tag--status">In review</span>
+        </div>
+      </div>
+    </article>
+      <article class="tile tile--quiet" data-reveal>
+      <div class="tile__thumb">
+        <!-- No thumbnail: client dashboards cannot be shown publicly, and a
+             stand-in graphic would be pretending to be the work. -->
+      </div>
+      <div class="tile__body">
+        <div class="tile__head">
+          <h3 class="tile__title">
+            <a class="tile__link" href="work/healthcare-system.html">Healthcare dashboards</a>
+          </h3>
+          <span class="meta">Vizient</span>
+        </div>
+        <p class="tile__sub">Fifty-plus executive dashboards, and the colour standard under them.</p>
+        <div class="tile__tags">
+          <span class="tag tag--type">Dashboard</span>
+          <span class="tag">Design system</span>
+          <span class="tag tag--status">Protected</span>
         </div>
       </div>
     </article>
@@ -354,7 +355,7 @@
 
       <article class="tile" data-reveal>
         <div class="tile__thumb">
-        <img src="assets/img/tools/editorial.jpg?v=20260807x"
+        <img src="assets/img/tools/editorial.jpg?v=20260808m"
              alt="A Sacramento Business Journal spread, 7 Big Development Projects To Watch This Year, with a gold duotone photograph of houses under construction facing a numeral seven set behind the headline."
              width="1200" height="812" loading="lazy">
       </div>
@@ -408,7 +409,7 @@
 
 </main>
 
-<script src="js/theme.js?v=20260807x"></script>
-<script type="module" src="js/motion.js?v=20260807x"></script>
+<script src="js/theme.js?v=20260808m"></script>
+<script type="module" src="js/motion.js?v=20260808m"></script>
 </body>
 </html>

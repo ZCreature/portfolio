@@ -21,7 +21,7 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="css/base.css?v=20260807x">
+<link rel="stylesheet" href="css/base.css?v=20260808m">
 <style>
   /* Career spine - a dated list, same voice as the work ledger. */
   .spine { border-top: 1px solid var(--rule); }
@@ -65,12 +65,32 @@
 
 <header class="masthead">
   <div class="shell masthead__inner">
-    <a class="wordmark" href="index.html">Chris Almaguer</a>
+    <img class="rail__mark" src="assets/img/mark.png?v=20260808m" alt="" width="440" height="440" aria-hidden="true">
+
+    <a class="railmark" href="index.html">
+      <span class="railmark__name">Chris Almaguer</span>
+      <span class="railmark__role">Data Visualization &amp; UX Designer</span>
+    </a>
+
     <nav class="nav" aria-label="Primary">
-      <a href="index.html#dataviz">Data visualization</a>
-      <a href="index.html#uiux">UI/UX</a>
-      <a href="index.html#editorial">Editorial / Branding</a>
-      <a href="about.html" aria-current="page">About</a>
+        <a href="index.html#dataviz">Data visualization</a>
+        <a href="index.html#uiux">UI/UX</a>
+        <a href="index.html#editorial">Editorial / Branding</a>
+        <a href="about.html" class="nav__about">About</a>
+    </nav>
+
+    <div class="rail__foot">
+      <div class="rail__social">
+        <a href="https://www.linkedin.com/in/almaguer1/" aria-label="LinkedIn" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.98 3.5a2.5 2.5 0 1 1-.02 5 2.5 2.5 0 0 1 .02-5zM3 9h4v12H3zM9 9h3.8v1.65h.05a4.17 4.17 0 0 1 3.75-2.06c4.01 0 4.75 2.64 4.75 6.07V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21H9z"/></svg>
+        </a>
+        <a href="https://dribbble.com/chrisalmaguer" aria-label="Dribbble" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9.25" fill="none" stroke="currentColor" stroke-width="1.6"/><path fill="none" stroke="currentColor" stroke-width="1.6" d="M3.4 9.2c5.6.4 10.6-1 14.3-4M2.9 14.6c5-1.6 10.2-.6 13.6 3.6M8.2 3.2c3.4 3.8 5.8 8.6 6.8 15.1"/></svg>
+        </a>
+        <a href="mailto:calmaguer.design@gmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M3 6.5h18v11H3zM3.4 7l8.6 6 8.6-6"/></svg>
+        </a>
+      </div>
       <button class="theme-toggle" type="button" data-theme-toggle
               aria-label="Switch to dark theme" aria-pressed="false">
         <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
@@ -78,7 +98,7 @@
           <path d="M8 0.75 A7.25 7.25 0 0 0 8 15.25 Z" fill="currentColor"/>
         </svg>
       </button>
-    </nav>
+    </div>
   </div>
 </header>
 
@@ -88,37 +108,24 @@
   <section class="shell" style="padding-block: clamp(4rem,11vw,8rem) var(--gap-l);">
     <p class="meta" data-reveal>About</p>
     <h1 class="h1" data-reveal style="--reveal-delay:70ms; margin-top: var(--gap-s); max-width: 19ch;">
-      I learned structure in print and put it to work on data.
+      Chris Almaguer
     </h1>
 
     <div class="prose" data-reveal style="--reveal-delay:150ms; margin-top: var(--gap-m);">
       <p>
-        I started in print production - signage, wide-format, colour management. The
-        unglamorous end, where a mistake costs material. It taught me specifications
-        before it taught me taste.
+        California-based designer specializing in data visualization, design systems,
+        and UI/UX. With over a decade of experience spanning advertising, editorial
+        layout, and interactive design, I bring structure, clarity, and visual precision
+        to every stage of the design process.
       </p>
       <p>
-        Then seven years of advertising, then a hard turn into editorial. Four years of
-        news graphics for California business journals - strict grids, standing type,
-        daily deadlines. A chart needing three paragraphs of explanation has failed, and
-        a newsroom tells you immediately.
+        Currently, I lead data visualization design at a healthcare company, where I
+        design scalable dashboard systems and visual interfaces that help decision-makers
+        interpret complex data.
       </p>
       <p>
-        Now I build data products for U.S. hospital systems, read by executives making
-        decisions with real consequences. The constraints changed; the discipline didn't.
-        <b>Structure first, then clarity, then - if there's room - elegance.</b>
-      </p>
-      <p>
-        Lately I build my own tools when the ones I need don't exist. I'm a designer,
-        not an engineer, and I'm careful about the difference - but knowing how a thing
-        is made has changed how I design it.
-      </p>
-      <p>
-        Two of them run a language model on the machine rather than calling an API.
-        MyBEATS classifies a 16,000-track library locally, and Disk Map's cleanup
-        advisor judges a folder from its metadata - names, sizes, dates - and never
-        reads file contents. Running local keeps both free to use and keeps the
-        library and the disk on the machine they came from.
+        If you're interested in collaborating or just want to talk design, feel free to
+        reach&nbsp;out.
       </p>
     </div>
 
@@ -278,7 +285,7 @@
 
 </main>
 
-<script src="js/theme.js?v=20260807x"></script>
-<script type="module" src="js/motion.js?v=20260807x"></script>
+<script src="js/theme.js?v=20260808m"></script>
+<script type="module" src="js/motion.js?v=20260808m"></script>
 </body>
 </html>
