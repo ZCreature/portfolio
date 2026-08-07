@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MyBEATS - Chris Almaguer</title>
+<meta name="description" content="Tagging a 16,000-track library with a local model, and why the model size was chosen by where it starts inventing.">
+<meta name="theme-color" content="#fbfbfa">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Chris Almaguer">
+<meta property="og:title" content="MyBEATS - Chris Almaguer">
+<meta property="og:description" content="Tagging a 16,000-track library with a local model, and why the model size was chosen by where it starts inventing.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MyBEATS - Chris Almaguer">
+<meta name="twitter:description" content="Tagging a 16,000-track library with a local model, and why the model size was chosen by where it starts inventing.">
+<meta name="author" content="Chris Almaguer">
+<script>
+  try {
+    if (localStorage.getItem('ca-theme') === 'dark')
+      document.documentElement.setAttribute('data-theme', 'dark');
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="../css/base.css?v=20260807x">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="shell masthead__inner">
+    <a class="wordmark" href="../index.html">Chris Almaguer</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="../index.html#dataviz">Data visualization</a>
+      <a href="../index.html#uiux">UI/UX</a>
+      <a href="../index.html#editorial">Editorial / Branding</a>
+      <a href="../about.html">About</a>
+      <button class="theme-toggle" type="button" data-theme-toggle
+              aria-label="Switch to dark theme" aria-pressed="false">
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+          <circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M8 0.75 A7.25 7.25 0 0 0 8 15.25 Z" fill="currentColor"/>
+        </svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="shell case-hero">
+    <p class="meta" data-reveal>Case study - Tooling &amp; on-device AI</p>
+    <h1 class="h1" data-reveal style="--reveal-delay:70ms; margin-top: var(--gap-s);">
+      Getting a local model to stop making things up
+    </h1>
+    <p class="lede tight" data-reveal style="--reveal-delay:140ms; margin-top: var(--gap-m);">
+      MyBEATS tags a 16,000-track library with genre, mood and vibe using a model
+      running on the laptop. No API key, no per-track cost, nothing leaving the
+      machine. The interesting problem was not getting it to work. It was getting
+      it to admit what it did not know.
+    </p>
+    <div class="case-tags" data-reveal style="--reveal-delay:200ms;">
+      <span class="tag">macOS</span>
+      <span class="tag tag--ai">On-device AI</span>
+      <span class="tag tag--tool">Ollama</span>
+      <span class="tag tag--tool">SQLite</span>
+    </div>
+  </section>
+
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
+    <div class="prose" data-reveal>
+      <p class="meta">01 - The pipeline</p>
+      <h2>Five stages, one of them a model</h2>
+      <p>
+        A library is imported in stages: <b>scan</b> walks the files,
+        <b>tags</b> reads embedded metadata, <b>art</b> pulls cover images,
+        <b>analyze</b> measures the audio, and <b>enrich</b> asks a local model
+        for the things no tag contains - genre, subgenre, mood, and free-form
+        vibe descriptions.
+      </p>
+      <p>
+        Only the last stage is a model, and that is deliberate. Everything that
+        can be measured is measured. The model is asked only for judgement, on
+        top of evidence the earlier stages already gathered.
+      </p>
+    </div>
+  </section>
+
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
+    <div class="prose" data-reveal>
+      <p class="meta">02 - The failure that set the model size</p>
+      <h2>7B does not say "I do not know"</h2>
+      <p>
+        The obvious choice was a 7B model: smaller, faster, less memory. It
+        worked well on anything canonical. It fell apart on the part of the
+        library I actually care about - underground and regional rap, where an
+        artist might have a few thousand listeners.
+      </p>
+      <p>
+        It did not fail by returning nothing. <b>It failed by inventing.</b>
+        Asked about a record it had never seen, a small model will produce a
+        confident, plausible, wrong genre rather than an empty field. That is
+        far worse than a gap, because a gap is visible and a fabrication is not.
+      </p>
+    </div>
+
+    <p class="pull" data-reveal>
+      A missing tag is a task. A wrong tag is a lie that looks like a task
+      already done.
+    </p>
+
+    <div class="prose" data-reveal>
+      <p>
+        14B at 4-bit quantisation is about 9&nbsp;GB, which sits comfortably
+        alongside the app in 18&nbsp;GB of memory. 32B does not. So the model
+        size was not chosen for benchmark scores - it was chosen as the smallest
+        one whose recall did not run out on the specific library it has to read.
+      </p>
+    </div>
+  </section>
+
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
+    <div class="prose" data-reveal>
+      <p class="meta">03 - Shape, not persuasion</p>
+      <h2>Constrain the output instead of asking nicely</h2>
+      <p>
+        The usual way to get structured data out of a model is to ask for JSON
+        in the prompt, then parse whatever comes back and hope. That fails in
+        the ordinary case: fenced code blocks, a sentence of preamble, a
+        trailing apology.
+      </p>
+      <p>
+        Ollama takes a JSON schema and constrains generation to it, so the
+        output conforms by construction. There is no scraping and no retry loop,
+        because a malformed response is not a thing the model can emit.
+        <b>The reliability came from removing the failure mode, not from
+        handling it better.</b>
+      </p>
+    </div>
+  </section>
+
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) var(--gap-xl);">
+    <div class="prose" data-reveal>
+      <p class="meta">04 - Running it over 16,000 tracks</p>
+      <h2>Two constraints that only appear at scale</h2>
+      <ul>
+        <li>
+          <b>Concurrency of one.</b> The instinct is to parallelise. A local
+          model is memory-bound and Ollama serves a single request at a time, so
+          extra workers do not generate in parallel - they queue while holding
+          memory, and the whole pass gets slower.
+        </li>
+        <li>
+          <b>A deadline on every call.</b> Without one, a single stuck
+          generation pins the worker forever. At low concurrency that does not
+          fail one track, it silently stalls the entire stage. The timeout is
+          what turns a hang into one skipped record.
+        </li>
+      </ul>
+      <p>
+        The model is also resolved at call time rather than frozen at import, so
+        changing it in Settings takes effect without restarting the app - which
+        matters when you are comparing two models across a long run.
+      </p>
+
+      <h3>What I take from it</h3>
+      <p>
+        The design work here was not the interface. It was deciding what the
+        machine is allowed to assert. Measure what can be measured, constrain
+        the shape of what it returns, and size the model against the hardest
+        part of the real data rather than the average part.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<script src="../js/theme.js?v=20260807x"></script>
+<script type="module" src="../js/motion.js?v=20260807x"></script>
+</body>
+</html>

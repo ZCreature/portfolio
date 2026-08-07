@@ -1,5 +1,5 @@
 /* ============================================================
-   Chris Almaguer — portfolio design system
+   Chris Almaguer - portfolio design system
    Concept: the interface is monochrome. Colour appears only
    inside the data. Colour is information, not decoration.
    ============================================================ */
@@ -13,12 +13,12 @@
      browser resolves it to the real SF Pro, and picks Display or Text
      at the right optical size on its own. Apple's licence does not
      permit self-hosting SF as a webfont, so naming the files directly
-     is not an option — this is both the legal route and the fast one.
+     is not an option - this is both the legal route and the fast one.
      Off Apple platforms it falls through to the platform UI face.
 
      SF Mono carries the label voice: .meta, .num, and anything that
      has to align in a column. That pairing is the point of choosing
-     SF — it ships with a matching monospace, which Helvetica does not
+     SF - it ships with a matching monospace, which Helvetica does not
      have, so labels no longer lean on caps and tracking alone. */
   --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text",
     "SF Pro Display", system-ui, "Helvetica Neue", Arial, sans-serif;
@@ -35,7 +35,7 @@
   --paper:      #fbfbfa;
   --paper-2:    #f2f2f0;
 
-  /* Space — 4px base, named by use not size. */
+  /* Space - 4px base, named by use not size. */
   --gap-s:  1rem;
   --gap-m:  2rem;
   --gap-l:  4rem;
@@ -292,11 +292,26 @@ section { padding-block: var(--gap-xl); }
 }
 
 .nameplate__sub {
-  margin-top: 0.6rem;
-  font-size: clamp(0.8125rem, 1.45vw, 1.125rem);
-  line-height: 1.35;
+  /* An eyebrow above the name: small, uppercase and tracked, so it labels
+     the discipline without competing with the nameplate underneath. */
+  margin-bottom: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.4;
   color: var(--ink-3);
-  white-space: nowrap;
+}
+
+/* Short bio under the nameplate. Held to the prose measure so it reads as
+   a paragraph, not a banner. */
+.nameplate__bio {
+  margin-top: clamp(1rem, 2vw, 1.5rem);
+  max-width: 40rem;
+  font-size: clamp(0.9375rem, 1.15vw, 1.0625rem);
+  line-height: 1.55;
+  color: var(--ink-2);
+  text-wrap: pretty;
 }
 
 /* Below the width where it fits on one line, let it wrap rather than
@@ -306,7 +321,7 @@ section { padding-block: var(--gap-xl); }
 }
 
 
-/* Specification block — label / value rows, the way a spec sheet
+/* Specification block - label / value rows, the way a spec sheet
    or a chart's metadata reads. Replaces the "availability pill". */
 
 .spec {
@@ -373,7 +388,7 @@ section { padding-block: var(--gap-xl); }
   transition: background 90ms linear, color 90ms linear;
 }
 
-/* Hard invert. No fade, no slide — the row is either off or on. */
+/* Hard invert. No fade, no slide - the row is either off or on. */
 .entry:hover,
 .entry:focus-within {
   background: var(--ink);
@@ -443,13 +458,13 @@ section { padding-block: var(--gap-xl); }
    meaning on its own, which is what WCAG 1.4.1 asks.
 
    Derived, not picked. Every ink clears 4.5:1 against BOTH its
-   own fill and the page — so a label stays readable even if the
-   fill never paints. Measured: text/chip 5.0–5.1, text/page
-   5.4–6.2 in light, 6.0–6.2 in dark.
+   own fill and the page - so a label stays readable even if the
+   fill never paints. Measured: text/chip 5.0-5.1, text/page
+   5.4-6.2 in light, 6.0-6.2 in dark.
 
    The three families sit at matched lightness, so they are
    deliberately NOT separable in greyscale. That is the correct
-   trade here — they are siblings, and the word does the work.
+   trade here - they are siblings, and the word does the work.
    Anywhere colour is the only channel, use the tile ladder
    instead, which is built to survive greyscale.            */
 
@@ -484,7 +499,7 @@ section { padding-block: var(--gap-xl); }
 }
 
 /* Chart type leads every tile, so it is the one facet that carries weight
-   rather than hue — a fifth colour would turn the grid into confetti, and
+   rather than hue - a fifth colour would turn the grid into confetti, and
    monochrome keeps the emphasis where the eye lands first. */
 .tag--type {
   color: var(--ink);
@@ -493,7 +508,7 @@ section { padding-block: var(--gap-xl); }
 }
 
 /* Local AI. Violet reads as the machine-learning family by convention and
-   sits well clear of the other three inks — minimum ΔE 21.4 in light,
+   sits well clear of the other three inks - minimum ΔE 21.4 in light,
    26.3 in dark, so it never reads as a shade of the tool blue. */
 :root {
   --tag-ai-fill: #f0e7fe;  --tag-ai-line: #d9ccf0;  --tag-ai-ink: #6c54aa;
@@ -526,15 +541,15 @@ section { padding-block: var(--gap-xl); }
 
 /* Both ladders are verified: every pair clears ΔE 10 in normal vision, all
    three CVD types and greyscale, and every colour clears 3:1 against the tile
-   background it sits on. Light measures ΔE 10.2 minimum, dark ΔE 10.3 — the
+   background it sits on. Light measures ΔE 10.2 minimum, dark ΔE 10.3 - the
    binding pair is greyscale in both, as it usually is.
 
    --tile-4 is the tightest colour on the site at 3.03:1 against --paper-2, the
    thumbnail surface these marks sit on, and that is forced
    rather than careless: a 3:1 floor on light paper caps a usable series at
-   about L* 58, and the full L* 16–58 span is needed for four series to stay
+   about L* 58, and the full L* 16-58 span is needed for four series to stay
    apart in greyscale. Re-deriving all four jointly buys ΔE 10.4 instead of
-   10.2 — not worth changing four colours for. Anything lighter here fails
+   10.2 - not worth changing four colours for. Anything lighter here fails
    contrast; anything darker collapses into --tile-3 in greyscale. */
 
 :root {
@@ -559,7 +574,7 @@ section { padding-block: var(--gap-xl); }
   border: 1px solid var(--rule);
 }
 
-/* Fixed column counts — galleries that sit beside each other need to read
+/* Fixed column counts - galleries that sit beside each other need to read
    as matching blocks rather than reflowing independently. */
 .tiles--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .tiles--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -611,7 +626,7 @@ section { padding-block: var(--gap-xl); }
   width: 100%;
   height: 100%;
   /* Contain, not cover: show the recording whole rather than cropping to
-     hide its black surround — every attempt at that clipped the chart title
+     hide its black surround - every attempt at that clipped the chart title
      or the value axis. The source is 1.548:1 against a 1.6:1 tile, so the
      letterbox is ~3% and disappears against the matched black ground. */
   object-fit: contain;
@@ -629,10 +644,17 @@ section { padding-block: var(--gap-xl); }
   display: block;
 }
 
-/* NOTE: this must stay below `.tile__thumb img` — same specificity, so
+/* NOTE: this must stay below `.tile__thumb img` - same specificity, so
    whichever comes last wins. Placed above it, the cover rule silently
    overrode contain and these tiles kept cropping. */
-/* App captures sit as objects on the panel rather than bleeding to the tile
+/* THE RULE, so the grid does not look accidental: captured software - app
+   windows, dashboards, recordings - is contained on white with an inset, so
+   it reads as a screenshot presented on the panel. Device mockups and
+   photography fill the tile edge to edge, because insetting a photograph
+   just looks like a mistake. Sorting by what the picture IS keeps the two
+   treatments legible rather than arbitrary.
+
+   App captures sit as objects on the panel rather than bleeding to the tile
    edge. Contain shows the window whole; the inset stops it touching the
    border, so a 1.3:1 screenshot in a 1.6:1 slot reads as deliberate framing
    instead of a crop that went wrong. */
@@ -691,7 +713,7 @@ section { padding-block: var(--gap-xl); }
 
 .tile__link::before { content: ""; position: absolute; inset: 0; }
 
-/* Reserved slot. Holds the grid square until real work fills it — visibly
+/* Reserved slot. Holds the grid square until real work fills it - visibly
    empty rather than a fake card, and skipped by assistive tech. */
 .tile--empty { background: var(--paper); }
 .tile--empty:hover { background: var(--paper); color: inherit; }
@@ -703,7 +725,7 @@ section { padding-block: var(--gap-xl); }
 }
 .tile--empty .tile__body { min-height: 5.5rem; }
 
-/* Past work has no live data behind it yet — a ruled field holds the
+/* Past work has no live data behind it yet - a ruled field holds the
    slot until real assets land, rather than a fake image. */
 .tile--quiet .tile__thumb {
   background-image: repeating-linear-gradient(
@@ -746,8 +768,8 @@ section { padding-block: var(--gap-xl); }
 
 /* Fit-to-width variant.
 
-   Both embedded tools are laid out for one viewport size — no media
-   queries, several position:fixed panels — so narrowing the frame clips
+   Both embedded tools are laid out for one viewport size - no media
+   queries, several position:fixed panels - so narrowing the frame clips
    them rather than reflowing. Instead the iframe is given its natural
    size and scaled down to whatever width is available, so the whole
    interface is always visible and nothing is cut off. Interaction still
@@ -774,7 +796,7 @@ section { padding-block: var(--gap-xl); }
   .embed--bleed { width: 100%; margin-inline: 0; }
 }
 
-/* Shown until the iframe reports load — these are heavy documents. */
+/* Shown until the iframe reports load - these are heavy documents. */
 .embed__loading {
   position: absolute;
   inset: 0;
@@ -861,7 +883,7 @@ section { padding-block: var(--gap-xl); }
 .prose ul { margin: 0; padding-left: 1.1rem; color: var(--ink-2); }
 .prose li + li { margin-top: 0.5em; }
 
-/* A pulled-out claim — used sparingly, for the decision that
+/* A pulled-out claim - used sparingly, for the decision that
    actually mattered in the project. */
 .pull {
   border-left: 2px solid var(--ink);
@@ -916,7 +938,7 @@ figure { margin: 0; }
 
 .viz figcaption { margin-top: 1rem; }
 
-/* Data-source honesty line — every live chart carries one. */
+/* Data-source honesty line - every live chart carries one. */
 .source {
   font-family: var(--font-mono);
   font-size: 0.625rem;
@@ -928,8 +950,7 @@ figure { margin: 0; }
   border-top: 1px solid var(--rule-soft);
 }
 
-/* Reconstructed / placeholder data must announce itself. Greyscale only —
-   weight and a glyph carry the signal, never hue. */
+/* Reconstructed / placeholder data must announce itself. Greyscale only - weight and a glyph carry the signal, never hue. */
 .source[data-placeholder="true"] {
   color: var(--ink-2);
   font-weight: 700;
@@ -977,8 +998,7 @@ figure { margin: 0; }
 
 /* ---- 13. Reveal on scroll -------------------------------- */
 
-/* Elements arrive; they don't drift in. Short, flat, almost mechanical —
-   a long floaty fade-up is the house style of every template on the web. */
+/* Elements arrive; they don't drift in. Short, flat, almost mechanical - a long floaty fade-up is the house style of every template on the web. */
 [data-reveal] {
   opacity: 0;
   transform: translateY(5px);
@@ -1102,3 +1122,33 @@ figure { margin: 0; }
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
+
+
+/* ---- Editorial page gallery -------------------------------
+   A weekly page is a body of work, not a series of one-offs, so
+   these sit in a grid at a size you can read the headline from
+   rather than as a stack of full-width figures.             */
+
+.pages {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: var(--gap-m) var(--gap-s);
+  margin-top: var(--gap-l);
+}
+
+.pages figure { margin: 0; }
+
+.pages img {
+  width: 100%;
+  border: 1px solid var(--rule);
+  background: #fff;
+}
+
+.pages figcaption {
+  margin-top: 0.55rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+
+.pages figcaption b { color: var(--ink-2); font-weight: 600; display: block; }

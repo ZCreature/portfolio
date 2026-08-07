@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Disk Map - Chris Almaguer</title>
+<meta name="description" content="A disk-cleanup advisor given file metadata and never file contents, and the context-window bug that hid its own rules.">
+<meta name="theme-color" content="#fbfbfa">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Chris Almaguer">
+<meta property="og:title" content="Disk Map - Chris Almaguer">
+<meta property="og:description" content="A disk-cleanup advisor given file metadata and never file contents, and the context-window bug that hid its own rules.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Disk Map - Chris Almaguer">
+<meta name="twitter:description" content="A disk-cleanup advisor given file metadata and never file contents, and the context-window bug that hid its own rules.">
+<meta name="author" content="Chris Almaguer">
+<script>
+  try {
+    if (localStorage.getItem('ca-theme') === 'dark')
+      document.documentElement.setAttribute('data-theme', 'dark');
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="../css/base.css?v=20260807x">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="shell masthead__inner">
+    <a class="wordmark" href="../index.html">Chris Almaguer</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="../index.html#dataviz">Data visualization</a>
+      <a href="../index.html#uiux">UI/UX</a>
+      <a href="../index.html#editorial">Editorial / Branding</a>
+      <a href="../about.html">About</a>
+      <button class="theme-toggle" type="button" data-theme-toggle
+              aria-label="Switch to dark theme" aria-pressed="false">
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+          <circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M8 0.75 A7.25 7.25 0 0 0 8 15.25 Z" fill="currentColor"/>
+        </svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="shell case-hero">
+    <p class="meta" data-reveal>Case study - Tooling &amp; on-device AI</p>
+    <h1 class="h1" data-reveal style="--reveal-delay:70ms; margin-top: var(--gap-s);">
+      An assistant that is never shown your files
+    </h1>
+    <p class="lede tight" data-reveal style="--reveal-delay:140ms; margin-top: var(--gap-m);">
+      Disk Map is a treemap explorer, built because Disk Inventory X was
+      discontinued. The part worth writing about is the advisor bolted to it:
+      it recommends what to delete while being structurally incapable of reading
+      what is inside anything. First pass recovered 80&nbsp;GB.
+    </p>
+    <div class="case-tags" data-reveal style="--reveal-delay:200ms;">
+      <span class="tag">macOS</span>
+      <span class="tag tag--ai">On-device AI</span>
+      <span class="tag tag--tool">Ollama</span>
+      <span class="tag">Utility</span>
+    </div>
+  </section>
+
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
+    <div class="prose" data-reveal>
+      <p class="meta">01 - The constraint that came first</p>
+      <h2>Metadata only, by construction</h2>
+      <p>
+        An assistant that helps you delete things has to be trusted twice: that
+        its advice is sound, and that asking for the advice was itself safe. The
+        second is the one people actually worry about, and it cannot be answered
+        with a privacy policy.
+      </p>
+      <p>
+        So the advisor is only ever given names, sizes, extensions, dates and
+        counts. Not a byte of file content reaches it, because the scanner does
+        not hold any. There are exactly two backends - the Anthropic API when a
+        key is present, or a local Ollama model otherwise, free and offline -
+        and with neither available the app behaves as it did before the feature
+        existed.
+      </p>
+    </div>
+
+    <p class="pull" data-reveal>
+      The honest version of "we never read your files" is an assistant that
+      could not read them if it tried.
+    </p>
+  </section>
+
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
+    <div class="prose" data-reveal>
+      <p class="meta">02 - The tools it is given</p>
+      <h2>A deliberately small surface</h2>
+      <ul>
+        <li><b>list_folder, folder_stats, search_names</b> - read the scan's
+          in-memory metadata. Nothing touches the disk again.</li>
+        <li><b>propose_rescan</b> - cannot scan anything. It surfaces a button
+          for the person to press.</li>
+        <li><b>photo_date_taken</b> - reads the EXIF header of one image at a
+          time to recover a capture date. A camera-metadata header, never the
+          image.</li>
+      </ul>
+      <p>
+        None of them modify or delete. The assistant can argue for a deletion;
+        it cannot perform one. That division is the whole safety model, and it
+        is enforced by what exists rather than by instructions in a prompt.
+      </p>
+    </div>
+  </section>
+
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
+    <div class="prose" data-reveal>
+      <p class="meta">03 - Judgement</p>
+      <h2>Context is what makes a folder readable</h2>
+      <p>
+        A verdict is <b>safe</b>, <b>risky</b> or <b>unknown</b>, with a
+        confidence, two or three plain sentences, and an estimate of the bytes
+        recoverable without losing anything personal. "Unknown" is a first-class
+        answer - the alternative is a model guessing about someone's only copy
+        of something.
+      </p>
+      <p>
+        The prompt leans conservative on purpose: personal media, documents and
+        anything ambiguous fall to risky. And the model is shown a folder's
+        <b>siblings</b>, because that is where the meaning is. A
+        <code>dist</code> next to a <code>package.json</code> is build output. A
+        <code>Backup</code> next to <code>Old iPhone Backup 2</code> is probably
+        somebody's only copy.
+      </p>
+    </div>
+  </section>
+
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) var(--gap-xl);">
+    <div class="prose" data-reveal>
+      <p class="meta">04 - The bug worth keeping</p>
+      <h2>A context window that truncates from the front</h2>
+      <p>
+        Ollama's default context is small enough that a large folder manifest
+        overruns it. It does not error - it truncates from the front, which is
+        where the system prompt lives. The model then answers without its
+        instructions, fluently and in the wrong format, and nothing in the
+        output says so.
+      </p>
+      <p>
+        The manifest is bounded instead - depth, children and total nodes all
+        capped - and the context raised to 16k, comfortably inside what the
+        local model handles. <b>The failure mode I was designing against was not
+        a bad answer. It was a confident one with the rules quietly missing.</b>
+      </p>
+
+      <h3>What I take from it</h3>
+      <p>
+        Same lesson as the colour tool: a system that advises has to earn trust
+        structurally, not reassure verbally. Give it the least access that still
+        answers the question, let it say "unknown", and assume the quiet failures
+        are the ones that will reach a user.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<script src="../js/theme.js?v=20260807x"></script>
+<script type="module" src="../js/motion.js?v=20260807x"></script>
+</body>
+</html>
