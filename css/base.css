@@ -224,7 +224,7 @@ section { padding-block: var(--gap-xl); }
   flex: 0 0 auto;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.8rem;
+  gap: 0.55rem;
   width: 100%;
 }
 
@@ -244,14 +244,14 @@ section { padding-block: var(--gap-xl); }
   align-self: center;
   width: clamp(7rem, 11vw, 9.5rem);
   height: auto;
-  margin-bottom: clamp(0.75rem, 2vw, 1.5rem);
+  margin-bottom: 0;
 }
 
 .railmark { display: block; }
 
 .railmark__name {
   display: block;
-  font-size: 0.9375rem;
+  font-size: 1.25rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.2;
@@ -260,6 +260,8 @@ section { padding-block: var(--gap-xl); }
 .railmark__role {
   display: block;
   margin-top: 0.2rem;
+  /* Sized to hold "Data Visualization & UX Designer" on one line
+     inside a 16.5rem rail. */
   font-size: 0.8125rem;
   line-height: 1.3;
   color: var(--ink-3);
@@ -284,12 +286,11 @@ section { padding-block: var(--gap-xl); }
 .rail__social a:hover { color: var(--ink); }
 .rail__social svg { width: 16px; height: 16px; fill: currentColor; }
 
-/* About is a different kind of destination from the sections above it. */
+/* About is a different kind of destination from the sections above it.
+   Space does that job here; a rule was one line too many in a rail this
+   quiet. */
 .nav__about {
-  margin-top: 0.75rem;
-  padding-top: 0.9rem;
-  border-top: 1px solid var(--rule);
-  width: 100%;
+  margin-top: 0.9rem;
   color: var(--ink) !important;
 }
 
@@ -298,7 +299,7 @@ section { padding-block: var(--gap-xl); }
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: var(--gap-l);
+  gap: var(--gap-m);
   height: 100%;
   padding-block: calc(var(--gap-m) - 0.25rem) var(--gap-m);
 }
@@ -371,7 +372,7 @@ body { padding-left: var(--rail); }
 }
 
 .nameplate h1 {
-  font-size: clamp(1.5rem, 6.25vw, 4.5rem);
+  font-size: clamp(1.4rem, 5.4vw, 3.9rem);
   line-height: 0.98;
   /* SF Pro Display sets wider than Helvetica at this size, so the nameplate
      needs more negative tracking to keep the same density. */
