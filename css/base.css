@@ -38,7 +38,8 @@
   --paper-2:    #f2f2f0;
   /* Tile hover ground. Mid-dark grey rather than the near-black --ink;
      paper text still clears 11.9:1 on it. */
-  --hover:      #3a3a40;
+  --hover:      #f2f2f0;
+  --hover-lift: 0 2px 10px rgba(38, 38, 43, 0.07), 0 10px 28px rgba(38, 38, 43, 0.06);
 
   /* Space - 4px base, named by use not size. */
   --gap-s:  1rem;
@@ -51,6 +52,7 @@
   --measure: 34rem;
   --shell: 78rem;
   --rail: 16.5rem;
+  --rail-pad: 1.75rem;
 
   /* Motion */
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
@@ -70,7 +72,8 @@
   --rule-soft: rgba(244, 244, 242, 0.07);
   --paper:     #17171a;
   --paper-2:   #212126;
-  --hover:     #2c2c33;
+  --hover:     #212126;
+  --hover-lift: inset 0 0 0 1px rgba(244, 244, 242, 0.11);
 }
 
 /* ---- 2. Reset -------------------------------------------- */
@@ -217,18 +220,19 @@ section { padding-block: var(--gap-xl); }
 /* The shell's max-width and centring are meaningless inside the rail. */
 .masthead .shell {
   max-width: none;
-  padding-inline: clamp(1.25rem, 2vw, 1.75rem);
+  padding-inline: var(--rail-pad);
 }
 
 .masthead .nav {
   flex: 0 0 auto;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.55rem;
+  gap: 0.99rem;                 /* 15.8px + 21.1px line box = the comp\'s 37px step */
+  margin-top: 2.03rem;           /* drops nav1 baseline from 405.5 to 438 */
   width: 100%;
 }
 
-.masthead .nav a { font-size: 0.875rem; }
+.masthead .nav a { font-size: 0.9438rem; line-height: 1.4; }
 
 /* At the foot of the rail, away from the links it is not one of. */
 .masthead .theme-toggle { margin-left: auto; margin-right: -0.35rem; }
@@ -238,31 +242,47 @@ section { padding-block: var(--gap-xl); }
    About set apart because it is not one of them, and the ways
    to reach him at the foot.                                */
 
+/* The mark now runs full width, flush to the top edge, cropped to a
+   landscape frame rather than sitting inside the rail's padding. The
+   image is oversized inside it so the glow fills the frame the way the
+   Figma comp does. */
 .rail__mark {
-  /* Centred in the rail rather than aligned to the text below it: the mark
-     is the one thing here that is not type, so it gets its own axis. */
-  align-self: center;
-  width: clamp(7rem, 11vw, 9.5rem);
+  width: calc(100% + 2 * var(--rail-pad));
+  margin: 0 calc(-1 * var(--rail-pad)) 0;
+  aspect-ratio: 264 / 228;
+  overflow: hidden;
+  display: block;
+}
+
+.rail__mark img {
+  /* Figma places the 440px source at 241x241 inside the 264x228 frame,
+     offset (-5, -13). Expressed against the frame width so it scales:
+     241/264 = 91.29%, -5/264 = -1.894%, -13/264 = -4.924%. Margin
+     percentages resolve against width, which is what keeps both true. */
+  width: 91.29%;
   height: auto;
-  margin-bottom: 0;
+  display: block;
+  margin: -4.924% 0 0 -1.894%;
 }
 
 .railmark { display: block; }
 
 .railmark__name {
   display: block;
-  font-size: 1.25rem;
+  font-size: 1.7936rem;
   font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
+  line-height: 0.871;
+  letter-spacing: -0.022em;
+  text-transform: uppercase;
 }
 
 .railmark__role {
   display: block;
-  margin-top: 0.2rem;
-  /* Sized to hold "Data Visualization & UX Designer" on one line
-     inside a 16.5rem rail. */
-  font-size: 0.8125rem;
+  margin-top: 0.7125rem;
+  font-size: 0.7563rem;
+  font-weight: 700;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
   line-height: 1.3;
   color: var(--ink-3);
 }
@@ -286,22 +306,16 @@ section { padding-block: var(--gap-xl); }
 .rail__social a:hover { color: var(--ink); }
 .rail__social svg { width: 16px; height: 16px; fill: currentColor; }
 
-/* About is a different kind of destination from the sections above it.
-   Space does that job here; a rule was one line too many in a rail this
-   quiet. */
-.nav__about {
-  margin-top: 0.9rem;
-  color: var(--ink) !important;
-}
+
 
 .masthead__inner {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: var(--gap-m);
+  gap: clamp(2rem, 4vw, 2.75rem);
   height: 100%;
-  padding-block: calc(var(--gap-m) - 0.25rem) var(--gap-m);
+  padding-block: 0 calc(var(--gap-m) + 0.15rem);
 }
 
 /* Content clears the rail. */
@@ -476,7 +490,7 @@ body { padding-left: var(--rail); }
   padding: clamp(1.4rem, 3vw, 2.1rem) clamp(0.5rem, 1.5vw, 1rem);
   border-bottom: 1px solid var(--rule);
   position: relative;
-  transition: background 90ms linear, color 90ms linear;
+  transition: background 110ms linear, box-shadow 160ms ease;
 }
 
 /* Hard invert. No fade, no slide - the row is either off or on. */
@@ -499,14 +513,14 @@ body { padding-left: var(--rail); }
   /* 9px. Small, but these are secondary labels beside a title that already
      names the thing, not copy anyone has to read to understand the tile.
      The inks still clear 4.5:1, so shrinking costs legibility, not contrast. */
-  font-size: 0.5rem;
-  letter-spacing: 0.05em;
+  font-size: 0.34375rem;
+  letter-spacing: 0.045em;
   text-transform: uppercase;
   color: var(--ink-3);
   background: transparent;
   border: 1px solid var(--rule);
   border-radius: 3px;
-  padding: 0.13rem 0.3rem;
+  padding: 0.08rem 0.2rem;
   white-space: nowrap;
 }
 
@@ -542,14 +556,14 @@ body { padding-left: var(--rail); }
 
 .tag {
   font-family: var(--font-mono);
-  font-size: 0.625rem;
-  letter-spacing: 0.07em;
+  font-size: 0.5625rem;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--ink-3);
   background: transparent;
   border: 1px solid var(--rule);
   border-radius: 3px;
-  padding: 0.2rem 0.45rem;
+  padding: 0.16rem 0.38rem;
   white-space: nowrap;
 }
 
@@ -700,15 +714,19 @@ body { padding-left: var(--rail); }
   background: var(--paper);
   display: flex;
   flex-direction: column;
-  transition: background 90ms linear, color 90ms linear;
+  transition: background 110ms linear, box-shadow 160ms ease;
 }
 
-.tile:hover, .tile:focus-within { background: var(--hover); color: var(--paper); }
-.tile:hover .tile__sub, .tile:focus-within .tile__sub,
-.tile:hover .meta,     .tile:focus-within .meta { color: var(--paper); opacity: 0.7; }
-.tile:hover .tile__thumb, .tile:focus-within .tile__thumb { border-bottom-color: var(--paper); }
-.tile:hover .tag, .tile:focus-within .tag { color: var(--paper); border-color: var(--paper); opacity: 0.7; }
-
+/* Hover lifts the card off the page instead of inverting it. The earlier
+   dark fill forced every label to white and flattened the tag families to
+   plain outlines, so the one place colour is allowed to carry meaning went
+   grey exactly when someone was paying attention to it. A tint plus a lift
+   keeps the ink, the hues and every contrast ratio the page was verified
+   against, and reads as clearly as the slab did. */
+.tile:hover, .tile:focus-within {
+  background: var(--hover);
+  box-shadow: var(--hover-lift);
+}
 .tile__thumb {
   aspect-ratio: 16 / 10;
   border-bottom: 1px solid var(--rule);
@@ -717,7 +735,6 @@ body { padding-left: var(--rail); }
   transition: border-color 90ms linear;
 }
 
-.tile:hover .tile__thumb { background: var(--paper-2); }
 .tile__thumb svg { width: 100%; height: 100%; display: block; }
 
 /* Video thumbs. The Thunderhill capture carries a black window surround and
@@ -1044,7 +1061,7 @@ figure { margin: 0; }
 .source {
   font-family: var(--font-mono);
   font-size: 0.625rem;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.045em;
   text-transform: uppercase;
   color: var(--ink-4);
   margin-top: 0.9rem;
@@ -1277,7 +1294,7 @@ figure { margin: 0; }
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap: var(--gap-m);
+    gap: clamp(2rem, 4vw, 2.75rem);
     height: 4rem;
     padding-block: 0;
   }
@@ -1290,7 +1307,7 @@ figure { margin: 0; }
     width: auto;
   }
 
-  .masthead .nav a { font-size: 0.8125rem; }
+  .masthead .nav a { font-size: 0.9438rem; line-height: 1.4; }
   .masthead .theme-toggle { margin-top: 0; margin-left: 0.25rem; }
 
   :target, section[id] { scroll-margin-top: 5.5rem; }

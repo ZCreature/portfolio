@@ -21,7 +21,7 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="../css/base.css?v=20260808v">
+<link rel="stylesheet" href="../css/base.css?v=20260809b">
 <style>
   /* Tableau sets x-frame-options: SAMEORIGIN, so a plain iframe is refused.
      Their embedding API mounts the viz in a shadow root instead. */
@@ -35,32 +35,23 @@
 
 <header class="masthead">
   <div class="shell masthead__inner">
-    <img class="rail__mark" src="../assets/img/mark.png?v=20260808v" alt="" width="440" height="440" aria-hidden="true">
+    <div class="rail__mark">
+      <img src="../assets/img/mark.png?v=20260809b" alt="" width="440" height="440" aria-hidden="true">
+    </div>
 
     <a class="railmark" href="../index.html">
       <span class="railmark__name">Chris Almaguer</span>
-      <span class="railmark__role">Data Visualization &amp; UX Designer</span>
+      <span class="railmark__role">Data visualization design</span>
     </a>
 
     <nav class="nav" aria-label="Primary">
         <a href="../index.html#dataviz">Data visualization</a>
         <a href="../index.html#uiux">UI/UX</a>
         <a href="../index.html#editorial">Editorial / Branding</a>
-        <a href="../about.html" class="nav__about">About</a>
+        <a href="../about.html">About</a>
     </nav>
 
     <div class="rail__foot">
-      <div class="rail__social">
-        <a href="https://www.linkedin.com/in/almaguer1/" aria-label="LinkedIn" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.98 3.5a2.5 2.5 0 1 1-.02 5 2.5 2.5 0 0 1 .02-5zM3 9h4v12H3zM9 9h3.8v1.65h.05a4.17 4.17 0 0 1 3.75-2.06c4.01 0 4.75 2.64 4.75 6.07V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21H9z"/></svg>
-        </a>
-        <a href="https://dribbble.com/chrisalmaguer" aria-label="Dribbble" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm6.605 4.61a8.502 8.502 0 0 1 1.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 0 0-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0 1 12 3.475zm-3.633.803a53.896 53.896 0 0 1 3.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 0 1 4.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 0 1-2.19-5.705zM12 20.547a8.482 8.482 0 0 1-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 0 1 1.823 6.475 8.4 8.4 0 0 1-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 0 1-3.655 5.715z"/></svg>
-        </a>
-        <a href="mailto:calmaguer.design@gmail.com" aria-label="Email">
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M3 6.5h18v11H3zM3.4 7l8.6 6 8.6-6"/></svg>
-        </a>
-      </div>
       <button class="theme-toggle" type="button" data-theme-toggle
               aria-label="Switch to dark theme" aria-pressed="false">
         <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
@@ -83,6 +74,14 @@
     <p class="lede tight" data-reveal style="--reveal-delay:140ms; margin-top: var(--gap-m);">
       A study of medical student mental health, measured on two validated
       instruments and read as density rather than as points.
+    </p>
+
+    <p class="body" data-reveal style="--reveal-delay:170ms; margin-top: var(--gap-s);">
+      Built for the Cleartelligence Chart Champ competition, where it placed
+      <strong>fourth overall</strong>. The top five entries did not just get
+      judged, they got defended: I presented this from a stage at Boston
+      University, to a room, in one pass. Designing for that is a different
+      job from designing for a reader who can lean in.
     </p>
 
       <div class="case-tags" data-reveal style="--reveal-delay:200ms;">
@@ -127,8 +126,9 @@
       <p>
         This workbook was submitted to that contest. Its description on Tableau
         Public reads “Medical Student Mental Health; Heat map study /
-        Cleartelligence Chart Champ dashboard entry”. Nothing in the workbook or
-        in this repository records how it placed.
+        Cleartelligence Chart Champ dashboard entry”. It finished fourth
+        overall, inside the top five, which meant presenting it live at Boston
+        University.
       </p>
       <p>
         The subject chosen under the theme is medical student mental health:
@@ -208,8 +208,36 @@
     <div class="prose" data-reveal>
       <p class="meta">04 - Impact</p>
       <h2>Impact</h2>
-      <p class="impact-todo" data-todo>
-        To be supplied.
+      <p>
+        The dashboard placed <span class="num">fourth</span> overall. Because
+        the top five entries were presented live, the work did not end at
+        submission: I stood up in front of the room at Boston University and
+        defended it out loud.
+      </p>
+      <p>
+        That changes what a chart has to do. A dashboard read alone gets as
+        long as the reader wants; a dashboard read from a stage gets one pass,
+        at the speaker's pace, from the back of the room. The two-panel split
+        is what survived that constraint. Depression severity against
+        curriculum year on the left, three strips over weekly study hours on
+        the right, and the whole argument reduces to a shape people can see
+        before I finish the sentence describing it: the load does not taper as
+        students advance.
+      </p>
+      <p>
+        Density marks earned their place for the same reason. A scatter of a
+        few hundred students is a smear from twenty feet away. Kernel-smoothed
+        density turns repeated responses into a region with a readable centre,
+        so the pattern holds at presentation distance instead of dissolving
+        into ink.
+      </p>
+      <p>
+        What I would change is the thing the room could have asked about and
+        did not. The published dashboard carries no title, legend, units note
+        or source line, because I was standing next to it supplying all of
+        that. Once it was back on Tableau Public without me, that context was
+        gone. A chart that has to travel without its author needs to answer
+        those questions on its own face.
       </p>
     </div>
   </section>
@@ -234,7 +262,7 @@
 </main>
 
 <script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
-<script src="../js/theme.js?v=20260808v"></script>
-<script type="module" src="../js/motion.js?v=20260808v"></script>
+<script src="../js/theme.js?v=20260809b"></script>
+<script type="module" src="../js/motion.js?v=20260809b"></script>
 </body>
 </html>
