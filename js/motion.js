@@ -108,6 +108,8 @@ function boot() {
 
 function initCarousels() {
   document.querySelectorAll('[data-carousel]').forEach((root) => {
+    if (root.dataset.carInit) return;   // gateopen re-runs boot; bind once
+    root.dataset.carInit = '1';
     const track = root.querySelector('.car__track');
     const prev = root.querySelector('[data-car-prev]');
     const next = root.querySelector('[data-car-next]');
@@ -162,5 +164,12 @@ if (document.readyState === 'loading') {
 } else {
   boot();
 }
+
+/* Gate pages inject their decrypted content after boot has run, so the
+   reveal observer has never seen it and it would sit at opacity 0.
+   gate.js announces the unlock; run the initialisers again over the
+   new markup. Reveal re-observation is idempotent and carousels guard
+   themselves against double binding. */
+document.addEventListener('gateopen', boot);
 
 export { REDUCED };
