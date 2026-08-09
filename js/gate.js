@@ -42,6 +42,31 @@ async function unlock(passphrase, payload) {
 }
 
 /**
+ * Media too large to inline in the page payload ships as separate
+ * encrypted binaries ("CAG1" | salt 16 | iv 12 | ciphertext+tag) and is
+ * fetched and decrypted only after the page itself unlocks. On failure
+ * the element keeps its poster, so the page still reads.
+ */
+async function hydrateMedia(root, passphrase) {
+  for (const el of root.querySelectorAll('[data-gated-media]')) {
+    try {
+      const buf = new Uint8Array(
+        await (await fetch(el.dataset.gatedMedia)).arrayBuffer()
+      );
+      const key = await deriveKey(passphrase, buf.slice(4, 20));
+      const plain = await crypto.subtle.decrypt(
+        { name: 'AES-GCM', iv: buf.slice(20, 32) },
+        key,
+        buf.slice(32)
+      );
+      el.src = URL.createObjectURL(
+        new Blob([plain], { type: el.dataset.gatedType || 'video/mp4' })
+      );
+    } catch { /* poster stays */ }
+  }
+}
+
+/**
  * innerHTML never executes <script>, so the decrypted document's own
  * scripts have to be re-created as live nodes to run.
  */
@@ -79,6 +104,7 @@ async function init() {
       activateScripts(target);
       gate.remove();
       target.hidden = false;
+      hydrateMedia(target, pass); // async on purpose - the page reads while video decrypts
       try { sessionStorage.setItem('ca-gate', pass); } catch {}
       document.dispatchEvent(new CustomEvent('gateopen'));
       return true;
