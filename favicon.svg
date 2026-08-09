@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <!-- A dot. The paper square keeps it visible in a dark browser chrome —
-       a bare black circle on transparent disappears into a dark tab bar. -->
-  <rect width="32" height="32" fill="#fbfbfa"/>
-  <circle cx="16" cy="16" r="9" fill="#101012"/>
-</svg>
