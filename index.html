@@ -23,7 +23,7 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="css/base.css?v=20260809b">
+<link rel="stylesheet" href="css/base.css?v=20260809d">
 </head>
 <body>
 
@@ -32,7 +32,7 @@
 <header class="masthead">
   <div class="shell masthead__inner">
     <div class="rail__mark">
-      <img src="assets/img/mark.png?v=20260809b" alt="" width="440" height="440" aria-hidden="true">
+      <img src="assets/img/mark.png?v=20260809d" alt="" width="440" height="440" aria-hidden="true">
     </div>
 
     <a class="railmark" href="index.html">
@@ -69,14 +69,14 @@
     <div class="tiles tiles--3" data-reveal-group data-reveal-step="50">
       <article class="tile" data-reveal>
       <div class="tile__thumb">
-        <img src="assets/img/tools/population-alluvial.jpg?v=20260809b"
+        <img src="assets/img/tools/population-alluvial.jpg?v=20260809d"
              alt="The 7.9 billion broadsheet shown on a laptop - an alluvial diagram tying five continents through thirty-three countries to fifty cities, each city's population drawn as a red circle along the bottom axis."
              width="1200" height="750" loading="lazy">
       </div>
       <div class="tile__body">
         <div class="tile__head">
           <h3 class="tile__title">
-            <a class="tile__link" href="work/overpopulation.html">7.9 billion</a>
+            <a class="tile__link" href="work/overpopulation.html">Alluvial population visualization</a>
           </h3>
           <span class="meta">2023</span>
         </div>
@@ -90,7 +90,7 @@
     </article>
       <article class="tile" data-reveal>
       <div class="tile__thumb tile__thumb--contain">
-        <img src="assets/img/tools/medical-mental-health.jpg?v=20260809b" alt="Medical student mental health dashboard - heat map of MBI and STAI scores" loading="lazy">
+        <img src="assets/img/tools/medical-mental-health.jpg?v=20260809d" alt="Medical student mental health dashboard - heat map of MBI and STAI scores" loading="lazy">
       </div>
       <div class="tile__body">
         <div class="tile__head">
@@ -112,12 +112,12 @@
              contain on a white ground, inset so it reads as a screenshot
              sitting on the panel. Lazy-loaded like the other video. -->
         <video class="tile__video" data-lazy-video
-               poster="assets/img/tools/csl-poster.jpg?v=20260809b"
+               poster="assets/img/tools/csl-poster.jpg?v=20260809d"
                width="582" height="444"
                muted loop playsinline preload="none"
-               style="width:100%;height:100%;object-fit:contain;display:block;background:#fff;padding:5%"
+               style="width:100%;height:100%;object-fit:contain;display:block;background:#fff"
                aria-label="Screen recording of Color Safety Lens: palettes swapped, colour-vision type switched between protan and tritan, and the severity slider dragged while every tint tile re-checks its WCAG contrast.">
-          <source src="assets/video/color-safety-lens.mp4?v=20260809b" type="video/mp4">
+          <source src="assets/video/color-safety-lens.mp4?v=20260809d" type="video/mp4">
         </video></div>
       <div class="tile__body">
         <div class="tile__head">
@@ -141,15 +141,15 @@
                poster="assets/img/tools/thunderhill-poster.jpg"
                width="586" height="342"
                muted loop playsinline preload="none"
-               style="width:100%;height:100%;object-fit:contain;display:block;background:#fff;padding:5%"
+               style="width:100%;height:100%;object-fit:contain;display:block;background:#fff"
                aria-label="Screen recording of the Thunderhill West lap-time dashboard in Tableau, hovering laps to reveal times and conditions.">
-          <source src="assets/video/thunderhill.mp4?v=20260809b" type="video/mp4">
+          <source src="assets/video/thunderhill.mp4?v=20260809d" type="video/mp4">
         </video>
       </div>
       <div class="tile__body">
         <div class="tile__head">
           <h3 class="tile__title">
-            <a class="tile__link" href="work/lap-times.html">115 laps at Thunderhill</a>
+            <a class="tile__link" href="work/lap-times.html">Racetrack scatterplot lap times</a>
           </h3>
           <span class="meta">2025</span>
         </div>
@@ -162,8 +162,8 @@
       </div>
     </article>
       <article class="tile" data-reveal>
-      <div class="tile__thumb"><img src="assets/img/tools/gas-prices.jpg?v=20260809b"
-             alt="The Global Gas Prices dashboard on a laptop resting on a concrete plinth - a dark world map with amber circles scaled to year-over-year price change, beside a ranked panel of regional averages."
+      <div class="tile__thumb"><img src="assets/img/tools/gas-prices.jpg?v=20260809d"
+             alt="The North America Gas Prices dashboard on a laptop resting on a concrete plinth - a dark continental map with a purple-to-amber price surface, beside a ranked panel of regional averages."
              width="1200" height="750" loading="lazy"></div>
       <div class="tile__body">
         <div class="tile__head">
@@ -180,10 +180,14 @@
         </div>
       </div>
     </article>
-      <article class="tile tile--quiet" data-reveal>
+      <article class="tile" data-reveal>
       <div class="tile__thumb">
-        <!-- No thumbnail: the artwork carries real clinical figures and lives
-             inside the encrypted payload, not on this server. -->
+        <!-- Deliberately blurred: rebuilt from a 28px downscale, so the blur is
+             in the pixels and cannot be removed. The sharp artwork lives only
+             inside the encrypted payload. -->
+        <img src="assets/img/tools/surgical-sankey-blur.jpg?v=20260809d"
+             alt="A deliberately blurred Sankey dashboard. Shapes and colour remain; every figure and label is unreadable."
+             width="1200" height="600" loading="lazy">
       </div>
       <div class="tile__body">
         <div class="tile__head">
@@ -211,7 +215,7 @@
 
     <div class="tiles tiles--3" data-reveal-group data-reveal-step="50">
       <article class="tile" data-reveal>
-      <div class="tile__thumb"><img src="assets/img/tools/trackdash.jpg?v=20260809b" alt="TrackDash running on a phone mounted in a car at night, showing a five-minute speed trace beside the instrument cluster and the CarPlay screen." width="1200" height="750" loading="lazy"></div>
+      <div class="tile__thumb"><img src="assets/img/tools/trackdash.jpg?v=20260809d" alt="TrackDash running on a phone mounted in a car at night, showing a five-minute speed trace beside the instrument cluster and the CarPlay screen." width="1200" height="750" loading="lazy"></div>
       <div class="tile__body">
         <div class="tile__head">
           <h3 class="tile__title">TrackDash</h3>
@@ -227,7 +231,7 @@
     </article>
       <article class="tile" data-reveal>
       <div class="tile__thumb">
-        <img src="assets/img/tools/focus-timer.jpg?v=20260809b"
+        <img src="assets/img/tools/focus-timer.jpg?v=20260809d"
              alt="The Pomodoro FOCUS app on a laptop resting on a stone slab in a dark room, a green ASCII hourglass counting down beside the editor it was built in."
              width="1200" height="750" loading="lazy">
       </div>
@@ -247,7 +251,7 @@
 
       <article class="tile tile--mybeats" data-reveal>
       <div class="tile__thumb tile__thumb--contain">
-        <img width="1200" height="869" src="assets/img/tools/mybeats.jpg?v=20260809b" alt="The MyBEATS EQ view - a light interface with paired analogue VU meters, a stereo correlation scale, EQ sliders, and readouts for crest, centroid, BPM and key." loading="lazy">
+        <img width="1200" height="869" src="assets/img/tools/mybeats.jpg?v=20260809d" alt="The MyBEATS EQ view - a light interface with paired analogue VU meters, a stereo correlation scale, EQ sliders, and readouts for crest, centroid, BPM and key." loading="lazy">
       </div>
       <div class="tile__body">
         <div class="tile__head">
@@ -263,7 +267,7 @@
       </div>
     </article>
       <article class="tile" data-reveal>
-      <div class="tile__thumb tile__thumb--contain"><img src="assets/img/tools/diskmap.jpg?v=20260809b" alt="The DiskMap app with its scan-location dialog open, beside the Diskbot panel offering to analyse file names, sizes and dates but never file contents." loading="lazy"></div>
+      <div class="tile__thumb tile__thumb--contain"><img src="assets/img/tools/diskmap.jpg?v=20260809d" alt="The DiskMap app with its scan-location dialog open, beside the Diskbot panel offering to analyse file names, sizes and dates but never file contents." loading="lazy"></div>
       <div class="tile__body">
         <div class="tile__head">
           <h3 class="tile__title"><a class="tile__link" href="work/diskmap.html">Disk Map</a></h3>
@@ -279,7 +283,7 @@
     </article>
       <article class="tile" data-reveal>
       <div class="tile__thumb tile__thumb--contain">
-        <img src="assets/img/tools/asciicam.jpg?v=20260809b"
+        <img src="assets/img/tools/asciicam.jpg?v=20260809d"
              alt="ASCII Glitch Camera on a phone: a car rendered live as dense ASCII characters, with resolution and contrast sliders and dither, enhance and invert controls beneath."
              width="552" height="1200" loading="lazy">
       </div>
@@ -295,7 +299,7 @@
         </div>
       </div>
     </article>
-      <article class="tile tile--quiet" data-reveal>
+      <article class="tile" data-reveal>
       <div class="tile__thumb">
         <!-- No thumbnail: client dashboards cannot be shown publicly, and a
              stand-in graphic would be pretending to be the work. -->
@@ -328,7 +332,7 @@
 
       <article class="tile" data-reveal>
         <div class="tile__thumb">
-        <img src="assets/img/tools/editorial.jpg?v=20260809b"
+        <img src="assets/img/tools/editorial.jpg?v=20260809d"
              alt="A Sacramento Business Journal spread, 7 Big Development Projects To Watch This Year, with a gold duotone photograph of houses under construction facing a numeral seven set behind the headline."
              width="1200" height="812" loading="lazy">
       </div>
@@ -343,7 +347,7 @@
           <div class="tile__tags"><span class="tag">ACBJ</span></div>
         </div>
       </article>
-      <article class="tile tile--quiet" data-reveal>
+      <article class="tile" data-reveal>
         <div class="tile__thumb"></div>
         <div class="tile__body">
           <div class="tile__head">
@@ -354,7 +358,7 @@
           <div class="tile__tags"><span class="tag">Branding</span><span class="tag tag--status">On request</span></div>
         </div>
       </article>
-      <article class="tile tile--quiet" data-reveal>
+      <article class="tile" data-reveal>
         <div class="tile__thumb"></div>
         <div class="tile__body">
           <div class="tile__head">
@@ -382,7 +386,7 @@
 
 </main>
 
-<script src="js/theme.js?v=20260809b"></script>
-<script type="module" src="js/motion.js?v=20260809b"></script>
+<script src="js/theme.js?v=20260809d"></script>
+<script type="module" src="js/motion.js?v=20260809d"></script>
 </body>
 </html>

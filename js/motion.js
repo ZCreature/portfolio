@@ -99,6 +99,29 @@ function boot() {
   initReveal();
   initScrolly();
   initLazyVideo();
+  initCarousels();
+}
+
+/* ---- 3c. Carousel arrows ----------------------------------
+   The strip scrolls natively; these buttons just page it. They
+   disable at the ends so the state is legible without motion. */
+
+function initCarousels() {
+  document.querySelectorAll('[data-carousel]').forEach((root) => {
+    const track = root.querySelector('.car__track');
+    const prev = root.querySelector('[data-car-prev]');
+    const next = root.querySelector('[data-car-next]');
+    if (!track || !prev || !next) return;
+    const step = () => Math.max(track.clientWidth * 0.85, 240);
+    prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: REDUCED ? 'auto' : 'smooth' }));
+    next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: REDUCED ? 'auto' : 'smooth' }));
+    const sync = () => {
+      prev.disabled = track.scrollLeft < 8;
+      next.disabled = track.scrollLeft > track.scrollWidth - track.clientWidth - 8;
+    };
+    track.addEventListener('scroll', sync, { passive: true });
+    sync();
+  });
 }
 
 /* ---- 3b. Lazy video ---------------------------------------

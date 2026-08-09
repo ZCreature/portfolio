@@ -782,7 +782,7 @@ body { padding-left: var(--rail); }
 .tile__thumb--contain img {
   object-fit: contain;
   object-position: center;
-  padding: 9%;
+  padding: 2%;
 }
 
 /* Marks a tile whose thumbnail is an illustration, not a capture. */
@@ -1364,3 +1364,67 @@ figure { margin: 0; }
 @media (max-width: 46rem) {
   .now__frame { aspect-ratio: 4 / 3; }
 }
+
+
+/* ---- Carousel strip ------------------------------------------
+   For bodies of work too large to stack. Scroll-snap does the
+   real work; the buttons are a convenience layered on top, so
+   without JS the strip is still a plain scrollable row. Slides
+   are height-capped so portrait pages and wide spreads share
+   one line. */
+
+.car { position: relative; }
+
+.car__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 1rem;
+}
+
+.car__meta { display: flex; align-items: baseline; gap: 1.1rem; }
+
+.car__track {
+  display: flex;
+  gap: 0.9rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  padding: 2px 2px 0.9rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ink-4) transparent;
+}
+.car__track::-webkit-scrollbar { height: 5px; }
+.car__track::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 3px; }
+.car__track::-webkit-scrollbar-track { background: transparent; }
+
+.car__item { flex: 0 0 auto; scroll-snap-align: start; }
+
+.car__item img {
+  height: clamp(15rem, 32vw, 24rem);
+  width: auto;
+  display: block;
+  border: 1px solid var(--rule);
+  background: #fff;
+}
+
+.car__btns { display: flex; gap: 0.4rem; }
+
+.car__btn {
+  width: 1.9rem;
+  height: 1.9rem;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--paper);
+  color: var(--ink-2);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+}
+.car__btn svg { width: 12px; height: 12px; }
+.car__btn:hover { color: var(--ink); border-color: var(--ink-3); }
+.car__btn:disabled { opacity: 0.3; cursor: default; }
