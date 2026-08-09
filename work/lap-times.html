@@ -407,8 +407,8 @@ function render() {
   }).join('');
 
   const marks = visible.map((l) => `
-    <circle class="lap" cx="${x(l.lap).toFixed(1)}" cy="${y(l.t).toFixed(1)}" r="4"
-            fill="${l.wet ? c.wet : c.dry}" fill-opacity="0.72"
+    <circle class="lap" cx="${x(l.lap).toFixed(1)}" cy="${y(l.t).toFixed(1)}" r="5.5"
+            fill="${l.wet ? c.wet : c.dry}" fill-opacity="0.55"
             stroke="${l.wet ? c.wet : c.dry}" stroke-width="0.75"
             tabindex="0" role="img"
             data-lap="${l.lap}" data-t="${l.t}" data-day="${l.dayLabel}"
