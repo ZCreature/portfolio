@@ -44,12 +44,6 @@
   .readout-bar b { color: var(--ink); font-weight: 600; }
   .readout-bar[data-empty="true"] { color: var(--ink-4); }
 
-  .compare-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(15rem,1fr)); gap: 1px;
-    background: var(--rule); border: 1px solid var(--rule); margin-top: var(--gap-m); }
-  .compare-cell { background: var(--paper); padding: 1.15rem; }
-  .compare-cell h3 { font-size: 0.875rem; letter-spacing: -0.01em; margin-bottom: 0.4rem; }
-  .compare-cell p { font-size: 0.8125rem; color: var(--ink-3); line-height: 1.5; }
-  .compare-cell .meta { display: block; margin-bottom: 0.5rem; }
 
   .stat-row { display: grid; grid-template-columns: repeat(auto-fit,minmax(8rem,1fr)); gap: var(--gap-m);
     padding-block: var(--gap-m); border-block: 1px solid var(--rule); }
@@ -240,44 +234,7 @@
       </p>
     </div>
 
-    <div class="compare-grid" data-reveal-group data-reveal-step="55">
-      <div class="compare-cell" data-reveal>
-        <span class="meta">Marks</span>
-        <h3>Radius 4 at 0.72 opacity</h3>
-        <p>
-          115 circles, one per lap. Overlapping times in a dense session stack visibly
-          instead of merging into a single shape.
-        </p>
-      </div>
-      <div class="compare-cell" data-reveal>
-        <span class="meta">Axes</span>
-        <h3><span class="num">m:ss</span> and five dated bands</h3>
-        <p>
-          Y labels are formatted <span class="num">m:ss</span> with a tick every ten
-          seconds. Dashed rules divide the x axis into one band per track day,
-          labeled with the day number and its year and month.
-        </p>
-      </div>
-      <div class="compare-cell" data-reveal>
-        <span class="meta">Detail</span>
-        <h3>Readout bar below the plot</h3>
-        <p>
-          Hover and keyboard focus write the same line into a bar under the chart: lap,
-          session, day, date, time and condition. The bar is
-          <span class="num">aria-live</span> polite, and all 115 marks take focus.
-        </p>
-      </div>
-      <div class="compare-cell" data-reveal>
-        <span class="meta">Color</span>
-        <h3>One palette per theme</h3>
-        <p>
-          Every series color clears 3:1 against its own page background, and the
-          closest pair measures ΔE 10.7 in light and 15.4 in dark.
-        </p>
-      </div>
-    </div>
-
-    <div style="margin-top: var(--gap-l); display:flex; gap:0.75rem; flex-wrap:wrap;" data-reveal>
+<div style="margin-top: var(--gap-l); display:flex; gap:0.75rem; flex-wrap:wrap;" data-reveal>
       <a class="btn" href="https://public.tableau.com/app/profile/creature/viz/ThunderhillWest-HPDElaptimes/Dashboard12" rel="noopener">The original on Tableau Public</a>
     </div>
   </section>
