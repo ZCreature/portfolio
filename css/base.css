@@ -237,6 +237,12 @@ section { padding-block: var(--gap-xl); }
 
 .masthead .nav a { font-size: 0.9438rem; line-height: 1.4; }
 
+/* Elsewhere links: same column, quieter voice, held apart from the
+   primary set by a clear step. */
+.masthead .nav--social { margin-top: 1.6rem; gap: 0.7rem; }
+.masthead .nav--social a { font-size: 0.8125rem; color: var(--ink-4); }
+.masthead .nav--social a:hover { color: var(--ink); }
+
 /* At the foot of the rail, away from the links it is not one of. */
 .masthead .theme-toggle { margin-left: auto; margin-right: -0.35rem; }
 
