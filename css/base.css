@@ -167,7 +167,10 @@ p { margin: 0; text-wrap: pretty; }
   padding-inline: clamp(1.25rem, 5vw, 3.5rem);
 }
 
-.shell--narrow { max-width: 52rem; }
+/* Narrow sections keep the reading measure but stay flush with the left
+   content edge instead of centring inside the shell. */
+.shell--narrow { max-width: var(--shell); }
+.shell--narrow > * { max-width: 52rem; }
 
 section { padding-block: var(--gap-xl); }
 
@@ -992,6 +995,8 @@ body { padding-left: var(--rail); }
   margin-top: 2.6em;
   margin-bottom: 0.1em;
 }
+/* The section flag sits close above its heading, not a full block away. */
+.prose .meta + h2 { margin-top: 0.75em; }
 .prose h3 {
   font-size: 1.0625rem;
   letter-spacing: -0.015em;
