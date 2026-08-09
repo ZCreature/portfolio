@@ -992,11 +992,12 @@ body { padding-left: var(--rail); }
 .prose h2 {
   font-size: clamp(1.35rem, 2.2vw, 1.7rem);
   letter-spacing: -0.017em;
+  line-height: 1.18;
   margin-top: 2.6em;
   margin-bottom: 0.1em;
 }
 /* The section flag sits close above its heading, not a full block away. */
-.prose .meta + h2 { margin-top: 0.75em; }
+.prose .meta + h2 { margin-top: 0.55em; }
 .prose h3 {
   font-size: 1.0625rem;
   letter-spacing: -0.015em;
