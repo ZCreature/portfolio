@@ -122,7 +122,14 @@ function initCarousels() {
       next.disabled = track.scrollLeft > track.scrollWidth - track.clientWidth - 8;
     };
     track.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync, { passive: true });
+    // Images (lazy files or decrypted data URIs) can finish layout after
+    // binding, leaving the arrows stuck disabled - re-sync once they land.
+    track.querySelectorAll('img').forEach((img) => {
+      if (!img.complete) img.addEventListener('load', sync, { once: true });
+    });
     sync();
+    setTimeout(sync, 600);
   });
 }
 
