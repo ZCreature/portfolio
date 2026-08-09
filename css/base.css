@@ -992,7 +992,7 @@ body { padding-left: var(--rail); }
 .prose h2 {
   font-size: clamp(1.35rem, 2.2vw, 1.7rem);
   letter-spacing: -0.017em;
-  line-height: 1.18;
+  line-height: 1.24;
   margin-top: 2.6em;
   margin-bottom: 0.1em;
 }
