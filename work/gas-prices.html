@@ -66,9 +66,10 @@
       Prompting is not designing
     </h1>
     <p class="lede tight" data-reveal style="--reveal-delay:140ms; margin-top: var(--gap-m);">
-      An interactive study of global gas prices, built in R with Leaflet.
-      I wrote it with AI assistance, which got me to a working map fast - and then
-      cost me a long evening of specifying exactly what "looks right" means.
+      An interactive study of global gas prices, built in R with Leaflet. I
+      wrote it with AI assistance, which got me to a working map fast, and then
+      cost me a long evening working out how to say exactly what "looks right"
+      means.
     </p>
 
       <div class="case-tags" data-reveal style="--reveal-delay:200ms;">
@@ -92,7 +93,7 @@
       <p>
         It runs in the page. The price data is baked into the document as 1,712
         vector shapes, with no API key and no query at view time. Only the
-        basemap is fetched, from CartoDB's dark tiles.
+        basemap is fetched.
       </p>
     </div>
 
@@ -109,7 +110,7 @@
       </div>
       <p class="embed__note">
         Built for a 1440&nbsp;×&nbsp;900 viewport with no responsive breakpoints, so it
-        renders at full size and scales to fit rather than reflowing.
+        renders at full size and scales to fit instead of reflowing.
         <span data-scale-out></span> Basemap tiles come from CartoDB, so this panel
         needs a connection.
       </p>
@@ -127,13 +128,9 @@
         corner, and state boundaries competing with the data for attention.
       </p>
       <p>
-        Moving past that meant writing down decisions normally made by eye. Every
-        prompt that produced something worth keeping was one where the design
-        decision had already been made. The same pattern showed up on the
-        <a href="color-safety-lens.html" style="text-decoration:underline; text-underline-offset:3px;">Color
-        Safety Lens</a> project from a different angle: the distance between an
-        idea and something that runs is now short, and the distance between
-        something that runs and something correct is unchanged.
+        Getting past that meant writing down decisions I normally make by eye.
+        Every prompt that produced something worth keeping was one where the
+        design decision had already been made before I typed it.
       </p>
     </div>
   </section>
@@ -144,16 +141,22 @@
       <p class="meta">03 - Design</p>
       <h2>Four decisions, written down before they were prompted</h2>
       <p>
-        Bin breaks follow the distribution rather than equal intervals, so the
+        Bin breaks follow the distribution instead of equal intervals, so the
         classes carry roughly comparable numbers of places instead of splitting
-        an empty range. The ramp is sequential rather than categorical, because
-        price is a quantity and a categorical set implies unordered groups.
+        an empty range.
+      </p>
+      <p>
+        The ramp is sequential instead of categorical, because price is a
+        quantity and a categorical set implies unordered groups.
       </p>
       <p>
         Boundaries drop back to a hairline so the fill reads before the outline,
-        and labels appear only where they do not collide. Baking the data into
-        the document rather than querying it removes the failure mode where the
-        map is a blank basemap because an API is down or a key has expired.
+        and labels appear only where they do not collide.
+      </p>
+      <p>
+        The data is baked into the document instead of queried, which removes the
+        failure mode where the map is a blank basemap because an API is down or a
+        key has expired.
       </p>
     </div>
   </section>
@@ -162,9 +165,23 @@
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
     <div class="prose" data-reveal>
       <p class="meta">04 - Impact</p>
-      <h2>Impact</h2>
-      <p class="impact-todo" data-todo>
-        To be supplied.
+      <h2>What this one is actually for</h2>
+      <p>
+        The map works. The finding is the process.
+      </p>
+      <p>
+        I got to something that ran in an afternoon and spent the evening on four
+        decisions that took one line each to state. Bin breaks, sequential ramp,
+        hairline boundaries, no runtime dependency. None of those are hard. They
+        are just not defaults, and nothing was going to supply them for me.
+      </p>
+      <p>
+        The distance between an idea and something that runs is now short. The
+        distance between something that runs and something correct has not moved.
+        Color Safety Lens hit the same wall from the other side, where the thing
+        that ran was confidently wrong and I could not tell by looking. That is
+        the argument I make now for having a designer on this work rather than a
+        prompt: the specification is the job.
       </p>
     </div>
   </section>
@@ -179,7 +196,7 @@
           <h3 class="entry__title">
             <a class="entry__link" href="color-safety-lens.html">Color Safety Lens</a>
           </h3>
-          <p class="entry__sub">Shipped an accessibility auditor, then found my own colour maths was wrong.</p>
+          <p class="entry__sub">Shipped an accessibility auditor, then found my own color math was wrong.</p>
         </div>
         <span class="meta">Next</span>
       </article>

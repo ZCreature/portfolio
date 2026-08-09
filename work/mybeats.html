@@ -82,15 +82,16 @@
       <p class="meta">01 - The pipeline</p>
       <h2>Five stages, one of them a model</h2>
       <p>
-        A library is imported in stages: <b>scan</b> walks the files,
-        <b>tags</b> reads embedded metadata, <b>art</b> pulls cover images,
-        <b>analyze</b> measures the audio, and <b>enrich</b> asks a local model
-        for the things no tag contains - genre, subgenre, mood, and free-form
-        vibe descriptions.
+        A library is imported in stages. <span class="num">scan</span> walks the
+        files, <span class="num">tags</span> reads embedded metadata,
+        <span class="num">art</span> pulls cover images,
+        <span class="num">analyze</span> measures the audio, and
+        <span class="num">enrich</span> asks a local model for the things no tag
+        contains: genre, subgenre, mood, and free-form vibe descriptions.
       </p>
       <p>
         Only the last stage is a model, and that is deliberate. Everything that
-        can be measured is measured. The model is asked only for judgement, on
+        can be measured is measured. The model is asked only for judgment, on
         top of evidence the earlier stages already gathered.
       </p>
     </div>
@@ -101,15 +102,15 @@
       <p class="meta">02 - The failure that set the model size</p>
       <h2>7B does not say "I do not know"</h2>
       <p>
-        The obvious choice was a 7B model: smaller, faster, less memory. It
+        The obvious choice was a 7B model. Smaller, faster, less memory. It
         worked well on anything canonical. It fell apart on the part of the
-        library I actually care about - underground and regional rap, where an
+        library I actually care about, underground and regional rap, where an
         artist might have a few thousand listeners.
       </p>
       <p>
-        It did not fail by returning nothing. <b>It failed by inventing.</b>
-        Asked about a record it had never seen, a small model will produce a
-        confident, plausible, wrong genre rather than an empty field. That is
+        It did not fail by returning nothing. <em>It failed by inventing.</em>
+        Asked about a record it had never seen, a small model produces a
+        confident, plausible, wrong genre instead of an empty field. That is
         far worse than a gap, because a gap is visible and a fabrication is not.
       </p>
     </div>
@@ -121,9 +122,9 @@
 
     <div class="prose" data-reveal>
       <p>
-        14B at 4-bit quantisation is about 9&nbsp;GB, which sits comfortably
-        alongside the app in 18&nbsp;GB of memory. 32B does not. So the model
-        size was not chosen for benchmark scores - it was chosen as the smallest
+        14B at 4-bit quantization is about 9 GB, which sits comfortably
+        alongside the app in 18 GB of memory. 32B does not. So the model
+        size was not chosen for benchmark scores. It was chosen as the smallest
         one whose recall did not run out on the specific library it has to read.
       </p>
     </div>
@@ -154,12 +155,10 @@
       <p class="meta">04 - Running it over 16,000 tracks</p>
       <h2>Two constraints that only appear at scale</h2>
       <ul>
-        <li>
-          <b>Concurrency of one.</b> The instinct is to parallelise. A local
+        <li><b>Concurrency of one.</b> The instinct is to parallelize. A local
           model is memory-bound and Ollama serves a single request at a time, so
-          extra workers do not generate in parallel - they queue while holding
-          memory, and the whole pass gets slower.
-        </li>
+          extra workers do not generate in parallel. They queue while holding
+          memory, and the whole pass gets slower.</li>
         <li>
           <b>A deadline on every call.</b> Without one, a single stuck
           generation pins the worker forever. At low concurrency that does not
@@ -168,8 +167,8 @@
         </li>
       </ul>
       <p>
-        The model is also resolved at call time rather than frozen at import, so
-        changing it in Settings takes effect without restarting the app - which
+        The model is resolved at call time instead of frozen at import, so
+        changing it in Settings takes effect without restarting the app. That
         matters when you are comparing two models across a long run.
       </p>
 
@@ -178,7 +177,7 @@
         The design work here was not the interface. It was deciding what the
         machine is allowed to assert. Measure what can be measured, constrain
         the shape of what it returns, and size the model against the hardest
-        part of the real data rather than the average part.
+        part of the real data instead of the average part.
       </p>
     </div>
   </section>

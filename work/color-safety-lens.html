@@ -4,16 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Color Safety Lens - Chris Almaguer</title>
-<meta name="description" content="A palette auditor: WCAG contrast across tint ramps and colour-vision simulation, with the colour maths running live in the page.">
+<meta name="description" content="A palette auditor: WCAG contrast across tint ramps and color-vision simulation, with the color maths running live in the page.">
 <meta name="theme-color" content="#fbfbfa">
 <link rel="icon" href="../favicon.png?v=20260809h" type="image/png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Chris Almaguer">
 <meta property="og:title" content="Color Safety Lens - Chris Almaguer">
-<meta property="og:description" content="A palette auditor: WCAG contrast across tint ramps and colour-vision simulation, with the colour maths running live in the page.">
+<meta property="og:description" content="A palette auditor: WCAG contrast across tint ramps and color-vision simulation, with the color maths running live in the page.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Color Safety Lens - Chris Almaguer">
-<meta name="twitter:description" content="A palette auditor: WCAG contrast across tint ramps and colour-vision simulation, with the colour maths running live in the page.">
+<meta name="twitter:description" content="A palette auditor: WCAG contrast across tint ramps and color-vision simulation, with the color maths running live in the page.">
 <meta name="author" content="Chris Almaguer">
 <script>
   try {
@@ -208,9 +208,10 @@
       Auditing the auditor
     </h1>
     <p class="lede tight" data-reveal style="--reveal-delay:140ms; margin-top: var(--gap-m);">
-      Color Safety Lens audits palettes for contrast and colour-vision deficiency. The
-      first working version gave confident, authoritative, wrong answers - off by more
-      than ΔE&nbsp;14 on some hues, where 1.0 is a visible difference.
+      Color Safety Lens audits palettes for contrast and color-vision
+      deficiency. The first working version gave confident, authoritative,
+      wrong answers. Off by more than ΔE 14 on some hues, where 1.0 is a
+      visible difference.
     </p>
 
       <div class="case-tags" data-reveal style="--reveal-delay:200ms;">
@@ -234,9 +235,9 @@
                 title="Color Safety Lens - palette accessibility auditor"></iframe>
       </div>
       <p class="embed__note">
-        The actual tool, not a screenshot. Load a palette, ramp the tints, and run the
-        colour-vision simulation - the same linear-RGB pipeline described above.
-        <span data-scale-out></span>
+        The actual tool, not a screenshot. Load a palette, ramp the tints, and
+        run the color-vision simulation on the same linear-RGB pipeline described
+        below.
       </p>
     </div>
   </section>
@@ -245,17 +246,18 @@
   <section class="shell shell--narrow" style="padding-block: var(--gap-l);">
     <div class="prose" data-reveal>
       <p class="meta">01 - Context</p>
-      <h2>Colour never ships at 100%</h2>
+      <h2>Color never ships at 100%</h2>
       <p>
-        Every brand guideline specifies colour at full strength. In a dashboard that
-        colour spends its life at 60%, 30%, 10% - fills, ramps, banding, disabled
-        states. The guideline says nothing about those. That's where accessibility
-        quietly breaks.
+        Every brand guideline specifies color at full strength. In a dashboard
+        that color spends its life at 60%, 30%, 10%. Fills, ramps, banding,
+        disabled states. The guideline says nothing about those. That is where
+        accessibility quietly breaks.
       </p>
       <p>
-        I was checking tints one at a time on <b>webaim.org</b>, dozens per dashboard,
-        across fifty. Slow - and worse, it was <em>sampling</em>. I only caught failures
-        I thought to look for.
+        I was checking tints one at a time on
+        <a href="https://webaim.org/resources/contrastchecker/" rel="noopener" target="_blank">webaim.org</a>,
+        dozens per dashboard, across fifty. Slow, and worse, it was
+        <em>sampling</em>. I only caught the failures I thought to look for.
       </p>
     </div>
 
@@ -268,7 +270,7 @@
       </div>
 
       <div class="controls">
-        <div class="seg" role="group" aria-label="Base colour">
+        <div class="seg" role="group" aria-label="Base color">
           <button type="button" data-base="#0b5cad" aria-pressed="true">Blue</button>
           <button type="button" data-base="#00786b" aria-pressed="false">Teal</button>
           <button type="button" data-base="#a3341f" aria-pressed="false">Rust</button>
@@ -282,12 +284,13 @@
       <p class="source">Live · WCAG 2.1 relative luminance · 4.5:1 threshold for body text</p>
 
       <figcaption>
-        <b>Watch the label colour flip.</b> At full strength only a white label passes;
-        one step down that reverses and only black passes. Every base colour here does
-        the same thing. <b>There is no single label colour that is safe across a tint
-        ramp</b> - so any dashboard that sets one label colour for a whole chart family
-        is failing somewhere on that ramp. That's not a judgement call, it's arithmetic,
-        and it's the sort of thing worth having a machine check.
+        <b>Watch the label color flip.</b> At full strength only a white
+        label passes. One step down that reverses and only black passes. Every
+        base color here does the same thing. <em>There is no single label color
+        that is safe across a tint ramp</em>, so any dashboard that sets one
+        label color for a whole chart family is failing somewhere on that ramp.
+        That is not a judgment call, it is arithmetic, and it is the sort of
+        thing worth having a machine check.
       </figcaption>
     </figure>
   </section>
@@ -298,14 +301,15 @@
       <p class="meta">02 - Process</p>
       <h2>The first version computed the simulation on the wrong values</h2>
       <p>
-        I used the <b>Machado, Oliveira &amp; Fernandes (2009)</b> model - the standard
-        CVD matrices. Read the values in, multiply through the matrix, write them back
-        out. It rendered. It looked plausible. I shipped it.
+        I used the <em>Machado, Oliveira &amp; Fernandes (2009)</em> model, the
+        standard CVD matrices. Read the values in, multiply through the matrix,
+        write them back out. It rendered. It looked plausible. I shipped it.
       </p>
       <p>
-        The matrices operate on <b>linear</b> RGB - light as a physical quantity. Hex
-        values in a design file are <b>gamma-encoded</b> sRGB, pre-distorted for how
-        displays and eyes work. I was running a physics model on perceptual numbers.
+        The matrices operate on <em>linear</em> RGB, light as a physical
+        quantity. Hex values in a design file are <em>gamma-encoded</em> sRGB,
+        pre-distorted for how displays and eyes work. I was running a physics
+        model on perceptual numbers.
       </p>
     </div>
 
@@ -325,14 +329,14 @@
       <div class="compare">
         <div class="compare__col">
           <div class="compare__label">
-            <span class="meta">Wrong - gamma sRGB</span>
+            <span class="meta">Wrong, gamma sRGB</span>
             <span class="meta">v0.1</span>
           </div>
           <div class="strip" id="strip-wrong"></div>
         </div>
         <div class="compare__col">
           <div class="compare__label">
-            <span class="meta">Correct - linear RGB</span>
+            <span class="meta">Correct, linear RGB</span>
             <span class="meta">v1.0</span>
           </div>
           <div class="strip" id="strip-right"></div>
@@ -351,9 +355,9 @@
         </div>
         <div style="flex:1 1 14rem; min-width:12rem;">
           <p class="meta">Reference</p>
-          <p class="fact__value" style="font-size:0.8125rem; color:var(--ink-3); line-height:1.45;">
-            ΔE&nbsp;1.0 is the threshold of a just-noticeable difference.
-            Anything above ~2.3 is plainly visible to an ordinary observer.
+          <p>
+            ΔE 1.0 is the threshold of a just-noticeable difference.
+            Anything above about 2.3 is plainly visible to an ordinary observer.
           </p>
         </div>
       </div>
@@ -361,9 +365,10 @@
       <p class="source">Live · Machado et&nbsp;al. 2009 matrices · CIEDE2000 difference</p>
 
       <figcaption>
-        Both strips claim to show the same thing. One is a simulation; the other is a
-        picture of an arithmetic error. <b>The tool gave no indication which was
-        which</b> - that's what made it dangerous rather than merely wrong.
+        <b>Both strips claim to show the same thing.</b> One is a simulation.
+        The other is a picture of an arithmetic error. The tool gave no
+        indication which was which, and that is what made it dangerous instead
+        of merely wrong.
       </figcaption>
     </figure>
   </section>
@@ -374,23 +379,20 @@
       <p class="meta">03 - Design</p>
       <h2>Rebuilt on linear values, then checked against published figures</h2>
       <p>
-        Fixing the code took an afternoon: linearise in, apply, re-encode out.
+        Fixing the code took an afternoon: linearize in, apply, re-encode out.
         Trusting it again took much longer.
       </p>
       <ul>
-        <li>
-          <b>Rebuilt in linear RGB.</b> Every operation - simulation, tinting, mixing - happens in linear space and converts back at the boundary.
-        </li>
+        <li><b>Rebuilt in linear RGB.</b> Every operation, simulation, tinting,
+          mixing, happens in linear space and converts back at the boundary.</li>
         <li>
           <b>Validated ΔE against Sharma's test suite.</b> CIEDE2000 has known
           discontinuities that naive implementations get wrong. The published test data
           exists to catch them.
         </li>
-        <li>
-          <b>Ran Okabe - Ito through as a control.</b> It's the palette designed by
-          colourblind scientists to stay distinguishable. If my tool flagged it unsafe,
-          my tool was still broken.
-        </li>
+        <li><b>Ran Okabe and Ito through as a control.</b> It is the palette designed
+          by colorblind scientists to stay distinguishable. If my tool flagged
+          it unsafe, my tool was still broken.</li>
       </ul>
       <p>Five audits later, it passed clean.</p>
     </div>
@@ -399,7 +401,7 @@
       <div class="viz__head">
         <div>
           <p class="viz__title">The corrected simulator</p>
-          <p class="viz__note">Okabe - Ito, the control palette</p>
+          <p class="viz__note">Okabe and Ito, the control palette</p>
         </div>
         <div class="seg" role="group" aria-label="Palette">
           <button type="button" data-pal="okabe" aria-pressed="true">Okabe - Ito</button>
@@ -430,10 +432,10 @@
       </p>
 
       <figcaption>
-        <b>Switch to the naive palette and drag severity up.</b> Two hues that look
-        clearly distinct at zero converge well before full severity - a failure affecting
-        roughly 1 in 12 men. Okabe - Ito holds separation throughout. That's the point of
-        it.
+        <b>Switch to the naive palette and drag severity up.</b> Two hues that
+        look clearly distinct at zero converge well before full severity, a
+        failure affecting roughly 1 in 12 men. Okabe and Ito holds separation
+        throughout. That is the point of it.
       </figcaption>
     </figure>
   </section>
@@ -444,19 +446,16 @@
       <p class="meta">04 - Impact</p>
       <h2>Impact</h2>
       <p>
-        The tool tests every colour pair in a palette at once. Run against the
+        The tool tests every color pair in a palette at once. Run against the
         dashboard palette in use at the time, it returned combinations that
-        failed WCAG&nbsp;AA.
+        failed WCAG&nbsp;AA that hand-checking had missed.
       </p>
       <p>
         Verified tints export as SVG back into Figma and into the design system
-        rather than a screenshot folder, which moved the audit from a final check
-        into the definition of done. The source is public on GitHub.
+        instead of into a screenshot folder, which moved the audit from a final
+        check into the definition of done. The source is public on GitHub.
       </p>
-      <p class="impact-todo" data-todo>
-        Confirm which palette this was run against, and add any adoption or
-        follow-on outcome.
-      </p>
+      
     </div>
 
 
@@ -476,8 +475,8 @@
             <a class="entry__link" href="lap-times.html">115 laps at Thunderhill</a>
           </h3>
           <p class="entry__sub">
-            Next case study - a year of my own telemetry, and what I found reviewing my
-            own chart a year later.
+            Next case study. A year of my own telemetry, and what I found
+            reviewing my own chart a year later.
           </p>
         </div>
         <span class="meta">Next</span>

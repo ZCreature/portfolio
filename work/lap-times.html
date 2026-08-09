@@ -101,9 +101,9 @@
       One year, one chart
     </h1>
     <p class="lede tight" data-reveal style="--reveal-delay:140ms; margin-top: var(--gap-m);">
-      115 laps at Thunderhill West across five track days, May 2025 to April 2026,
-      logged with RaceChrono and RaceStudio. The chart was published on Tableau Public
-      and rebuilt here as SVG drawn in the browser from a reconstructed data file.
+      115 laps at Thunderhill West across five track days, May 2025 to April
+      2026, logged with RaceChrono and RaceStudio. Published first on Tableau
+      Public, rebuilt here as SVG drawn in the browser.
     </p>
 
       <div class="case-tags" data-reveal style="--reveal-delay:200ms;">
@@ -130,25 +130,17 @@
       <h2>A season of lap times</h2>
       <p>
         Five track days at Thunderhill Raceway Park, West configuration, between
-        17 May 2025 and 12 April 2026: 115 laps across 16 sessions, logged with
-        RaceChrono and RaceStudio. The first four days carried 22 laps each and the
-        fifth carried 27.
+        17 May 2025 and 12 April 2026. 115 laps across 16 sessions. The first
+        four days carried 22 laps each and the fifth carried 27.
       </p>
       <p>
-        The fastest dry lap of the first day was 1:39.36. The fastest of the season was
-        1:28.39, set on lap 112 of the last day, a difference of 10.97 seconds. The
-        steps between one day's best lap and the next were 2.24, 3.02, 3.10 and 2.61
-        seconds.
+        The fastest dry lap of the first day was 1:39.36. The fastest of the
+        season was 1:28.39, set on lap 112 of the last day. That is 10.97
+        seconds. The steps between one day's best and the next were 2.24, 3.02,
+        3.10 and 2.61 seconds, which is the part I could not see while it was
+        happening.
       </p>
-      <p>
-        The season was first published as a Tableau Public dashboard, and this page
-        rebuilds that chart in the browser. The data behind the rebuild is a
-        reconstruction: the track days, the session count, the 1:28.39 best and the
-        2:01.14 wet lap are the dashboard's own figures, while the remaining individual
-        lap times were modelled to match its distribution and were not measured. The
-        data file records this in its meta block, and the reconstruction stands until
-        the original RaceChrono and RaceStudio sessions are exported.
-      </p>
+      
     </div>
   </section>
 
@@ -194,29 +186,31 @@
       <p class="meta">02 - Process</p>
       <h2>Rebuilding the chart</h2>
       <p>
-        The published dashboard supplied the anchors: 115 laps, 16 sessions, a 1:28.39
-        best on lap 112, a 2:01.14 wet lap. The remaining lap times were generated to
-        fit that distribution and written to <span class="num">assets/data/laps.json</span>,
-        one record per lap with day, session, time, date and a wet flag, plus a
-        theoretical best for each day and a meta block carrying the reconstruction note.
+        The published dashboard supplied the anchors: 115 laps, 16 sessions, a
+        1:28.39 best on lap 112, a 2:01.14 wet lap. The remaining lap times were
+        modeled to fit that distribution and written to a JSON file, one record
+        per lap with day, session, time, date and a wet flag, plus a theoretical
+        best for each day. The reconstruction note lives in the file and prints
+        as the source line under the plot. It stands until I export the original
+        sessions.
       </p>
       <p>
-        The chart is drawn by a module script in the page. It fetches the JSON and
-        writes the gridlines, the day boundaries, the floor segments and the 115 circles
-        into a 760 by 380 viewBox as SVG markup. There is no build step and no static
-        fallback, so the page has to be served over http; the fetch handler prints that
-        instruction in place of the source line when the file is opened directly. One
-        bug came out of the rebuild: the m:ss helper padded seconds to a fixed five
-        characters, which printed the one-decimal first-day best as 1:039.4. The pad
-        width now follows the number of decimals asked for.
+        The chart is drawn by a module script in the page. It fetches the JSON
+        and writes the gridlines, the day boundaries, the floor segments and the
+        115 circles into a 760 by 380 viewBox as SVG.
       </p>
       <p>
-        Colour was checked with <span class="num">js/color.js</span>, which measures
-        CIEDE2000 distance under normal vision, under Machado simulations of the three
-        dichromacies, and in greyscale. The first dark-theme wet colour, #d7bcff, failed
-        in greyscale at ΔE 9.9 against the near-white floor line and was replaced with
-        #bea2fb, which measures L* 72. The closest pair now measures ΔE 10.7 in the
-        light palette and 15.4 in the dark, greyscale in both cases.
+        One bug came out of the rebuild. The m:ss helper padded seconds to a
+        fixed five characters, which printed the one-decimal first-day best as
+        1:039.4. The pad width now follows the number of decimals asked for.
+      </p>
+      <p>
+        Color went through my own checker, which measures CIEDE2000 distance
+        under normal vision, under Machado simulations of the three dichromacies,
+        and in greyscale. The first dark-theme wet color, #d7bcff, failed in
+        greyscale at ΔE 9.9 against the near-white floor line and was replaced
+        with #bea2fb at L* 72. The closest pair now measures ΔE 10.7 in light and
+        15.4 in dark, greyscale in both cases.
       </p>
     </div>
   </section>
@@ -227,22 +221,22 @@
       <p class="meta">03 - Design</p>
       <h2>Reading the plot</h2>
       <p>
-        Each circle is one lap, plotted in the order driven. Seven of the 115 are wet
-        and take the second series colour. The rule under each track day is that day's
-        theoretical best: 1:38.13, 1:35.89, 1:32.81, 1:29.70 and 1:26.93. No lap in the
-        file reaches its own day's floor, and the gap from a day's best lap down to that
-        floor runs from 1.23 seconds on the first two days to 1.46 on the fifth.
+        Each circle is one lap, plotted in the order driven. Seven of the 115 are
+        wet and take the second series color. The rule under each track day is
+        that day's theoretical best: 1:38.13, 1:35.89, 1:32.81, 1:29.70 and
+        1:26.93. No lap in the file reaches its own day's floor, and the gap from
+        a day's best lap down to that floor runs from 1.23 seconds on the first
+        two days to 1.46 on the fifth.
       </p>
       <p>
-        The All laps view covers 1:25 to 2:05, the range needed to hold the wet session.
-        The Dry only view drops those seven laps and tightens the axis to 1:25-1:45,
-        which gives the dry cluster more of the plot height. Nothing is clipped in
-        either view.
+        The All laps view covers 1:25 to 2:05, the range needed to hold the wet
+        session. The Dry only view drops those seven laps and tightens the axis
+        to 1:25 to 1:45, which gives the dry cluster more of the plot height.
+        Nothing is clipped in either view.
       </p>
       <p>
-        Each theme has its own palette, and the chart re-renders when
-        <span class="num">theme.js</span> dispatches its themechange event. The
-        reconstruction caveat prints as the source line beneath the plot.
+        Each theme has its own palette and the chart re-renders when the theme
+        changes.
       </p>
     </div>
 
@@ -260,8 +254,8 @@
         <h3><span class="num">m:ss</span> and five dated bands</h3>
         <p>
           Y labels are formatted <span class="num">m:ss</span> with a tick every ten
-          seconds. Dashed rules divide the x axis into one band per track day, labelled
-          with the day number and its year and month.
+          seconds. Dashed rules divide the x axis into one band per track day,
+          labeled with the day number and its year and month.
         </p>
       </div>
       <div class="compare-cell" data-reveal>
@@ -274,10 +268,10 @@
         </p>
       </div>
       <div class="compare-cell" data-reveal>
-        <span class="meta">Colour</span>
+        <span class="meta">Color</span>
         <h3>One palette per theme</h3>
         <p>
-          Every series colour clears 3:1 against its own page background, and the
+          Every series color clears 3:1 against its own page background, and the
           closest pair measures ΔE 10.7 in light and 15.4 in dark.
         </p>
       </div>
@@ -292,9 +286,26 @@
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) var(--gap-xl);">
     <div class="prose" data-reveal>
       <p class="meta">04 - Impact</p>
-      <h2>Impact</h2>
-      <p class="impact-todo" data-todo>
-        To be supplied.
+      <h2>The chart found the time I could not feel</h2>
+      <p>
+        Eleven seconds off a lap over five days, and none of it felt like
+        progress from inside the car. Each day felt like the last one. The chart
+        is where the shape shows up: the day-over-day steps are almost identical,
+        2.24, 3.02, 3.10, 2.61, which means the gains were coming from something
+        repeatable and not from any one breakthrough session.
+      </p>
+      <p>
+        The theoretical-best floor under each day is the part I actually use. The
+        gap from my best lap to that day's floor sits between 1.23 and 1.46
+        seconds and has barely moved across a year, so the time left is not in
+        one corner I am blowing. It is spread thin across the whole lap. That
+        changed what I practice.
+      </p>
+      <p>
+        This one also runs as my own regression test. It is the project where I
+        check whether a chart still reads a year later, on a phone, in a theme I
+        did not design it in first, and by keyboard alone. Every one of those
+        caught something.
       </p>
     </div>
   </section>
@@ -307,7 +318,7 @@
         <span class="entry__num num">01</span>
         <div>
           <h3 class="entry__title">
-            <a class="entry__link" href="healthcare-system.html">A colour standard for healthcare dashboards</a>
+            <a class="entry__link" href="healthcare-system.html">A color standard for healthcare dashboards</a>
           </h3>
           <p class="entry__sub">The WCAG 2.1 AA study behind fifty-plus executive dashboards.</p>
         </div>

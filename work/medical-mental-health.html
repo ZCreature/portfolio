@@ -73,15 +73,15 @@
     </h1>
     <p class="lede tight" data-reveal style="--reveal-delay:140ms; margin-top: var(--gap-m);">
       A study of medical student mental health, measured on two validated
-      instruments and read as density rather than as points.
+      instruments and read as density instead of as points.
     </p>
 
     <p class="body" data-reveal style="--reveal-delay:170ms; margin-top: var(--gap-s);">
       Built for the Cleartelligence Chart Champ competition, where it placed
-      <strong>fourth overall</strong>. The top five entries did not just get
-      judged, they got defended: I presented this from a stage at Boston
-      University, to a room, in one pass. Designing for that is a different
-      job from designing for a reader who can lean in.
+      <strong>fourth</strong>. The top five entries did not just get judged,
+      they got defended. I presented this from a stage at Boston University,
+      to a room, in one pass. Designing for that is a different job from
+      designing for a reader who can lean in.
     </p>
 
       <div class="case-tags" data-reveal style="--reveal-delay:200ms;">
@@ -105,9 +105,8 @@
           hide-tabs toolbar="bottom"></tableau-viz>
       </div>
       <p class="embed__note">
-        The live workbook, served by Tableau Public. It sets
-        <span class="num">x-frame-options: SAMEORIGIN</span>, so this uses Tableau's
-        embedding API rather than an iframe - which means this panel needs a connection.
+        The live workbook, served by Tableau Public, so this panel needs a
+        connection.
       </p>
     </div>
   </section>
@@ -118,24 +117,16 @@
       <p class="meta">01 - Context</p>
       <h2>An entry for Chart Champ 2023</h2>
       <p>
-        Cleartelligence held its eighth annual Chart Champ contest on 4 October
-        2023 at Boston University. The theme that year was higher education.
-        Dashboards were due on 22 September, and the five highest-placed entries
-        were presented live at the event, with $1,000 for first place.
+        Cleartelligence ran its eighth annual Chart Champ contest on 4 October
+        2023 at Boston University. The theme that year was higher education,
+        dashboards were due 22 September, and the five highest-placed entries
+        were presented live at the event.
       </p>
       <p>
-        This workbook was submitted to that contest. Its description on Tableau
-        Public reads “Medical Student Mental Health; Heat map study /
-        Cleartelligence Chart Champ dashboard entry”. It finished fourth
-        overall, inside the top five, which meant presenting it live at Boston
-        University.
-      </p>
-      <p>
-        The subject chosen under the theme is medical student mental health:
+        The subject I picked under that theme is medical student mental health:
         survey scores for depression, burnout and exhaustion, set against
-        curriculum year and weekly study hours. The dashboard names no source.
-        The plotted measure names correspond to columns in a public Kaggle
-        dataset of the same title, whose fields include
+        curriculum year and weekly study hours. The measures correspond to a
+        public dataset whose fields include
         <span class="num">cesd</span>, <span class="num">stud_h</span>,
         <span class="num">health</span> and the MBI subscales.
       </p>
@@ -146,32 +137,23 @@
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
     <div class="prose" data-reveal>
       <p class="meta">02 - Process</p>
-      <h2>Building and publishing the workbook</h2>
+      <h2>Two panels, because two questions</h2>
       <p>
-        The workbook was built in Tableau and first published to Tableau Public
-        on 20 September 2023, two days before the submission deadline. A second
-        publish followed on 26 September, after the deadline and before the
-        event. The stored revision string is 3.9.
+        The data offered more than two questions and the canvas offered room for
+        two. Depression severity against curriculum year went left. Weekly study
+        hours, the variable a student can actually change, went right, carrying
+        three stacked measures over one shared x axis.
       </p>
       <p>
-        The published file is 77,410 bytes and exposes a single view,
-        <span class="num">Dashboard1</span>. Data download is turned off, so the
-        survey table cannot be exported from Tableau Public, and no copy of it
-        is held in this repository. The publish settings hide the sheet tabs,
-        keep the toolbar and keep the Tableau Public watermark; the embed on
-        this page is configured to match.
+        Density marks were the second decision. A few hundred students plotted as
+        points is a smear, and a binned heat map introduces cell edges that read
+        as structure the data does not have. Tableau's density marks are
+        kernel-smoothed, so repeated responses at the same coordinates accumulate
+        into continuous regions with a readable center.
       </p>
       <p>
-        The case study page was written in commit
-        <span class="num">1320fb5</span>. Tableau Public responds with
-        <span class="num">x-frame-options: SAMEORIGIN</span>, so the page loads
-        Tableau's embedding API module and mounts a
-        <span class="num">tableau-viz</span> element, which the API renders in a
-        shadow root. A local rule sets a 40rem minimum height on the wrapper,
-        because the custom element defaults to <span class="num">display:
-        inline</span> and would collapse without it. Commit
-        <span class="num">46f72d2</span> later moved the page into the site's
-        four-category structure.
+        Built in Tableau and published two days ahead of the deadline, with one
+        revision before the event.
       </p>
     </div>
   </section>
@@ -182,23 +164,16 @@
       <p class="meta">03 - Design</p>
       <h2>Density marks across two panels</h2>
       <p>
-        The canvas is 1,366 by 795 and holds two panels. On the left, severity
-        of depression symptoms runs 0 to 60 on the y axis against curriculum
-        year 1 to 6, drawn on a grey-to-teal ramp. On the right, three strips
-        stack over a shared x axis of hours of study per week, 0 to 75:
-        academic burnout at 0 to 40, emotional exhaustion at 0 to 35, and mental
-        health at 1 to 6, all on a grey-to-orange-to-red ramp.
+        The canvas is 1,366 by 795. On the left, severity of depression symptoms
+        runs 0 to 60 against curriculum year 1 to 6, on a grey-to-teal ramp. On
+        the right, three strips stack over a shared x axis of hours of study per
+        week, 0 to 75: academic burnout at 0 to 40, emotional exhaustion at 0 to
+        35, and mental health at 1 to 6, all on a grey-to-orange-to-red ramp.
       </p>
       <p>
-        The marks are Tableau density marks. Enlarged, the fills are smooth
-        kernel-smoothed gradients with no cell edges, so repeated responses at
-        the same coordinates accumulate into continuous regions.
-      </p>
-      <p>
-        A pale grey silhouette of a head in profile occupies roughly the right
-        quarter of the canvas and carries no data. The published dashboard has
-        no title, subtitle, legend, annotation, units note or source line. Axis
-        titles and tick labels are the only text on it.
+        A pale grey silhouette of a head in profile occupies the right quarter of
+        the canvas and carries no data. Axis titles and tick labels are the only
+        text on the dashboard.
       </p>
     </div>
   </section>
@@ -210,13 +185,13 @@
       <h2>Impact</h2>
       <p>
         The dashboard placed <span class="num">fourth</span> overall. Because
-        the top five entries were presented live, the work did not end at
-        submission: I stood up in front of the room at Boston University and
-        defended it out loud.
+        the top five were presented live, the work did not end at submission.
+        I stood up in front of the room at Boston University and defended it
+        out loud.
       </p>
       <p>
         That changes what a chart has to do. A dashboard read alone gets as
-        long as the reader wants; a dashboard read from a stage gets one pass,
+        long as the reader wants. A dashboard read from a stage gets one pass,
         at the speaker's pace, from the back of the room. The two-panel split
         is what survived that constraint. Depression severity against
         curriculum year on the left, three strips over weekly study hours on
@@ -227,7 +202,7 @@
       <p>
         Density marks earned their place for the same reason. A scatter of a
         few hundred students is a smear from twenty feet away. Kernel-smoothed
-        density turns repeated responses into a region with a readable centre,
+        density turns repeated responses into a region with a readable center,
         so the pattern holds at presentation distance instead of dissolving
         into ink.
       </p>
