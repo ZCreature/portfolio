@@ -39,12 +39,17 @@
 <link rel="stylesheet" href="../css/base.css?v=20260810k">
 <style>
   .figure { margin: var(--gap-m) 0 0; }
-  .figure img {
+  .figure img,
+  .figure video {
     width: 100%;
     height: auto;
     display: block;
     border: 1px solid var(--rule);
   }
+  /* The product shot is the first thing on the page, so it runs the full
+     shell rather than the 52rem prose measure. */
+  .figure--wide { margin-top: 0; }
+  .figure--wide video { border: 0; }
   .figure figcaption {
     margin-top: 0.7rem;
     font-size: 0.8125rem;
@@ -121,6 +126,16 @@
         <span class="tag tag--ai">On-device AI</span>
         <span class="tag tag--tool">Ollama</span>
       </div>
+  </section>
+
+  <section class="shell" style="padding-block: var(--gap-m) 0;">
+    <figure class="figure figure--wide" data-reveal>
+      <video controls muted loop playsinline preload="none"
+             poster="../assets/img/work/mybeats/app-poster.jpg?v=20260810n"
+             aria-label="MyBEATS running on a laptop: the library, the playlists built from the model's tags, and the equalizer view.">
+        <source src="../assets/video/mybeats-app.mp4?v=20260810n" type="video/mp4">
+      </video>
+    </figure>
   </section>
 
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
