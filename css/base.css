@@ -1031,6 +1031,23 @@ body { padding-left: var(--rail); }
   max-width: 32rem;
 }
 
+/* Mark grid - logos shown as a set, two up, each in its own frame. */
+.marks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: var(--gap-s);
+}
+.marks figure { margin: 0; }
+.marks .figure__frame { aspect-ratio: 4 / 3; }
+.marks .figure__frame img { width: 100%; height: 100%; object-fit: cover; }
+.marks figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.8125rem;
+  color: var(--ink-3);
+  line-height: 1.5;
+}
+.marks figcaption b { color: var(--ink-2); font-weight: 600; }
+
 /* Figure with mono caption, newsroom style */
 figure { margin: 0; }
 .figure { margin-block: var(--gap-l); }
