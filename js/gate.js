@@ -88,16 +88,34 @@ async function init() {
   const input = gate.querySelector('input[type="password"]');
   const msg = gate.querySelector('.gate__msg');
 
-  let payload;
-  try {
-    payload = await (await fetch(gate.dataset.gate)).json();
-  } catch {
-    msg.textContent = 'Protected content could not be loaded.';
-    msg.dataset.state = 'bad';
-    return;
-  }
+  /* The payload is several megabytes. Most people who open this page never
+     have the passphrase, so it is fetched on first need rather than on load,
+     and warmed as soon as someone starts typing so the unlock still feels
+     immediate. The promise is memoised, so concurrent callers share one
+     request and a failed fetch can be retried by submitting again. */
+  let payloadPromise = null;
+  const getPayload = () => {
+    if (!payloadPromise) {
+      payloadPromise = fetch(gate.dataset.gate)
+        .then((r) => {
+          if (!r.ok) throw new Error(r.status);
+          return r.json();
+        })
+        .catch((err) => { payloadPromise = null; throw err; });
+    }
+    return payloadPromise;
+  };
+  input.addEventListener('focus', () => { getPayload().catch(() => {}); }, { once: true });
 
   const open = async (pass, quiet) => {
+    let payload;
+    try {
+      payload = await getPayload();
+    } catch {
+      msg.textContent = 'Protected content could not be loaded.';
+      msg.dataset.state = 'bad';
+      return false;
+    }
     try {
       const html = await unlock(pass, payload);
       target.innerHTML = html;

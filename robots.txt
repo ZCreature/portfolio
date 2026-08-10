@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+# Encrypted client work - nothing readable, no reason to crawl it.
+Disallow: /assets/protected/
+
+Sitemap: https://almaguer.design/sitemap.xml

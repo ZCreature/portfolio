@@ -1100,7 +1100,10 @@ figure { margin: 0; }
   font-size: 0.625rem;
   letter-spacing: 0.045em;
   text-transform: uppercase;
-  color: var(--ink-4);
+  /* --ink-4 measured 3.07:1 light / 3.99:1 dark against --paper at this
+     10px size: under the 4.5:1 floor this site argues for. --ink-3 clears
+     it in both themes (5.32 / 5.57). */
+  color: var(--ink-3);
   margin-top: 0.9rem;
   padding-top: 0.6rem;
   border-top: 1px solid var(--rule-soft);
@@ -1183,6 +1186,19 @@ figure { margin: 0; }
 
 .muted { color: var(--ink-3); }
 .tight { max-width: var(--measure); }
+
+/* Available to assistive tech and search engines, absent visually. Used
+   for the homepage h1, which the grid layout deliberately has no room for. */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
 
 .skip {
   position: absolute;
