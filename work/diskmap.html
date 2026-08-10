@@ -37,6 +37,25 @@
   } catch (e) {}
 </script>
 <link rel="stylesheet" href="../css/base.css?v=20260810j">
+<style>
+  /* Two supporting screens side by side rather than stacked, so the section
+     is one screenful instead of three. */
+  .pair {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: var(--gap-m);
+    align-items: start;
+  }
+  .pair figure { margin: 0; }
+  .pair img { width: 100%; height: auto; display: block; }
+  .pair figcaption {
+    margin-top: 0.7rem;
+    font-size: 0.8125rem;
+    color: var(--ink-3);
+    line-height: 1.5;
+  }
+  .pair figcaption b { color: var(--ink-2); font-weight: 600; }
+</style>
 </head>
 <body>
 
@@ -166,18 +185,6 @@
     </p>
   </section>
 
-  <section class="shell shell--narrow" style="padding-block: var(--gap-m) 0;">
-    <figure class="figure" data-reveal style="max-width: 26rem;">
-      <div class="figure__frame">
-        <img src="../assets/img/work/diskmap/ai-chat.jpg?v=20260810l" width="736" height="288"
-             alt="The Diskbot conversation: a short exchange where the assistant offers to look at a specific folder or file more closely."
-             loading="lazy">
-      </div>
-      <figcaption><b>It talks, but only about metadata.</b> The assistant is
-      conversational on purpose, because the question people actually have is
-      vague. What it can answer with is not.</figcaption>
-    </figure>
-  </section>
 
 
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
@@ -202,18 +209,32 @@
   </section>
 
   <section class="shell shell--narrow" style="padding-block: var(--gap-m) 0;">
-    <figure class="figure" data-reveal style="max-width: 26rem;">
-      <div class="figure__frame">
-        <img src="../assets/img/work/diskmap/ai-search.jpg?v=20260810l" width="736" height="740"
-             alt="Diskbot returning the ten largest GIFs in the scan, each row showing a preview thumbnail, the file path and its size in megabytes."
-             loading="lazy">
-      </div>
-      <figcaption><b>Search by description, not by filename.</b> Asking for the
-      largest GIFs runs a name search across the in-memory scan and returns
-      paths and sizes. The thumbnails are drawn by the app from the file on
-      disk; the model never sees them.</figcaption>
-    </figure>
+    <div class="pair" data-reveal-group data-reveal-step="60">
+      <figure data-reveal>
+        <div class="figure__frame">
+          <img src="../assets/img/work/diskmap/ai-chat.jpg?v=20260810l" width="736" height="288"
+               alt="The Diskbot conversation: a short exchange where the assistant offers to look at a specific folder or file more closely."
+               loading="lazy">
+        </div>
+        <figcaption><b>It talks, but only about metadata.</b> The assistant is
+        conversational on purpose, because the question people actually have is
+        vague. What it can answer with is not.</figcaption>
+      </figure>
+      <figure data-reveal>
+        <div class="figure__frame">
+          <img src="../assets/img/work/diskmap/ai-search.jpg?v=20260810l" width="736" height="740"
+               alt="Diskbot returning the ten largest GIFs in the scan, each row showing a preview thumbnail, the file path and its size in megabytes."
+               loading="lazy">
+        </div>
+        <figcaption><b>Search by description, not by filename.</b> Asking for the
+        largest GIFs runs a name search across the in-memory scan and returns
+        paths and sizes. The thumbnails are drawn by the app from the file on
+        disk; the model never sees them.</figcaption>
+      </figure>
+    </div>
   </section>
+
+
 
 
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
