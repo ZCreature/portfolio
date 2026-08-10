@@ -30,7 +30,7 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="css/base.css?v=20260810b">
+<link rel="stylesheet" href="css/base.css?v=20260810c">
 </head>
 <body>
 
@@ -96,7 +96,14 @@
         <!-- Deliberately blurred: rebuilt from a 42px downscale of a frame of the
              2025 spend prototype, so the blur is in the pixels. The sharp frame
              lives only inside the encrypted payload. -->
-        <img src="assets/img/tools/healthcare-blur.jpg?v=20260809h" alt="A deliberately blurred dashboard prototype. Panel structure and color remain; every figure and label is unreadable." width="1200" height="665" loading="lazy">
+        <video class="tile__video" data-lazy-video
+               poster="assets/img/tools/healthcare-blur.jpg?v=20260810c"
+               width="1200" height="750"
+               muted loop playsinline preload="none"
+               style="width:100%;height:100%;object-fit:cover;display:block;background:#fff"
+               aria-label="A deliberately blurred recording of a dashboard prototype in use. Panel structure, color and movement remain; every figure and label is unreadable.">
+          <source src="assets/video/healthcare-blur.mp4?v=20260810c" type="video/mp4">
+        </video>
       </div>
       <div class="tile__body">
         <div class="tile__head">
@@ -114,8 +121,8 @@
       </div>
     </article>
       <article class="tile" data-reveal>
-      <div class="tile__thumb tile__thumb--contain">
-        <img src="assets/img/work/editorial/c/dive-06.jpg?v=20260809q" alt="A Data Dive page from the Sacramento Business Journal - Local businesses slow to open and reopen in 2020, paired donut charts of reopenings against openings beside year-over-year bars by sector." loading="lazy">
+      <div class="tile__thumb">
+        <img src="assets/img/tools/newsroom.jpg?v=20260810c" width="1200" height="750" alt="Data Dive pages from the Sacramento Business Journal laid out as a set, each pairing a headline with the week's charts." loading="lazy">
       </div>
       <div class="tile__body">
         <div class="tile__head">
@@ -137,7 +144,7 @@
         <!-- Animated GIF export, authored at the tile's native 16:10 so it
              fills the frame with no crop. 226KB against the 2.2MB video it
              replaced. -->
-        <video class="tile__video" data-lazy-video
+        <video class="tile__video tile__video--zoom" data-lazy-video
                poster="assets/img/tools/csl-poster.jpg?v=20260810c"
                width="1200" height="750"
                muted loop playsinline preload="none"
