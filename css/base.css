@@ -808,6 +808,16 @@ body { padding-left: var(--rail); }
   padding: 2%;
 }
 
+/* Same idea with more air, for a capture whose subject runs right to its own
+   edges and needs breathing room to read as a framed object. */
+.tile__thumb--inset { background: var(--paper-2); }
+
+.tile__thumb--inset img {
+  object-fit: contain;
+  object-position: center;
+  padding: 6%;
+}
+
 /* Marks a tile whose thumbnail is an illustration, not a capture. */
 .tile--novisual .tile__thumb { display: grid; place-items: center; }
 .tile--novisual .tile__thumb svg { width: 78%; height: 78%; }
