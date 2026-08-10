@@ -752,7 +752,9 @@ body { padding-left: var(--rail); }
   aspect-ratio: 16 / 10;
   border-bottom: 1px solid var(--rule);
   overflow: hidden;
-  background: var(--paper-2);
+  /* Paper, not the grey step: if a frame is ever empty for a moment it
+     should read as blank rather than as a grey slab. */
+  background: var(--paper);
   transition: border-color 90ms linear;
 }
 
