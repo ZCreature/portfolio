@@ -179,33 +179,27 @@
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
     <div class="prose" data-reveal>
       <p class="meta">02 - Process</p>
-      <h2>Rebuilding the chart</h2>
+      <h2>Recording first, the chart second</h2>
+      <p>
+        I was recording data before I knew what it was for. RaceChrono and
+        RaceStudio logged every session from the first track day on, because
+        logging is cheap and hindsight is not. There was no chart in mind yet,
+        just laps going into a file.
+      </p>
+      <p>
+        The goal showed up once the data crossed a threshold. After multiple
+        track days and over a hundred laps, the question stopped being about
+        any single session and became the season: whether the time was actually
+        coming down, and where it was coming from. Only the full set can answer
+        that, and it set the design. Every lap in the order driven, one
+        theoretical-best floor per day.
+      </p>
       <p>
         The published dashboard supplied the anchors: 115 laps, 16 sessions, a
-        1:28.39 best on lap 112, a 2:01.14 wet lap. The remaining lap times were
-        modeled to fit that distribution and written to a JSON file, one record
-        per lap with day, session, time, date and a wet flag, plus a theoretical
-        best for each day. The reconstruction note lives in the file and prints
-        as the source line under the plot. It stands until I export the original
+        1:28.39 best on lap 112, a 2:01.14 wet lap. The rebuild on this page
+        models the remaining lap times to fit that distribution and says so in
+        the source line under the plot. It stands until I export the original
         sessions.
-      </p>
-      <p>
-        The chart is drawn by a module script in the page. It fetches the JSON
-        and writes the gridlines, the day boundaries, the floor segments and the
-        115 circles into a 760 by 380 viewBox as SVG.
-      </p>
-      <p>
-        One bug came out of the rebuild. The m:ss helper padded seconds to a
-        fixed five characters, which printed the one-decimal first-day best as
-        1:039.4. The pad width now follows the number of decimals asked for.
-      </p>
-      <p>
-        Color went through my own checker, which measures CIEDE2000 distance
-        under normal vision, under Machado simulations of the three dichromacies,
-        and in greyscale. The first dark-theme wet color, #d7bcff, failed in
-        greyscale at ΔE 9.9 against the near-white floor line and was replaced
-        with #bea2fb at L* 72. The closest pair now measures ΔE 10.7 in light and
-        15.4 in dark, greyscale in both cases.
       </p>
     </div>
   </section>
