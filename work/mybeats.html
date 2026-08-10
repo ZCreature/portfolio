@@ -12,13 +12,13 @@
   gtag('config', 'G-WEL5434XZK');
 </script>
 <title>MyBEATS - Chris Almaguer</title>
-<meta name="description" content="Tagging a 16,000-track library with a local model, and why the model size was chosen by where it starts inventing.">
+<meta name="description" content="Tagging a 12,000-track library with a local model, and why the model size was chosen by where it starts inventing.">
 <meta name="theme-color" content="#fbfbfa">
 <link rel="icon" href="../favicon.png?v=20260809h" type="image/png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Chris Almaguer">
 <meta property="og:title" content="MyBEATS - Chris Almaguer">
-<meta property="og:description" content="Tagging a 16,000-track library with a local model, and why the model size was chosen by where it starts inventing.">
+<meta property="og:description" content="Tagging a 12,000-track library with a local model, and why the model size was chosen by where it starts inventing.">
 <meta property="og:url" content="https://almaguer.design/work/mybeats.html">
 <meta property="og:image" content="https://almaguer.design/assets/img/og.png?v=3">
 <meta property="og:image:width" content="1200">
@@ -28,7 +28,7 @@
 <link rel="canonical" href="https://almaguer.design/work/mybeats.html">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="MyBEATS - Chris Almaguer">
-<meta name="twitter:description" content="Tagging a 16,000-track library with a local model, and why the model size was chosen by where it starts inventing.">
+<meta name="twitter:description" content="Tagging a 12,000-track library with a local model, and why the model size was chosen by where it starts inventing.">
 <meta name="author" content="Chris Almaguer">
 <script>
   try {
@@ -114,13 +114,14 @@
   <section class="shell case-hero">
     <p class="meta" data-reveal>Case study - Tooling &amp; on-device AI</p>
     <h1 class="h1" data-reveal style="--reveal-delay:70ms; margin-top: var(--gap-s);">
-      Getting a local model to stop making things up
+      Twenty years of music, and shuffle was the only control I had
     </h1>
     <p class="lede tight" data-reveal style="--reveal-delay:140ms; margin-top: var(--gap-m);">
-      MyBEATS tags a 16,000-track library with genre, mood and vibe using a model
-      running on the laptop. No API key, no per-track cost, nothing leaving the
-      machine. The interesting problem was not getting it to work. It was getting
-      it to admit what it did not know.
+      Twelve thousand tracks, each given a genre, a mood and a description of
+      how it actually sounds, by a model running on the laptop itself.
+      Nothing uploaded, nothing metered, no cost per track. The point was
+      never automation. It was getting enough structure onto a collection
+      that I could finally ask it something specific.
     </p>
     <div class="case-tags" data-reveal style="--reveal-delay:200ms;">
         <span class="tag">macOS</span>
@@ -132,16 +133,40 @@
   <section class="shell" style="padding-block: var(--gap-m) 0;">
     <figure class="figure figure--wide" data-reveal>
       <video controls muted loop playsinline preload="none"
-             poster="../assets/img/work/mybeats/app-poster.jpg?v=20260810n"
-             aria-label="MyBEATS running on a laptop: the library, the playlists built from the model's tags, and the equalizer view.">
-        <source src="../assets/video/mybeats-app.mp4?v=20260810n" type="video/mp4">
+             poster="../assets/img/work/mybeats/app-poster.jpg?v=20260810p"
+             aria-label="Screen recording of MyBEATS: the equalizer view, with vocal cut and band sliders on the left and the analyzer on the right cycling through scope, VU meters and correlation while a track plays.">
+        <source src="../assets/video/mybeats-app.mp4?v=20260810p" type="video/mp4">
       </video>
     </figure>
   </section>
 
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
     <div class="prose" data-reveal>
-      <p class="meta">01 - The pipeline</p>
+      <p class="meta">01 - Context</p>
+      <h2>We have every song ever recorded and we listen to nine of them</h2>
+      <p>
+        I have been collecting music since Winamp, through MiniDisc, cassettes,
+        CDs, and every hard drive since. Twelve thousand tracks, most of them
+        bought or ripped rather than streamed.
+      </p>
+      <p>
+        Streaming handed everyone the entire catalog and quietly took away the
+        thing that made a collection yours. Recommendations go stale. Shuffle
+        across twelve thousand songs still serves the same forty, and repeats
+        them. There is no way to say "the sad ones," or "the ones nobody else
+        knows," or "surprise me, but not like that." You get a list, and you
+        get play.
+      </p>
+      <p>
+        So the question was never how to tag files. It was what a person could
+        do with their own library if the library knew something about itself.
+      </p>
+    </div>
+  </section>
+
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
+    <div class="prose" data-reveal>
+      <p class="meta">02 - The pipeline</p>
       <h2>Five stages, one of them a model</h2>
       <p>
         A library is imported in stages. <span class="num">scan</span> walks the
@@ -161,7 +186,7 @@
 
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
     <div class="prose" data-reveal>
-      <p class="meta">02 - The failure that set the model size</p>
+      <p class="meta">03 - The failure that set the model size</p>
       <h2>7B does not say "I do not know"</h2>
       <p>
         The obvious choice was a 7B model. Smaller, faster, less memory. It
@@ -194,7 +219,7 @@
 
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
     <div class="prose" data-reveal>
-      <p class="meta">03 - Shape, not persuasion</p>
+      <p class="meta">04 - Shape, not persuasion</p>
       <h2>Constrain the output instead of asking nicely</h2>
       <p>
         The usual way to get structured data out of a model is to ask for JSON
@@ -212,9 +237,9 @@
     </div>
   </section>
 
-  <section class="shell shell--narrow" style="padding-block: var(--gap-l) var(--gap-xl);">
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
     <div class="prose" data-reveal>
-      <p class="meta">04 - Running it over 16,000 tracks</p>
+      <p class="meta">05 - Running it over 12,000 tracks</p>
       <h2>Two constraints that only appear at scale</h2>
       <ul>
         <li><b>Concurrency of one.</b> The instinct is to parallelize. A local
@@ -237,16 +262,43 @@
 
     <figure class="figure" data-reveal>
       <img src="../assets/img/work/mybeats/settings.jpg?v=20260810n" alt="The MyBEATS Settings panel over the library. Appearance offers standard, red-green and blue-yellow palettes; formats indexed shows mp3, flac and m4a selected; a FLAC to MP3 converter sits below; and Assistant model is a dropdown currently set to qwen2.5:14b." loading="lazy" decoding="async" width="1600" height="1127">
-      <figcaption><b>Settings.</b> The assistant model is a dropdown rather than a constant, which is what makes comparing two of them across a long run practical. Appearance carries red-green and blue-yellow palettes beside the standard one.</figcaption>
+      <figcaption><b>Settings.</b> The assistant model is a dropdown rather than a constant, which is what makes comparing two of them across a long run practical. Appearance carries red-green and blue-yellow palettes beside the standard one, because a library view is a chart and the same rules apply.</figcaption>
     </figure>
 
+  </section>
+
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) var(--gap-xl);">
     <div class="prose" data-reveal>
+      <p class="meta">06 - What the tags are for</p>
+      <h2>Structure is what turns a library back into a collection</h2>
+      <p>
+        Tags on their own are filing. What they buy is the ability to ask for
+        something specific: the hidden gems, the emotional run, the regional
+        stuff with a few thousand listeners, or a playlist built deliberately
+        to be strange. Those are queries a person can make once mood and vibe
+        exist as fields instead of as a feeling about a filename.
+      </p>
+      <p>
+        The interface is charts rather than rows, because twelve thousand
+        lines is not something anyone reads. The library is shown as shape
+        first, so you can see what a collection is made of before you look at
+        any single track in it. The equalizer view puts a source in space and
+        lets you move it, including pulling the vocals down out of a mix.
+      </p>
+      <p>
+        That is the part that connects to the rest of my work. It is the same
+        problem as a hospital dashboard: more records than a person can hold,
+        and the job is giving them a way to see the whole thing and then act
+        on one part of it.
+      </p>
+
       <h3>What I take from it</h3>
       <p>
         The design work here was not the interface. It was deciding what the
-        machine is allowed to assert. Measure what can be measured, constrain
-        the shape of what it returns, and size the model against the hardest
-        part of the real data instead of the average part.
+        machine is allowed to assert, and then what a person gets to do with
+        what it asserted. Measure what can be measured, constrain the shape of
+        what comes back, and size the model against the hardest part of the
+        real data instead of the average part.
       </p>
     </div>
   </section>
