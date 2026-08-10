@@ -810,7 +810,7 @@ body { padding-left: var(--rail); }
 
 /* Same idea with more air, for a capture whose subject runs right to its own
    edges and needs breathing room to read as a framed object. */
-.tile__thumb--inset { background: var(--paper-2); }
+.tile__thumb--inset { background: #fff; }
 
 .tile__thumb--inset img {
   object-fit: contain;
