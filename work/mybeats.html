@@ -37,6 +37,22 @@
   } catch (e) {}
 </script>
 <link rel="stylesheet" href="../css/base.css?v=20260810k">
+<style>
+  .figure { margin: var(--gap-m) 0 0; }
+  .figure img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid var(--rule);
+  }
+  .figure figcaption {
+    margin-top: 0.7rem;
+    font-size: 0.8125rem;
+    color: var(--ink-3);
+    line-height: 1.5;
+  }
+  .figure figcaption b { color: var(--ink-2); font-weight: 600; }
+</style>
 </head>
 <body>
 
@@ -201,7 +217,14 @@
         changing it in Settings takes effect without restarting the app. That
         matters when you are comparing two models across a long run.
       </p>
+    </div>
 
+    <figure class="figure" data-reveal>
+      <img src="../assets/img/work/mybeats/settings.jpg?v=20260810n" alt="The MyBEATS Settings panel over the library. Appearance offers standard, red-green and blue-yellow palettes; formats indexed shows mp3, flac and m4a selected; a FLAC to MP3 converter sits below; and Assistant model is a dropdown currently set to qwen2.5:14b." loading="lazy" decoding="async" width="1600" height="1127">
+      <figcaption><b>Settings.</b> The assistant model is a dropdown rather than a constant, which is what makes comparing two of them across a long run practical. Appearance carries red-green and blue-yellow palettes beside the standard one.</figcaption>
+    </figure>
+
+    <div class="prose" data-reveal>
       <h3>What I take from it</h3>
       <p>
         The design work here was not the interface. It was deciding what the

@@ -236,29 +236,18 @@
       <p class="meta">03 - The cause</p>
       <h2>Signed one way here, another way there</h2>
       <p>
-        A Mac App Store build signs every binary in the bundle, including the
-        helper processes that render the window. The signing tool turns on
-        Hardened Runtime for all of them. A renderer runs a JavaScript engine,
-        which needs two entitlements to allocate executable memory. Under
-        Apple's sandbox inheritance rule a helper is allowed to carry exactly
-        two entitlements, app sandbox and inherit, and nothing else. So the
-        helper was asked to run a compiler it was not permitted to run, and the
-        renderer died at launch.
+        The part of the app that draws the window runs as its own process, and
+        to draw anything it has to compile code as it goes. Building for the
+        App Store locks every process down, and by Apple's own rule a helper
+        process cannot be handed the exemption that goes with the lockdown. So
+        it was told to do the one thing it had just been forbidden. It quit
+        before the window appeared.
       </p>
       <p>
-        It never reproduced locally because a build re-signed on this machine
-        does not carry the Hardened Runtime flag at all. The crash existed only
-        in the distribution signature, which is the one build I could not make
-        myself.
-      </p>
-    </div>
-
-    <div class="prose" data-reveal>
-      <p>
-        The fix is small: Hardened Runtime off for the App Store target, where
-        the store sandbox is the boundary anyway, and the helpers left at
-        exactly the two entitlements Apple permits. That is
-        <span class="num">1.0.4</span>, the build now in review.
+        None of that happens here, because the signature I use for testing does
+        not apply the lockdown. The crash lived in the store signature, the one
+        build I could not make myself. The fix was a single setting, in
+        <span class="num">1.0.4</span>.
       </p>
 
       <h3>What I take from it</h3>
