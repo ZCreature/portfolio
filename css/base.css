@@ -259,6 +259,8 @@ section { padding-block: var(--gap-xl); }
    landscape frame rather than sitting inside the rail's padding. The
    image is oversized inside it so the glow fills the frame the way the
    Figma comp does. */
+/* The mark links home. It duplicates the nameplate link directly below it,
+   so it stays out of the tab order and the accessibility tree. */
 .rail__mark {
   width: calc(100% + 2 * var(--rail-pad));
   margin: 0 calc(-1 * var(--rail-pad)) 0;
