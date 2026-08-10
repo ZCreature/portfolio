@@ -1453,6 +1453,18 @@ figure { margin: 0; }
   background: #fff;
 }
 
+/* Slides that name what they are: a caption sits under the frame and is
+   held to the slide's own width so the strip keeps its rhythm. */
+.car__item figure { margin: 0; }
+.car__item figcaption {
+  margin-top: 0.55rem;
+  font-size: 0.8125rem;
+  color: var(--ink-3);
+  line-height: 1.45;
+  max-width: 22rem;
+}
+.car__item figcaption b { color: var(--ink-2); font-weight: 600; }
+
 .car__btns { display: flex; gap: 0.4rem; }
 
 .car__btn {
