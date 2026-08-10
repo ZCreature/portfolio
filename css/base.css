@@ -818,6 +818,10 @@ body { padding-left: var(--rail); }
   gap: 0.75rem;
 }
 
+/* The year/status label sits beside the title but should not compete with
+   it - a step down from the base .meta size keeps it as an annotation. */
+.tile__head .meta { font-size: 0.625rem; flex: 0 0 auto; }
+
 .tile__title {
   font-size: 1.0625rem;
   font-weight: 700;
