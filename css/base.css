@@ -448,6 +448,14 @@ body { padding-left: var(--rail); }
   border-bottom: 1px solid var(--rule);
 }
 
+/* An 8.5rem label column leaves too little for a 25-character address on a
+   320px screen, so the pair stacks instead. */
+@media (max-width: 26rem) {
+  .spec { grid-template-columns: minmax(0, 1fr); }
+  .spec > dt { padding-bottom: 0; }
+  .spec > dd { overflow-wrap: anywhere; }
+}
+
 .spec > dt {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
@@ -1123,7 +1131,12 @@ figure { margin: 0; }
 /* ---- 12. Footer / contact -------------------------------- */
 
 .contact-line {
-  font-size: clamp(1.6rem, 4.5vw, 3rem);
+  /* The address is 25 characters; a fixed 1.6rem floor measured 342px and
+     overflowed a 320px screen. Scale with the viewport instead, and allow a
+     break as a last resort. */
+  font-size: clamp(1.05rem, 6.2vw, 3rem);
+  max-width: 100%;
+  overflow-wrap: anywhere;
   letter-spacing: -0.024em;
   line-height: 1.06;
   font-weight: 700;
@@ -1374,6 +1387,38 @@ figure { margin: 0; }
 
   :target, section[id] { scroll-margin-top: 5.5rem; }
 }
+
+/* Phones. The folded bar tried to hold the nameplate, four nav links, four
+   social icons and the theme toggle on one 4rem line: it measured 585px
+   inside a 390px screen, so the whole page scrolled sideways. Below 48rem
+   the bar wraps to two rows instead. */
+@media (max-width: 48rem) {
+  .masthead__inner {
+    flex-wrap: wrap;
+    height: auto;
+    row-gap: 0.55rem;
+    column-gap: 1rem;
+    padding-block: 0.7rem;
+  }
+
+  /* Row 1: name, then icons and the theme toggle. */
+  .railmark { flex: 1 1 auto; }
+  .masthead .nav--social { order: 2; margin-left: auto; }
+  .masthead .rail__foot { order: 3; }
+
+  /* Row 2: the primary links, wrapping rather than overflowing. */
+  .masthead .nav[aria-label="Primary"] {
+    order: 4;
+    flex: 1 1 100%;
+    flex-wrap: wrap;
+    row-gap: 0.3rem;
+    column-gap: 1.1rem;
+  }
+  .masthead .nav[aria-label="Primary"] a { font-size: 0.875rem; }
+
+  :target, section[id] { scroll-margin-top: 7.5rem; }
+}
+
 
 
 /* ---- "Right now" feature ---------------------------------
