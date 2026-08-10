@@ -36,7 +36,33 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="../css/base.css?v=20260810j">
+<link rel="stylesheet" href="../css/base.css?v=20260810k">
+<style>
+  /* Apple's two rejection screenshots side by side. They are almost entirely
+     black, which is the point, so they carry a hairline to read as evidence
+     rather than as images that failed to load. */
+  .shots {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: var(--gap-m);
+    align-items: start;
+    margin: var(--gap-m) 0;
+  }
+  .shot { margin: 0; }
+  .shot img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid var(--rule);
+  }
+  .shot figcaption {
+    margin-top: 0.7rem;
+    font-size: 0.8125rem;
+    color: var(--ink-3);
+    line-height: 1.5;
+  }
+  .shot figcaption b { color: var(--ink-2); font-weight: 600; }
+</style>
 </head>
 <body>
 
@@ -164,13 +190,37 @@
         the next build was mostly guesswork, and the next rejection was
         identical.
       </p>
+    </div>
+
+    <div class="shots" data-reveal>
+      <figure class="shot">
+        <img src="../assets/img/work/focus/blank-0727.jpg?v=20260810n" alt="Apple's July 27 rejection screenshot. The FOCUS window is open and completely black apart from the three traffic light buttons." loading="lazy" decoding="async" width="1400" height="1051">
+        <figcaption><b>July 27.</b> The whole of what came back with the first rejection.</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="../assets/img/work/focus/blank-0805.jpg?v=20260810n" alt="Apple's August 5 rejection screenshot. The same completely black FOCUS window, indistinguishable from the July one." loading="lazy" decoding="async" width="1400" height="1053">
+        <figcaption><b>August 5.</b> Nine days and two builds later. The same picture.</figcaption>
+      </figure>
+    </div>
+
+    <div class="prose" data-reveal>
       <p>
         The build that broke the loop did not add a feature. It added a fatal
-        error surface: if the interface fails to render, the app draws the
-        error on screen in ASCII instead of sitting on the boot splash forever.
-        The reviewer sent back a screenshot of that dialog, and the screenshot
-        was the diagnosis.
+        error surface, so a renderer dying at launch is reported by the main
+        process instead of leaving a black window on screen forever. The next
+        screenshot came back with something written on it, and the crash code
+        in that one line is the whole diagnosis.
       </p>
+    </div>
+
+    <div class="shots" data-reveal style="grid-template-columns: minmax(0, 1fr);">
+      <figure class="shot">
+        <img src="../assets/img/work/focus/dialog-0807.jpg?v=20260810n" alt="Apple's August 7 rejection screenshot. The same black FOCUS window, now with a macOS dialog on it reading: FOCUS could not display its interface. The display process ended unexpectedly, crashed, code 5. Please reopen FOCUS." loading="lazy" decoding="async" width="1400" height="750">
+        <figcaption><b>August 7.</b> The same window, with one line on it. That line named the process that died and how, which was the first thing in three rejections that could be acted on.</figcaption>
+      </figure>
+    </div>
+
+    <div class="prose" data-reveal>
       <p>
         A separate note in the same review asked me to take ".exe" out of the
         store listing, since Apple would rather a Mac app not advertise a
