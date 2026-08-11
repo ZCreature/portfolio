@@ -940,15 +940,16 @@ body { padding-left: var(--rail); }
   transform-origin: top left;
 }
 
-/* Full-bleed: escape the reading column so the scale factor stays high. */
-.embed--bleed {
-  width: min(96vw, 92rem);
-  margin-inline: calc(50% - min(48vw, 46rem));
-}
+/* Full-bleed: escape the reading column so the scale factor stays high.
 
-@media (max-width: 46rem) {
-  .embed--bleed { width: 100%; margin-inline: 0; }
-}
+   The vw-based break-out below 64rem only: above that the rail is fixed at
+   the left, so the content area is no longer centred in the viewport and
+   `50% - 48vw` pushed the box hard against the right edge. Measured at a
+   1740px viewport it left a 266px gutter on the left and 2px on the right,
+   and held the tool at 1:1 where it dwarfed everything around it. Inside the
+   shell it scales to about 89% instead, which is still legible and lines up
+   with the copy above and below it. */
+.embed--bleed { width: 100%; margin-inline: 0; }
 
 /* Shown until the iframe reports load - these are heavy documents. */
 .embed__loading {
