@@ -1,0 +1,49 @@
+<!doctype html><html><head><title>x</title><link rel="stylesheet" href="../css/base.css"></head>
+<body style="margin:0;font:14px/1.45 monospace;padding:14px;white-space:pre">
+<div id="out">PENDING</div>
+<script>
+const PAGES=['/index.html','/about.html','/work/color-safety-lens.html','/work/focus.html',
+             '/work/editorial-design.html','/work/mybeats.html','/work/diskmap.html',
+             '/work/trackdash.html','/work/lap-times.html','/work/branding.html'];
+const W=[1400,1100,760];
+function orphans(doc){
+  const out=[];
+  doc.querySelectorAll('p, li, figcaption, dd, h1, h2, h3').forEach(el=>{
+    const walk=doc.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    const spots=[];
+    while(walk.nextNode()){
+      const n=walk.currentNode, v=n.nodeValue;
+      const re=/\S+/g; let m;
+      while((m=re.exec(v))){
+        const r=doc.createRange(); r.setStart(n,m.index); r.setEnd(n,m.index+m[0].length);
+        const b=r.getBoundingClientRect();
+        if(b.width>0) spots.push({top:Math.round(b.top), w:m[0]});
+      }
+    }
+    if(spots.length<3) return;
+    const lastTop=spots[spots.length-1].top;
+    const onLast=spots.filter(s=>Math.abs(s.top-lastTop)<3);
+    const lines=new Set(spots.map(s=>s.top)).size;
+    if(lines>1 && onLast.length===1) out.push(onLast[0].w);
+  });
+  return out;
+}
+(async ()=>{
+  const lines=[]; let grand=0;
+  for(const url of PAGES){
+    for(const w of W){
+      const f=document.createElement('iframe');
+      f.style.cssText='position:absolute;left:-9999px;border:0;height:1600px;width:'+w+'px';
+      document.body.appendChild(f);
+      await new Promise(r=>{ f.onload=r; f.src=url; });
+      await new Promise(r=>setTimeout(r,800));
+      const o=orphans(f.contentDocument);
+      const nb=(f.contentDocument.body.innerHTML.match(/ /g)||[]).length;
+      grand+=o.length;
+      lines.push(url.replace('/work/','').padEnd(26)+' w='+String(w).padEnd(5)+' nbsp='+String(nb).padEnd(4)+' orphans='+o.length+(o.length?'  '+o.slice(0,4).join(', '):''));
+      f.remove();
+    }
+  }
+  document.getElementById('out').textContent='RESULT  total orphans = '+grand+'\n'+lines.join('\n');
+})();
+</script></body></html>
