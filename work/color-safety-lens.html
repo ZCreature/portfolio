@@ -39,6 +39,22 @@
 <link rel="stylesheet" href="../css/base.css?v=20260811a">
 
 <style>
+  /* The four checks are parallel, so they read as a grid rather than as
+     four stacked headings saying the same shape of thing. */
+  /* Two columns, not auto-fit: four items land 3 + 1 on a wide screen, which
+     reads as a leftover rather than as a set. */
+  .checks {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--gap-m) var(--gap-l);
+    margin-top: var(--gap-m);
+    max-width: 46rem;
+  }
+  @media (max-width: 34rem) { .checks { grid-template-columns: minmax(0, 1fr); } }
+  .check { border-top: 1px solid var(--rule); padding-top: 0.85rem; }
+  .check h3 { font-size: 0.9375rem; margin: 0 0 0.4rem; }
+  .check p { color: var(--ink-2); font-size: 0.9375rem; line-height: 1.55; }
+
   /* The tool in use, at the top of the page: the recording carries the idea
      faster than the first three paragraphs can. */
   .hero-vid { margin: 0; }
@@ -253,33 +269,25 @@
         they behave together, as a palette rather than as swatches.
       </p>
 
-      <h3>Text on any fill</h3>
-      <p>
-        Body-size text is checked against every tint for WCAG AA contrast. The
-        lighter steps matter most: a brand color that passes at 100% can fail
-        quickly as it lightens.
-      </p>
+    </div>
 
-      <h3>Adjacent fills</h3>
-      <p>
-        Data visualization puts colors directly beside one another. Neighboring
-        fills are tested so a boundary stays readable without depending on an
-        outline.
-      </p>
-
-      <h3>Color-vision deficiency</h3>
-      <p>
-        Palettes are simulated across protan, deutan and tritan. The goal is
-        not to make every color look identical under simulation. It is to keep
-        the information that color is carrying available.
-      </p>
-
-      <h3>Series separation</h3>
-      <p>
-        Every color pair is evaluated against the others. A palette can look
-        entirely reasonable as a row of swatches and still fail once several of
-        them appear in the same chart.
-      </p>
+    <div class="checks" data-reveal>
+      <div class="check">
+        <h3>Text on any fill</h3>
+        <p>Body-size text checked at every tint. A color that passes at 100% can fail as it lightens.</p>
+      </div>
+      <div class="check">
+        <h3>Adjacent fills</h3>
+        <p>Neighboring fills tested so a boundary reads without an outline holding it together.</p>
+      </div>
+      <div class="check">
+        <h3>Color-vision deficiency</h3>
+        <p>Simulated across protan, deutan and tritan. Not identical appearance, but information that survives.</p>
+      </div>
+      <div class="check">
+        <h3>Series separation</h3>
+        <p>Every pair checked against the others. A set can look fine as swatches and fail in one chart.</p>
+      </div>
     </div>
   </section>
 
