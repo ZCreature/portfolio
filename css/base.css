@@ -280,6 +280,11 @@ section { padding-block: var(--gap-xl); }
   margin: -4.924% 0 0 -1.894%;
 }
 
+/* The green burst is the one piece of colour in the chrome. In dark mode it
+   is the only saturated thing on the screen, so it drops to greyscale and
+   the interface stays monochrome the way the rest of the site argues for. */
+:root[data-theme="dark"] .rail__mark img { filter: grayscale(1); }
+
 .railmark { display: block; }
 
 .railmark__name {
