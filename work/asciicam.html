@@ -37,6 +37,13 @@
   } catch (e) {}
 </script>
 <link rel="stylesheet" href="../css/base.css?v=20260810k">
+<style>
+  /* One frame large, before the carousel goes through the styles. Capped at
+     the source's native 700px: the whole page is an argument about the glyph
+     grid, so upscaling it and smearing that grid would undercut the point. */
+  .figure--hero { margin: 0 auto; max-width: 700px; }
+  .figure--hero img { width: 100%; height: auto; display: block; }
+</style>
 </head>
 <body>
 
@@ -110,12 +117,18 @@
     </div>
   </section>
 
+  <section class="shell" style="padding-block: var(--gap-m) 0;">
+    <figure class="figure--hero" data-reveal>
+      <img src="../assets/img/work/asciicam/sample-02.jpg?v=20260810p" alt="ASCII iOS Camera output. A portrait rendered entirely in typographic characters, the face and hair built from dense punctuation and letterforms against black, tone carried by how much ink each glyph puts in its cell." width="700" height="700">
+    </figure>
+  </section>
+
   <section class="shell" style="padding-block: var(--gap-m) var(--gap-l);">
     <div class="car" data-carousel data-reveal>
       <div class="car__head">
         <h2 class="meta">Shot on it</h2>
         <div class="car__meta">
-          <span class="meta">4 frames, 10 styles</span>
+          <span class="meta">3 frames, 10 styles</span>
           <div class="car__btns">
             <button class="car__btn" type="button" data-car-prev aria-label="Scroll the samples back">
               <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M8 1 3 6l5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
@@ -127,9 +140,6 @@
         </div>
       </div>
       <div class="car__track" tabindex="0" role="group" aria-label="Frames shot with the app, horizontally scrollable gallery">
-        <div class="car__item">
-          <img src="../assets/img/work/asciicam/sample-02.jpg?v=20260810g" alt="ASCII iOS Camera output. A portrait in the halftone dot ramp, tone carried by dot size rather than by letterforms." loading="lazy" decoding="async">
-        </div>
         <div class="car__item">
           <img src="../assets/img/work/asciicam/sample-03.jpg?v=20260810g" alt="ASCII iOS Camera output. A standing figure in high-contrast glyphs, the background dissolving into sparse punctuation." loading="lazy" decoding="async">
         </div>
