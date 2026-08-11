@@ -65,10 +65,10 @@
     background: var(--paper);
   }
   /* Sized to the prose measure rather than the full shell: at full width the
-     recording dominated the hero, and its detail is illegible at any size, so
-     it earns nothing by being bigger. */
+     board dominated the hero, and its detail is illegible at any size, so it
+     earns nothing by being bigger. */
   .figure--wide { margin: 0; max-width: 46rem; }
-  .figure--wide video { width: 100%; height: auto; display: block; background: #000; }
+  .figure--wide img { width: 100%; height: auto; display: block; background: #000; }
 </style>
 </head>
 <body>
@@ -143,11 +143,9 @@
 
   <section class="shell shell--narrow" style="padding-block: var(--gap-m) 0;">
     <figure class="figure--wide" data-reveal>
-      <video controls muted loop playsinline preload="none"
-             poster="../assets/img/work/rf/poster.jpg?v=20260810p"
-             aria-label="The twelve motifs running together: a radar sweep rotating with a phosphor trail, expanding pulse rings, a scrolling spectrum waterfall, a rotating IQ phasor, and a standing wave oscillating in place.">
-        <source src="../assets/video/rf-study.mp4?v=20260810p" type="video/mp4">
-      </video>
+      <img src="../assets/img/work/rf/motifs.jpg?v=20260810q"
+           alt="The full study board: the twelve motifs laid out as a grid of black panels on the right, with one enlarged on the left beside its technical description. Radar sweep, expanding diamonds, a perspective grid, a spectrum waterfall, a Lissajous figure and a standing wave among them."
+           width="1800" height="1287">
     </figure>
   </section>
 
