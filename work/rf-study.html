@@ -64,7 +64,10 @@
     padding: 0.5rem 0.6rem 0.7rem;
     background: var(--paper);
   }
-  .figure--wide { margin: 0; }
+  /* Sized to the prose measure rather than the full shell: at full width the
+     recording dominated the hero, and its detail is illegible at any size, so
+     it earns nothing by being bigger. */
+  .figure--wide { margin: 0; max-width: 46rem; }
   .figure--wide video { width: 100%; height: auto; display: block; background: #000; }
 </style>
 </head>
@@ -138,7 +141,7 @@
     </div>
   </section>
 
-  <section class="shell" style="padding-block: var(--gap-m) 0;">
+  <section class="shell shell--narrow" style="padding-block: var(--gap-m) 0;">
     <figure class="figure--wide" data-reveal>
       <video controls muted loop playsinline preload="none"
              poster="../assets/img/work/rf/poster.jpg?v=20260810p"
