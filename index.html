@@ -91,9 +91,21 @@
 
 <main>
 
-<h1 class="sr-only">Chris Almaguer - data visualization designer. Dashboards, design systems and accessible color for healthcare analytics and newsrooms.</h1>
+<!-- The rail carries the name, so the h1 carries the role. It is a real
+     heading rather than the sr-only one it replaces: the first thing a
+     recruiter reads should also be the first thing a crawler reads. -->
+<section class="shell case-hero" style="padding-bottom: var(--gap-m);">
+  <h1 class="h1" data-reveal>Senior Data Visualization Designer</h1>
+  <p class="lede tight" data-reveal style="--reveal-delay:70ms; margin-top: var(--gap-m);">
+    I design complex information systems, analytics products, and interfaces
+    that make data easier to understand and act on.
+  </p>
+  <p class="meta" data-reveal style="--reveal-delay:140ms; margin-top: var(--gap-m);">
+    Healthcare analytics &middot; Data visualization &middot; Product UI &middot; Design systems
+  </p>
+</section>
 
-<section class="shell" id="dataviz">
+<section class="shell" id="dataviz" style="padding-top: var(--gap-l);">
     <div class="section-head">
       <h2 class="meta">Data visualization</h2>
     </div>
@@ -146,6 +158,30 @@
         <div class="tile__tags">
           <span class="tag tag--type">Dashboard</span>
           <span class="tag">Design system</span>
+          <span class="tag tag--status">Protected</span>
+        </div>
+      </div>
+    </article>
+      <article class="tile" data-reveal>
+      <div class="tile__thumb">
+        <!-- Deliberately blurred: rebuilt from a 28px downscale, so the blur is
+             in the pixels and cannot be removed. The sharp artwork lives only
+             inside the encrypted payload. -->
+        <img src="assets/img/tools/surgical-sankey-blur.jpg?v=20260810e"
+             alt="A deliberately blurred Sankey dashboard. Shapes and color remain; every figure and label is unreadable."
+             width="1200" height="600">
+      </div>
+      <div class="tile__body">
+        <div class="tile__head">
+          <h3 class="tile__title">
+            <a class="tile__link" href="work/patient-flow.html">Sankey surgical utilization</a>
+          </h3>
+          <span class="meta">2022</span>
+        </div>
+        <p class="tile__sub">Six Sankeys across knee, hip, CABG and skin cases.</p>
+        <div class="tile__tags">
+          <span class="tag tag--type">Sankey</span>
+          <span class="tag">Healthcare</span>
           <span class="tag tag--status">Protected</span>
         </div>
       </div>
@@ -236,30 +272,6 @@
     </article>
       <article class="tile" data-reveal>
       <div class="tile__thumb">
-        <!-- Deliberately blurred: rebuilt from a 28px downscale, so the blur is
-             in the pixels and cannot be removed. The sharp artwork lives only
-             inside the encrypted payload. -->
-        <img src="assets/img/tools/surgical-sankey-blur.jpg?v=20260810e"
-             alt="A deliberately blurred Sankey dashboard. Shapes and color remain; every figure and label is unreadable."
-             width="1200" height="600">
-      </div>
-      <div class="tile__body">
-        <div class="tile__head">
-          <h3 class="tile__title">
-            <a class="tile__link" href="work/patient-flow.html">Sankey surgical utilization</a>
-          </h3>
-          <span class="meta">2022</span>
-        </div>
-        <p class="tile__sub">Six Sankeys across knee, hip, CABG and skin cases.</p>
-        <div class="tile__tags">
-          <span class="tag tag--type">Sankey</span>
-          <span class="tag">Healthcare</span>
-          <span class="tag tag--status">Protected</span>
-        </div>
-      </div>
-    </article>
-      <article class="tile" data-reveal>
-      <div class="tile__thumb">
         <!-- Animated GIF export of the Tableau dashboard, authored at the tile's
              native 16:10 so it fills the frame with no crop. -->
         <img width="1200" height="750" src="assets/img/tools/thunderhill.gif?v=20260809g" alt="The Thunderhill West lap-time dashboard in Tableau - a scatterplot of dry and wet laps with tooltips revealing times and conditions, beside the track outline.">
@@ -289,6 +301,21 @@
     </div>
 
     <div class="tiles tiles--3" data-reveal-group data-reveal-step="50">
+      <article class="tile" data-reveal>
+      <div class="tile__thumb"><img src="assets/img/tools/trackdash.jpg?v=20260809f" alt="TrackDash running on a phone mounted in a car at night, showing a five-minute speed trace beside the instrument cluster and the CarPlay screen." width="1200" height="750"></div>
+      <div class="tile__body">
+        <div class="tile__head">
+          <h3 class="tile__title"><a class="tile__link" href="work/trackdash.html">TrackDash</a></h3>
+          <span class="meta">CarPlay</span>
+        </div>
+        <p class="tile__sub">The car's built-in screen, not the phone.</p>
+        <div class="tile__tags">
+          <span class="tag">Mobile application</span>
+          <span class="tag">Apple CarPlay</span>
+          <span class="tag tag--status">In testing</span>
+        </div>
+      </div>
+    </article>
       
 
       <article class="tile tile--mybeats" data-reveal>
@@ -363,21 +390,6 @@
           <span class="tag">macOS</span>
           <span class="tag tag--ai">On-device AI</span>
           <span class="tag tag--tool">Ollama</span>
-        </div>
-      </div>
-    </article>
-      <article class="tile" data-reveal>
-      <div class="tile__thumb"><img src="assets/img/tools/trackdash.jpg?v=20260809f" alt="TrackDash running on a phone mounted in a car at night, showing a five-minute speed trace beside the instrument cluster and the CarPlay screen." width="1200" height="750"></div>
-      <div class="tile__body">
-        <div class="tile__head">
-          <h3 class="tile__title"><a class="tile__link" href="work/trackdash.html">TrackDash</a></h3>
-          <span class="meta">CarPlay</span>
-        </div>
-        <p class="tile__sub">The car's built-in screen, not the phone.</p>
-        <div class="tile__tags">
-          <span class="tag">Mobile application</span>
-          <span class="tag">Apple CarPlay</span>
-          <span class="tag tag--status">In testing</span>
         </div>
       </div>
     </article>
