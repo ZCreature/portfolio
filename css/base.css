@@ -507,7 +507,7 @@ body { padding-left: var(--rail); }
 
 .entry {
   display: grid;
-  grid-template-columns: 3.25rem minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: var(--gap-s) var(--gap-m);
   align-items: baseline;
   padding: clamp(1.4rem, 3vw, 2.1rem) clamp(0.5rem, 1.5vw, 1rem);
@@ -523,10 +523,8 @@ body { padding-left: var(--rail); }
   color: var(--paper);
 }
 
-.entry:hover .entry__num,
 .entry:hover .entry__sub,
 .entry:hover .meta,
-.entry:focus-within .entry__num,
 .entry:focus-within .entry__sub,
 .entry:focus-within .meta { color: var(--paper); }
 
@@ -546,8 +544,6 @@ body { padding-left: var(--rail); }
   padding: 0.08rem 0.2rem;
   white-space: nowrap;
 }
-
-.entry__num { color: var(--ink-3); font-size: 0.75rem; }
 
 .entry__title {
   font-size: clamp(1.25rem, 2.6vw, 1.9rem);
