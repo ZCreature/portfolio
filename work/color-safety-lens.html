@@ -12,13 +12,13 @@
   gtag('config', 'G-WEL5434XZK');
 </script>
 <title>Color Safety Lens - Chris Almaguer</title>
-<meta name="description" content="A palette auditor: WCAG contrast across tint ramps and color-vision simulation, with the color maths running live in the page.">
+<meta name="description" content="Making brand colors work for healthcare data: a controlled tint range, tested for contrast and color-vision deficiency before it reaches a dashboard.">
 <meta name="theme-color" content="#fbfbfa">
 <link rel="icon" href="../favicon.png?v=20260809h" type="image/png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Chris Almaguer">
 <meta property="og:title" content="Color Safety Lens - Chris Almaguer">
-<meta property="og:description" content="A palette auditor: WCAG contrast across tint ramps and color-vision simulation, with the color maths running live in the page.">
+<meta property="og:description" content="Making brand colors work for healthcare data: a controlled tint range, tested for contrast and color-vision deficiency before it reaches a dashboard.">
 <meta property="og:url" content="https://almaguer.design/work/color-safety-lens.html">
 <meta property="og:image" content="https://almaguer.design/assets/img/og.png?v=3">
 <meta property="og:image:width" content="1200">
@@ -28,7 +28,7 @@
 <link rel="canonical" href="https://almaguer.design/work/color-safety-lens.html">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Color Safety Lens - Chris Almaguer">
-<meta name="twitter:description" content="A palette auditor: WCAG contrast across tint ramps and color-vision simulation, with the color maths running live in the page.">
+<meta name="twitter:description" content="Making brand colors work for healthcare data: a controlled tint range, tested for contrast and color-vision deficiency before it reaches a dashboard.">
 <meta name="author" content="Chris Almaguer">
 <script>
   try {
@@ -170,8 +170,7 @@
       </div>
       <p class="embed__note">
         The actual tool, not a screenshot. Load a palette, ramp the tints, and
-        run the color-vision simulation on the same linear-RGB pipeline
-        described below.
+        run the color-vision simulation against a live palette.
       </p>
     </div>
   </section>
@@ -293,54 +292,20 @@
     </div>
   </section>
 
-  <!-- ============ 04 The technical problem ============ -->
+  
+
+  <!-- ============ 04 Seeing the difference ============ -->
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
     <div class="prose" data-reveal>
-      <p class="meta">04 - The technical problem</p>
-      <h2>Then the tool gave a confident, wrong answer</h2>
-      <p>
-        The first working version produced results that looked authoritative
-        and were not reliable. It came down to the RGB values themselves. The
-        values used for display are encoded rather than linear, and running
-        color operations directly on them produces incorrect results.
-      </p>
-      <p>
-        The calculations were rebuilt in linear RGB. Every operation,
-        simulation, tinting and mixing, happens in linear space and converts
-        back at the boundary. That fixed the color math. The next question was
-        whether the color-difference calculation could be trusted.
-      </p>
-    </div>
-
-    <div class="prose" data-reveal>
-      <h3>Validating &#916;E2000</h3>
-      <p>
-        The &#916;E2000 implementation was validated against Sharma's published
-        test suite. CIEDE2000 has known edge cases and discontinuities that a
-        naive implementation gets wrong, and the published data is a reference
-        rather than an assumption that the math is right.
-      </p>
-      <p>
-        The <b>Okabe-Ito palette</b> became the control. It was designed to stay
-        distinguishable under the common forms of color-vision deficiency, so it
-        gave a simple test:
-        <b>if the tool says Okabe-Ito is unsafe, the tool is broken.</b>
-        Five audits later, it passed clean.
-      </p>
-    </div>
-  </section>
-
-  <!-- ============ 05 Seeing the difference ============ -->
-  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
-    <div class="prose" data-reveal>
-      <p class="meta">05 - Seeing the difference</p>
+      <p class="meta">04 - Seeing the difference</p>
       <h2>A palette can look fine until it does not</h2>
       <p>
-        The simulator moves through the types and severities of color-vision
-        deficiency. A naive palette shows the problem quickly: two colors that
-        look clearly different under normal vision start to converge as
-        severity rises. The Okabe-Ito control holds separation far longer, which
-        is the whole point of it.
+        Color-vision deficiency is not a switch, it is a range, and most people
+        who have one are somewhere in the middle of it. A palette shows the
+        problem quickly once you move through that range: two colors that look
+        clearly different at zero start to converge well before full severity.
+        Palettes built to stay separable, like Okabe and Ito's, hold their
+        distance the whole way.
       </p>
       <p>
         The goal is not a palette that looks good in a screenshot.
@@ -350,10 +315,10 @@
     </div>
   </section>
 
-  <!-- ============ 06 Making it useful ============ -->
+  <!-- ============ 05 Making it useful ============ -->
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
     <div class="prose" data-reveal>
-      <p class="meta">06 - Making it useful</p>
+      <p class="meta">05 - Making it useful</p>
       <h2>The tool had to fit the design system</h2>
       <p>
         A color audit is only useful if designers actually run it. The last
@@ -388,10 +353,10 @@
     </div>
   </section>
 
-  <!-- ============ 07 Impact ============ -->
+  <!-- ============ 06 Impact ============ -->
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) var(--gap-xl);">
     <div class="prose" data-reveal>
-      <p class="meta">07 - Impact</p>
+      <p class="meta">06 - Impact</p>
       <h2>Accessibility became part of the process</h2>
       <p>
         Color Safety Lens is used in healthcare dashboard work to check
