@@ -36,9 +36,27 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="../css/base.css?v=20260810p">
+<link rel="stylesheet" href="../css/base.css?v=20260811a">
 
 <style>
+  /* The tool in use, at the top of the page: the recording carries the idea
+     faster than the first three paragraphs can. */
+  .hero-vid { margin: 0; }
+  .hero-vid video {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid var(--rule);
+    background: var(--paper-2);
+  }
+  .hero-vid figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.8125rem;
+    color: var(--ink-3);
+    line-height: 1.5;
+    max-width: 46ch;
+  }
+
   /* The tint ladder, read as a table of value against job. */
   .ramp { margin: var(--gap-m) 0 0; }
   .ramp > div {
@@ -145,8 +163,9 @@
     <p class="lede tight" data-reveal style="--reveal-delay:140ms; margin-top: var(--gap-m);">
       Healthcare dashboards rarely start with a blank canvas. Clients arrive
       with an established brand, and those colors tend to reach a dashboard
-      concept at full saturation. The result is familiar to the brand and
-      overwhelming for the data.
+      concept at full saturation, which is familiar to the brand and
+      overwhelming for the data. This is the tool I built to work out which
+      version of a brand color a chart can actually carry.
     </p>
     <div class="case-tags" data-reveal style="--reveal-delay:200ms;">
         <span class="tag tag--type">Heatmap</span>
@@ -155,34 +174,31 @@
       </div>
   </section>
 
-  <!-- ============ The tool, up front ============ -->
+
+  <!-- ============ The tool in use ============ -->
   <section class="shell shell--narrow" style="padding-block: 0 var(--gap-l);">
-    <div class="embed embed--fit" data-embed data-reveal
-         data-embed-w="1280" data-embed-h="860">
-      <div class="embed__bar">
-        <span class="meta">Color Safety Lens - running live</span>
-        <a class="btn" href="tools/color-safety-lens.html" target="_blank" rel="noopener">Open full screen</a>
-      </div>
-      <div class="embed__frame">
-        <p class="embed__loading meta">Loading tool…</p>
-        <iframe src="tools/color-safety-lens.html" loading="lazy"
-                title="Color Safety Lens - palette accessibility auditor"></iframe>
-      </div>
-      <p class="embed__note">
-        The actual tool, not a screenshot. Load a palette, ramp the tints, and
-        run the color-vision simulation against a live palette.
-      </p>
-    </div>
+    <figure class="hero-vid" data-reveal>
+      <video controls muted loop playsinline preload="none"
+             poster="../assets/img/work/csl/hero-poster.jpg?v=20260811a"
+             aria-label="Screen recording of Color Safety Lens on a laptop: a six-colour palette loaded, tints ramped from 100 down to 10 percent with every step reporting its contrast ratio, and the colour-vision control switched to protan while the severity slider is dragged.">
+        <source src="../assets/video/csl-hero.mp4?v=20260811a" type="video/mp4">
+      </video>
+      <figcaption>
+        A palette going through the tool. Each tint reports its contrast ratio
+        as the ramp is built, and the color-vision control re-renders the whole
+        set at any severity.
+      </figcaption>
+    </figure>
   </section>
 
   <!-- ============ Opening argument ============ -->
   <section class="shell shell--narrow" style="padding-block: 0 var(--gap-l);">
     <div class="prose" data-reveal>
       <p>
-        Every chart becomes loud. Every category competes for attention. The
-        answer is not to remove the brand, it is to use it more deliberately.
-        A controlled range of tints reserves the strongest version of the
-        brand for highlights and interface, and lets lighter tints carry the
+        At full strength every chart is loud and every category competes for
+        attention. The answer is not to remove the brand, it is to use it more
+        deliberately. A controlled range of tints reserves the strongest
+        version for highlights and interface, and lets lighter tints carry the
         visualization.
       </p>
       <p>
@@ -287,12 +303,47 @@
       </dl>
       <p>
         These are a starting point for hierarchy, not rigid percentages. The
-        important part is that a color has a reason for being there.
+        important part is that a color has a reason for being there, and that
+        the reason can be checked.
       </p>
     </div>
   </section>
 
   
+
+  <!-- ============ Try it ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
+    <div class="prose" data-reveal>
+      <p class="meta">Try it</p>
+      <h2>The same checks, on your own palette</h2>
+      <p>
+        Everything above is a rule. This is the rule doing its job. Paste in a
+        brand color, ramp it, and the tool reports what passes at each step and
+        what happens to the set under each type of color-vision deficiency.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ The live tool ============ -->
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
+    <div class="embed embed--fit" data-embed data-reveal
+         data-embed-w="1280" data-embed-h="860">
+      <div class="embed__bar">
+        <span class="meta">Color Safety Lens - running live</span>
+        <a class="btn" href="tools/color-safety-lens.html" target="_blank" rel="noopener">Open full screen</a>
+      </div>
+      <div class="embed__frame">
+        <p class="embed__loading meta">Loading tool…</p>
+        <iframe src="tools/color-safety-lens.html" loading="lazy"
+                title="Color Safety Lens - palette accessibility auditor"></iframe>
+      </div>
+      <p class="embed__note">
+        This is the tool itself, running in the page. Type in hex values, ramp
+        the tints, and switch the color-vision control to see what a palette
+        does before it reaches a dashboard.
+      </p>
+    </div>
+  </section>
 
   <!-- ============ 04 Seeing the difference ============ -->
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
