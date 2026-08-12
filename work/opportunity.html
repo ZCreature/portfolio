@@ -11,14 +11,14 @@
   gtag('js', new Date());
   gtag('config', 'G-WEL5434XZK');
 </script>
-<title>Financial opportunity, by size and by speed - Chris Almaguer</title>
-<meta name="description" content="Two questions in one picture: how big is the opportunity, and how long until we see it. A phase-approach spread for a hospital executive team.">
+<title>Two ways out of a table - Chris Almaguer</title>
+<meta name="description" content="The data existed and nobody could see it as anything but a table. Two alternatives, both carrying size of opportunity against time to value.">
 <meta name="theme-color" content="#fbfbfa">
 <link rel="icon" href="../favicon.png?v=20260809h" type="image/png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Chris Almaguer">
-<meta property="og:title" content="Financial opportunity, by size and by speed - Chris Almaguer">
-<meta property="og:description" content="Two questions in one picture: how big is the opportunity, and how long until we see it.">
+<meta property="og:title" content="Two ways out of a table - Chris Almaguer">
+<meta property="og:description" content="The data existed and nobody could see it as anything but a table. Two alternatives, both carrying size of opportunity against time to value.">
 <meta property="og:url" content="https://almaguer.design/work/opportunity.html">
 <meta property="og:image" content="https://almaguer.design/assets/img/og.png?v=3">
 <meta property="og:image:width" content="1200">
@@ -27,8 +27,8 @@
 <meta name="twitter:image" content="https://almaguer.design/assets/img/og.png?v=3">
 <link rel="canonical" href="https://almaguer.design/work/opportunity.html">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Financial opportunity, by size and by speed - Chris Almaguer">
-<meta name="twitter:description" content="Two questions in one picture: how big is the opportunity, and how long until we see it.">
+<meta name="twitter:title" content="Two ways out of a table - Chris Almaguer">
+<meta name="twitter:description" content="The data existed and nobody could see it as anything but a table. Two alternatives, both carrying size of opportunity against time to value.">
 <meta name="author" content="Chris Almaguer">
 <script>
   try {
@@ -44,11 +44,6 @@
     margin-top: 0.75rem; font-size: 0.8125rem; color: var(--ink-3);
     line-height: 1.5; max-width: 46ch;
   }
-  .reads { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: var(--gap-m) var(--gap-l); max-width: 46rem; margin-top: var(--gap-m); }
-  @media (max-width: 34rem) { .reads { grid-template-columns: minmax(0,1fr); } }
-  .read { border-top: 1px solid var(--rule); padding-top: 0.85rem; }
-  .read h3 { font-size: 0.9375rem; margin: 0 0 0.4rem; }
-  .read p { color: var(--ink-2); font-size: 0.9375rem; line-height: 1.55; }
 </style>
 </head>
 <body>
@@ -105,12 +100,13 @@
   <section class="shell case-hero">
     <p class="meta" data-reveal>Side project - Editorial data visualization</p>
     <h1 class="h1" data-reveal style="--reveal-delay:70ms; margin-top: var(--gap-s);">
-      Financial opportunity, by size and by speed
+      Two ways out of a table
     </h1>
     <p class="lede tight" data-reveal style="--reveal-delay:140ms; margin-top: var(--gap-m);">
-      An executive team asking where to spend its attention has two questions,
-      and they fight each other. Which opportunity is biggest, and which one
-      pays out soonest. This is one picture that answers both.
+      The data already existed. The person who owned it could not see a way to
+      show it that was not a table, so they asked. I came back with two. Both
+      carry the same two facts: how big the opportunity is, and how long until
+      anyone sees it.
     </p>
     <div class="case-tags" data-reveal style="--reveal-delay:200ms;">
       <span class="tag tag--type">Bubble chart</span>
@@ -122,94 +118,27 @@
   <section class="shell shell--narrow" style="padding-block: 0 var(--gap-l);">
     <figure class="plate" data-reveal>
       <img src="../assets/img/work/opportunity/spread.jpg?v=20260812a"
-           alt="A deck spread titled Operational Effectiveness Financial Opportunity. Circles sized by dollar opportunity fan out along an arc scaled in months, green for clinical operations and grey for spend management, every figure masked."
+           alt="Circles sized by dollar opportunity fan out along an arc scaled in months, green for clinical operations and grey for spend management, every figure masked."
            width="2000" height="1294">
       <figcaption>
-        Every figure and the client name are masked. The encoding is the point,
-        not the numbers.
+        <b>One.</b> Size is the money, distance from the center is the wait.
+        Near is soon and far is later, so the big circle sitting furthest out
+        reads as the prize that costs the most patience. <em>Client name and
+        every dollar figure masked.</em>
       </figcaption>
     </figure>
   </section>
 
-  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
-    <div class="prose" data-reveal>
-      <p class="meta">01 - The problem</p>
-      <h2>A table makes you do the work</h2>
-      <p>
-        The source for this was a table: a row per category, a dollar column,
-        and a column for how many months until the money shows up. Everything
-        needed was in it, and nobody could see the answer. Ranking by dollars
-        buries the quick wins. Ranking by time buries the big ones. A reader
-        has to hold both columns in their head and do the comparison
-        themselves, which is exactly the work a chart is supposed to take off
-        them.
-      </p>
-      <p>
-        The decision this had to support was not "which number is largest." It
-        was where a leadership team should point its next twelve months.
-      </p>
-    </div>
-  </section>
-
-  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
-    <div class="prose" data-reveal>
-      <p class="meta">02 - The encoding</p>
-      <h2>Three channels, one for each thing being asked</h2>
-    </div>
-    <div class="reads" data-reveal>
-      <div class="read">
-        <h3>Area is the money</h3>
-        <p>Circles scaled by dollar opportunity. Area is a weak channel for precise comparison, which is correct here: nobody should read exact dollars off a bubble, and the figures are printed anyway.</p>
-      </div>
-      <div class="read">
-        <h3>Distance is the wait</h3>
-        <p>Position along the arc is time to value, from three months at the center out past eighteen. Distance from the origin is the delay, so far away literally means far off.</p>
-      </div>
-      <div class="read">
-        <h3>Color is the kind of work</h3>
-        <p>Two categories only, clinical operations against spend management, which stays well under the point where color stops separating reliably.</p>
-      </div>
-      <div class="read">
-        <h3>The fan is the effort</h3>
-        <p>The grey wedges widen with the work required to reach each one, so the shape carries a third variable without adding a legend nobody reads.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
-    <div class="prose" data-reveal>
-      <p class="meta">03 - Why an arc</p>
-      <h2>The shape answers before the labels do</h2>
-      <p>
-        A scatter plot would have carried the same two variables and read as
-        homework. The arc does one thing a grid cannot: it puts the origin
-        where the reader is standing. Near is soon, far is later, and the
-        largest circle sitting furthest out is the prize that costs the most
-        patience.
-      </p>
-      <p>
-        That is the sentence the room says out loud when this goes up, which
-        is the only real test of a chart built for a meeting.
-      </p>
-    </div>
-  </section>
-
-  <section class="shell shell--narrow" style="padding-block: var(--gap-l) var(--gap-xl);">
-    <div class="prose" data-reveal>
-      <p class="meta">04 - The other cut</p>
-      <h2>Same data, scale made explicit</h2>
-      <p>
-        A second version trades the arc for a straight month scale across the
-        top. It is easier to read a specific number off and much harder to see
-        the story in, which is the trade you make every time you turn a picture
-        back into a table.
-      </p>
-    </div>
-    <figure class="plate" data-reveal style="margin-top: var(--gap-m); max-width: 34rem;">
+  <section class="shell shell--narrow" style="padding-block: 0 var(--gap-xl);">
+    <figure class="plate" data-reveal style="max-width: 34rem;">
       <img src="../assets/img/work/opportunity/scale.jpg?v=20260812a"
-           alt="The portrait variant of the same spread, with a numbered month scale running one to eighteen across the top and the circles arranged beneath it."
+           alt="The same categories drawn against a numbered month scale running one to eighteen across the top, circles sized by dollar opportunity beneath it."
            width="970" height="1500" loading="lazy" decoding="async">
-      <figcaption>The same categories against an explicit eighteen-month scale.</figcaption>
+      <figcaption>
+        <b>Two.</b> The same data against a numbered month scale. Easier to
+        read a specific number off, harder to see the shape of the answer,
+        which is the trade every time you move a picture back toward a table.
+      </figcaption>
     </figure>
   </section>
 
@@ -229,6 +158,7 @@
   </section>
 
 </main>
+
 
 
 <script>
