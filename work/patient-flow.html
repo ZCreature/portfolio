@@ -56,6 +56,11 @@
     .spread { grid-template-columns: minmax(0, 1fr); gap: var(--gap-l); }
     .spread .prose { max-width: 52rem; }
   }
+
+  /* The two hues the section is about, sampled from the slides themselves:
+     teal #00ACAA for no dressing, purple #7E5DB8 for dressing or kit. */
+  .hues { display: flex; gap: 0.4rem; margin-bottom: 0.9rem; }
+  .hues span { width: 1.15rem; height: 1.15rem; display: block; }
 </style>
 </head>
 <body>
@@ -238,6 +243,7 @@
   <section class="shell" style="padding-block: var(--gap-l) 0;">
     <div class="spread">
       <div class="prose" data-reveal>
+        <p class="hues" aria-hidden="true"><span style="background:#00ACAA"></span><span style="background:#7E5DB8"></span></p>
         <p class="meta">03 - Design</p>
         <h2>Two hues, and everything else carried by structure</h2>
         <p>
