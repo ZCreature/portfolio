@@ -164,6 +164,33 @@
     </article>
       <article class="tile" data-reveal>
       <div class="tile__thumb">
+        <!-- Animated GIF export, authored at the tile's native 16:10 so it
+             fills the frame with no crop. 226KB against the 2.2MB video it
+             replaced. -->
+        <video class="tile__video" data-lazy-video
+               poster="assets/img/tools/csl-poster.jpg?v=20260810f"
+               width="1200" height="750"
+               muted loop playsinline preload="none"
+               style="width:100%;height:100%;object-fit:cover;display:block;background:#fff"
+               aria-label="Screen recording of Color Safety Lens: palettes swapped, color-vision type switched between deficiency types, and the severity slider dragged while every tint tile re-checks its WCAG contrast.">
+          <source src="assets/video/color-safety-lens.mp4?v=20260810f" type="video/mp4">
+        </video>
+      </div>
+      <div class="tile__body">
+        <div class="tile__head">
+          <h3 class="tile__title"><a class="tile__link" href="work/color-safety-lens.html">Color Safety Lens</a></h3>
+          <span class="meta">Web</span>
+        </div>
+        <p class="tile__sub">WCAG ramps, CVD simulation, ΔE checking.</p>
+        <div class="tile__tags">
+          <span class="tag tag--type">Heatmap</span>
+          <span class="tag tag--live">Live</span>
+          <span class="tag tag--tool">JavaScript</span>
+        </div>
+      </div>
+    </article>
+      <article class="tile" data-reveal>
+      <div class="tile__thumb">
         <img src="assets/img/tools/population-alluvial.jpg?v=20260809f"
              alt="The 7.9 billion broadsheet shown on a laptop - an alluvial diagram tying five continents through thirty-three countries to fifty cities, each city's population drawn as a red circle along the bottom axis."
              width="1200" height="750" fetchpriority="high">
@@ -223,33 +250,6 @@
           <span class="tag tag--type">Bubble chart</span>
           <span class="tag">Healthcare</span>
           <span class="tag">Custom illustration</span>
-        </div>
-      </div>
-    </article>
-      <article class="tile" data-reveal>
-      <div class="tile__thumb">
-        <!-- Animated GIF export, authored at the tile's native 16:10 so it
-             fills the frame with no crop. 226KB against the 2.2MB video it
-             replaced. -->
-        <video class="tile__video" data-lazy-video
-               poster="assets/img/tools/csl-poster.jpg?v=20260810f"
-               width="1200" height="750"
-               muted loop playsinline preload="none"
-               style="width:100%;height:100%;object-fit:cover;display:block;background:#fff"
-               aria-label="Screen recording of Color Safety Lens: palettes swapped, color-vision type switched between deficiency types, and the severity slider dragged while every tint tile re-checks its WCAG contrast.">
-          <source src="assets/video/color-safety-lens.mp4?v=20260810f" type="video/mp4">
-        </video>
-      </div>
-      <div class="tile__body">
-        <div class="tile__head">
-          <h3 class="tile__title"><a class="tile__link" href="work/color-safety-lens.html">Color Safety Lens</a></h3>
-          <span class="meta">Web</span>
-        </div>
-        <p class="tile__sub">WCAG ramps, CVD simulation, ΔE checking.</p>
-        <div class="tile__tags">
-          <span class="tag tag--type">Heatmap</span>
-          <span class="tag tag--live">Live</span>
-          <span class="tag tag--tool">JavaScript</span>
         </div>
       </div>
     </article>
