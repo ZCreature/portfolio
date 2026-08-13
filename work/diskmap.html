@@ -56,6 +56,11 @@
   }
   .pair figcaption b { color: var(--ink-2); font-weight: 600; }
 
+  /* The search figure is the exchange in two parts: the ask above the
+     results it produced. */
+  .duo { display: grid; gap: 0.6rem; }
+  .duo img { width: 100%; height: auto; display: block; }
+
   /* One screen large, up front: the whole app in a single frame before the
      carousel goes through it piece by piece. */
   .figure--wide { margin: 0; }
@@ -155,7 +160,7 @@
       </div>
       <div class="car__track" tabindex="0" role="group" aria-label="Disk Map screens, horizontally scrollable gallery">
         <div class="car__item">
-          <img src="../assets/img/work/diskmap/shot-01.jpg?v=20260810k" alt="Disk Map. The Diskbot panel answering a question about locating a file, beside the treemap of the whole drive." loading="lazy" decoding="async">
+          <img src="../assets/img/work/diskmap/shot-01.jpg?v=20260813a" alt="Disk Map. The Diskbot panel answering a question about locating a file, beside the treemap of the whole drive." loading="lazy" decoding="async">
         </div>
         <div class="car__item">
           <img src="../assets/img/work/diskmap/shot-04.jpg?v=20260810k" alt="Disk Map. The light theme with the scan-location dialog open, choosing which volume or folder to read." loading="lazy" decoding="async">
@@ -229,15 +234,22 @@
         vague. What it can answer with is not.</figcaption>
       </figure>
       <figure data-reveal>
-        <div class="figure__frame">
-          <img src="../assets/img/work/diskmap/ai-search.jpg?v=20260810l" width="736" height="740"
-               alt="Diskbot returning the ten largest GIFs in the scan, each row showing a preview thumbnail, the file path and its size in megabytes."
-               loading="lazy">
+        <div class="duo">
+          <div class="figure__frame">
+            <img src="../assets/img/work/diskmap/ai-ask.jpg?v=20260813a" width="726" height="896"
+                 alt="The question in the Diskbot panel: whats the top 10 largest GIFs scanned. Beneath it the disclosed lookup, a name search for star dot gif with 287 matches, and the model's text answer listing paths and sizes."
+                 loading="lazy">
+          </div>
+          <div class="figure__frame">
+            <img src="../assets/img/work/diskmap/ai-search.jpg?v=20260810l" width="736" height="740"
+                 alt="The result list continued: each of the largest GIFs as a row with a preview thumbnail, the file path and its size in megabytes."
+                 loading="lazy">
+          </div>
         </div>
-        <figcaption><b>Search by description, not by filename.</b> Asking for the
-        largest GIFs runs a name search across the in-memory scan and returns
-        paths and sizes. The thumbnails are drawn by the app from the file on
-        disk; the model never sees them.</figcaption>
+        <figcaption><b>Search by description, not by filename.</b> The ask and
+        the answer. Asking for the largest GIFs runs a name search across the
+        in-memory scan and returns paths and sizes. The thumbnails are drawn by
+        the app from the file on disk; the model never sees them.</figcaption>
       </figure>
     </div>
   </section>
