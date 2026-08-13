@@ -42,6 +42,20 @@
      their captions get a wider measure than a one-line label needs. */
   .car__item img { height: clamp(17rem, 42vw, 32rem); }
   .car__item figcaption { max-width: 34rem; }
+
+  /* Numbered steps read two-up, the same editorial spread as the healthcare
+     study: each pair is two halves of one move. Stacks below 62rem. */
+  .spread {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--gap-m) var(--gap-xl);
+    align-items: start;
+  }
+  .spread .prose { max-width: 34rem; }
+  @media (max-width: 62rem) {
+    .spread { grid-template-columns: minmax(0, 1fr); gap: var(--gap-l); }
+    .spread .prose { max-width: 52rem; }
+  }
 </style>
 </head>
 <body>
