@@ -38,11 +38,11 @@
 </script>
 <link rel="stylesheet" href="../css/base.css?v=20260811a">
 <style>
-  /* One frame large, before the carousel goes through the styles. Capped at
-     the source's native 700px: the whole page is an argument about the glyph
-     grid, so upscaling it and smearing that grid would undercut the point. */
-  .figure--hero { margin: 0 auto; max-width: 700px; }
-  .figure--hero img { width: 100%; height: auto; display: block; }
+  /* The camera running, before the carousel goes through the styles: the
+     whole claim is thirty frames a second on the phone, and only motion
+     shows it. */
+  .figure--hero { margin: 0 auto; max-width: 46rem; }
+  .figure--hero video { width: 100%; height: auto; display: block; background: #000; border: 1px solid var(--rule); }
 </style>
 </head>
 <body>
@@ -119,7 +119,11 @@
 
   <section class="shell" style="padding-block: var(--gap-m) 0;">
     <figure class="figure--hero" data-reveal>
-      <img src="../assets/img/work/asciicam/sample-02.jpg?v=20260810p" alt="ASCII iOS Camera output. A portrait rendered entirely in typographic characters, the face and hair built from dense punctuation and letterforms against black, tone carried by how much ink each glyph puts in its cell." width="700" height="700">
+      <video controls muted loop playsinline preload="none"
+             poster="../assets/img/work/asciicam/hero-poster.jpg?v=20260812a"
+             aria-label="The camera feed rendered live as ASCII: a landscape resolving into rows of typographic characters at thirty frames a second, dense glyphs carrying the bright sky and sparse punctuation the dark ground.">
+        <source src="../assets/video/ascii-hero.mp4?v=20260812a" type="video/mp4">
+      </video>
     </figure>
   </section>
 
