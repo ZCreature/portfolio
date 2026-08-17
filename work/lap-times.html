@@ -312,10 +312,10 @@
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
-/* Two verified palettes - a series colour must clear 3:1 against its own page,
+/* Two verified palettes - a series color must clear 3:1 against its own page,
    and every pair must clear ΔE 10 in normal vision, all three CVD types, and
    greyscale. Worst pair in both themes is greyscale, which is the usual answer:
-   greyscale is the mode that punishes colours chosen by hue alone.
+   greyscale is the mode that punishes colors chosen by hue alone.
 
    Light: ΔE 10.7 minimum (dry/wet, grey).  Dark: ΔE 15.4 minimum (dry/wet, grey).
 
@@ -397,7 +397,7 @@ function render() {
     <text x="${M.l - 9}" y="${(y(t) + 3.5).toFixed(1)}" font-size="9" text-anchor="end">${mmss(t, 0)}</text>
   `).join('');
 
-  // Track-day boundaries - the x-axis the original left unlabelled.
+  // Track-day boundaries - the x-axis the original left unlabeled.
   const bounds = days.map((d) => {
     const inDay = laps.filter((l) => l.day === d.index);
     const first = inDay[0].lap, last = inDay[inDay.length - 1].lap;

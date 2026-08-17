@@ -114,9 +114,33 @@ function initCarousels() {
     const prev = root.querySelector('[data-car-prev]');
     const next = root.querySelector('[data-car-next]');
     if (!track || !prev || !next) return;
-    const step = () => Math.max(track.clientWidth * 0.85, 240);
-    prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: REDUCED ? 'auto' : 'smooth' }));
-    next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: REDUCED ? 'auto' : 'smooth' }));
+
+    /* Page by exactly one slide and land it in the middle of the frame.
+       Scrolling by a fraction of the track width used to stop wherever it
+       stopped, which left the slide you were moving to sliced by the right
+       edge. Measuring from rects rather than offsetLeft keeps this correct
+       no matter which ancestor happens to be positioned. */
+    const page = (dir) => {
+      const items = track.querySelectorAll('.car__item');
+      if (!items.length) return;
+      const frame = track.getBoundingClientRect();
+      const mid = frame.left + frame.width / 2;
+      let i = 0;
+      let best = Infinity;
+      items.forEach((el, n) => {
+        const r = el.getBoundingClientRect();
+        const d = Math.abs(r.left + r.width / 2 - mid);
+        if (d < best) { best = d; i = n; }
+      });
+      const target = items[Math.min(items.length - 1, Math.max(0, i + dir))];
+      const r = target.getBoundingClientRect();
+      // scrollBy clamps at both ends, so the first and last slides settle
+      // flush against their edge instead of trying to centre past it.
+      track.scrollBy({ left: r.left + r.width / 2 - mid, behavior: REDUCED ? 'auto' : 'smooth' });
+    };
+
+    prev.addEventListener('click', () => page(-1));
+    next.addEventListener('click', () => page(1));
     const sync = () => {
       prev.disabled = track.scrollLeft < 8;
       next.disabled = track.scrollLeft > track.scrollWidth - track.clientWidth - 8;

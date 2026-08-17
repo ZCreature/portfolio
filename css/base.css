@@ -1534,7 +1534,11 @@ figure { margin: 0; }
 .car__track::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 3px; }
 .car__track::-webkit-scrollbar-track { background: transparent; }
 
-.car__item { flex: 0 0 auto; scroll-snap-align: start; }
+/* Centre, not start: a flick or an arrow press settles the slide you moved
+   to in the middle of the frame, with its neighbours trimmed evenly on both
+   sides. Start-aligned, the incoming slide came to rest sliced by the right
+   edge and read as a rendering fault rather than as "there is more". */
+.car__item { flex: 0 0 auto; scroll-snap-align: center; }
 
 .car__item img {
   height: clamp(15rem, 32vw, 24rem);
@@ -1542,6 +1546,16 @@ figure { margin: 0; }
   display: block;
   border: 1px solid var(--rule);
   background: #fff;
+}
+
+/* Below this width a height-sized slide grows wider than the frame holding
+   it, and centring would then crop it on both edges at once. Sizing by width
+   instead keeps one whole slide in view with a sliver of the next.
+   Written through `.car__track` on purpose: pages that set their own slide
+   height do it with a plain `.car__item img`, and that must not survive here
+   or the width below would stretch the picture. */
+@media (max-width: 40rem) {
+  .car__track .car__item img { width: 82vw; height: auto; }
 }
 
 /* Slides that name what they are: a caption sits under the frame and is
