@@ -12,13 +12,13 @@
   gtag('config', 'G-WEL5434XZK');
 </script>
 <title>MyBEATS - Chris Almaguer</title>
-<meta name="description" content="Tagging a 17,000-track personal library with an on-device model: the pipeline, and what the tags are for.">
+<meta name="description" content="A local music library for people who still own their files: an EQ room, mood shelves, on-device lyrics transcription, and 17,000 tracks tagged by a local model.">
 <meta name="theme-color" content="#fbfbfa">
 <link rel="icon" href="../favicon.png?v=20260809h" type="image/png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Chris Almaguer">
 <meta property="og:title" content="MyBEATS - Chris Almaguer">
-<meta property="og:description" content="Tagging a 17,000-track personal library with an on-device model: the pipeline, and what the tags are for.">
+<meta property="og:description" content="A local music library for people who still own their files: an EQ room, mood shelves, on-device lyrics transcription, and 17,000 tracks tagged by a local model.">
 <meta property="og:url" content="https://almaguer.design/work/mybeats.html">
 <meta property="og:image" content="https://almaguer.design/assets/img/og.png?v=3">
 <meta property="og:image:width" content="1200">
@@ -28,7 +28,7 @@
 <link rel="canonical" href="https://almaguer.design/work/mybeats.html">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="MyBEATS - Chris Almaguer">
-<meta name="twitter:description" content="Tagging a 17,000-track personal library with an on-device model: the pipeline, and what the tags are for.">
+<meta name="twitter:description" content="A local music library for people who still own their files: an EQ room, mood shelves, on-device lyrics transcription, and 17,000 tracks tagged by a local model.">
 <meta name="author" content="Chris Almaguer">
 <script>
   try {
@@ -50,6 +50,24 @@
      shell rather than the 52rem prose measure. */
   .figure--wide { margin-top: 0; }
   .figure--wide video { border: 0; max-width: 91%; margin-inline: auto; }
+  .rules { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--rule); margin-top: var(--gap-m); }
+  .rules > div { padding: 1.45rem 1.6rem 1.55rem; border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); }
+  .rules > div:nth-child(-n+2) { border-top: 0; }
+  .rules > div:nth-child(2n+1) { border-left: 0; }
+  .rule__num { font-family: var(--font-mono); font-size: 1.05rem; color: var(--ink); display: block; }
+  .rules h3 { font-size: 0.9375rem; letter-spacing: -0.01em; margin: 0.55rem 0 0.3rem; }
+  .prose .rules p { margin: 0; font-size: 0.9375rem; line-height: 1.55; color: var(--ink-3); }
+  .car--screens .car__track .car__item { width: min(100%, 52rem); }
+  .car--screens .car__track .car__item img { width: 100%; height: auto; }
+  .car--screens .car__item figcaption { max-width: 30rem; }
+  .commits { margin: var(--gap-m) 0 0; padding: 0; list-style: none; border: 1px solid var(--rule); }
+  .commits li { font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.01em; color: var(--ink-2); padding: 0.7rem 1.1rem; border-top: 1px solid var(--rule); }
+  .commits li:first-child { border-top: 0; }
+  @media (max-width: 40rem) {
+    .rules { grid-template-columns: 1fr; }
+    .rules > div { border-left: 0; border-top: 1px solid var(--rule); }
+    .rules > div:first-child { border-top: 0; }
+  }
   .figure figcaption {
     margin-top: 0.7rem;
     font-size: 0.8125rem;
@@ -183,29 +201,238 @@
     </div>
   </section>
 
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
+    <div class="prose" data-reveal>
+      <p class="meta">03 - Why not streaming</p>
+      <h2>Owning it is the point</h2>
+      <p>
+        This is the part where someone asks why I did not just use Spotify.
+        Streaming is an extraordinary answer to "what can I play." It is a
+        terrible answer to "what do I have." A subscription is a lease on
+        somebody else's shelf: the catalog decides what arrives, the platform
+        decides how it sounds, and both change without asking you.
+      </p>
+      <p>
+        A collection is different. These are hard files, bought and ripped
+        across twenty years: MP3, FLAC, M4A, WAV, AIFF, OGG. Lossless plays
+        as lossless. Nothing is squeezed through a bitrate ceiling chosen for
+        bandwidth, and nothing quietly leaves the library because a license
+        lapsed somewhere upstream.
+      </p>
+      <p>
+        The quieter loss is creative control. A platform ships one interface,
+        one EQ and one recommendation engine for everyone, and there is no
+        seat in that room for the listener who wants to pull the vocals out
+        of a mix, or sit somewhere else in the hall while a record plays.
+        This app leans the other way, toward the audiophile and the track
+        collector. The EQ is a room you stand in. The auditorium view moves
+        the music to whichever seat you click. And genre is not a marketing
+        shelf but something the library knows about itself, deep enough to
+        hold regional rap with a few thousand listeners.
+      </p>
+
+      <div class="rules">
+        <div>
+          <span class="rule__num">own</span>
+          <h3>Files, not licenses</h3>
+          <p>A purchase is a file on your disk. A stream is permission, and permission gets revoked at the margins every year.</p>
+        </div>
+        <div>
+          <span class="rule__num">flac</span>
+          <h3>Quality, not throughput</h3>
+          <p>Lossless plays as ripped or bought. A stream meets a bitrate budget chosen for the network, not for the record.</p>
+        </div>
+        <div>
+          <span class="rule__num">eq</span>
+          <h3>Your room, not theirs</h3>
+          <p>One interface for everyone, or your own: band sliders, a vocal cut, a seat in the hall, palettes that survive color-vision deficiency.</p>
+        </div>
+        <div>
+          <span class="rule__num">disk</span>
+          <h3>Permanence</h3>
+          <p>A folder of files has outlived every player since Winamp. It will outlive this one too.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
+    <div class="prose" data-reveal>
+      <p class="meta">04 - The features</p>
+      <h2>What a library can do once it knows itself</h2>
+      <p>
+        Seventeen thousand lines is not something anyone reads, so the
+        interface is charts rather than rows: the collection is shown as
+        shape first, and every feature below sits on the same idea.
+        Structure first, then the specific thing you actually wanted.
+      </p>
+
+      <div class="rules">
+        <div>
+          <span class="rule__num">01</span>
+          <h3>Charts, not rows</h3>
+          <p>Tempo, years, tags, loudness and origins drawn as charts, with a treemap and a sankey for the deep cuts.</p>
+        </div>
+        <div>
+          <span class="rule__num">02</span>
+          <h3>Mood shelves</h3>
+          <p>Boards built from the enriched mood field, so "the angry ones" is a place you can walk to rather than a search you have to remember.</p>
+        </div>
+        <div>
+          <span class="rule__num">03</span>
+          <h3>Ask the library</h3>
+          <p>Natural language over your own files: the hidden gems, the emotional run, the regional stuff nobody else knows.</p>
+        </div>
+        <div>
+          <span class="rule__num">04</span>
+          <h3>Lyrics, even unpublished</h3>
+          <p>Timed lyrics from an open database when they exist. When they do not, a local Whisper model transcribes the track itself. Nothing leaves the machine.</p>
+        </div>
+        <div>
+          <span class="rule__num">05</span>
+          <h3>The EQ room</h3>
+          <p>Band sliders, a vocal cut, a limiter with a ceiling you can drag, and a meter bridge that reads at arm's length.</p>
+        </div>
+        <div>
+          <span class="rule__num">06</span>
+          <h3>Every format on the shelf</h3>
+          <p>MP3, FLAC, M4A, WAV, AIFF, OGG. The formats a collection actually arrives in, played as they are.</p>
+        </div>
+        <div>
+          <span class="rule__num">07</span>
+          <h3>Playlists by hand</h3>
+          <p>A wall of covers curated deliberately, renamed freely, and a queue that remembers which view filled it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="shell" style="padding-block: var(--gap-l) 0;">
+    <div class="car car--screens" data-carousel data-reveal>
+      <div class="car__head">
+        <h2 class="meta">The screens</h2>
+        <div class="car__meta">
+          <span class="meta">3 screens</span>
+          <div class="car__btns">
+            <button class="car__btn" type="button" data-car-prev aria-label="Scroll the screens back">
+              <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M8 1 3 6l5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            </button>
+            <button class="car__btn" type="button" data-car-next aria-label="Scroll the screens forward">
+              <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M4 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="car__track" tabindex="0" role="group" aria-label="Three application screens, horizontally scrollable gallery">
+        <div class="car__item">
+          <figure>
+            <img src="../assets/img/work/mybeats/app-ui.jpg?v=20260818d" alt="The MyBEATS library in its All music table. The left rail runs Music, EQ, Crate, Digger and Charts; the list shows tracks by The Cure, Deep Purple and DJ Screw with library search and rescan along the top." loading="lazy" decoding="async" width="1600" height="1197">
+            <figcaption><b>The app.</b> The rail runs Music, EQ, Crate, Digger and Charts. The collection reads as shape before any single row.</figcaption>
+          </figure>
+        </div>
+        <div class="car__item">
+          <figure>
+            <img src="../assets/img/work/mybeats/auditorium.jpg?v=20260818d" alt="The auditorium view: the hall drawn from above with the stage at the top and the floor fanning out below, a seat selected mid-floor while A Forest plays." loading="lazy" decoding="async" width="1600" height="1000">
+            <figcaption><b>The auditorium.</b> The hall from above, stage at the top. Click a seat and the music moves to where you are sitting: distance eats the top end, and the room adds its own reverb on the way back.</figcaption>
+          </figure>
+        </div>
+        <div class="car__item">
+          <figure>
+            <img src="../assets/img/work/mybeats/settings.jpg?v=20260810n" alt="The MyBEATS Settings panel over the library. Appearance offers standard, red-green and blue-yellow palettes; formats indexed shows mp3, flac and m4a selected; a FLAC to MP3 converter sits below; and Assistant model is a dropdown currently set to qwen2.5:14b." loading="lazy" decoding="async" width="1600" height="1127">
+            <figcaption><b>Settings.</b> The assistant model is a dropdown rather than a constant, which is what makes comparing two of them across a long run practical. Appearance carries red-green and blue-yellow palettes beside the standard one.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
+    <div class="prose" data-reveal>
+      <p class="meta">05 - The build</p>
+      <h2>Built in the open, one decision at a time</h2>
+      <p>
+        An Electron shell around a local SQLite index, the five-stage pipeline
+        from 02, and a deliberately small Ollama client. The model runs on the
+        laptop, answers in a fixed shape the pipeline never has to parse its
+        way around, and can be swapped from Settings mid-run.
+      </p>
+      <p>
+        There was no Figma file for this one. The wireframe is the commit log:
+        every layout argument got settled in a sentence before it got settled
+        in pixels, and reading it back is the design process, verbatim.
+      </p>
+      <ul class="commits" aria-label="Eight commit subjects from the build log">
+        <li>The player bar is 72px because it says so</li>
+        <li>An auditorium you can sit down in</li>
+        <li>Mood shelves hear their own name; the selector moves to a menu</li>
+        <li>The limiter gets a ceiling you can drag, and a meter that moves</li>
+        <li>Search stands the charts down, instead of drawing over the results</li>
+        <li>A way back to what is playing, and three smaller things</li>
+        <li>The mark becomes the bloom</li>
+        <li>Take the iPod out again</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
+    <div class="prose" data-reveal>
+      <p class="meta">06 - What broke</p>
+      <h2>The failures worth keeping</h2>
+      <p>
+        Free and local was the constraint from the start: nothing uploaded,
+        nothing metered, no cost per track. Holding that line surfaced real
+        failures, and four of them taught me more than the features did.
+      </p>
+      <p>
+        <b>The model invented.</b> A small model fit comfortably in memory and
+        worked on anything canonical, then fell apart exactly where this
+        library matters most, underground and regional rap. Asked about a
+        record it had never seen, it produced a confident, plausible, wrong
+        genre instead of an empty field. A gap is visible; a fabrication is
+        not. The fix was not a benchmark score, it was stepping up to the
+        smallest model whose recall did not run out on the real data.
+      </p>
+      <p>
+        <b>The selector did not select.</b> "Play me a good song" searched the
+        library for a record called "me a good song," found nothing, and said
+        so. Technically honest, completely useless. A request built of filler
+        is a request to be chosen for, so it now routes to a pick instead of
+        a lookup.
+      </p>
+      <p>
+        <b>The breadcrumb had nothing to say.</b> It held a full row across
+        the top of every view, and in most of them it carried one crumb
+        pointing at where you already were; in duplicate review it captioned
+        the screen "All music." It now shows over the song table and nowhere
+        else.
+      </p>
+      <p>
+        <b>A header hid the one button that mattered.</b> Save SVG lived
+        inside a chart header that the five aggregate charts hide, so the
+        button that saves a chart was missing from exactly the charts worth
+        saving. It moved out.
+      </p>
+      <p>
+        Every one of these is a commit, written down the way it happened.
+      </p>
+    </div>
+  </section>
+
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) var(--gap-xl);">
     <div class="prose" data-reveal>
-      <p class="meta">03 - What the tags are for</p>
-      <h2>Structure is what turns a library back into a collection</h2>
+      <p class="meta">07 - The end game</p>
+      <h2>A library that outlives its players</h2>
       <p>
-        Tags on their own are filing. What they buy is the ability to ask for
-        something specific: the hidden gems, the emotional run, the regional
-        stuff with a few thousand listeners, or a playlist built deliberately
-        to be strange. Those are queries a person can make once mood and vibe
-        exist as fields instead of as a feeling about a filename.
+        The end game is old fashioned. An iPod shows up as a folder, the app
+        works out what fits, and a slice of the collection walks out the door
+        on hardware no subscription can follow. That is the ownership
+        argument made physical.
       </p>
       <p>
-        The interface is charts rather than rows, because seventeen thousand
-        lines is not something anyone reads. The library is shown as shape
-        first, so you can see what a collection is made of before you look at
-        any single track in it. The equalizer view puts a source in space and
-        lets you move it, including pulling the vocals down out of a mix.
-      </p>
-      <p>
-        That is the part that connects to the rest of my work. It is the same
-        problem as a hospital dashboard: more records than a person can hold,
-        and the job is giving them a way to see the whole thing and then act
-        on one part of it.
+        It is also the same problem as the rest of my work. A hospital
+        dashboard and a record collection share a shape: more records than a
+        person can hold, and the job is giving them a way to see the whole
+        thing and then act on one part of it.
       </p>
 
       <h3>What I take from it</h3>
