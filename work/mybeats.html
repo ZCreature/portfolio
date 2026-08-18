@@ -49,7 +49,7 @@
   /* The product shot is the first thing on the page, so it runs the full
      shell rather than the 52rem prose measure. */
   .figure--wide { margin-top: 0; }
-  .figure--wide video { border: 0; }
+  .figure--wide video { border: 0; max-width: 91%; margin-inline: auto; }
   .figure figcaption {
     margin-top: 0.7rem;
     font-size: 0.8125rem;
@@ -131,7 +131,7 @@
 
   <section class="shell" style="padding-block: var(--gap-m) 0;">
     <figure class="figure figure--wide" data-reveal>
-      <video controls muted loop playsinline preload="none"
+      <video data-lazy-video controls muted loop playsinline preload="none"
              poster="../assets/img/work/mybeats/app-poster.jpg?v=20260810p"
              aria-label="Screen recording of MyBEATS: the equalizer view, with vocal cut and band sliders on the left and the analyzer on the right cycling through scope, VU meters and correlation while a track plays.">
         <source src="../assets/video/mybeats-app.mp4?v=20260810p" type="video/mp4">
