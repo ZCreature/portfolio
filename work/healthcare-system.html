@@ -136,6 +136,9 @@
      sits closer, so the grouping is visible before a word is read. */
   .case section { padding-block: var(--gap-m); }
   .case .step { padding-top: var(--gap-l); border-top: 1px solid var(--rule); }
+  /* A step whose figure sits just above it: the figure IS the step's opening
+     evidence, so no hairline between them - the pair reads as one section. */
+  .case .step--joined { border-top: 0; padding-top: var(--gap-m); }
   .case .case-hero { padding-block: clamp(4rem, 12vw, 9rem) var(--gap-l); }
   .case section:last-child { padding-bottom: var(--gap-xl); }
   /* Captions match the width of the figure they sit under. The 46ch site
@@ -198,7 +201,7 @@
     </figure>
   </section>
 
-  <section class="shell shell--narrow step">
+  <section class="shell shell--narrow step step--joined">
     <div class="prose" data-reveal>
       <p class="meta">01 - The ask</p>
       <h2>Rank in the top percentile against hospitals like us</h2>
@@ -498,7 +501,7 @@
     <figure class="figure" data-reveal>
       <h3 class="fig__h">Clinical Documentation Integrity</h3>
 <div class="figure__frame">
-        <img src="../assets/img/work/healthcare/cdi.jpg?v=20260818a" alt="A Clinical Documentation Integrity dashboard marked as sample data. Case Mix Index, CC/MCC capture and relative expected mortality run across the top, with service line and MS-DRG opportunity tables beneath." loading="lazy" decoding="async" width="1600" height="889">
+        <img src="../assets/img/work/healthcare/cdi.jpg?v=20260818c" alt="A Clinical Documentation Integrity dashboard marked as sample data. Case Mix Index, CC/MCC capture and relative expected mortality run across the top, with service line and MS-DRG opportunity tables beneath." loading="lazy" decoding="async" width="1600" height="889">
       </div>
       <figcaption>Case Mix Index, CC/MCC capture and relative expected mortality establish the top-level view, with service-line and MS-DRG opportunity beneath. <em>Sample data, marked directly on the dashboard.</em></figcaption>
     </figure>
