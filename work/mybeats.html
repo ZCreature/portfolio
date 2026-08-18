@@ -185,60 +185,7 @@
 
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
     <div class="prose" data-reveal>
-      <p class="meta">03 - The failure that set the model size</p>
-      <h2>7B does not say "I do not know"</h2>
-      <p>
-        The obvious choice was a 7B model. Smaller, faster, less memory. It
-        worked well on anything canonical. It fell apart on the part of the
-        library I actually care about, underground and regional rap, where an
-        artist might have a few thousand listeners.
-      </p>
-      <p>
-        It did not fail by returning nothing. <em>It failed by inventing.</em>
-        Asked about a record it had never seen, a small model produces a
-        confident, plausible, wrong genre instead of an empty field. That is
-        far worse than a gap, because a gap is visible and a fabrication is not.
-      </p>
-    </div>
-
-    <p class="pull" data-reveal>
-      A missing tag is a task. A wrong tag is a lie that looks like a task
-      already done.
-    </p>
-
-    <div class="prose" data-reveal>
-      <p>
-        14B at 4-bit quantization is about 9 GB, which sits comfortably
-        alongside the app in 18 GB of memory. 32B does not. So the model
-        size was not chosen for benchmark scores. It was chosen as the smallest
-        one whose recall did not run out on the specific library it has to read.
-      </p>
-    </div>
-  </section>
-
-  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
-    <div class="prose" data-reveal>
-      <p class="meta">04 - Shape, not persuasion</p>
-      <h2>Constrain the output instead of asking nicely</h2>
-      <p>
-        The usual way to get structured data out of a model is to ask for JSON
-        in the prompt, then parse whatever comes back and hope. That fails in
-        the ordinary case: fenced code blocks, a sentence of preamble, a
-        trailing apology.
-      </p>
-      <p>
-        Ollama takes a JSON schema and constrains generation to it, so the
-        output conforms by construction. There is no scraping and no retry loop,
-        because a malformed response is not a thing the model can emit.
-        <b>The reliability came from removing the failure mode, not from
-        handling it better.</b>
-      </p>
-    </div>
-  </section>
-
-  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
-    <div class="prose" data-reveal>
-      <p class="meta">05 - Running it over 17,000 tracks</p>
+      <p class="meta">03 - Running it over 17,000 tracks</p>
       <h2>Two constraints that only appear at scale</h2>
       <ul>
         <li><b>Concurrency of one.</b> The instinct is to parallelize. A local
@@ -268,7 +215,7 @@
 
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) var(--gap-xl);">
     <div class="prose" data-reveal>
-      <p class="meta">06 - What the tags are for</p>
+      <p class="meta">04 - What the tags are for</p>
       <h2>Structure is what turns a library back into a collection</h2>
       <p>
         Tags on their own are filing. What they buy is the ability to ask for
