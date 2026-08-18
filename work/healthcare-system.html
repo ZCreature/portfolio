@@ -11,13 +11,13 @@
   gtag('js', new Date());
   gtag('config', 'G-WEL5434XZK');
 </script>
-<title>Protected - Chris Almaguer</title>
-<meta name="description" content="The color standard behind executive dashboards for U.S. hospital systems. Protected: client work under NDA.">
+<title>Healthcare Design - Dashboard Study - Chris Almaguer</title>
+<meta name="description" content="Executive dashboards for U.S. hospital systems, and the visualization design system underneath them: structure, colour standard, build and handoff.">
 <meta name="theme-color" content="#fbfbfa">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Chris Almaguer">
-<meta property="og:title" content="Healthcare dashboards - Chris Almaguer">
-<meta property="og:description" content="The color standard behind executive dashboards for U.S. hospital systems. Protected: client work under NDA.">
+<meta property="og:title" content="Healthcare Design - Dashboard Study - Chris Almaguer">
+<meta property="og:description" content="Executive dashboards for U.S. hospital systems, and the visualization design system underneath them: structure, colour standard, build and handoff.">
 <meta property="og:url" content="https://almaguer.design/work/healthcare-system.html">
 <meta property="og:image" content="https://almaguer.design/assets/img/og.png?v=3">
 <meta property="og:image:width" content="1200">
@@ -25,8 +25,8 @@
 <meta name="twitter:image" content="https://almaguer.design/assets/img/og.png?v=3">
 <link rel="canonical" href="https://almaguer.design/work/healthcare-system.html">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Healthcare dashboards - Chris Almaguer">
-<meta name="twitter:description" content="The color standard behind executive dashboards for U.S. hospital systems. Protected: client work under NDA.">
+<meta name="twitter:title" content="Healthcare Design - Dashboard Study - Chris Almaguer">
+<meta name="twitter:description" content="Executive dashboards for U.S. hospital systems, and the visualization design system underneath them: structure, colour standard, build and handoff.">
 <link rel="icon" href="../favicon.png?v=20260809h" type="image/png">
 <meta name="author" content="Chris Almaguer">
 <script>
@@ -35,7 +35,6 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<meta name="robots" content="noindex">
 <link rel="stylesheet" href="../css/base.css?v=20260811a">
 </head>
 <body>
@@ -87,36 +86,520 @@
   </div>
 </header>
 
-<main id="main">
-  <section class="shell" style="padding-block: clamp(4rem,12vw,9rem) var(--gap-xl);">
-    <div class="gate" data-gate="../assets/protected/healthcare.json?v=20260809h">
-      <p class="meta">Protected</p>
-      <h1 class="h1" style="margin-top: var(--gap-s);">Client work, under NDA</h1>
-      <p class="gate__note">
-        This case study documents the method and the design system behind
-        executive dashboards for U.S. hospital systems. It holds no client
-        data and no hospital figures, and every chart is rebuilt from
-        synthetic data, but the work is covered by an agreement so it sits
-        behind a passphrase.
-      </p>
-      <p class="gate__note">
-        Email me and I will pass it on.
-        <a href="mailto:calmaguer.design@gmail.com" style="text-decoration:underline; text-underline-offset:3px;">calmaguer.design@gmail.com</a>
-      </p>
+<main id="main" class="case">
+<style>
+  /* One step reads with its evidence beside it rather than under it: prose
+     left, the screen right, so the opening is not a wall of text. The image
+     column takes the wider share. */
+  .spread--media { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); align-items: start; }
+  .spread--media .figure { margin: 0; }
+  .spread--media .fig__h { margin-top: 0; }
+  @media (max-width: 62rem) { .spread--media { grid-template-columns: minmax(0, 1fr); } }
 
-      <form class="gate__row" autocomplete="off">
-        <label class="skip" for="pw">Passphrase</label>
-        <input id="pw" type="password" placeholder="Passphrase" autocomplete="off" spellcheck="false">
-        <button type="submit">Unlock</button>
-      </form>
-      <p class="gate__msg" role="status" aria-live="polite"></p>
+  /* 01 and 02 set as an editorial spread. They are the two halves of one
+     argument - what was asked for, and what made it hard - so reading them
+     across rather than down costs a screenful less scrolling. */
+  .spread {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--gap-m) var(--gap-xl);
+    align-items: start;
+  }
+  .spread .prose { max-width: 34rem; }
+  @media (max-width: 62rem) {
+    .spread { grid-template-columns: minmax(0, 1fr); gap: var(--gap-l); }
+    .spread .prose { max-width: 52rem; }
+  }
+
+  /* Each screen is introduced by name before it is described, so the set
+     reads as a labeled gallery rather than six captions in a row. */
+  .fig__h {
+    font-size: 0.9375rem;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.7rem;
+  }
+  .figure figcaption em { display: block; margin-top: 0.35rem; color: var(--ink-4); }
+  /* The question the whole study exists to answer. */
+  .ask {
+    font-size: clamp(1.05rem, 1.7vw, 1.3rem);
+    line-height: 1.4;
+    color: var(--ink);
+    font-weight: 700;
+    margin-top: var(--gap-s);
+    max-width: 34rem;
+  }
+  .qnum { color: var(--ink-4); }
+  .kpi-asks { margin: var(--gap-s) 0 0; padding: 0; list-style: none; }
+  .kpi-asks li { font-weight: 700; color: var(--ink-2); line-height: 1.5; }
+  .manifest { margin: 0; padding: 0; list-style: none; }
+  .manifest li {
+    padding-block: 0.7rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.875rem;
+    color: var(--ink-3);
+    line-height: 1.5;
+  }
+  .manifest li b { color: var(--ink-2); font-weight: 700; }
+
+  /* The opening gallery is the deliverable itself, so its slides run larger
+     than the site default - a dashboard shown small is only a texture. */
+  /* Size the slide by width, capped at the track it lives in. Sized by
+     height it came out ~853px against a slightly narrower track, and because
+     the strip centres each slide that overflow was split across both edges -
+     which is what was clipping the first characters off every caption. */
+  /* Selector depth matches the base mobile rule (.car__track .car__item img)
+     on purpose: at equal specificity this block wins because it is injected
+     after the stylesheet, so the width cap holds below 40rem too. */
+  .car--screens .car__track .car__item { width: min(100%, 52rem); }
+  .car--screens .car__track .car__item img { width: 100%; height: auto; }
+  .car--screens .car__item figcaption { max-width: 30rem; }
+
+  /* Nothing sits beside a step any more, so the copy takes the whole reading
+     column the shell allows. At the site default of 34rem the paragraphs
+     ran as a ribbon down the left with half the page empty next to them.
+     52rem is the widest the narrow shell permits; past roughly 75 characters
+     a line needs more leading for the eye to find its way back to the left
+     edge, so the two changes belong together. */
+  .prose { max-width: 52rem; }
+  .prose p, .prose li { line-height: 1.72; }
+  /* The one-line ask and the four questions under it stay short on purpose:
+     they are called out, and a callout set to full measure stops reading as
+     one. */
+  .ask, .kpi-asks { max-width: 34rem; }
+  /* One rhythm for the page, set here rather than section by section. A
+     numbered step opens on a hairline with a full gap above it; anything
+     that belongs to the step - its slides, its figure, its pull quote -
+     sits closer, so the grouping is visible before a word is read. */
+  .case section { padding-block: var(--gap-m); }
+  .case .step { padding-top: var(--gap-l); border-top: 1px solid var(--rule); }
+  .case .case-hero { padding-block: clamp(4rem, 12vw, 9rem) var(--gap-l); }
+  .case section:last-child { padding-bottom: var(--gap-xl); }
+  /* Captions match the width of the figure they sit under. The 46ch site
+     default is right beside a narrow column, but here it left a short ribbon
+     of text under a full-width screenshot. */
+  .case .figure figcaption { max-width: none; }
+  /* Tools as marks rather than a sentence. Greyscale like the rest of the
+     interface: colour on this site belongs to data, and a row of vendor brand
+     colours would break that rule on the page that argues for it. */
+  .tools { display: flex; flex-wrap: wrap; gap: var(--gap-m) var(--gap-l); margin: 0 0 var(--gap-m); padding: 0; }
+  .tools li { list-style: none; display: grid; justify-items: center; gap: 0.5rem; width: 4.75rem; }
+  .tools svg { width: 22px; height: 22px; display: block; color: var(--ink-2); fill: currentColor; }
+  .tools span { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.02em; color: var(--ink-4); text-align: center; line-height: 1.35; }
+</style>
+
+  <!-- ============ Hero ============ -->
+  <section class="shell case-hero">
+    <p class="meta" data-reveal>Case study - 01 / Design systems &amp; accessibility</p>
+    <h1 class="h1" data-reveal style="--reveal-delay:70ms; margin-top: var(--gap-s);">
+      Healthcare Design - Dashboard Study
+    </h1>
+    <p class="lede tight" data-reveal style="--reveal-delay:140ms; margin-top: var(--gap-m);">
+      Executive dashboards for U.S. hospital systems. Each engagement asks a
+      version of the same question: where do we rank against hospitals like
+      us, and what do we do about it. Around six dashboards per client, about
+      ten engagements, all of it built on a data visualization design system I
+      created at Vizient.
+    </p>
+
+    <div class="case-facts" data-reveal style="--reveal-delay:200ms; margin-top: var(--gap-l);">
+      <div><p class="meta">Role</p><p class="body">Sr. Designer, Data Intelligence &amp; Visualization</p></div>
+      <div><p class="meta">Client</p><p class="body">Vizient, U.S. hospital systems</p></div>
+      <div><p class="meta">Years</p><p class="body">2022 to present</p></div>
+      <div><p class="meta">Tools</p><p class="body">Figma, Power BI, Tableau</p></div>
     </div>
 
-    <div data-gate-target hidden></div>
+    <p class="source" data-reveal style="margin-top: var(--gap-m);">
+      Client data cannot be shown publicly. This case study documents the
+      method and the system: the rules, the reasoning, and dashboards rebuilt
+      with synthetic data that follow them. The views shown are drawn from
+      different engagements, not a single build. Real production screens are
+      available on request.
+    </p>
   </section>
+
+  <section class="shell shell--narrow">
+    <figure class="figure" data-reveal>
+      <h3 class="fig__h">Surgical Value Optimization</h3>
+<div class="figure__frame">
+        <video controls muted loop playsinline preload="none"
+               poster="../assets/img/work/healthcare/spend-poster.jpg?v=20260817u"
+               style="width:100%;display:block"
+               aria-label="Screen recording of the Surgical Value Optimization prototype: filtering service lines, expanding cardiac surgery to procedure level, and opening the literature rail.">
+          <source src="../assets/video/healthcare-spend.mp4?v=20260817u" type="video/mp4">
+        </video>
+      </div>
+      <figcaption><b>Surgical Value Optimization.</b> A spend view built on the system: service-line supply cost variation resolves from the left into procedure-level detail in the center, with the supporting literature in the rail. <em>Sample data under the demo brand.</em></figcaption>
+    </figure>
+  </section>
+
+  <section class="shell shell--narrow">
+    <figure class="figure" data-reveal>
+      <h3 class="fig__h">What gets delivered</h3>
+<div class="figure__frame">
+        <img src="../assets/img/work/healthcare/readmissions.jpg?v=20260817u" alt="A 30-day readmissions and excess days dashboard on a laptop: key indicators down the left, readmission patterns in the center, post-discharge pathways and outpatient revisits on the right." loading="lazy" decoding="async">
+      </div>
+      <figcaption><b>Dashboard design sample;</b> Key indicators on the left, the patterns behind them in the center, where the patients actually went on the right. Read across and the question resolves in that order: how big, what kind, and where. <em>Great State Hospital System is a demo brand; every figure is synthetic.</em></figcaption>
+    </figure>
+  </section>
+
+  <section class="shell shell--narrow step">
+    <div class="prose" data-reveal>
+      <p class="meta">01 - The ask</p>
+      <h2>Rank in the top percentile against hospitals like us</h2>
+      <p>
+        Hospitals do not come to us for a dashboard. They come with a goal:
+        move into the top percentile of a cohort of comparable hospitals. The
+        cohort is matched on size, case mix and type, so the comparison holds.
+      </p>
+      <p>
+        That framing decides everything downstream. A hospital already knows
+        its own readmission rate. What it is buying is the ability to see that
+        number sitting next to the hospitals it considers peers, and to find
+        the service line where the gap is worth closing this year.
+      </p>
+      <p>
+        The engagement starts in a room. Executives, analysts, and the people
+        who will actually open the file every Monday. We work out which
+        measures the goal depends on, who reads them, and what decision each
+        one is supposed to trigger. The output is a suite of around six
+        dashboards on the client's BI platform.
+      </p>
+      <p>
+        I have run about ten of these. Six dashboards each is where the fifty
+        comes from.
+      </p>
+    </div>
+  </section>
+
+  <section class="shell step">
+    <div class="car car--screens" data-carousel data-reveal>
+      <div class="car__head">
+        <h2 class="meta">Wireframes</h2>
+        <div class="car__meta">
+          <span class="meta">2 slides, wireframe stage</span>
+          <div class="car__btns">
+            <button class="car__btn" type="button" data-car-prev aria-label="Scroll the wireframes back">
+              <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M8 1 3 6l5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            </button>
+            <button class="car__btn" type="button" data-car-next aria-label="Scroll the wireframes forward">
+              <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M4 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="car__track" tabindex="0" role="group" aria-label="Two wireframe slides, horizontally scrollable gallery">
+        <div class="car__item">
+          <figure>
+            <img src="../assets/img/work/healthcare/wireframe-sectioning.jpg?v=20260817u" alt="A wireframe slide titled Sectioning for data insights: three labeled tiers - key insights, drill-down analysis, root cause analysis - each tied by a leader line to a row of empty blocks." loading="lazy" decoding="async">
+            <figcaption><b>Sectioning.</b> Three tiers, top to bottom: key insights, then drill-down, then root cause. The layout gets argued as zones before a single component is drawn.</figcaption>
+          </figure>
+        </div>
+        <div class="car__item">
+          <figure>
+            <img src="../assets/img/work/healthcare/wireframe-narrative.jpg?v=20260817u" alt="A wireframe slide titled Visual narrative structure and hierarchy: level one summary KPIs across the top row, supporting metrics beneath, drawn as empty blocks." loading="lazy" decoding="async">
+            <figcaption><b>Visual narrative.</b> Level one answers <em>are we on track</em> at a glance. Everything under it exists to explain that answer, which is what stops the top row from turning into a wall of tiles.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="shell shell--narrow">
+    <div class="prose" data-reveal>
+    <p class="meta">02 - Wireframing</p>
+    <h2>Structure before color</h2>
+    <p>
+      I go back to square one on every engagement: boxes, greyscale, no
+      styling. A palette cannot rescue a card that is answering the wrong
+      question, and color arguments are much harder to have once someone has
+      fallen in love with a layout.
+    </p>
+    <p>
+      Each component gets argued as structure. What is the reader looking at.
+      What do they need beside it to trust it. What are they currently
+      leaving the screen to find out.
+    </p>
+    <figure class="figure" data-reveal>
+<div class="figure__frame">
+        <img src="../assets/img/work/healthcare/kpi-anatomy.jpg?v=20260817u" alt="An annotated anatomy of a KPI card. The LOS Index card is pulled apart with callouts naming each element: the large number, the observed and expected values, the encounter count, the percentile pill, the benchmark line and the sparkline axis." loading="lazy" decoding="async">
+      </div>
+      <figcaption>The LOS Index card pulled apart: primary value, observed against expected, encounter count, percentile indicator, benchmark line and sparkline.</figcaption>
+    </figure>
+    <h3>Designing the KPI card</h3>
+    <p>
+      The card exists to answer a comparative question, so every element on
+      it is there to close a gap the reader would otherwise go somewhere else
+      to close.
+    </p>
+    <ul>
+      <li>What is the number?</li>
+      <li>What was expected?</li>
+      <li>How many encounters is it based on?</li>
+      <li>Where does it sit against the cohort?</li>
+    </ul>
+    <p>
+      This is also where the KPI explainers get written. Case Mix Index and
+      relative expected mortality are not self-evident, and a measure the
+      reader cannot define is a measure they will not act on. The definition
+      ships with the card.
+    </p>
+    <p>
+      The percentile indicator uses shape and a label, not hue alone. That is
+      the accessibility rule showing up as a layout decision rather than as a
+      color choice, which is the point of doing structure first.
+    </p>
+  </div>
+  </section>
+
+
+  <section class="shell step">
+    <div class="car car--screens" data-carousel data-reveal>
+      <div class="car__head">
+        <h2 class="meta">The color study</h2>
+        <div class="car__meta">
+          <span class="meta">5 slides, audit stage</span>
+          <div class="car__btns">
+            <button class="car__btn" type="button" data-car-prev aria-label="Scroll the color study back">
+              <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M8 1 3 6l5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            </button>
+            <button class="car__btn" type="button" data-car-next aria-label="Scroll the color study forward">
+              <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M4 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="car__track" tabindex="0" role="group" aria-label="Five slides from the color audit, horizontally scrollable gallery">
+        <div class="car__item">
+          <figure>
+            <img src="../assets/img/work/healthcare/color-purpose.jpg?v=20260817u" alt="A slide titled Applying color purposefully in data visualization: four palette types - categorical, sequential, diverging, and highlight against grey - each shown as a row of swatches." loading="lazy" decoding="async">
+            <figcaption><b>Four jobs, four kinds of palette.</b> Categorical, sequential, diverging, and a single accent against grey. Which ramp applies is decided by what the data is, not by what the brand owns.</figcaption>
+          </figure>
+        </div>
+        <div class="car__item">
+          <figure>
+            <img src="../assets/img/work/healthcare/color-tints.jpg?v=20260817u" alt="A slide titled 60-30-10 rule: the brand orange and turquoise stepped down to 60, 30 and 10 percent tints, each block labeled with its hex value." loading="lazy" decoding="async">
+            <figcaption><b>The brand palette at 60, 30 and 10.</b> Orange and turquoise stepped down from full strength. The 100% tints are the ones a brand guide leads with, and the first ones the study rules out for data.</figcaption>
+          </figure>
+        </div>
+        <div class="car__item">
+          <figure>
+            <img src="../assets/img/work/healthcare/color-wcag.jpg?v=20260817u" alt="A slide titled Color distributions and WCAG compliance: a contrast table across seven tints, black text passing on every one, and the white-text rows struck through with a red cross." loading="lazy" decoding="async">
+            <figcaption><b>Contrast at every step.</b> Black text clears AA on all seven tints. White text fails on all seven, including the pairings the brand guide specifies. The crossed-out block is the finding, not a design flourish.</figcaption>
+          </figure>
+        </div>
+        <div class="car__item">
+          <figure>
+            <img src="../assets/img/work/healthcare/color-cvd.jpg?v=20260817u" alt="A slide titled Ensuring color accessibility for all users: the tested heatmap ramp and a red-yellow-green ramp, each shown again as a protanope and deuteranope would see it." loading="lazy" decoding="async">
+            <figcaption><b>The same ramps under protanopia and deuteranopia.</b> The tested ramp keeps its order. Red-yellow-green collapses into one olive run, which is why traffic-light coding does not survive the trip from a stoplight to a dashboard.</figcaption>
+          </figure>
+        </div>
+        <div class="car__item">
+          <figure>
+            <img src="../assets/img/work/healthcare/color-scales.jpg?v=20260817u" alt="A slide titled Interpreting performance through color, comparing a continuous sequential ramp, a decile scale in ten equal steps, and a quantile scale cut at the top quartile and median." loading="lazy" decoding="async">
+            <figcaption><b>Why quantile, not decile.</b> Ten equal steps look precise and read as noise. Quantile buckets cut where people are actually judged - top quartile, median - so a performance tier is visible as a tier.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="shell shell--narrow">
+    <div class="prose" data-reveal>
+    <p class="meta">03 - Color, and the conversation about it</p>
+    <h2>Why this ramp and not the brand one</h2>
+    <p>
+      Color is the touchy part of every engagement. It is the one design
+      decision everybody has an opinion about, and it usually arrives
+      attached to a brand guide that was drawn for a website.
+    </p>
+    <p>
+      So I stopped arriving with a preference and started arriving with
+      evidence. I audited dashboards that were already shipping and tested
+      the brand palette against three questions, in order.
+    </p>
+
+    <h3>01 / Does text stay readable at every tint?</h3>
+    <p>
+      Brand colors ship at 60%, 30% and 10%. Contrast had to hold at every
+      step, not only at full strength.
+    </p>
+
+    <h3>02 / Do series stay distinguishable under color-vision deficiency?</h3>
+    <p>
+      All three types, at partial severity as well as full. Most people with
+      a color-vision deficiency are not at 100%, so a standard built only for
+      the extreme case fails the majority of the people it is for.
+    </p>
+
+    <h3>03 / Does it survive without color?</h3>
+    <p>
+      Greyscale printing and projector washout expose the same failure as
+      CVD: color can no longer carry the information by itself.
+    </p>
+
+    <p>Four rules came out of it, and they are the whole standard.</p>
+  </div>
+  </section>
+
+  <section class="shell shell--narrow">
+    <div class="prose" data-reveal>
+      <p>
+        The conversation goes differently now. Nobody is being told their brand
+        color is ugly. They are being shown what it does at 30% behind a data
+        label, and what the alternative is.
+      </p>
+    </div>
+  </section>
+
+  <section class="shell shell--narrow step">
+    <div class="prose" data-reveal>
+    <p class="meta">04 - Iteration and presentation</p>
+    <h2>Four rounds, and what they are for</h2>
+    <p>
+      Everything goes through internal review before a client sees it. Then
+      it gets presented, and typically runs four revision cycles.
+    </p>
+    <p>
+      The rounds are not cosmetic. Early ones argue about which measures earn
+      a place on the top-level view, which is really an argument about what
+      the executive team is accountable for. Later ones tighten labeling,
+      defaults and filter behavior. By the fourth pass the changes are small,
+      which is the signal that the structure underneath was right.
+    </p>
+    <p>
+      What makes four rounds possible rather than painful is that the rules
+      are already written down. Revisions happen inside a standard instead of
+      relitigating it.
+    </p>
+  </div>
+  </section>
+
+
+  <section class="shell shell--narrow">
+    <figure class="figure" data-reveal>
+<div class="figure__frame">
+        <img src="../assets/img/work/healthcare/iteration-rounds.jpg?v=20260817u" alt="A Figma canvas holding many dated versions of the same mortality dashboard, laid out in columns by revision round, with the file list of client pages down the left." loading="lazy" decoding="async">
+      </div>
+      <figcaption><b>Four rounds, on the canvas.</b> Every revision kept and dated beside the one it replaced, so a later round argues against a version still on screen rather than from memory.</figcaption>
+    </figure>
+  </section>
+
+  <section class="shell shell--narrow step">
+    <ul class="tools" data-reveal aria-label="Tools the system is built and shipped in">
+      <li><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="12" width="3.6" height="6" rx="0.8"/><rect x="8.2" y="7.5" width="3.6" height="10.5" rx="0.8"/><rect x="13.4" y="3" width="3.6" height="15" rx="0.8"/></svg><span>Power BI</span></li>
+      <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5v15M2.5 10h15" stroke="currentColor" stroke-width="2" fill="none"/><path d="M5.6 5.2v3.2M4 6.8h3.2M14.4 11.6v3.2M12.8 13.2H16" stroke="currentColor" stroke-width="1.2" fill="none"/></svg><span>Tableau</span></li>
+      <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3a7 7 0 1 0 4.6 12.3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M11.6 12.4 17 17.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Qlik</span></li>
+      <li><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="5" cy="5" r="1.4"/><circle cx="10" cy="5" r="1.4"/><circle cx="15" cy="5" r="1.4"/><circle cx="5" cy="10" r="1.4"/><circle cx="10" cy="10" r="2.9"/><circle cx="15" cy="10" r="1.4"/><circle cx="5" cy="15" r="1.4"/><circle cx="10" cy="15" r="1.4"/><circle cx="15" cy="15" r="1.4"/></svg><span>ThoughtSpot</span></li>
+      <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.6 3 17.4h3.3l1.3-3.3h4.8l1.3 3.3H17zm0 5.7 1.6 3.7H8.4z"/></svg><span>Adobe</span></li>
+      <li><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="4" y="2.2" width="6" height="5.2" rx="2.6"/><rect x="10" y="2.2" width="6" height="5.2" rx="2.6"/><rect x="4" y="7.4" width="6" height="5.2" rx="2.6"/><circle cx="13" cy="10" r="2.6"/><rect x="4" y="12.6" width="6" height="5.2" rx="2.6"/></svg><span>Figma</span></li>
+      <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7.2 6 3 10l4.2 4M12.8 6 17 10l-4.2 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>VS Code</span></li>
+    </ul>
+  </section>
+
+  <section class="shell shell--narrow">
+    <div class="prose" data-reveal>
+    <p class="meta">05 - Development</p>
+    <h2>Built, not handed over as a picture</h2>
+    <p>
+      The design work does not end at a Figma file. I work hand in hand with
+      development through the build, in Power BI and Tableau, which is where
+      a visualization standard either holds or quietly falls apart. Tools
+      have their own defaults, their own color pickers, and their own
+      opinions about what a chart should look like.
+    </p>
+    <p>
+      Being in the file myself is the only reliable way to find the parts of
+      a design the tool cannot express, and to fix them before a developer
+      inherits the problem.
+    </p>
+  </div>
+  </section>
+
+  <section class="shell shell--narrow step">
+    <figure class="figure" data-reveal>
+      <h3 class="fig__h">Clinical Documentation Integrity</h3>
+<div class="figure__frame">
+        <img src="../assets/img/work/healthcare/cdi.jpg?v=20260817u" alt="Clinical Documentation Integrity dashboard built for a client hospital system. Case Mix Index, CC/MCC capture and relative expected mortality run across the top, with service line and MS-DRG opportunity tables beneath." loading="lazy" decoding="async">
+      </div>
+      <figcaption>Case Mix Index, CC/MCC capture and relative expected mortality establish the top-level view, with service-line and MS-DRG opportunity beneath. <em>Sample data, marked directly on the dashboard.</em></figcaption>
+    </figure>
+  </section>
+
+  <section class="shell shell--narrow">
+    <figure class="figure" data-reveal>
+<div class="figure__frame">
+        <video controls muted loop playsinline preload="none"
+               poster="../assets/img/work/healthcare/spend-poster.jpg?v=20260817u"
+               style="width:100%;display:block"
+               aria-label="Screen recording of the spend management prototype: supply cost variation ranked by service line, spine fusion expanded to procedure level, and the supporting literature open in the rail.">
+          <source src="../assets/video/healthcare-prototype.mp4?v=20260817u" type="video/mp4">
+        </video>
+      </div>
+      <figcaption><b>What the room is shown.</b> Supply cost variation ranked by service line, the chosen line resolved to procedure level, and the evidence behind the recommendation open beside it. <em>Sample data under the demo brand.</em></figcaption>
+    </figure>
+  </section>
+
+  <section class="shell shell--narrow">
+    <div class="prose" data-reveal>
+    <p class="meta">06 - Handoff</p>
+    <h2>What the room actually sees, and what they keep</h2>
+    <p>Two things transfer at the end.</p>
+    <p>
+      The first is the executive readout. It takes the measures that survived
+      and puts them where a decision gets made, using the same ramps and the
+      same rules, so a slide and a dashboard cannot disagree with each other
+      in front of a board.
+    </p>
+    <p>
+      The second is the style guide. Hex values, the rule for when each
+      applies, the KPI definitions, and components that already obey them.
+      The client keeps building after we leave, and this is what decides
+      whether what they build next still matches what we handed them.
+    </p>
+  </div>
+  </section>
+
+  <section class="shell shell--narrow step">
+    <div class="prose" data-reveal>
+    <p class="meta">07 - The system underneath</p>
+    <h2>Why it repeats</h2>
+    <p>
+      None of the above would survive ten engagements as a personal habit. It
+      survives because it is a Figma library: verified palettes as styles,
+      chart components with the tints pre-applied, KPI card patterns, and
+      annotation patterns for the cases where color alone is not enough.
+    </p>
+    <p>
+      Designers stopped picking colors for every chart. They picked a
+      component, and compliance came with it.
+      <b>The accessible option became the fastest option</b>, which is the
+      only version of a standard that survives a deadline.
+    </p>
+  </div>
+  </section>
+
+  <section class="shell shell--narrow">
+    <figure class="figure" data-reveal>
+      <h3 class="fig__h">The library itself</h3>
+<div class="figure__frame">
+        <img src="../assets/img/work/healthcare/design-system.jpg?v=20260817u" alt="The design system open in Figma, its variables panel listing the colour token collection: brand tints, greys and the data-visualization ramps, each with a name and a hex value." loading="lazy" decoding="async">
+      </div>
+      <figcaption>The ramps are defined once and inherited throughout the system, so a change to the standard propagates instead of being reapplied by hand across fifty workbooks.</figcaption>
+    </figure>
+  </section>
+
+  <section class="shell shell--narrow">
+    <figure class="figure" data-reveal>
+      <h3 class="fig__h">The standard, written down</h3>
+<div class="figure__frame">
+        <img src="../assets/img/work/healthcare/color-standard.jpg?v=20260817u" alt="The color standard as a specification table. Rows for typography, branding, data visualization ramps, pill indicators and wireframe components, each with a hex value, a color sample and a usage note." loading="lazy" decoding="async">
+      </div>
+      <figcaption>Diverging ramps at 60, 30 and 10 percent, pill indicators by decile, and wireframe greys, each documented with its hex value and the rule for when it applies. A ramp nobody can look up is a ramp that gets reinvented.</figcaption>
+    </figure>
+  </section>
+
 </main>
 
-<script type="module" src="../js/gate.js?v=20260809t"></script>
 <script src="../js/guard.js?v=20260809o"></script>
 <script src="../js/widont.js?v=20260811a"></script>
 <script src="../js/theme.js?v=20260809h"></script>
