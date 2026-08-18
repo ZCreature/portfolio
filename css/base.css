@@ -238,7 +238,7 @@ section { padding-block: var(--gap-xl); }
   width: 100%;
 }
 
-.masthead .nav a { font-size: 0.9438rem; line-height: 1.4; }
+.masthead .nav a { font-size: 0.9282rem; line-height: 1.4; }
 
 /* Elsewhere links: same column, quieter voice, held apart from the
    primary set by a clear step. */
@@ -1372,7 +1372,7 @@ figure { margin: 0; }
     width: auto;
   }
 
-  .masthead .nav a { font-size: 0.9438rem; line-height: 1.4; }
+  .masthead .nav a { font-size: 0.9282rem; line-height: 1.4; }
   .masthead .nav--social { margin-top: 0; }
   .masthead .theme-toggle { margin-top: 0; margin-left: 0.25rem; }
 
