@@ -12,13 +12,13 @@
   gtag('config', 'G-WEL5434XZK');
 </script>
 <title>MyBEATS - Chris Almaguer</title>
-<meta name="description" content="Tagging a 17,000-track library with a local model, and why the model size was chosen by where it starts inventing.">
+<meta name="description" content="Tagging a 17,000-track personal library with an on-device model: the pipeline, and what the tags are for.">
 <meta name="theme-color" content="#fbfbfa">
 <link rel="icon" href="../favicon.png?v=20260809h" type="image/png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Chris Almaguer">
 <meta property="og:title" content="MyBEATS - Chris Almaguer">
-<meta property="og:description" content="Tagging a 17,000-track library with a local model, and why the model size was chosen by where it starts inventing.">
+<meta property="og:description" content="Tagging a 17,000-track personal library with an on-device model: the pipeline, and what the tags are for.">
 <meta property="og:url" content="https://almaguer.design/work/mybeats.html">
 <meta property="og:image" content="https://almaguer.design/assets/img/og.png?v=3">
 <meta property="og:image:width" content="1200">
@@ -28,7 +28,7 @@
 <link rel="canonical" href="https://almaguer.design/work/mybeats.html">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="MyBEATS - Chris Almaguer">
-<meta name="twitter:description" content="Tagging a 17,000-track library with a local model, and why the model size was chosen by where it starts inventing.">
+<meta name="twitter:description" content="Tagging a 17,000-track personal library with an on-device model: the pipeline, and what the tags are for.">
 <meta name="author" content="Chris Almaguer">
 <script>
   try {
@@ -183,39 +183,9 @@
     </div>
   </section>
 
-  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
-    <div class="prose" data-reveal>
-      <p class="meta">03 - Running it over 17,000 tracks</p>
-      <h2>Two constraints that only appear at scale</h2>
-      <ul>
-        <li><b>Concurrency of one.</b> The instinct is to parallelize. A local
-          model is memory-bound and Ollama serves a single request at a time, so
-          extra workers do not generate in parallel. They queue while holding
-          memory, and the whole pass gets slower.</li>
-        <li>
-          <b>A deadline on every call.</b> Without one, a single stuck
-          generation pins the worker forever. At low concurrency that does not
-          fail one track, it silently stalls the entire stage. The timeout is
-          what turns a hang into one skipped record.
-        </li>
-      </ul>
-      <p>
-        The model is resolved at call time instead of frozen at import, so
-        changing it in Settings takes effect without restarting the app. That
-        matters when you are comparing two models across a long run.
-      </p>
-    </div>
-
-    <figure class="figure" data-reveal>
-      <img src="../assets/img/work/mybeats/settings.jpg?v=20260810n" alt="The MyBEATS Settings panel over the library. Appearance offers standard, red-green and blue-yellow palettes; formats indexed shows mp3, flac and m4a selected; a FLAC to MP3 converter sits below; and Assistant model is a dropdown currently set to qwen2.5:14b." loading="lazy" decoding="async" width="1600" height="1127">
-      <figcaption><b>Settings.</b> The assistant model is a dropdown rather than a constant, which is what makes comparing two of them across a long run practical. Appearance carries red-green and blue-yellow palettes beside the standard one, because a library view is a chart and the same rules apply.</figcaption>
-    </figure>
-
-  </section>
-
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) var(--gap-xl);">
     <div class="prose" data-reveal>
-      <p class="meta">04 - What the tags are for</p>
+      <p class="meta">03 - What the tags are for</p>
       <h2>Structure is what turns a library back into a collection</h2>
       <p>
         Tags on their own are filing. What they buy is the ability to ask for
