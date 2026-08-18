@@ -20,11 +20,11 @@ No build step, no dependencies. Open `index.html` via a local server
     work/patient-flow.html        surgical dressing utilization (Vizient, 2022)
     work/editorial.html           ACBJ newsroom graphics 2018-22
     css/base.css                  design system — the only stylesheet
-    js/color.js                   colour engine: CVD, CIEDE2000, WCAG
+    js/color.js                   colour harness: CVD, CIEDE2000, WCAG.
+                                  Verification only - no page loads it.
     js/theme.js                   light/dark, light by default
     js/motion.js                  reveals + scrollytelling
     js/embed.js                   lazy iframe embeds (Tableau, Leaflet)
-    js/gate.js                    passphrase unlock for the encrypted page
     assets/data/laps.json         lap data (currently a reconstruction)
     assets/data/editorial.json    tearsheet manifest — scaffold, not yet wired
 
@@ -64,8 +64,8 @@ careless.
 Every row above except the two healthcare ones is reproducible against
 `js/color.js` — build the set, then take the minimum `deltaE00` across normal
 vision, all three `simulate()` dichromacies, and `toGrey()`. The healthcare
-palette lives inside the encrypted page, so its two rows cannot be re-run without
-the plaintext.
+palette exists only inside the slide images on that page, never as hex values in
+the markup or the stylesheet, so its two rows still cannot be re-run here.
 
 ## Outstanding
 
@@ -84,8 +84,8 @@ the plaintext.
   until Chris supplies the outcome lines; the class renders as a hatched "To
   fill" block so it cannot be mistaken for published copy.
 - `work/healthcare-system.html` is the one case study still on the old
-  structure. It is AES-encrypted, so restructuring it needs the plaintext and a
-  re-encrypt per `BUILD.md`.
+  structure: it runs steps 01-07 where every other one runs 01-04. It is plain
+  markup now, so restructuring it is an ordinary edit.
 - `assets/data/editorial.json` is a **scaffold that nothing reads yet**.
   `work/editorial.html` is currently static prose. The manifest is there so the
   tearsheet grid can be driven from data once page images land in

@@ -35,7 +35,7 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="../css/base.css?v=20260811a">
+<link rel="stylesheet" href="../css/base.css?v=20260817a">
 </head>
 <body>
 
@@ -88,29 +88,6 @@
 
 <main id="main" class="case">
 <style>
-  /* One step reads with its evidence beside it rather than under it: prose
-     left, the screen right, so the opening is not a wall of text. The image
-     column takes the wider share. */
-  .spread--media { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); align-items: start; }
-  .spread--media .figure { margin: 0; }
-  .spread--media .fig__h { margin-top: 0; }
-  @media (max-width: 62rem) { .spread--media { grid-template-columns: minmax(0, 1fr); } }
-
-  /* 01 and 02 set as an editorial spread. They are the two halves of one
-     argument - what was asked for, and what made it hard - so reading them
-     across rather than down costs a screenful less scrolling. */
-  .spread {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--gap-m) var(--gap-xl);
-    align-items: start;
-  }
-  .spread .prose { max-width: 34rem; }
-  @media (max-width: 62rem) {
-    .spread { grid-template-columns: minmax(0, 1fr); gap: var(--gap-l); }
-    .spread .prose { max-width: 52rem; }
-  }
-
   /* Each screen is introduced by name before it is described, so the set
      reads as a labeled gallery rather than six captions in a row. */
   .fig__h {
@@ -119,27 +96,6 @@
     margin: 0 0 0.7rem;
   }
   .figure figcaption em { display: block; margin-top: 0.35rem; color: var(--ink-4); }
-  /* The question the whole study exists to answer. */
-  .ask {
-    font-size: clamp(1.05rem, 1.7vw, 1.3rem);
-    line-height: 1.4;
-    color: var(--ink);
-    font-weight: 700;
-    margin-top: var(--gap-s);
-    max-width: 34rem;
-  }
-  .qnum { color: var(--ink-4); }
-  .kpi-asks { margin: var(--gap-s) 0 0; padding: 0; list-style: none; }
-  .kpi-asks li { font-weight: 700; color: var(--ink-2); line-height: 1.5; }
-  .manifest { margin: 0; padding: 0; list-style: none; }
-  .manifest li {
-    padding-block: 0.7rem;
-    border-top: 1px solid var(--rule);
-    font-size: 0.875rem;
-    color: var(--ink-3);
-    line-height: 1.5;
-  }
-  .manifest li b { color: var(--ink-2); font-weight: 700; }
 
   /* The opening gallery is the deliverable itself, so its slides run larger
      than the site default - a dashboard shown small is only a texture. */
@@ -162,10 +118,6 @@
      edge, so the two changes belong together. */
   .prose { max-width: 52rem; }
   .prose p, .prose li { line-height: 1.72; }
-  /* The one-line ask and the four questions under it stay short on purpose:
-     they are called out, and a callout set to full measure stops reading as
-     one. */
-  .ask, .kpi-asks { max-width: 34rem; }
   /* One rhythm for the page, set here rather than section by section. A
      numbered step opens on a hairline with a full gap above it; anything
      that belongs to the step - its slides, its figure, its pull quote -
@@ -600,9 +552,9 @@
 
 </main>
 
-<script src="../js/guard.js?v=20260809o"></script>
-<script src="../js/widont.js?v=20260811a"></script>
+<script src="../js/guard.js?v=20260817a"></script>
+<script src="../js/widont.js?v=20260817a"></script>
 <script src="../js/theme.js?v=20260809h"></script>
-<script type="module" src="../js/motion.js?v=20260809m"></script>
+<script type="module" src="../js/motion.js?v=20260817a"></script>
 </body>
 </html>

@@ -8,8 +8,6 @@
    two words with a non-breaking space so they can only wrap
    together.
 
-   Runs once, and again on `gateopen`, because the protected
-   pages inject their whole body after unlock.
    ============================================================ */
 
 const NBSP = ' ';
@@ -79,4 +77,3 @@ if (document.readyState === 'loading') {
   run();
 }
 
-document.addEventListener('gateopen', () => run());

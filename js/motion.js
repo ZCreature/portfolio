@@ -108,7 +108,7 @@ function boot() {
 
 function initCarousels() {
   document.querySelectorAll('[data-carousel]').forEach((root) => {
-    if (root.dataset.carInit) return;   // gateopen re-runs boot; bind once
+    if (root.dataset.carInit) return;   // boot may run twice; bind once
     root.dataset.carInit = '1';
     const track = root.querySelector('.car__track');
     const prev = root.querySelector('[data-car-prev]');
@@ -147,8 +147,8 @@ function initCarousels() {
     };
     track.addEventListener('scroll', sync, { passive: true });
     window.addEventListener('resize', sync, { passive: true });
-    // Images (lazy files or decrypted data URIs) can finish layout after
-    // binding, leaving the arrows stuck disabled - re-sync once they land.
+    // Lazy images can finish layout after binding, leaving the arrows
+    // stuck disabled - re-sync once they land.
     track.querySelectorAll('img').forEach((img) => {
       if (!img.complete) img.addEventListener('load', sync, { once: true });
     });
@@ -195,12 +195,5 @@ if (document.readyState === 'loading') {
 } else {
   boot();
 }
-
-/* Gate pages inject their decrypted content after boot has run, so the
-   reveal observer has never seen it and it would sit at opacity 0.
-   gate.js announces the unlock; run the initialisers again over the
-   new markup. Reveal re-observation is idempotent and carousels guard
-   themselves against double binding. */
-document.addEventListener('gateopen', boot);
 
 export { REDUCED };

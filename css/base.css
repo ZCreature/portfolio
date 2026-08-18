@@ -1268,48 +1268,6 @@ figure { margin: 0; }
   line-height: 1.5;
 }
 
-/* Gate shown in place of the protected page */
-.gate { max-width: 30rem; }
-.gate__row { display: flex; gap: 0.5rem; margin-top: 1.5rem; flex-wrap: wrap; }
-
-/* The reset zeroes paragraph margins, so without these the note runs straight
-   into the heading and into itself. This is the first thing a recruiter sees
-   on a protected page, so it gets the same air as body copy elsewhere. */
-.gate__note {
-  color: var(--ink-2);
-  line-height: 1.62;
-  margin-top: var(--gap-m);
-}
-.gate__note + .gate__note { margin-top: var(--gap-s); }
-
-.gate input[type="password"] {
-  flex: 1 1 14rem;
-  font: inherit;
-  font-size: 0.9375rem;
-  padding: 0.6rem 0.75rem;
-  border: 1px solid var(--ink-4);
-  border-radius: 0;
-  background: var(--paper);
-  color: var(--ink);
-}
-
-.gate input[type="password"]:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
-
-.gate button {
-  font: inherit;
-  font-size: 0.8125rem;
-  padding: 0.6rem 1rem;
-  border: 1px solid var(--ink);
-  background: var(--ink);
-  color: var(--paper);
-  cursor: pointer;
-  border-radius: 0;
-}
-
-.gate__msg { margin-top: 0.75rem; min-height: 1.2rem; font-size: 0.875rem; color: var(--ink-2); }
-.gate__msg[data-state="bad"] { color: var(--ink); font-weight: 700; }
-.gate__msg[data-state="bad"]::before { content: "✕ "; }
-
 /* ---- 14. Awaiting-copy placeholder ------------------------ */
 
 /* Marks a section whose text the author still has to supply. Deliberately
