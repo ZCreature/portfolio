@@ -269,21 +269,28 @@ section { padding-block: var(--gap-xl); }
   display: block;
 }
 
-.rail__mark img {
-  /* Figma places the 440px source at 241x241 inside the 264x228 frame,
-     offset (-5, -13). Expressed against the frame width so it scales:
-     241/264 = 91.29%, -5/264 = -1.894%, -13/264 = -4.924%. Margin
-     percentages resolve against width, which is what keeps both true. */
-  width: 91.29%;
-  height: auto;
-  display: block;
-  margin: -4.924% 0 0 -1.894%;
+/* Painted as a background rather than an <img> on purpose. Below 64rem this
+   element is display:none, and a hidden <img> is still downloaded - 247 KB
+   that a phone never sees. Background images on a display:none element are
+   never fetched, so the rule below actually saves the bytes.
+
+   Figma places the 440px square at 241x241 inside the 264x228 frame, offset
+   (-5, -13). background-size is a share of the frame width: 241/264 = 91.29%.
+   background-position percentages align the same percentage point of image
+   and box, so each axis is offset / (box - image):
+     x  -5 / (264 - 241) = -21.739%
+     y -13 / (228 - 241) = 100% */
+.rail__mark {
+  background-image: url("../assets/img/mark.png?v=20260809f");
+  background-size: 91.29% auto;
+  background-position: -21.739% 100%;
+  background-repeat: no-repeat;
 }
 
 /* The green burst is the one piece of colour in the chrome. In dark mode it
    is the only saturated thing on the screen, so it drops to greyscale and
    the interface stays monochrome the way the rest of the site argues for. */
-:root[data-theme="dark"] .rail__mark img { filter: grayscale(1); }
+:root[data-theme="dark"] .rail__mark { filter: grayscale(1); }
 
 .railmark { display: block; }
 

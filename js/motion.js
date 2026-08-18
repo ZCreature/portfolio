@@ -115,14 +115,11 @@ function initCarousels() {
     const next = root.querySelector('[data-car-next]');
     if (!track || !prev || !next) return;
 
-    /* Page by exactly one slide and land it in the middle of the frame.
-       Scrolling by a fraction of the track width used to stop wherever it
-       stopped, which left the slide you were moving to sliced by the right
-       edge. Measuring from rects rather than offsetLeft keeps this correct
-       no matter which ancestor happens to be positioned. */
-    const page = (dir) => {
+    /* Which slide is sitting nearest the middle of the frame. Measured from
+       rects rather than offsetLeft so it stays correct no matter which
+       ancestor happens to be positioned. */
+    const current = () => {
       const items = track.querySelectorAll('.car__item');
-      if (!items.length) return;
       const frame = track.getBoundingClientRect();
       const mid = frame.left + frame.width / 2;
       let i = 0;
@@ -132,18 +129,44 @@ function initCarousels() {
         const d = Math.abs(r.left + r.width / 2 - mid);
         if (d < best) { best = d; i = n; }
       });
-      const target = items[Math.min(items.length - 1, Math.max(0, i + dir))];
-      const r = target.getBoundingClientRect();
-      // scrollBy clamps at both ends, so the first and last slides settle
-      // flush against their edge instead of trying to centre past it.
+      return { items, i, mid };
+    };
+
+    /* Page by exactly one slide and land it in the middle of the frame.
+       Scrolling by a fraction of the track width used to stop wherever it
+       stopped, which left the slide you were moving to sliced by the edge. */
+    const page = (dir) => {
+      const { items, i, mid } = current();
+      if (!items.length) return;
+      const n = Math.min(items.length - 1, Math.max(0, i + dir));
+      const r = items[n].getBoundingClientRect();
       track.scrollBy({ left: r.left + r.width / 2 - mid, behavior: REDUCED ? 'auto' : 'smooth' });
+      /* Reflect the move immediately from the index we just moved to, rather
+         than waiting for the scroll event: with smooth behaviour that event
+         does not arrive until the animation settles, and some engines do not
+         emit one at all for an instant scroll. The listener still refines
+         this afterwards. */
+      prev.disabled = n === 0;
+      next.disabled = n === items.length - 1;
     };
 
     prev.addEventListener('click', () => page(-1));
     next.addEventListener('click', () => page(1));
+
+    /* An arrow is dead when there is no further slide OR no further scroll.
+       Both halves are needed. Asking only about scroll position breaks when a
+       slide is wider than the track: centring the last one leaves half the
+       overhang unreached, the scroll never reaches its extent, and the arrow
+       stays lit over a page() that can no longer move. Asking only about the
+       index breaks the mirror case, where several narrow slides share the
+       frame and the middle one is nearest the centre at rest. */
     const sync = () => {
-      prev.disabled = track.scrollLeft < 8;
-      next.disabled = track.scrollLeft > track.scrollWidth - track.clientWidth - 8;
+      const { items, i } = current();
+      if (!items.length) return;
+      const atStart = track.scrollLeft < 8;
+      const atEnd = track.scrollLeft > track.scrollWidth - track.clientWidth - 8;
+      prev.disabled = atStart || i === 0;
+      next.disabled = atEnd || i === items.length - 1;
     };
     track.addEventListener('scroll', sync, { passive: true });
     window.addEventListener('resize', sync, { passive: true });
