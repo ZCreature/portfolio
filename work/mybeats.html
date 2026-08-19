@@ -360,7 +360,32 @@
 
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
     <div class="prose" data-reveal>
-      <p class="meta">05 - The build</p>
+      <p class="meta">05 - The data</p>
+      <h2>What the library knows, drawn</h2>
+      <p>
+        Every stage of the pipeline leaves numbers behind, and the app draws
+        all of them. Tempo, years, tags, loudness and origins describe what
+        the collection is made of; a graph, a treemap and a sankey take the
+        deep cuts. Every chart states what it means and shows its key, and
+        any of them can be saved out as an SVG.
+      </p>
+      <p>
+        The other half is behavioral. The app keeps its own play history, so
+        listening becomes a dataset too: when you listen, what you replay,
+        what you skip. Most played and Most skipped run as leaderboards that
+        can be reset and started again, and a track can be forgotten
+        entirely.
+      </p>
+      <figure class="figure" style="margin-top: var(--gap-m);">
+        <img src="../assets/img/work/mybeats/when-you-listen.svg?v=20260819b" alt="A heatmap titled When you listen: 579 plays by hour and weekday, local time. Orange cells cluster on Tuesday through Thursday around midday, peaking Tuesday at 1pm; Sunday is empty." width="671" height="258" loading="lazy" decoding="async" style="width:100%;height:auto">
+        <figcaption><b>When you listen.</b> 579 plays by hour and weekday, drawn by the app and saved with its own Save SVG button. Tuesday at one in the afternoon is the peak, the work-week middays carry the rest, and Sunday does not register at all.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
+    <div class="prose" data-reveal>
+      <p class="meta">06 - The build</p>
       <h2>Built in the open, one decision at a time</h2>
       <p>
         An Electron shell around a local SQLite index, the five-stage pipeline
@@ -387,7 +412,7 @@
 
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
     <div class="prose" data-reveal>
-      <p class="meta">06 - What broke</p>
+      <p class="meta">07 - What broke</p>
       <h2>The failures worth keeping</h2>
       <p>
         Free and local was the constraint from the start: nothing uploaded,
@@ -431,7 +456,7 @@
 
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) var(--gap-xl);">
     <div class="prose" data-reveal>
-      <p class="meta">07 - The end game</p>
+      <p class="meta">08 - The end game</p>
       <h2>A library that outlives its players</h2>
       <p>
         The end game is old fashioned. An iPod shows up as a folder, the app
