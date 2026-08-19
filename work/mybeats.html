@@ -51,6 +51,8 @@
   .figure--wide { margin-top: 0; }
   .figure--wide video { border: 0; max-width: 91%; margin-inline: auto; }
   .step { margin-top: var(--gap-l); border-top: 1px solid var(--rule); }
+  .hm-panel { background: #0b0b0b; padding: clamp(1.25rem, 4vw, 2.5rem); display: flex; justify-content: center; }
+  .hm-panel img { width: min(100%, 38rem); height: auto; display: block; border: 0; }
   .rules { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--rule); margin-top: var(--gap-m); }
   .rules > div { padding: 1.45rem 1.6rem 1.55rem; border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); }
   .rules > div:nth-child(-n+2) { border-top: 0; }
@@ -331,7 +333,7 @@
 
   <section class="shell shell--narrow step" style="padding-block: var(--gap-l) 0;">
     <figure class="figure" data-reveal>
-        <img src="../assets/img/work/mybeats/when-you-listen.svg?v=20260819b" alt="A heatmap titled When you listen: 579 plays by hour and weekday, local time. Orange cells cluster on Tuesday through Thursday around midday, peaking Tuesday at 1pm; Sunday is empty." width="671" height="258" loading="lazy" decoding="async" style="width:100%;height:auto">
+        <div class="hm-panel"><img src="../assets/img/work/mybeats/when-you-listen.svg?v=20260819b" alt="A heatmap titled When you listen: 579 plays by hour and weekday, local time. Orange cells cluster on Tuesday through Thursday around midday, peaking Tuesday at 1pm; Sunday is empty." width="671" height="258" loading="lazy" decoding="async"></div>
         <figcaption><b>When you listen.</b> 579 plays by hour and weekday, drawn by the app and saved with its own Save SVG button. Tuesday at one in the afternoon is the peak, the work-week middays carry the rest, and Sunday does not register at all.</figcaption>
       </figure>
   </section>
