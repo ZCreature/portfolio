@@ -42,6 +42,12 @@
      whole claim is thirty frames a second on the phone, and only motion
      shows it. */
   .figure--hero { margin: 0 auto; max-width: 46rem; }
+  .phone { margin: 0 auto; width: min(21rem, 78vw); }
+  .phone__body { position: relative; background: #101013; border-radius: 3.1rem; padding: 0.85rem; box-shadow: inset 0 0 0 1.5px #303036, 0 24px 60px rgba(0, 0, 0, 0.18); }
+  .phone__body::after { content: ""; position: absolute; top: 1.55rem; left: 50%; transform: translateX(-50%); width: 24%; height: 1.5rem; background: #000; border-radius: 1rem; z-index: 2; }
+  .phone__screen { border-radius: 2.35rem; overflow: hidden; background: #000; }
+  .phone__screen video { width: 100%; height: auto; display: block; }
+  .phone figcaption { margin-top: 1rem; text-align: center; font-size: 0.8125rem; color: var(--ink-3); line-height: 1.5; }
   .figure--hero video { width: 100%; height: auto; display: block; background: #000; border: 1px solid var(--rule); }
 </style>
 </head>
@@ -123,6 +129,22 @@
              aria-label="The camera feed rendered live as ASCII: a landscape resolving into rows of typographic characters at thirty frames a second, dense glyphs carrying the bright sky and sparse punctuation the dark ground.">
         <source src="../assets/video/ascii-hero.mp4?v=20260812a" type="video/mp4">
       </video>
+    </figure>
+  </section>
+
+  <section class="shell" style="padding-block: var(--gap-l) 0;">
+    <figure class="phone" data-reveal>
+      <div class="phone__body">
+        <div class="phone__screen">
+          <video data-lazy-video controls muted loop playsinline preload="none"
+                 poster="../assets/img/work/asciicam/phone-poster.jpg?v=20260819g"
+                 width="720" height="1564"
+                 aria-label="Screen recording of ASCII-CAM on an iPhone: the live camera rendering as glyphs, with menu, live cam, freeze, record and upload controls along the interface.">
+            <source src="../assets/video/asciicam-phone.mp4?v=20260819g" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <figcaption><b>In play.</b> A recording straight off the phone: live camera in, glyphs out, with freeze, record and upload one thumb away.</figcaption>
     </figure>
   </section>
 
