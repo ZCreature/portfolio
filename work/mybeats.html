@@ -51,6 +51,9 @@
   .figure--wide { margin-top: 0; }
   .figure--wide video { border: 0; max-width: 91%; margin-inline: auto; }
   .step { margin-top: var(--gap-l); border-top: 1px solid var(--rule); }
+  .car--screens .car__track .car__item { width: min(100%, 52rem); }
+  .car--screens .car__track .car__item img { width: 100%; height: auto; }
+  .car--screens .car__item figcaption { max-width: 30rem; }
   .hm-panel { background: #0b0b0b; padding: clamp(1.25rem, 4vw, 2.5rem); display: flex; justify-content: center; }
   .hm-panel img { width: min(100%, 38rem); height: auto; display: block; border: 0; }
   .rules { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--rule); margin-top: var(--gap-m); }
@@ -337,6 +340,88 @@
         <figcaption><b>When you listen.</b> 579 plays by hour and weekday, drawn by the app and saved with its own Save SVG button. Tuesday at one in the afternoon is the peak, the work-week middays carry the rest, and Sunday does not register at all.</figcaption>
       </figure>
   </section>
+
+  <section class="shell" style="padding-block: var(--gap-l) 0;">
+    <div class="car car--screens" data-carousel data-reveal>
+      <div class="car__head">
+        <h2 class="meta">The charts</h2>
+        <div class="car__meta">
+          <span class="meta">10 slides, one library</span>
+          <div class="car__btns">
+            <button class="car__btn" type="button" data-car-prev aria-label="Scroll the charts back">
+              <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M8 1 3 6l5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            </button>
+            <button class="car__btn" type="button" data-car-next aria-label="Scroll the charts forward">
+              <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M4 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="car__track" tabindex="0" role="group" aria-label="Ten chart views, horizontally scrollable gallery">
+        <div class="car__item">
+          <figure>
+            <img src="../assets/img/work/mybeats/viz-tempo.jpg?v=20260819e" alt="The tempo histogram: bars count tracks in four-BPM slices across 16,690 analysed tracks, peaking at 92 to 95 BPM." loading="lazy" decoding="async" width="1600" height="1117">
+            <figcaption><b>Tempo.</b> Four-BPM bins across 16,690 analysed tracks. The peak is 92 to 95 BPM and 63% of the collection sits within 10 BPM of it: the zone where a set gets built without changing pace.</figcaption>
+          </figure>
+        </div>
+        <div class="car__item">
+          <figure>
+            <img src="../assets/img/work/mybeats/viz-years.jpg?v=20260819e" alt="The years chart: one bar per release year from 1938 to 2020, with 1996 the tallest." loading="lazy" decoding="async" width="1600" height="1117">
+            <figcaption><b>Years.</b> One bar per release year, 1938 to 2020. This is when the music was made, not when it was added: 1996 is the busiest with 1,432 tracks, and the 1990s hold nearly half the dated library.</figcaption>
+          </figure>
+        </div>
+        <div class="car__item">
+          <figure>
+            <img src="../assets/img/work/mybeats/viz-tags.jpg?v=20260819e" alt="The tags ranking: the top 24 of the model's tags drawn as bars." loading="lazy" decoding="async" width="1600" height="1117">
+            <figcaption><b>Tags.</b> The top 24 of the model's tags. A track can carry several at once, so the ranking reads as what keeps recurring, not as a split of the whole.</figcaption>
+          </figure>
+        </div>
+        <div class="car__item">
+          <figure>
+            <img src="../assets/img/work/mybeats/viz-loudness.jpg?v=20260819e" alt="The loudness war chart: median LUFS by year as a line, with a quartile band behind it, over 14,709 analysed tracks." loading="lazy" decoding="async" width="1600" height="1117">
+            <figcaption><b>The loudness war.</b> Median LUFS by year with the middle half of each year's records banded behind it. A wide band is a year mastered inconsistently.</figcaption>
+          </figure>
+        </div>
+        <div class="car__item">
+          <figure>
+            <img src="../assets/img/work/mybeats/viz-origins.jpg?v=20260819e" alt="The origins map: 174 cities as dots sized by track count, Los Angeles largest." loading="lazy" decoding="async" width="1600" height="1117">
+            <figcaption><b>Origins.</b> 174 cities the model tied artists to, sized by how many tracks come from there. Los Angeles leads with 2,438. An empty region may only mean nobody has been asked yet.</figcaption>
+          </figure>
+        </div>
+        <div class="car__item">
+          <figure>
+            <img src="../assets/img/work/mybeats/viz-graph.jpg?v=20260819e" alt="The genre force map: 63 genre dots sized by track count, connected by lines." loading="lazy" decoding="async" width="1600" height="1117">
+            <figcaption><b>How the library connects.</b> A force map, not a chart: each dot is one genre, its area is the track count, and clicking a genre branches its artists.</figcaption>
+          </figure>
+        </div>
+        <div class="car__item">
+          <figure>
+            <img src="../assets/img/work/mybeats/viz-treemap.jpg?v=20260819e" alt="The genre treemap: 63 rectangles, each genre sized by its track count." loading="lazy" decoding="async" width="1600" height="1117">
+            <figcaption><b>How the library divides.</b> Every rectangle is one genre and its area is how many tracks sit inside it: the shape of the collection at a glance.</figcaption>
+          </figure>
+        </div>
+        <div class="car__item">
+          <figure>
+            <img src="../assets/img/work/mybeats/viz-sankey.jpg?v=20260819e" alt="The sankey: nine genre blocks on the left flowing into thirteen decade blocks on the right." loading="lazy" decoding="async" width="1600" height="1117">
+            <figcaption><b>Genre to decade.</b> Nine genres flow into thirteen decades, for the 959 hours of listening the library can put a year on.</figcaption>
+          </figure>
+        </div>
+        <div class="car__item">
+          <figure>
+            <img src="../assets/img/work/mybeats/viz-genre-era-tempo.jpg?v=20260819e" alt="The three-column sankey: genre on the left, decade in the middle, tempo on the right." loading="lazy" decoding="async" width="1600" height="1117">
+            <figcaption><b>Genre, era, tempo.</b> The same reading with a third column, so a genre's decades and its speeds sit in one picture.</figcaption>
+          </figure>
+        </div>
+        <div class="car__item">
+          <figure>
+            <img src="../assets/img/work/mybeats/viz-listened.jpg?v=20260819e" alt="The listening dashboard: Most played and When you listen side by side over library totals." loading="lazy" decoding="async" width="1600" height="1117">
+            <figcaption><b>Your library, listened to.</b> Most played and When you listen in one view: 17,126 tracks, 2,340 artists, 1,492 albums.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
 
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
     <div class="prose" data-reveal>
