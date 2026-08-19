@@ -54,8 +54,6 @@
   .car--screens .car__track .car__item { width: min(100%, 52rem); }
   .car--screens .car__track .car__item img { width: 100%; height: auto; }
   .car--screens .car__item figcaption { max-width: 30rem; }
-  .hm-panel { background: #0b0b0b; padding: clamp(1.25rem, 4vw, 2.5rem); display: flex; justify-content: center; }
-  .hm-panel img { width: min(100%, 38rem); height: auto; display: block; border: 0; }
   .rules { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--rule); margin-top: var(--gap-m); }
   .rules > div { padding: 1.45rem 1.6rem 1.55rem; border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); }
   .rules > div:nth-child(-n+2) { border-top: 0; }
@@ -331,14 +329,7 @@
     </div>
   </section>
 
-  <section class="shell shell--narrow step" style="padding-block: var(--gap-l) 0;">
-    <figure class="figure" data-reveal>
-        <div class="hm-panel"><img src="../assets/img/work/mybeats/when-you-listen.svg?v=20260819b" alt="A heatmap titled When you listen: 579 plays by hour and weekday, local time. Orange cells cluster on Tuesday through Thursday around midday, peaking Tuesday at 1pm; Sunday is empty." width="671" height="258" loading="lazy" decoding="async"></div>
-        <figcaption><b>When you listen.</b> 579 plays by hour and weekday, drawn by the app and saved with its own Save SVG button. Tuesday at one in the afternoon is the peak, the work-week middays carry the rest, and Sunday does not register at all.</figcaption>
-      </figure>
-  </section>
-
-  <section class="shell" style="padding-block: var(--gap-l) 0;">
+  <section class="shell step" style="padding-block: var(--gap-l) 0;">
     <div class="car car--screens" data-carousel data-reveal>
       <div class="car__head">
         <h2 class="meta">The charts</h2>
