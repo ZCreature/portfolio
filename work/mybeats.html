@@ -58,9 +58,6 @@
   .rule__num { font-family: var(--font-mono); font-size: 1.05rem; color: var(--ink); display: block; }
   .rules h3 { font-size: 0.9375rem; letter-spacing: -0.01em; margin: 0.55rem 0 0.3rem; }
   .prose .rules p { margin: 0; font-size: 0.9375rem; line-height: 1.55; color: var(--ink-3); }
-  .car--screens .car__track .car__item { width: min(100%, 52rem); }
-  .car--screens .car__track .car__item img { width: 100%; height: auto; }
-  .car--screens .car__item figcaption { max-width: 30rem; }
   .commits { margin: var(--gap-m) 0 0; padding: 0; list-style: none; border: 1px solid var(--rule); }
   .commits li { font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.01em; color: var(--ink-2); padding: 0.7rem 1.1rem; border-top: 1px solid var(--rule); }
   .commits li:first-child { border-top: 0; }
@@ -270,42 +267,15 @@
   </section>
 
   <section class="shell step" style="padding-block: var(--gap-l) 0;">
-    <div class="car car--screens" data-carousel data-reveal>
-      <div class="car__head">
-        <h2 class="meta">The screens</h2>
-        <div class="car__meta">
-          <span class="meta">3 screens</span>
-          <div class="car__btns">
-            <button class="car__btn" type="button" data-car-prev aria-label="Scroll the screens back">
-              <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M8 1 3 6l5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
-            </button>
-            <button class="car__btn" type="button" data-car-next aria-label="Scroll the screens forward">
-              <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M4 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="car__track" tabindex="0" role="group" aria-label="Three application screens, horizontally scrollable gallery">
-        <div class="car__item">
-          <figure>
-            <img src="../assets/img/work/mybeats/app-ui.jpg?v=20260818d" alt="The MyBEATS library in its All music table. The left rail runs Music, EQ, Crate, Digger and Charts; the list shows tracks by The Cure, Deep Purple and DJ Screw with library search and rescan along the top." loading="lazy" decoding="async" width="1600" height="1197">
-            <figcaption><b>The app.</b> The rail runs Music, EQ, Crate, Digger and Charts. The collection reads as shape before any single row.</figcaption>
-          </figure>
-        </div>
-        <div class="car__item">
-          <figure>
-            <img src="../assets/img/work/mybeats/auditorium.jpg?v=20260818d" alt="The auditorium view: the hall drawn from above with the stage at the top and the floor fanning out below, a seat selected mid-floor while A Forest plays." loading="lazy" decoding="async" width="1600" height="1000">
-            <figcaption><b>The auditorium.</b> The hall from above, stage at the top. Click a seat and the music moves to where you are sitting: distance eats the top end, and the room adds its own reverb on the way back.</figcaption>
-          </figure>
-        </div>
-        <div class="car__item">
-          <figure>
-            <img src="../assets/img/work/mybeats/settings.jpg?v=20260810n" alt="The MyBEATS Settings panel over the library. Appearance offers standard, red-green and blue-yellow palettes; formats indexed shows mp3, flac and m4a selected; a FLAC to MP3 converter sits below; and Assistant model is a dropdown currently set to qwen2.5:14b." loading="lazy" decoding="async" width="1600" height="1127">
-            <figcaption><b>Settings.</b> The assistant model is a dropdown rather than a constant, which is what makes comparing two of them across a long run practical. Appearance carries red-green and blue-yellow palettes beside the standard one.</figcaption>
-          </figure>
-        </div>
-      </div>
-    </div>
+    <figure class="figure figure--wide" data-reveal>
+      <video data-lazy-video controls muted loop playsinline preload="none"
+             poster="../assets/img/work/mybeats/lyrics-poster.jpg?v=20260819d"
+             width="1774" height="1240"
+             aria-label="Screen recording of the MyBEATS lyrics panel: a Billie Holiday track playing from the All music table, the lyrics panel following alongside.">
+        <source src="../assets/video/mybeats-lyrics.mp4?v=20260819d" type="video/mp4">
+      </video>
+      <figcaption><b>Lyrics, even unpublished.</b> The panel follows playback with timed lines. When no published lyrics exist for a track, a local Whisper model transcribes the audio itself, and nothing leaves the machine.</figcaption>
+    </figure>
   </section>
 
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
