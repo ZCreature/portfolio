@@ -62,6 +62,44 @@
   .phone__btn--voldn  { left: -3px; top: 32.5%; height: 6.5%; }
   .phone__btn--power  { right: -3px; top: 27%; height: 10%; }
   .phone figcaption { margin-top: 1.1rem; text-align: center; font-size: 0.8125rem; color: var(--ink-3); line-height: 1.5; }
+
+  /* Style breakdown. One hairline row per style, with the ramp itself set in
+     the same monospace the app renders in, so the row is the artefact rather
+     than a picture of it. Square rules, greyscale: the glyphs are the only
+     texture on the page here. Letter-spacing does the separating, which keeps
+     a 28-level ramp readable without drawing a box around every character. */
+  .ramps { display: grid; grid-template-columns: 8rem minmax(0, 1fr);
+    border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+    margin-block: var(--gap-m); }
+  .ramps > dt { font-family: var(--font-mono); font-size: 0.6875rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3);
+    padding-block: 0.8rem; padding-right: 0.75rem;
+    border-right: 1px solid var(--rule); }
+  .ramps > dd { margin: 0; padding-block: 0.8rem; padding-left: 1rem;
+    color: var(--ink); }
+  .ramps > dt:not(:first-of-type),
+  .ramps > dd:not(:first-of-type) { border-top: 1px solid var(--rule); }
+  .ramps__n { color: var(--ink-2); }
+  .ramps__chars { font-family: var(--font-mono); font-size: 1.0625rem;
+    line-height: 1.85; letter-spacing: 0.4em; overflow-wrap: anywhere; }
+  .ramps__note { display: block; margin-top: 0.4rem; font-size: 0.8125rem;
+    color: var(--ink-3); line-height: 1.55; }
+  /* Block, not inline: rows without a prose note would otherwise run the
+     spec straight on from the last glyph of the ramp. */
+  .ramps__spec { display: block; margin-top: 0.4rem;
+    font-family: var(--font-mono); font-size: 0.6875rem;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
+  .ramps__key { font-size: 0.8125rem; color: var(--ink-3); line-height: 1.6;
+    margin-top: calc(var(--gap-m) * -0.5); }
+
+  /* Under ~34rem the label column starves the ramp, so the pair stacks and
+     the rule moves to the top of each style instead of between the columns. */
+  @media (max-width: 34rem) {
+    .ramps { grid-template-columns: minmax(0, 1fr); }
+    .ramps > dt { border-right: 0; padding-bottom: 0.2rem; }
+    .ramps > dd { padding-left: 0; padding-top: 0.2rem; }
+    .ramps > dd:not(:first-of-type) { border-top: 0; }
+  }
 </style>
 </head>
 <body>
@@ -260,9 +298,144 @@
     </div>
   </section>
 
+  <section class="shell shell--narrow" style="padding-block: var(--gap-l) 0;">
+    <div class="prose" data-reveal>
+      <p class="meta">04 - The ramps as shipped</p>
+      <h2>Every character, per style</h2>
+      <p>
+        Each ramp runs dark to bright, because more ink on a black screen
+        reads as more light. All ten open with a blank, so true black renders
+        as nothing rather than as a carpet of the lightest glyph. Two of them
+        carry no ramp at all: braille and quadrant encode sub-cell detail in
+        the shape of the glyph rather than in a position on a scale.
+      </p>
+      <p>
+        The note on each row is that style's tuned ink weight and tone gamma.
+        Ramps built from thin marks top out structurally dimmer than block
+        styles and spend their lower half on nearly invisible glyphs, so they
+        render at a heavier weight and get more midtone lift. The block styles
+        reach solid white on their own and need neither.
+      </p>
+    </div>
+
+    <dl class="ramps" data-reveal>
+      <dt><span class="ramps__n">1</span> Braille</dt>
+      <dd>
+        <span class="ramps__chars">⠀ ⣿</span>
+        <span class="ramps__note">
+          The empty and full cells of the braille block, U+2800 to U+28FF.
+          Eight dots per cell, each an independently dithered sub-sample, so
+          any of the 256 glyphs between those two can appear. Two by four
+          samples per character is the finest texture of any mode, which is
+          why it became the launch default.
+        </span>
+        <span class="ramps__spec">Regular, gamma 1.25</span>
+      </dd>
+
+      <dt><span class="ramps__n">2</span> Halftone</dt>
+      <dd>
+        <span class="ramps__chars">␣ . o O 0 8 @</span>
+        <span class="ramps__note">
+          A dot that grows with brightness, blank through to the densest ASCII
+          glyph. The print halftone look, across the full contrast range.
+        </span>
+        <span class="ramps__spec">Semibold, gamma 1.15</span>
+      </dd>
+
+      <dt><span class="ramps__n">3</span> Quadrant</dt>
+      <dd>
+        <span class="ramps__chars">␣ ▗ ▖ ▄ ▝ ▐ ▞ ▟ ▘ ▚ ▌ ▙ ▀ ▜ ▛ █</span>
+        <span class="ramps__note">
+          Two by two sub-blocks. Each corner is thresholded to lit or unlit and
+          the resulting four bit pattern picks the glyph, so these sixteen are
+          ordered by which corners are lit, not by how much ink they carry.
+        </span>
+        <span class="ramps__spec">Regular, gamma 1.00</span>
+      </dd>
+
+      <dt><span class="ramps__n">4</span> Punctuation</dt>
+      <dd>
+        <span class="ramps__chars">␣ ` . ' , : ; &quot; - ! $</span>
+        <span class="ramps__note">
+          The ramp that was out of order: the semicolon, one of the densest
+          marks here, sat in the shadow slots while the comma and period sat
+          in the midtones.
+        </span>
+        <span class="ramps__spec">Semibold, gamma 1.40</span>
+      </dd>
+
+      <dt><span class="ramps__n">5</span> Classic</dt>
+      <dd>
+        <span class="ramps__chars">␣ . : - = + * # % @</span>
+        <span class="ramps__spec">Medium, gamma 1.30</span>
+      </dd>
+
+      <dt><span class="ramps__n">6</span> Bar</dt>
+      <dd>
+        <span class="ramps__chars">␣ ▁ ▂ ▃ ▄ ▅ ▆ ▇ █</span>
+        <span class="ramps__note">
+          Eighth blocks: the one ramp where each glyph is effectively a bar
+          chart of its own value.
+        </span>
+        <span class="ramps__spec">Regular, gamma 1.00</span>
+      </dd>
+
+      <dt><span class="ramps__n">7</span> Lines</dt>
+      <dd>
+        <span class="ramps__chars">␣ ^ : ; | l i ! ¡ 1 I j &quot; ] ( ) \ /</span>
+        <span class="ramps__note">
+          Vertical strokes and slashes only, sorted light to heavy, so the
+          texture stays linear instead of turning into a field of dots.
+        </span>
+        <span class="ramps__spec">Semibold, gamma 1.35</span>
+      </dd>
+
+      <dt><span class="ramps__n">8</span> Power</dt>
+      <dd>
+        <span class="ramps__chars">␣ ₁ ₇ ₄ ₂ ₃ ₅ ₉ ₆ ₀ ₈ 1 7 4 2 3 5 9 6 0 8</span>
+        <span class="ramps__note">
+          Subscript digits as the light tier, the same digits full size as the
+          dense tier. One is a single thin stroke and eight has two enclosed
+          loops, which sets the order within each tier. This was the only ramp
+          that shipped without a leading blank, so black rendered as a field
+          of small ones.
+        </span>
+        <span class="ramps__spec">Semibold, gamma 1.30</span>
+      </dd>
+
+      <dt><span class="ramps__n">9</span> Detail</dt>
+      <dd>
+        <span class="ramps__chars">␣ ` . ' , : ; &quot; ~ - + ? x v z c n o a k X Z # &amp; 8 % @ $</span>
+        <span class="ramps__note">
+          Twenty eight levels, curated down from the classic seventy character
+          ramp. Nearly three times the steps of the others, which matters most
+          in the dark end, where a short ramp jumps straight from blank to a
+          visible glyph.
+        </span>
+        <span class="ramps__spec">Medium, gamma 1.30</span>
+      </dd>
+
+      <dt><span class="ramps__n">10</span> One-bit</dt>
+      <dd>
+        <span class="ramps__chars">␣ @</span>
+        <span class="ramps__note">
+          Pure threshold. With the ordered dither on it reads as a newspaper
+          halftone; with it off, a stark silhouette.
+        </span>
+        <span class="ramps__spec">Semibold, gamma 1.10</span>
+      </dd>
+    </dl>
+
+    <p class="ramps__key" data-reveal>
+      ␣ marks the blank at level zero. Styles 1 and 3 are shown as the glyph
+      set they draw from, not as a ramp, since neither maps a cell to a single
+      position on a scale.
+    </p>
+  </section>
+
   <section class="shell shell--narrow" style="padding-block: var(--gap-l) var(--gap-xl);">
     <div class="prose" data-reveal>
-      <p class="meta">04 - Impact</p>
+      <p class="meta">05 - Impact</p>
       <h2>What shipping it actually cost</h2>
       <p>
         It is approved and on the App Store, which is the part that is easy to
