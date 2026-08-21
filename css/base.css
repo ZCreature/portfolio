@@ -540,23 +540,6 @@ body { padding-left: var(--rail); }
 .entry:focus-within .entry__sub,
 .entry:focus-within .meta { color: var(--paper); }
 
-.entry:hover .tag,
-.entry:focus-within .tag {
-  font-family: var(--font-mono);
-  /* 9px. Small, but these are secondary labels beside a title that already
-     names the thing, not copy anyone has to read to understand the tile.
-     The inks still clear 4.5:1, so shrinking costs legibility, not contrast. */
-  font-size: 0.34375rem;
-  letter-spacing: 0.045em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-  background: transparent;
-  border: 1px solid var(--rule);
-  border-radius: 3px;
-  padding: 0.08rem 0.2rem;
-  white-space: nowrap;
-}
-
 .entry__title {
   font-size: clamp(1.25rem, 2.6vw, 1.9rem);
   letter-spacing: -0.02em;
@@ -575,14 +558,6 @@ body { padding-left: var(--rail); }
   color: var(--ink-3);
   font-size: 0.9375rem;
   max-width: 44ch;
-}
-
-.entry__tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-  justify-content: flex-end;
-  max-width: 20rem;
 }
 
 .tag {
@@ -607,7 +582,7 @@ body { padding-left: var(--rail); }
    Derived, not picked. Every ink clears 4.5:1 against BOTH its
    own fill and the page - so a label stays readable even if the
    fill never paints. Measured: text/chip 5.0-5.1, text/page
-   5.4-6.2 in light, 6.0-6.2 in dark.
+   5.4-6.0 in light, 5.5-5.6 in dark.
 
    The three families sit at matched lightness, so they are
    deliberately NOT separable in greyscale. That is the correct
@@ -679,7 +654,6 @@ body { padding-left: var(--rail); }
 
 @media (max-width: 46rem) {
   .entry { grid-template-columns: 2.25rem minmax(0, 1fr); }
-  .entry__tags { grid-column: 2; justify-content: flex-start; max-width: none; }
 }
 
 /* ---- 7b. Work tiles --------------------------------------
@@ -1457,7 +1431,6 @@ figure { margin: 0; }
 
 /* Pills sit on their own line under the caption; the tile row's
    margin-top: auto is meaningless outside a flex column. */
-.now__tags { flex-basis: 100%; margin-top: 0.25rem; padding-top: 0; }
 
 @media (max-width: 46rem) {
   .now__frame { aspect-ratio: 4 / 3; }
