@@ -36,7 +36,7 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="../css/base.css?v=20260821a">
+<link rel="stylesheet" href="../css/base.css?v=20260825a">
 <style>
   .chart-wrap { width: 100%; overflow-x: auto; }
   svg text { font-family: var(--font-mono); fill: var(--ink-3);
@@ -440,7 +440,7 @@ function render() {
   if (!drawn && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     $$('#marks .lap').forEach((el, i) => {
       el.style.opacity = '0';
-      el.style.transition = `opacity 420ms var(--ease) ${Math.min(i * 7, 900)}ms`;
+      el.style.transition = `opacity var(--t-med) var(--ease) ${Math.min(i * 7, 900)}ms`;
       requestAnimationFrame(() => { el.style.opacity = '1'; });
     });
     drawn = true;
