@@ -38,11 +38,12 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="css/base.css?v=20260825a">
+<link rel="stylesheet" href="css/base.css?v=20260826b">
+<noscript><style>[data-reveal]{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
 
-<a class="skip" href="#dataviz">Skip to work</a>
+<a class="skip" href="#main">Skip to work</a>
 
 <header class="masthead">
   <div class="shell masthead__inner">
@@ -88,7 +89,7 @@
   </div>
 </header>
 
-<main>
+<main id="main" tabindex="-1">
 
 <!-- The rail carries the name, so the h1 carries the role. It is a real
      heading rather than the sr-only one it replaces: the first thing a
@@ -118,7 +119,7 @@
              figure on screen is synthetic, which is what makes it showable on
              the public front page. -->
         <img src="assets/img/tools/healthcare-tile.jpg?v=20260820d"
-             width="1200" height="750" loading="lazy" decoding="async"
+             width="1200" height="750" fetchpriority="high" decoding="async"
              alt="A laptop on a wooden wall shelf in dappled light, showing the readmissions dashboard for a demo hospital system: KPI cards across the top, a bubble scatter of readmit ratio against length-of-stay index, and a discharge status table.">
       </div>
       <div class="tile__body">
@@ -138,7 +139,7 @@
     </article>
       <article class="tile" data-reveal>
       <div class="tile__thumb">
-        <img src="assets/img/tools/newsroom.jpg?v=20260810c" width="1200" height="750" alt="Data Dive pages from the Sacramento Business Journal laid out as a set, each pairing a headline with the week's charts.">
+        <img src="assets/img/tools/newsroom.jpg?v=20260810c" width="1200" height="750" decoding="async" alt="Data Dive pages from the Sacramento Business Journal laid out as a set, each pairing a headline with the week's charts.">
       </div>
       <div class="tile__body">
         <div class="tile__head">
@@ -186,7 +187,7 @@
       <div class="tile__thumb">
         <img src="assets/img/tools/population-alluvial.jpg?v=20260809f"
              alt="The 7.9 billion broadsheet shown on a laptop - an alluvial diagram tying five continents through thirty-three countries to fifty cities, each city's population drawn as a red circle along the bottom axis."
-             width="1200" height="750" fetchpriority="high">
+             width="1200" height="750" loading="lazy" decoding="async">
       </div>
       <div class="tile__body">
         <div class="tile__head">
@@ -207,7 +208,7 @@
       <div class="tile__thumb">
         <img src="assets/img/tools/surgical-sankey.jpg?v=20260820c"
              alt="A printed spread of the total hip replacement Sankey: cases flow from dressing used, through patient type, to complication flag and a ranked list of complication codes. Every figure is masked."
-             width="1200" height="750">
+             width="1200" height="750" loading="lazy" decoding="async">
       </div>
       <div class="tile__body">
         <div class="tile__head">
@@ -229,7 +230,7 @@
       <div class="tile__thumb">
         <img src="assets/img/tools/opportunity.jpg?v=20260812c"
              alt="Circles sized by dollar opportunity fanning out along an arc scaled in months, green for clinical operations and grey for spend management, every figure masked."
-             width="1200" height="750">
+             width="1200" height="750" loading="lazy" decoding="async">
       </div>
       <div class="tile__body">
         <div class="tile__head">
@@ -248,7 +249,9 @@
     </article>
       <article class="tile" data-reveal>
       <div class="tile__thumb tile__thumb--contain">
-        <img src="assets/img/tools/medical-mental-health.jpg?v=20260809f" alt="Medical student mental health dashboard - heat map of MBI and STAI scores">
+        <img src="assets/img/tools/medical-mental-health.jpg?v=20260809f"
+             alt="Medical student mental health dashboard - heat map of MBI and STAI scores"
+             width="1500" height="872" loading="lazy" decoding="async">
       </div>
       <div class="tile__body">
         <div class="tile__head">
@@ -268,7 +271,7 @@
       <article class="tile" data-reveal>
       <div class="tile__thumb"><img src="assets/img/tools/gas-prices.jpg?v=20260809f"
              alt="The North America Gas Prices dashboard on a laptop resting on a concrete plinth - a dark continental map with a purple-to-amber price surface, beside a ranked panel of regional averages."
-             width="1200" height="750"></div>
+             width="1400" height="1016" loading="lazy" decoding="async"></div>
       <div class="tile__body">
         <div class="tile__head">
           <h3 class="tile__title">
@@ -287,7 +290,7 @@
       <article class="tile" data-reveal>
       <div class="tile__thumb">
         <!-- Authored at the tile's native 16:10, so it fills the frame with no crop. -->
-        <img width="1200" height="750" src="assets/img/tools/thunderhill.jpg?v=20260812a" alt="The Thunderhill West lap-time dashboard in Tableau: 120 laps plotted as teal dry and purple wet circles against lap time, two tooltips open showing a 2:01.14 wet lap and a 1:28.39 dry one, with the track outline in the corner.">
+        <img width="1200" height="750" loading="lazy" decoding="async" src="assets/img/tools/thunderhill.jpg?v=20260812a" alt="The Thunderhill West lap-time dashboard in Tableau: 120 laps plotted as teal dry and purple wet circles against lap time, two tooltips open showing a 2:01.14 wet lap and a 1:28.39 dry one, with the track outline in the corner.">
       </div>
       <div class="tile__body">
         <div class="tile__head">
@@ -318,7 +321,7 @@
       <div class="tile__thumb tile__thumb--inset">
         <img src="assets/img/tools/diskmap.jpg?v=20260813b"
              alt="The Disk Map window: the Diskbot conversation down the left, the treemap of the whole drive in the middle, and the safe-to-delete rail on the right."
-             width="1800" height="1220">
+             width="1800" height="1220" loading="lazy" decoding="async">
       </div>
       <div class="tile__body">
         <div class="tile__head">
@@ -363,7 +366,7 @@
       <div class="tile__thumb">
         <img src="assets/img/tools/focus-timer.jpg?v=20260809s"
              alt="The Pomodoro FOCUS app on a laptop resting on a stone slab in a dark room, a green ASCII hourglass counting down beside the editor it was built in."
-             width="1200" height="750">
+             width="1600" height="1333" loading="lazy" decoding="async">
       </div>
       <div class="tile__body">
         <div class="tile__head">
@@ -379,7 +382,7 @@
       </div>
     </article>
       <article class="tile" data-reveal>
-      <div class="tile__thumb"><img src="assets/img/tools/trackdash.jpg?v=20260809f" alt="TrackDash running on a phone mounted in a car at night, showing a five-minute speed trace beside the instrument cluster and the CarPlay screen." width="1200" height="750"></div>
+      <div class="tile__thumb"><img src="assets/img/tools/trackdash.jpg?v=20260809f" alt="TrackDash running on a phone mounted in a car at night, showing a five-minute speed trace beside the instrument cluster and the CarPlay screen." width="1200" height="750" loading="lazy" decoding="async"></div>
       <div class="tile__body">
         <div class="tile__head">
           <h3 class="tile__title"><a class="tile__link" href="work/trackdash.html">TrackDash</a></h3>
@@ -397,7 +400,7 @@
       <div class="tile__thumb">
         <img src="assets/img/tools/asciicam.jpg?v=20260809f"
              alt="The ASCII Glitch Camera App Store page on a phone: Michelangelo's David rendered as ASCII art in the icon and screenshots, on a dark product page."
-             width="552" height="1200">
+             width="1500" height="1014" loading="lazy" decoding="async">
       </div>
       <div class="tile__body">
         <div class="tile__head">
@@ -427,7 +430,7 @@
         <div class="tile__thumb">
         <img src="assets/img/tools/editorial.jpg?v=20260809f"
              alt="A Sacramento Business Journal spread, 7 Big Development Projects To Watch This Year, with a gold duotone photograph of houses under construction facing a numeral seven set behind the headline."
-             width="1200" height="812">
+             width="1200" height="811" loading="lazy" decoding="async">
       </div>
         <div class="tile__body">
           <div class="tile__head">
@@ -441,7 +444,7 @@
         </div>
       </article>
       <article class="tile" data-reveal>
-        <div class="tile__thumb"><img src="assets/img/tools/bonepit.jpg?v=20260810b" alt="The Bone Pit Smoke House wordmark, its N drawn as a wishbone, reversed in white over a photograph of the smoker." width="1200" height="750"></div>
+        <div class="tile__thumb"><img src="assets/img/tools/bonepit.jpg?v=20260810b" alt="The Bone Pit Smoke House wordmark, its N drawn as a wishbone, reversed in white over a photograph of the smoker." width="1200" height="750" loading="lazy" decoding="async"></div>
         <div class="tile__body">
           <div class="tile__head">
             <h3 class="tile__title"><a class="tile__link" href="work/branding.html">Logo and identity</a></h3>
@@ -459,6 +462,6 @@
 <script src="js/guard.js?v=20260817a"></script>
 <script src="js/widont.js?v=20260817a"></script>
 <script src="js/theme.js?v=20260809h"></script>
-<script type="module" src="js/motion.js?v=20260818a"></script>
+<script type="module" src="js/motion.js?v=20260826b"></script>
 </body>
 </html>

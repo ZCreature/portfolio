@@ -23,7 +23,7 @@ No build step, no dependencies. Open `index.html` via a local server
     js/color.js                   colour harness: CVD, CIEDE2000, WCAG.
                                   Verification only - no page loads it.
     js/theme.js                   light/dark, light by default
-    js/motion.js                  reveals + scrollytelling
+    js/motion.js                  reveals + carousels + lazy video
     js/embed.js                   lazy iframe embeds (Tableau, Leaflet)
     assets/data/laps.json         lap data (currently a reconstruction)
     assets/data/editorial.json    tearsheet manifest — scaffold, not yet wired
@@ -52,16 +52,17 @@ numbers on screen and must not contradict themselves.
 | Healthcare palette, dark | min ΔE 10.3, all lines ≥3:1 on paper |
 | Lap dry/wet pair, light | min ΔE 10.7 (greyscale binds) |
 | Lap dry/wet pair, dark | min ΔE 15.4 (greyscale binds) |
-| Tile ladder, light | min ΔE 10.2, min contrast 3.03:1 |
-| Tile ladder, dark | min ΔE 10.3, min contrast 3.56:1 |
+| Split bar (`--tile-2`), light | 7.96:1 on paper |
+| Split bar (`--tile-2`), dark | 5.63:1 on paper |
 
-The tile ladder is the four `--tile-*` variables in `css/base.css`, and the
-contrast figures are measured against `--paper-2`, the thumbnail surface the
-marks actually sit on — not against `--paper`. Light `--tile-4` at 3.03:1 is the
-tightest colour on the site; `css/base.css` explains why it is forced rather than
-careless.
+One rung of the old tile ladder is still painted: `--tile-2` in `css/base.css`,
+the continent split bar in `work/overpopulation.html`. It has no sibling series,
+so there is no ΔE separation left to state - contrast against the ground is what
+binds, and it is measured against `--paper`, the surface that bar actually sits
+on. A second series arriving later has to be derived jointly with it rather than
+eyeballed against it.
 
-Every row above except the two healthcare ones is reproducible against
+Every ΔE row above except the two healthcare ones is reproducible against
 `js/color.js` — build the set, then take the minimum `deltaE00` across normal
 vision, all three `simulate()` dichromacies, and `toGrey()`. The healthcare
 palette exists only inside the slide images on that page, never as hex values in

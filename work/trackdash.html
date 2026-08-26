@@ -36,13 +36,14 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="../css/base.css?v=20260825a">
+<link rel="stylesheet" href="../css/base.css?v=20260826b">
 <style>
   /* Portrait phone captures in a strip: cap the height so four fit the
      viewport instead of one filling it. */
   .car__item video { height: clamp(15rem, 32vw, 24rem); width: auto; display: block;
     border: 1px solid var(--rule); background: #000; }
 </style>
+<noscript><style>[data-reveal]{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
 
@@ -133,7 +134,7 @@
   <section class="shell" style="padding-block: var(--gap-m) var(--gap-l);">
     <div class="car" data-carousel data-reveal>
       <div class="car__head">
-        <h2 class="meta">The screen, driving</h2>
+        <h3 class="meta">The screen, driving</h3>
         <div class="car__meta">
           <span class="meta">1 recording, 3 states</span>
           <div class="car__btns">
@@ -150,18 +151,19 @@
         <div class="car__item">
           <video controls muted loop playsinline preload="none"
                  poster="../assets/img/tools/trackdash-poster.jpg?v=20260810b"
+                 width="248" height="540"
                  aria-label="Screen recording of TrackDash during a drive: the speed trace scrolls, the friction circle tracks cornering load, and the drive timer and odometer count up.">
             <source src="../assets/video/trackdash.mp4?v=20260810b" type="video/mp4">
           </video>
         </div>
         <div class="car__item">
-          <img src="../assets/img/work/trackdash/app-02.jpg?v=20260810b" alt="TrackDash on iPhone. The five-minute window: a long trace of city driving, with the friction circle and drive totals beneath it." loading="lazy" decoding="async">
+          <img src="../assets/img/work/trackdash/app-02.jpg?v=20260810b" alt="TrackDash on iPhone. The five-minute window: a long trace of city driving, with the friction circle and drive totals beneath it." loading="lazy" decoding="async" width="506" height="1100">
         </div>
         <div class="car__item">
-          <img src="../assets/img/work/trackdash/app-03.jpg?v=20260810b" alt="TrackDash on iPhone. The two-minute window mid-drive, speed climbing back to 25 mph after a stop." loading="lazy" decoding="async">
+          <img src="../assets/img/work/trackdash/app-03.jpg?v=20260810b" alt="TrackDash on iPhone. The two-minute window mid-drive, speed climbing back to 25 mph after a stop." loading="lazy" decoding="async" width="506" height="1100">
         </div>
         <div class="car__item">
-          <img src="../assets/img/work/trackdash/app-04.jpg?v=20260810b" alt="TrackDash on iPhone. Stopped at the end of a drive, the trace holding the whole shape of it at 0 mph." loading="lazy" decoding="async">
+          <img src="../assets/img/work/trackdash/app-04.jpg?v=20260810b" alt="TrackDash on iPhone. Stopped at the end of a drive, the trace holding the whole shape of it at 0 mph." loading="lazy" decoding="async" width="506" height="1100">
         </div>
       </div>
     </div>
@@ -263,6 +265,6 @@
 <script src="../js/guard.js?v=20260817a"></script>
 <script src="../js/widont.js?v=20260817a"></script>
 <script src="../js/theme.js?v=20260809h"></script>
-<script type="module" src="../js/motion.js?v=20260818a"></script>
+<script type="module" src="../js/motion.js?v=20260826b"></script>
 </body>
 </html>

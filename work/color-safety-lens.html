@@ -36,7 +36,7 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="../css/base.css?v=20260825a">
+<link rel="stylesheet" href="../css/base.css?v=20260826b">
 
 <style>
   /* The four checks are parallel, so they read as a grid rather than as
@@ -114,10 +114,14 @@
     content: counter(step, decimal-leading-zero);
     font-family: var(--font-mono);
     font-size: 0.75rem;
-    color: var(--ink-4);
+    /* The numbers carry the step order, so they are content rather than
+       decoration and answer to the 4.5:1 floor the rest of the site holds.
+       --ink-4 measures 3.07:1 light / 3.99:1 dark against --paper. */
+    color: var(--ink-3);
   }
   .flow--was .flow__steps li { color: var(--ink-3); }
 </style>
+<noscript><style>[data-reveal]{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
 
@@ -195,6 +199,7 @@
     <figure class="hero-vid" data-reveal>
       <video controls muted loop playsinline preload="none"
              poster="../assets/img/work/csl/hero-poster.jpg?v=20260811a"
+             width="1214" height="760"
              aria-label="Screen recording of Color Safety Lens on a laptop: a six-color palette loaded, tints ramped from 100 down to 10 percent with every step reporting its contrast ratio, and the color-vision control switched to protan while the severity slider is dragged.">
         <source src="../assets/video/csl-hero.mp4?v=20260811a" type="video/mp4">
       </video>
@@ -337,7 +342,7 @@
          data-embed-w="1280" data-embed-h="860">
       <div class="embed__bar">
         <span class="meta">Color Safety Lens - running live</span>
-        <a class="btn" href="tools/color-safety-lens.html" target="_blank" rel="noopener">Open full screen</a>
+        <a class="btn" href="tools/color-safety-lens.html" target="_blank" rel="noopener">Open full screen<span class="sr-only"> (opens in a new tab)</span></a>
       </div>
       <div class="embed__frame">
         <p class="embed__loading meta">Loading tool…</p>
@@ -483,7 +488,7 @@
     addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('[data-embed]').forEach((box) => {
         const f = box.querySelector('iframe');
-        f.addEventListener('load', () => {
+        f?.addEventListener('load', () => {
           f.dataset.loaded = '1';
           box.setAttribute('data-loaded', 'true');
         });
@@ -495,6 +500,6 @@
 <script src="../js/guard.js?v=20260817a"></script>
 <script src="../js/widont.js?v=20260817a"></script>
 <script src="../js/theme.js?v=20260809h"></script>
-<script type="module" src="../js/motion.js?v=20260818a"></script>
+<script type="module" src="../js/motion.js?v=20260826b"></script>
 </body>
 </html>

@@ -46,7 +46,6 @@
   --gap-m:  2rem;
   --gap-l:  4rem;
   --gap-xl: 7rem;
-  --gap-xxl: 11rem;
 
   /* Measure */
   --measure: 34rem;
@@ -176,7 +175,6 @@ p { margin: 0; text-wrap: pretty; }
 
 /* Narrow sections keep the reading measure but stay flush with the left
    content edge instead of centring inside the shell. */
-.shell--narrow { max-width: var(--shell); }
 .shell--narrow > * { max-width: 52rem; }
 
 section { padding-block: var(--gap-xl); }
@@ -360,7 +358,6 @@ body { padding-left: var(--rail); }
   display: inline-flex;
   border: 1px solid var(--rule);
   border-radius: 0;
-  overflow: hidden;
 }
 
 .seg button {
@@ -380,6 +377,13 @@ body { padding-left: var(--rail); }
 .seg button + button { border-left: 1px solid var(--rule); }
 .seg button:hover { color: var(--ink); }
 .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+
+/* Each button fills its cell to the edge, so a ring drawn outside the box
+   lands on its neighbour and on the control's own border rather than on the
+   cell that has focus. Inset instead, and flipped to paper on the pressed
+   cell, whose ground is already ink. */
+.seg button:focus-visible { outline-offset: -3px; }
+.seg button[aria-pressed="true"]:focus-visible { outline-color: var(--paper); }
 
 /* ---- 5c. Theme toggle ------------------------------------
    A half-filled circle: the light/dark relationship itself, so
@@ -401,11 +405,6 @@ body { padding-left: var(--rail); }
 .theme-toggle svg { width: 16px; height: 16px; }
 .theme-toggle:hover { color: var(--ink); }
 .theme-toggle[aria-pressed="true"] svg { transform: rotate(180deg); }
-
-@media (max-width: 34rem) {
-  .nav { gap: 0.85rem; }
-  .nav a { font-size: 0.75rem; }
-}
 
 /* ---- 6. Nameplate ----------------------------------------
    The masthead of a newspaper, not the hero of a landing page.
@@ -466,14 +465,6 @@ body { padding-left: var(--rail); }
   border-bottom: 1px solid var(--rule);
 }
 
-/* An 8.5rem label column leaves too little for a 25-character address on a
-   320px screen, so the pair stacks instead. */
-@media (max-width: 26rem) {
-  .spec { grid-template-columns: minmax(0, 1fr); }
-  .spec > dt { padding-bottom: 0; }
-  .spec > dd { overflow-wrap: anywhere; }
-}
-
 .spec > dt {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
@@ -498,6 +489,19 @@ body { padding-left: var(--rail); }
 @media (max-width: 34rem) {
   .spec { grid-template-columns: 6.5rem minmax(0, 1fr); }
   .spec > dd { padding-left: 0.75rem; }
+}
+
+/* An 8.5rem label column leaves too little for a 25-character address on a
+   320px screen, so the pair stacks instead. NOTE: this must stay below the
+   34rem block - both match at this width, and a two-column track set later
+   would win on equal specificity. */
+@media (max-width: 26rem) {
+  .spec { grid-template-columns: minmax(0, 1fr); }
+  /* Stacked there is no second column for the divider to divide, and the
+     row rule would land between a label and its own value. */
+  .spec > dt { padding-bottom: 0; border-right: 0; }
+  .spec > dd { overflow-wrap: anywhere; }
+  .spec > dd:not(:first-of-type) { border-top: 0; }
 }
 
 /* Square hairline button. No radius, no fill, no motion trickery. */
@@ -543,6 +547,10 @@ body { padding-left: var(--rail); }
 .entry:hover .meta,
 .entry:focus-within .entry__sub,
 .entry:focus-within .meta { color: var(--paper); }
+
+/* Taking focus is what inverts the row, so the default ink ring would be
+   drawn in the ground colour it now sits on and vanish. */
+.entry:focus-within :focus-visible { outline-color: var(--paper); }
 
 .entry__title {
   font-size: clamp(1.25rem, 2.6vw, 1.9rem);
@@ -656,40 +664,27 @@ body { padding-left: var(--rail); }
   inset: 0;
 }
 
+/* On a phone there is no width left for the label to sit beside the title:
+   holding it on the same line crushed the heading to roughly a word a line.
+   One column, so the label drops to its own row underneath. */
 @media (max-width: 46rem) {
-  .entry { grid-template-columns: 2.25rem minmax(0, 1fr); }
+  .entry { grid-template-columns: minmax(0, 1fr); }
 }
 
 /* ---- 7b. Work tiles --------------------------------------
    A grid, not a reading list. Each thumbnail is a vector
    reduction of the actual work rather than a screenshot.   */
 
-/* Both ladders are verified: every pair clears ΔE 10 in normal vision, all
-   three CVD types and greyscale, and every colour clears 3:1 against the tile
-   background it sits on. Light measures ΔE 10.2 minimum, dark ΔE 10.3 - the
-   binding pair is greyscale in both, as it usually is.
+/* One rung of the tile ladder is still painted: --tile-2, the split bar in the
+   overpopulation piece. It has no sibling series on the page, so the ΔE
+   separation the ladder was derived for is not what binds any more - contrast
+   against the ground is. It measures 7.96:1 on --paper in light and 5.63:1 in
+   dark, well clear of the 3:1 floor a non-text mark has to hold. A second
+   series arriving later has to be derived jointly with this one rather than
+   eyeballed against it, or the greyscale separation goes first. */
 
-   --tile-4 is the tightest colour on the site at 3.03:1 against --paper-2, the
-   thumbnail surface these marks sit on, and that is forced
-   rather than careless: a 3:1 floor on light paper caps a usable series at
-   about L* 58, and the full L* 16-58 span is needed for four series to stay
-   apart in greyscale. Re-deriving all four jointly buys ΔE 10.4 instead of
-   10.2 - not worth changing four colours for. Anything lighter here fails
-   contrast; anything darker collapses into --tile-3 in greyscale. */
-
-:root {
-  --tile-1: #003353;
-  --tile-2: #a1002a;
-  --tile-3: #107c7f;
-  --tile-4: #c87900;
-}
-
-:root[data-theme="dark"] {
-  --tile-1: #1372b0;
-  --tile-2: #fc5562;
-  --tile-3: #21c9ce;
-  --tile-4: #fedab0;
-}
+:root { --tile-2: #a1002a; }
+:root[data-theme="dark"] { --tile-2: #fc5562; }
 
 .tiles {
   display: grid;
@@ -929,17 +924,6 @@ body { padding-left: var(--rail); }
   transform: scale(var(--embed-scale, 1));
   transform-origin: top left;
 }
-
-/* Full-bleed: escape the reading column so the scale factor stays high.
-
-   The vw-based break-out below 64rem only: above that the rail is fixed at
-   the left, so the content area is no longer centred in the viewport and
-   `50% - 48vw` pushed the box hard against the right edge. Measured at a
-   1740px viewport it left a 266px gutter on the left and 2px on the right,
-   and held the tool at 1:1 where it dwarfed everything around it. Inside the
-   shell it scales to about 89% instead, which is still legible and lines up
-   with the copy above and below it. */
-.embed--bleed { width: 100%; margin-inline: 0; }
 
 /* Shown until the iframe reports load - these are heavy documents. */
 .embed__loading {
@@ -1193,7 +1177,6 @@ figure { margin: 0; }
     transition-duration: 0.01ms !important;
   }
   [data-reveal] { opacity: 1; transform: none; }
-  .step { opacity: 1; }
 }
 
 /* ---- 15. Utilities --------------------------------------- */
@@ -1331,6 +1314,11 @@ figure { margin: 0; }
                 border-color var(--t-med) var(--ease);
   }
 
+  /* js/motion.js stamps this once the page has moved off the top. At rest the
+     bar is part of the page and wants no edge; only when content is running
+     underneath it does a separator have anything to separate. */
+  .masthead[data-scrolled="true"] { border-bottom-color: var(--rule); }
+
   .masthead .shell { padding-inline: clamp(1.25rem, 5vw, 3.5rem); }
 
   .masthead__inner {
@@ -1350,7 +1338,6 @@ figure { margin: 0; }
     width: auto;
   }
 
-  .masthead .nav a { font-size: 0.9282rem; line-height: 1.4; }
   .masthead .nav--social { margin-top: 0; }
   .masthead .theme-toggle { margin-top: 0; margin-left: 0.25rem; }
 
@@ -1386,6 +1373,18 @@ figure { margin: 0; }
   .masthead .nav[aria-label="Primary"] a { font-size: 0.875rem; }
 
   :target, section[id] { scroll-margin-top: 7.5rem; }
+}
+
+/* Small phones. Row two carries four labels, one of them twenty characters
+   wide, so the type and the step between them come down one more notch before
+   the row has to wrap again. Written through .masthead and matched to the
+   48rem block's selectors on purpose: a bare .nav loses to the rail rules
+   above it, and an unqualified .nav a loses to the Primary rule. */
+@media (max-width: 34rem) {
+  .masthead .nav { gap: 0.85rem; }
+  .masthead .nav a { font-size: 0.75rem; }
+  .masthead .nav[aria-label="Primary"] { column-gap: 0.85rem; }
+  .masthead .nav[aria-label="Primary"] a { font-size: 0.75rem; }
 }
 
 

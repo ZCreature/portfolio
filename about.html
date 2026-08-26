@@ -36,7 +36,7 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="css/base.css?v=20260825a">
+<link rel="stylesheet" href="css/base.css?v=20260826b">
 <style>
   /* Career spine - a dated list, same voice as the work ledger. */
   .spine { border-top: 1px solid var(--rule); }
@@ -49,7 +49,9 @@
     border-bottom: 1px solid var(--rule);
   }
 
-  .role__when { color: var(--ink-4); padding-top: 0.2rem; }
+  /* The date column is 11px mono; --ink-4 is a hairline tint that only holds
+     up on large type, so the spine's dates take the darker step. */
+  .role__when { color: var(--ink-3); padding-top: 0.2rem; }
   .role__title { font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.018em; }
   .role__org { color: var(--ink-3); font-size: 0.9375rem; margin-top: 0.1rem; }
   .role__note { color: var(--ink-2); font-size: 0.9375rem; margin-top: 0.6rem; max-width: 48ch; }
@@ -73,6 +75,7 @@
     border-bottom: 1px solid var(--rule-soft);
   }
 </style>
+<noscript><style>[data-reveal]{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
 
@@ -122,7 +125,7 @@
   </div>
 </header>
 
-<main id="main">
+<main id="main" tabindex="-1">
 
   <!-- ============ Lead ============ -->
   <section class="shell" style="padding-block: clamp(4rem,11vw,8rem) var(--gap-l);">
@@ -340,6 +343,6 @@
 <script src="js/guard.js?v=20260817a"></script>
 <script src="js/widont.js?v=20260817a"></script>
 <script src="js/theme.js?v=20260809h"></script>
-<script type="module" src="js/motion.js?v=20260818a"></script>
+<script type="module" src="js/motion.js?v=20260826b"></script>
 </body>
 </html>

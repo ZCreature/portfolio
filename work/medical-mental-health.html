@@ -36,13 +36,14 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="../css/base.css?v=20260825a">
+<link rel="stylesheet" href="../css/base.css?v=20260826b">
 <style>
   /* Tableau sets x-frame-options: SAMEORIGIN, so a plain iframe is refused.
      Their embedding API mounts the viz in a shadow root instead. */
   .viz-embed { width: 100%; min-height: 40rem; }
   tableau-viz { width: 100%; display: block; }
 </style>
+<noscript><style>[data-reveal]{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
 
@@ -122,11 +123,11 @@
 
   <!-- ============ Live ============ -->
   <section class="shell" style="padding-block: var(--gap-m) var(--gap-l);">
-    <div class="embed" data-reveal style="border:1px solid var(--rule);">
+    <div class="embed" data-reveal>
       <div class="embed__bar">
         <span class="meta">Medical Student Mental Health - live</span>
         <a class="btn" href="https://public.tableau.com/app/profile/creature/viz/MedicalStudentMentalHealthChartChamp/Dashboard1"
-           target="_blank" rel="noopener">Open on Tableau Public</a>
+           target="_blank" rel="noopener">Open on Tableau Public<span class="sr-only"> (opens in a new tab)</span></a>
       </div>
       <div class="viz-embed">
         <tableau-viz id="viz"
@@ -264,6 +265,6 @@
 <script src="../js/guard.js?v=20260817a"></script>
 <script src="../js/widont.js?v=20260817a"></script>
 <script src="../js/theme.js?v=20260809h"></script>
-<script type="module" src="../js/motion.js?v=20260818a"></script>
+<script type="module" src="../js/motion.js?v=20260826b"></script>
 </body>
 </html>

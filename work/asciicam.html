@@ -36,7 +36,7 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="../css/base.css?v=20260825a">
+<link rel="stylesheet" href="../css/base.css?v=20260826b">
 <style>
   /* The camera running, before the carousel goes through the styles: the
      whole claim is thirty frames a second on the phone, and only motion
@@ -101,6 +101,7 @@
     .ramps > dd:not(:first-of-type) { border-top: 0; }
   }
 </style>
+<noscript><style>[data-reveal]{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
 
@@ -184,9 +185,9 @@
         <div class="phone__screen">
           <video data-lazy-video controls muted loop playsinline preload="none"
                  poster="../assets/img/work/asciicam/phone-poster.jpg?v=20260820b"
-                 width="1260" height="2736"
+                 width="664" height="1440"
                  aria-label="Screen recording of ASCII-CAM on an iPhone: the live camera rendering as glyphs while the styles are swiped through, with menu, live cam, freeze, record, save and upload controls along the bottom.">
-            <source src="../assets/video/asciicam-phone.mp4?v=20260820b" type="video/mp4">
+            <source src="../assets/video/asciicam-phone.mp4?v=20260826b" type="video/mp4">
           </video>
         </div>
       </div>
@@ -246,7 +247,7 @@
   <section class="shell" style="padding-block: var(--gap-l) 0;">
     <div class="car" data-carousel data-reveal>
       <div class="car__head">
-        <h2 class="meta">My best test shots</h2>
+        <h3 class="meta">My best test shots</h3>
         <div class="car__meta">
           <div class="car__btns">
             <button class="car__btn" type="button" data-car-prev aria-label="Scroll the samples back">
@@ -260,13 +261,13 @@
       </div>
       <div class="car__track" tabindex="0" role="group" aria-label="Frames shot with the app, horizontally scrollable gallery">
         <div class="car__item">
-          <img src="../assets/img/work/asciicam/sample-03.jpg?v=20260810g" alt="ASCII iOS Camera output. A standing figure in high-contrast glyphs, the background dissolving into sparse punctuation." loading="lazy" decoding="async">
+          <img src="../assets/img/work/asciicam/sample-03.jpg?v=20260810g" alt="ASCII iOS Camera output. A standing figure in high-contrast glyphs, the background dissolving into sparse punctuation." loading="lazy" decoding="async" width="700" height="700">
         </div>
         <div class="car__item">
-          <img src="../assets/img/work/asciicam/sample-04.jpg?v=20260810g" alt="ASCII iOS Camera output. A parked car in the line-stroke style, panel edges picked out as continuous strokes." loading="lazy" decoding="async">
+          <img src="../assets/img/work/asciicam/sample-04.jpg?v=20260810g" alt="ASCII iOS Camera output. A parked car in the line-stroke style, panel edges picked out as continuous strokes." loading="lazy" decoding="async" width="700" height="700">
         </div>
         <div class="car__item">
-          <img src="../assets/img/work/asciicam/sample-05.jpg?v=20260810g" alt="ASCII iOS Camera output. A row of cars in a dense ramp, reflections reading as brightness steps across the grid." loading="lazy" decoding="async">
+          <img src="../assets/img/work/asciicam/sample-05.jpg?v=20260810g" alt="ASCII iOS Camera output. A row of cars in a dense ramp, reflections reading as brightness steps across the grid." loading="lazy" decoding="async" width="700" height="700">
         </div>
       </div>
     </div>
@@ -481,6 +482,6 @@
 <script src="../js/guard.js?v=20260817a"></script>
 <script src="../js/widont.js?v=20260817a"></script>
 <script src="../js/theme.js?v=20260809h"></script>
-<script type="module" src="../js/motion.js?v=20260818a"></script>
+<script type="module" src="../js/motion.js?v=20260826b"></script>
 </body>
 </html>

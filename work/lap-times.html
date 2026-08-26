@@ -36,7 +36,7 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="../css/base.css?v=20260825a">
+<link rel="stylesheet" href="../css/base.css?v=20260826b">
 <style>
   .chart-wrap { width: 100%; overflow-x: auto; }
   svg text { font-family: var(--font-mono); fill: var(--ink-3);
@@ -57,7 +57,9 @@
     font-variant-numeric: tabular-nums; color: var(--ink-3);
   }
   .readout-bar b { color: var(--ink); font-weight: 600; }
-  .readout-bar[data-empty="true"] { color: var(--ink-4); }
+  /* The prompt is read, not glanced at, so it holds the same 4.5:1 floor as
+     the filled state. --ink-4 measures 3.07:1 light / 3.99:1 dark on --paper. */
+  .readout-bar[data-empty="true"] { color: var(--ink-3); }
 
 
   .stat-row { display: grid; grid-template-columns: repeat(auto-fit,minmax(8rem,1fr)); gap: var(--gap-m);
@@ -66,6 +68,7 @@
     letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums; }
   .stat__l { margin-top: 0.4rem; }
 </style>
+<noscript><style>[data-reveal]{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
 
@@ -182,7 +185,11 @@
       </div>
 
       <div class="chart-wrap">
-        <svg id="chart" viewBox="0 0 760 380" role="img"
+        <!-- A group, not an image: role="img" prunes everything inside from the
+             accessibility tree, so the 115 lap marks stayed in the tab order
+             with their own labels unreachable. The label below still names the
+             whole plot on the way in. -->
+        <svg id="chart" viewBox="0 0 760 380" role="group"
              aria-label="Scatter plot of 115 lap times across five track days, with a theoretical-best floor line beneath each day. Times improve from about 1:39 to 1:28.">
         </svg>
       </div>
@@ -306,7 +313,7 @@
 <script src="../js/guard.js?v=20260817a"></script>
 <script src="../js/widont.js?v=20260817a"></script>
 <script src="../js/theme.js?v=20260809h"></script>
-<script type="module" src="../js/motion.js?v=20260818a"></script>
+<script type="module" src="../js/motion.js?v=20260826b"></script>
 <script type="module">
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -406,7 +413,7 @@ function render() {
              y1="${M.t}" y2="${M.t + ih}" stroke="var(--rule)" stroke-dasharray="2 3"/>` : ''}
       <text x="${mid.toFixed(1)}" y="${H - 26}" font-size="9" text-anchor="middle">${d.label}</text>
       <text x="${mid.toFixed(1)}" y="${H - 14}" font-size="8" text-anchor="middle"
-            fill="var(--ink-4)">${d.d.slice(0, 7)}</text>
+            fill="var(--ink-3)">${d.d.slice(0, 7)}</text>
     `;
   }).join('');
 
@@ -434,7 +441,7 @@ function render() {
     <g>${bounds}</g>
     <g>${floors}</g>
     <g id="marks">${marks}</g>
-    <text x="${M.l}" y="${H - 2}" font-size="8" fill="var(--ink-4)">Lap, in order driven →</text>
+    <text x="${M.l}" y="${H - 2}" font-size="8" fill="var(--ink-3)" aria-hidden="true">Lap, in order driven →</text>
   `;
 
   if (!drawn && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {

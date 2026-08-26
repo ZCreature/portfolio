@@ -36,7 +36,7 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="../css/base.css?v=20260825a">
+<link rel="stylesheet" href="../css/base.css?v=20260826b">
 <style>
   .plate { margin: 0; }
   .plate img { width: 100%; height: auto; display: block; border: 1px solid var(--rule); }
@@ -45,6 +45,7 @@
     line-height: 1.5; max-width: 46ch;
   }
 </style>
+<noscript><style>[data-reveal]{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
 
@@ -114,6 +115,10 @@
   </section>
 
   <section class="shell shell--narrow" style="padding-block: 0 var(--gap-l);">
+    <!-- Each option is a section of the argument, but the plates carry their
+         own labels in the captions, so a visible heading would only repeat
+         them. The outline still needs the level. -->
+    <h2 class="sr-only">One. Size against distance from the center</h2>
     <figure class="plate" data-reveal>
       <img src="../assets/img/work/opportunity/spread.jpg?v=20260812a"
            alt="Circles sized by dollar opportunity fan out along an arc scaled in months, green for clinical operations and grey for spend management, every figure masked."
@@ -128,6 +133,7 @@
   </section>
 
   <section class="shell shell--narrow" style="padding-block: 0 var(--gap-xl);">
+    <h2 class="sr-only">Two. Size against a numbered month scale</h2>
     <figure class="plate" data-reveal style="max-width: 34rem;">
       <img src="../assets/img/work/opportunity/scale.jpg?v=20260812a"
            alt="The same categories drawn against a numbered month scale running one to eighteen across the top, circles sized by dollar opportunity beneath it."
@@ -158,20 +164,9 @@
 
 
 
-<script>
-  (function () {
-    addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('[data-embed]').forEach((box) => {
-        const f = box.querySelector('iframe');
-        f.addEventListener('load', () => box.setAttribute('data-loaded', 'true'));
-      });
-    });
-  })();
-</script>
-<script src="../js/embed.js?v=20260809f"></script>
 <script src="../js/guard.js?v=20260817a"></script>
 <script src="../js/widont.js?v=20260817a"></script>
 <script src="../js/theme.js?v=20260809h"></script>
-<script type="module" src="../js/motion.js?v=20260818a"></script>
+<script type="module" src="../js/motion.js?v=20260826b"></script>
 </body>
 </html>

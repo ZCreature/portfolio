@@ -36,7 +36,7 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="../css/base.css?v=20260825a">
+<link rel="stylesheet" href="../css/base.css?v=20260826b">
 <style>
   /* These slides are dense, so they run taller than the default strip and
      their captions get a wider measure than a one-line label needs. */
@@ -62,6 +62,7 @@
   .hues { display: flex; gap: 0.4rem; margin-bottom: 0.9rem; }
   .hues span { width: 1.15rem; height: 1.15rem; display: block; }
 </style>
+<noscript><style>[data-reveal]{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
 
@@ -154,37 +155,37 @@
       <div class="car__track" tabindex="0" role="group" aria-label="The six Sankey slides, horizontally scrollable gallery">
         <div class="car__item">
           <figure>
-            <img src="../assets/img/work/sankey/s01.jpg?v=20260812a" alt="Knee replacement Sankey, first version. Flows drawn as squared blocks with the cohort total in a circle at the left edge." loading="lazy" decoding="async">
+            <img src="../assets/img/work/sankey/s01.jpg?v=20260812a" alt="Knee replacement Sankey, first version. Flows drawn as squared blocks with the cohort total in a circle at the left edge." loading="lazy" decoding="async" width="2000" height="1125">
             <figcaption><b>Knee, version one.</b> Every flow squared into blocks, cohort total in a circle. It exposed the problem that shaped the rest: the outpatient block was the largest rectangle on the slide and carried no complication data.</figcaption>
           </figure>
         </div>
         <div class="car__item">
           <figure>
-            <img src="../assets/img/work/sankey/s02.jpg?v=20260812a" alt="Knee replacement Sankey, second version. Curved bands replace the blocks and the circle is gone, with a long written insight in the left column." loading="lazy" decoding="async">
+            <img src="../assets/img/work/sankey/s02.jpg?v=20260812a" alt="Knee replacement Sankey, second version. Curved bands replace the blocks and the circle is gone, with a long written insight in the left column." loading="lazy" decoding="async" width="2000" height="1125">
             <figcaption><b>Version two.</b> Curves instead of blocks and no circle. Following one flow got easier, but the space went into prose rather than into the diagram.</figcaption>
           </figure>
         </div>
         <div class="car__item">
           <figure>
-            <img src="../assets/img/work/sankey/s03.jpg?v=20260812a" alt="Knee replacement Sankey, third version. Curved bands, diagonal hatching on the outpatient block, and complication codes ranked down the right edge." loading="lazy" decoding="async">
+            <img src="../assets/img/work/sankey/s03.jpg?v=20260812a" alt="Knee replacement Sankey, third version. Curved bands, diagonal hatching on the outpatient block, and complication codes ranked down the right edge." loading="lazy" decoding="async" width="2000" height="1125">
             <figcaption><b>Version three, the template.</b> Outpatient hatched and labeled in place, complication codes ranked down the right edge instead of left as undifferentiated endpoints.</figcaption>
           </figure>
         </div>
         <div class="car__item">
           <figure>
-            <img src="../assets/img/work/sankey/s04.jpg?v=20260812a" alt="CABG Sankey. Utilization for negative pressure kits, resolving to wound related against non-wound related complications." loading="lazy" decoding="async">
+            <img src="../assets/img/work/sankey/s04.jpg?v=20260812a" alt="CABG Sankey. Utilization for negative pressure kits, resolving to wound related against non-wound related complications." loading="lazy" decoding="async" width="2000" height="1125">
             <figcaption><b>CABG.</b> Splits wound-related from non-wound-related and stops there, because that was the question.</figcaption>
           </figure>
         </div>
         <div class="car__item">
           <figure>
-            <img src="../assets/img/work/sankey/s05.jpg?v=20260812a" alt="Total hip replacement Sankey on the settled template, with the ten most frequent complication codes ranked for each arm." loading="lazy" decoding="async">
+            <img src="../assets/img/work/sankey/s05.jpg?v=20260812a" alt="Total hip replacement Sankey on the settled template, with the ten most frequent complication codes ranked for each arm." loading="lazy" decoding="async" width="2000" height="1125">
             <figcaption><b>Hip.</b> Took the knee template without a single change.</figcaption>
           </figure>
         </div>
         <div class="car__item">
           <figure>
-            <img src="../assets/img/work/sankey/s06.jpg?v=20260812a" alt="Skin procedures Sankey running five stages, inserting a wound split before the complication code list." loading="lazy" decoding="async">
+            <img src="../assets/img/work/sankey/s06.jpg?v=20260812a" alt="Skin procedures Sankey running five stages, inserting a wound split before the complication code list." loading="lazy" decoding="async" width="2000" height="1125">
             <figcaption><b>Skin procedures.</b> Five stages: the wound split is inserted before the code list, so the two questions resolve in sequence instead of collapsing into one column.</figcaption>
           </figure>
         </div>
@@ -304,21 +305,9 @@
 
 </main>
 
-
-<script>
-  (function () {
-    addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('[data-embed]').forEach((box) => {
-        const f = box.querySelector('iframe');
-        f.addEventListener('load', () => box.setAttribute('data-loaded', 'true'));
-      });
-    });
-  })();
-</script>
-<script src="../js/embed.js?v=20260809f"></script>
 <script src="../js/guard.js?v=20260817a"></script>
 <script src="../js/widont.js?v=20260817a"></script>
 <script src="../js/theme.js?v=20260809h"></script>
-<script type="module" src="../js/motion.js?v=20260818a"></script>
+<script type="module" src="../js/motion.js?v=20260826b"></script>
 </body>
 </html>

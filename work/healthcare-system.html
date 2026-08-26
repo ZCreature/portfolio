@@ -37,7 +37,102 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="../css/base.css?v=20260825a">
+<link rel="stylesheet" href="../css/base.css?v=20260826b">
+<style>
+  /* Each screen is introduced by name before it is described, so the set
+     reads as a labeled gallery rather than six captions in a row. */
+  .fig__h {
+    font-size: 0.9375rem;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.7rem;
+  }
+  .figure figcaption em { display: block; margin-top: 0.35rem; color: var(--ink-3); }
+
+  /* The opening gallery is the deliverable itself, so its slides run larger
+     than the site default - a dashboard shown small is only a texture. */
+  /* Size the slide by width, capped at the track it lives in. Sized by
+     height it came out ~853px against a slightly narrower track, and because
+     the strip centres each slide that overflow was split across both edges -
+     which is what was clipping the first characters off every caption. */
+  /* One class deeper than the base mobile rule (.car__track .car__item img)
+     on purpose: it outranks that rule on specificity alone, so the width cap
+     holds below 40rem too. */
+  .car--screens .car__track .car__item { width: min(100%, 52rem); }
+  .car--screens .car__track .car__item img { width: 100%; height: auto; }
+  .car--screens .car__item figcaption { max-width: 30rem; }
+
+  /* Nothing sits beside a step any more, so the copy takes the whole reading
+     column the shell allows. At the site default of 34rem the paragraphs
+     ran as a ribbon down the left with half the page empty next to them.
+     52rem is the widest the narrow shell permits; past roughly 75 characters
+     a line needs more leading for the eye to find its way back to the left
+     edge, so the two changes belong together. */
+  .prose { max-width: 52rem; }
+  .prose p, .prose li { line-height: 1.72; }
+  /* The four rules are one standard, so they are set as one thing: the same
+     definition list the site already uses for facts, with the threshold in
+     the term column. They used to be a 2x2 of equal boxes, which claimed a
+     parallel that is not there - two of these are WCAG minimums, one is a
+     perceptual distance and one is a plain count. A list lets them be four
+     different kinds of thing and lets each line run to its own length
+     instead of being trimmed to fill a card. The name runs in bold ahead of
+     the sentence, the way the figcaptions on this page already do. */
+  .spec--rules {
+    margin-top: var(--gap-m);
+    grid-template-columns: 7rem minmax(0, 1fr);
+    /* .spec carries only a bottom rule, which suits a short facts block
+       under a heading. This one is a closed document, so it gets a top
+       rule too, or the column divider starts in mid air. */
+    border-top: 1px solid var(--rule);
+  }
+  .spec--rules > dt {
+    font-size: 1.0625rem;
+    letter-spacing: -0.01em;
+    text-transform: none;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    padding-block: 1.15rem;
+  }
+  .spec--rules > dd {
+    padding-block: 1.15rem;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--ink-3);
+  }
+  .spec--rules > dd b { color: var(--ink); }
+  @media (max-width: 34rem) {
+    .spec--rules { grid-template-columns: 5.5rem minmax(0, 1fr); }
+  }
+  /* Stacked, the term keeps the pair together above its sentence and the
+     divider would otherwise hang off the right edge with nothing beside it. */
+  @media (max-width: 26rem) {
+    .spec--rules { grid-template-columns: minmax(0, 1fr); }
+    .spec--rules > dt { padding-block: 1.15rem 0; border-right: 0; }
+    .spec--rules > dd { padding-block: 0.35rem 1.15rem; }
+  }
+  /* One rhythm for the page, set here rather than section by section. A
+     numbered step opens on a hairline with a full gap above it; anything
+     that belongs to the step - its slides, its figure, its pull quote -
+     sits closer, so the grouping is visible before a word is read. */
+  .case section { padding-block: var(--gap-m); }
+  .case .step { padding-top: var(--gap-l); border-top: 1px solid var(--rule); }
+  /* A step whose figure sits just above it: the figure IS the step's opening
+     evidence, so no hairline between them - the pair reads as one section. */
+  .case .step--joined { border-top: 0; padding-top: var(--gap-m); }
+  .case .case-hero { padding-block: clamp(4rem, 12vw, 9rem) var(--gap-l); }
+  .case section:last-child { padding-bottom: var(--gap-xl); }
+  /* Captions match the width of the figure they sit under. The 46ch site
+     default is right beside a narrow column, but here it left a short ribbon
+     of text under a full-width screenshot. */
+  .case .figure figcaption { max-width: none; }
+  /* Tools as marks rather than a sentence. Greyscale like the rest of the
+     interface: colour on this site belongs to data, and a row of vendor brand
+     colours would break that rule on the page that argues for it. */
+  .tools { display: flex; flex-wrap: wrap; align-items: center; gap: var(--gap-m) var(--gap-l); margin: 0 0 var(--gap-m); padding: 0; }
+  .tools li { list-style: none; }
+  .tools svg { height: 22px; width: auto; display: block; color: var(--ink-2); fill: currentColor; }
+</style>
+<noscript><style>[data-reveal]{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
 
@@ -88,71 +183,6 @@
 </header>
 
 <main id="main" class="case">
-<style>
-  /* Each screen is introduced by name before it is described, so the set
-     reads as a labeled gallery rather than six captions in a row. */
-  .fig__h {
-    font-size: 0.9375rem;
-    letter-spacing: -0.01em;
-    margin: 0 0 0.7rem;
-  }
-  .figure figcaption em { display: block; margin-top: 0.35rem; color: var(--ink-4); }
-
-  /* The opening gallery is the deliverable itself, so its slides run larger
-     than the site default - a dashboard shown small is only a texture. */
-  /* Size the slide by width, capped at the track it lives in. Sized by
-     height it came out ~853px against a slightly narrower track, and because
-     the strip centres each slide that overflow was split across both edges -
-     which is what was clipping the first characters off every caption. */
-  /* Selector depth matches the base mobile rule (.car__track .car__item img)
-     on purpose: at equal specificity this block wins because it is injected
-     after the stylesheet, so the width cap holds below 40rem too. */
-  .car--screens .car__track .car__item { width: min(100%, 52rem); }
-  .car--screens .car__track .car__item img { width: 100%; height: auto; }
-  .car--screens .car__item figcaption { max-width: 30rem; }
-
-  /* Nothing sits beside a step any more, so the copy takes the whole reading
-     column the shell allows. At the site default of 34rem the paragraphs
-     ran as a ribbon down the left with half the page empty next to them.
-     52rem is the widest the narrow shell permits; past roughly 75 characters
-     a line needs more leading for the eye to find its way back to the left
-     edge, so the two changes belong together. */
-  .prose { max-width: 52rem; }
-  .prose p, .prose li { line-height: 1.72; }
-  .rules { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--rule); margin-top: var(--gap-m); }
-  .rules > div { padding: 1.45rem 1.6rem 1.55rem; border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); }
-  .rules > div:nth-child(-n+2) { border-top: 0; }
-  .rules > div:nth-child(2n+1) { border-left: 0; }
-  .rule__num { font-family: var(--font-mono); font-size: 1.25rem; color: var(--ink); display: block; }
-  .rules h3 { font-size: 0.9375rem; letter-spacing: -0.01em; margin: 0.55rem 0 0.3rem; }
-  .prose .rules p { margin: 0; font-size: 0.9375rem; line-height: 1.55; color: var(--ink-3); }
-  @media (max-width: 40rem) {
-    .rules { grid-template-columns: 1fr; }
-    .rules > div { border-left: 0; border-top: 1px solid var(--rule); }
-    .rules > div:first-child { border-top: 0; }
-  }
-  /* One rhythm for the page, set here rather than section by section. A
-     numbered step opens on a hairline with a full gap above it; anything
-     that belongs to the step - its slides, its figure, its pull quote -
-     sits closer, so the grouping is visible before a word is read. */
-  .case section { padding-block: var(--gap-m); }
-  .case .step { padding-top: var(--gap-l); border-top: 1px solid var(--rule); }
-  /* A step whose figure sits just above it: the figure IS the step's opening
-     evidence, so no hairline between them - the pair reads as one section. */
-  .case .step--joined { border-top: 0; padding-top: var(--gap-m); }
-  .case .case-hero { padding-block: clamp(4rem, 12vw, 9rem) var(--gap-l); }
-  .case section:last-child { padding-bottom: var(--gap-xl); }
-  /* Captions match the width of the figure they sit under. The 46ch site
-     default is right beside a narrow column, but here it left a short ribbon
-     of text under a full-width screenshot. */
-  .case .figure figcaption { max-width: none; }
-  /* Tools as marks rather than a sentence. Greyscale like the rest of the
-     interface: colour on this site belongs to data, and a row of vendor brand
-     colours would break that rule on the page that argues for it. */
-  .tools { display: flex; flex-wrap: wrap; align-items: center; gap: var(--gap-m) var(--gap-l); margin: 0 0 var(--gap-m); padding: 0; }
-  .tools li { list-style: none; }
-  .tools svg { height: 22px; width: auto; display: block; color: var(--ink-2); fill: currentColor; }
-</style>
 
   <!-- ============ Hero ============ -->
   <section class="shell case-hero">
@@ -179,26 +209,16 @@
 
   <section class="shell shell--narrow">
     <figure class="figure" data-reveal>
-      <h3 class="fig__h">Surgical Value Optimization</h3>
+      <h2 class="fig__h">Surgical Value Optimization</h2>
 <div class="figure__frame">
-        <video data-lazy-video width="2582" height="1430" controls muted loop playsinline preload="none"
+        <video data-lazy-video width="2166" height="1200" controls muted loop playsinline preload="none"
                poster="../assets/img/work/healthcare/spend-poster.jpg?v=20260821b"
                style="width:100%;height:auto;display:block"
                aria-label="Screen recording of the Surgical Value Optimization prototype: filtering service lines, expanding cardiac surgery to procedure level, opening the literature rail, then walking the product category and SKU drill-down tabs.">
-          <source src="../assets/video/healthcare-spend.mp4?v=20260821b" type="video/mp4">
+          <source src="../assets/video/healthcare-spend.mp4?v=20260826b" type="video/mp4">
         </video>
       </div>
       <figcaption><b>Surgical Value Optimization.</b> A spend view built on the system: service-line supply cost variation resolves from the left into procedure-level detail in the center, with the supporting literature in the rail. <em>Sample data under the demo brand.</em></figcaption>
-    </figure>
-  </section>
-
-  <section class="shell shell--narrow">
-    <figure class="figure" data-reveal>
-      <h3 class="fig__h">What gets delivered</h3>
-<div class="figure__frame">
-        <img src="../assets/img/work/healthcare/readmissions.jpg?v=20260826a" alt="A 30-day readmissions and excess days dashboard on a laptop: key indicators down the left, readmission patterns in the center, post-discharge pathways and outpatient revisits on the right." loading="lazy" decoding="async" width="1250" height="847">
-      </div>
-      <figcaption><b>Dashboard design sample;</b> Key indicators on the left, the patterns behind them in the center, where the patients actually went on the right. Read across and the question resolves in that order: how big, what kind, and where. <em>Great State Hospital System is a demo brand; every figure is synthetic.</em></figcaption>
     </figure>
   </section>
 
@@ -234,7 +254,7 @@
   <section class="shell step">
     <div class="car car--screens" data-carousel data-reveal>
       <div class="car__head">
-        <h2 class="meta">Wireframes</h2>
+        <h3 class="meta">Wireframes</h3>
         <div class="car__meta">
           <span class="meta">2 slides, wireframe stage</span>
           <div class="car__btns">
@@ -309,7 +329,7 @@
   <section class="shell step">
     <div class="car car--screens" data-carousel data-reveal>
       <div class="car__head">
-        <h2 class="meta">The color study</h2>
+        <h3 class="meta">The color study</h3>
         <div class="car__meta">
           <span class="meta">5 slides, audit stage</span>
           <div class="car__btns">
@@ -393,28 +413,19 @@
 
     <p>Four rules came out of it, and they are the whole standard.</p>
 
-    <div class="rules">
-      <div>
-        <span class="rule__num">4.5:1</span>
-        <h3>Text on any fill</h3>
-        <p>AA contrast for body-size labels, checked at every tint step, not only at 100%.</p>
-      </div>
-      <div>
-        <span class="rule__num">3:1</span>
-        <h3>Adjacent fills</h3>
-        <p>Non-text contrast between neighboring segments, so a boundary holds without an extra stroke.</p>
-      </div>
-      <div>
-        <span class="rule__num">&Delta;E&nbsp;10</span>
-        <h3>Series separation</h3>
-        <p>A minimum perceptual distance between any two series after CVD simulation.</p>
-      </div>
-      <div>
-        <span class="rule__num">5</span>
-        <h3>Categorical ceiling</h3>
-        <p>Past five series, color stops being a reliable encoding. Group, facet, or use position.</p>
-      </div>
-    </div>
+    <dl class="spec spec--rules">
+      <dt>4.5:1</dt>
+      <dd><b>Text on any fill.</b> AA contrast for body-size labels, checked at every tint step, not only at 100%.</dd>
+
+      <dt>3:1</dt>
+      <dd><b>Adjacent fills.</b> Non-text contrast between neighboring segments, so a boundary holds without an extra stroke.</dd>
+
+      <dt>&Delta;E&nbsp;10</dt>
+      <dd><b>Series separation.</b> A minimum perceptual distance between any two series after CVD simulation.</dd>
+
+      <dt>5</dt>
+      <dd><b>Categorical ceiling.</b> Past five series, color stops being a reliable encoding. Group, facet, or use position.</dd>
+    </dl>
   </div>
   </section>
 
@@ -493,6 +504,16 @@
   </section>
 
   <section class="shell shell--narrow">
+    <figure class="figure" data-reveal>
+      <h2 class="fig__h">What gets delivered</h2>
+<div class="figure__frame">
+        <img src="../assets/img/work/healthcare/readmissions.jpg?v=20260826a" alt="A 30-day readmissions and excess days dashboard on a laptop: key indicators down the left, readmission patterns in the center, post-discharge pathways and outpatient revisits on the right." loading="lazy" decoding="async" width="1250" height="847">
+      </div>
+      <figcaption><b>Dashboard design sample;</b> Key indicators on the left, the patterns behind them in the center, where the patients actually went on the right. Read across and the question resolves in that order: how big, what kind, and where. <em>Great State Hospital System is a demo brand; every figure is synthetic.</em></figcaption>
+    </figure>
+  </section>
+
+  <section class="shell shell--narrow">
     <div class="prose" data-reveal>
     <p class="meta">06 - Handoff</p>
     <h2>What the room actually sees, and what they keep</h2>
@@ -534,7 +555,7 @@
   <section class="shell">
     <div class="car car--screens" data-carousel data-reveal>
       <div class="car__head">
-        <h2 class="meta">The library and the standard</h2>
+        <h3 class="meta">The library and the standard</h3>
         <div class="car__meta">
           <span class="meta">2 slides, system stage</span>
           <div class="car__btns">
@@ -569,6 +590,6 @@
 <script src="../js/guard.js?v=20260817a"></script>
 <script src="../js/widont.js?v=20260817a"></script>
 <script src="../js/theme.js?v=20260809h"></script>
-<script type="module" src="../js/motion.js?v=20260818a"></script>
+<script type="module" src="../js/motion.js?v=20260826b"></script>
 </body>
 </html>

@@ -1,10 +1,11 @@
 <!doctype html>
 <html lang="en">
 <head>
-<link rel="icon" href="../../favicon.png" type="image/png">
+<link rel="icon" href="../../favicon.png?v=20260809h" type="image/png">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Color Safety Lens - Chris Almaguer</title>
+  <meta name="robots" content="noindex">
+  <title>Color Safety Lens, full screen tool - Chris Almaguer</title>
   <style>
     :root {
       color-scheme: light;
@@ -390,11 +391,15 @@
       min-width: 0;
     }
 
-    .toolbar-title strong {
+    /* Panel titles are headings so the tool has a document outline; the margin
+       and size are reset because they sit on a toolbar row, not in prose. */
+    .toolbar-title h2 {
       display: flex;
       align-items: center;
       gap: 7px;
       font-size: 13px;
+      font-weight: 700;
+      margin: 0;
     }
 
     .toolbar-title svg {
@@ -881,6 +886,19 @@
       }
     }
 
+    /* Available to assistive tech and search engines, absent visually. Used
+       for the page h1, which the sidebar mark deliberately has no room for. */
+    .sr-only {
+      position: absolute;
+      width: 1px; height: 1px;
+      margin: -1px; padding: 0;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      white-space: nowrap;
+      border: 0;
+    }
+
   </style>
   <script>
     // Applied before first paint so a dark visitor never flashes the paper
@@ -891,6 +909,7 @@
   </script>
 </head>
 <body>
+  <h1 class="sr-only">Color Safety Lens</h1>
   <button class="theme-toggle" id="themeToggle" title="Toggle dark mode" aria-label="Toggle dark mode">
     <svg class="ico-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 019.5 3.5a8.5 8.5 0 108.5 11z"/></svg>
     <svg class="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.5 4.5l2.1 2.1M17.4 17.4l2.1 2.1M19.5 4.5l-2.1 2.1M6.6 17.4l-2.1 2.1"/></svg>
@@ -914,12 +933,12 @@
 
       <div class="section">
         <div class="label-row">
-          <label>Enter HEX codes</label>
+          <label id="paletteEditorLabel">Enter HEX codes</label>
         </div>
-        <div class="palette-editor" id="paletteEditor" aria-label="Brand color inputs"></div>
+        <div class="palette-editor" id="paletteEditor" role="group" aria-labelledby="paletteEditorLabel"></div>
       </div>
 
-      <div class="chart-nav" aria-label="Chart export actions">
+      <div class="chart-nav" role="group" aria-label="Chart export actions">
         <button class="secondary" id="copyBtn">JSON</button>
         <button class="secondary" id="svgExportBtn" title="Download SVG" aria-label="Download SVG">SVG</button>
       </div>
@@ -940,7 +959,7 @@
         <section class="matrix-shell heatmap-shell">
           <div class="toolbar">
             <div class="toolbar-title">
-              <strong><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8" opacity=".55"/><rect x="3" y="13" width="8" height="8" opacity=".55"/><rect x="13" y="13" width="8" height="8" opacity=".25"/></svg>Heatmap Divergence</strong>
+              <h2><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8" opacity=".55"/><rect x="3" y="13" width="8" height="8" opacity=".55"/><rect x="13" y="13" width="8" height="8" opacity=".25"/></svg>Heatmap Divergence</h2>
             </div>
             <div class="toolbar-actions heatmap-actions">
               <div class="heatmap-controls">
@@ -951,7 +970,7 @@
                 <select id="heatmapColorA" aria-label="Left heatmap color"></select>
                 <select id="heatmapColorB" aria-label="Right heatmap color"></select>
               </div>
-              <div class="lens-controls" aria-label="Heatmap color safety lens">
+              <div class="lens-controls" role="group" aria-label="Heatmap color safety lens">
                 <select id="heatmapVisionMode" aria-label="Heatmap vision simulation">
                   <option value="normal">RGB view</option>
                   <option value="protan">Protan</option>
@@ -963,7 +982,7 @@
                   <input type="range" id="heatmapSeveritySlider" min="0" max="100" value="100" step="1" aria-label="Heatmap simulation severity">
                   <span id="heatmapSeverityVal">Severity 100%</span>
                 </div>
-                <div class="tabs" aria-label="Heatmap comparison mode">
+                <div class="tabs" role="group" aria-label="Heatmap comparison mode">
                   <button class="tab" data-heatmap-compare="full" aria-pressed="true">Full View</button>
                   <button class="tab" data-heatmap-compare="split" aria-pressed="false">Split Lens</button>
                 </div>
@@ -979,10 +998,10 @@
         <section class="matrix-shell">
           <div class="toolbar">
             <div class="toolbar-title">
-              <strong><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="2.8"/></svg>Vision Control</strong>
+              <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="2.8"/></svg>Vision Control</h2>
             </div>
             <div class="toolbar-actions">
-              <div class="lens-controls" aria-label="Tint matrix color safety lens">
+              <div class="lens-controls" role="group" aria-label="Tint matrix color safety lens">
                 <select id="matrixVisionMode" aria-label="Tint matrix vision simulation">
                   <option value="normal">RGB view</option>
                   <option value="protan">Protan</option>
@@ -994,7 +1013,7 @@
                   <input type="range" id="matrixSeveritySlider" min="0" max="100" value="100" step="1" aria-label="Vision simulation severity">
                   <span id="matrixSeverityVal">Severity 100%</span>
                 </div>
-                <div class="tabs" aria-label="Tint matrix comparison mode">
+                <div class="tabs" role="group" aria-label="Tint matrix comparison mode">
                   <button class="tab" data-matrix-compare="full" aria-pressed="true">Full View</button>
                   <button class="tab" data-matrix-compare="split" aria-pressed="false">Split Lens</button>
                 </div>
