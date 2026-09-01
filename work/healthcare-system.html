@@ -37,7 +37,7 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="../css/base.css?v=20260901a">
+<link rel="stylesheet" href="../css/base.css?v=20260901b">
 <style>
   /* Each screen is introduced by name before it is described, so the set
      reads as a labeled gallery rather than six captions in a row. */
@@ -69,47 +69,6 @@
      edge, so the two changes belong together. */
   .prose { max-width: 52rem; }
   .prose p, .prose li { line-height: 1.72; }
-  /* The four rules are one standard, so they are set as one thing: the same
-     definition list the site already uses for facts, with the threshold in
-     the term column. They used to be a 2x2 of equal boxes, which claimed a
-     parallel that is not there - two of these are WCAG minimums, one is a
-     perceptual distance and one is a plain count. A list lets them be four
-     different kinds of thing and lets each line run to its own length
-     instead of being trimmed to fill a card. The name runs in bold ahead of
-     the sentence, the way the figcaptions on this page already do. */
-  .spec--rules {
-    margin-top: var(--gap-m);
-    grid-template-columns: 7rem minmax(0, 1fr);
-    /* .spec carries only a bottom rule, which suits a short facts block
-       under a heading. This one is a closed document, so it gets a top
-       rule too, or the column divider starts in mid air. */
-    border-top: 1px solid var(--rule);
-  }
-  .spec--rules > dt {
-    font-size: 1.0625rem;
-    letter-spacing: -0.01em;
-    text-transform: none;
-    color: var(--ink);
-    font-variant-numeric: tabular-nums;
-    padding-block: 1.15rem;
-  }
-  .spec--rules > dd {
-    padding-block: 1.15rem;
-    font-size: 0.9375rem;
-    line-height: 1.6;
-    color: var(--ink-3);
-  }
-  .spec--rules > dd b { color: var(--ink); }
-  @media (max-width: 34rem) {
-    .spec--rules { grid-template-columns: 5.5rem minmax(0, 1fr); }
-  }
-  /* Stacked, the term keeps the pair together above its sentence and the
-     divider would otherwise hang off the right edge with nothing beside it. */
-  @media (max-width: 26rem) {
-    .spec--rules { grid-template-columns: minmax(0, 1fr); }
-    .spec--rules > dt { padding-block: 1.15rem 0; border-right: 0; }
-    .spec--rules > dd { padding-block: 0.35rem 1.15rem; }
-  }
   /* One rhythm for the page, set here rather than section by section. A
      numbered step opens on a hairline with a full gap above it; anything
      that belongs to the step - its slides, its figure, its pull quote -

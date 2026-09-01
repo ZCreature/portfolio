@@ -423,6 +423,54 @@ body { padding-left: var(--rail); }
 .spec > dt:not(:first-of-type),
 .spec > dd:not(:first-of-type) { border-top: 1px solid var(--rule); }
 
+/* A set of rules or features, set as one document rather than as a grid of
+   equal cards. The card grid was the wrong claim: identical boxes imply
+   identical kinds of thing, and they force every cell's copy to the same
+   length. Here the short term holds the left column - a threshold, an index,
+   a one-word tag - and the name runs in bold ahead of its sentence, the way
+   the figcaptions do, so each line is free to run to its own length.
+   Used by the healthcare colour standard and the MyBEATS feature lists. */
+.spec--rules {
+  grid-template-columns: 7rem minmax(0, 1fr);
+  /* .spec carries only a bottom rule, which suits a short facts block
+     under a heading. This one is a closed document, so it gets a top
+     rule too, or the column divider starts in mid air. */
+  border-top: 1px solid var(--rule);
+}
+.spec--rules > dt {
+  font-size: 1.0625rem;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  padding-block: 1.15rem;
+}
+.spec--rules > dd {
+  padding-block: 1.15rem;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--ink-3);
+}
+.spec--rules > dd b { color: var(--ink); }
+
+/* Specificity, not source order. `.prose > * + *` further down this file sets
+   margin-top on every child of a prose block and scores the same (0,1,0) as a
+   lone .spec--rules, so whichever is written last wins. This rule used to live
+   in a page's inline <style>, which came after base.css and quietly won; moved
+   in here it started losing, and the list crept up under its paragraph. The
+   doubled class outranks it from anywhere in the file. */
+.spec.spec--rules { margin-top: var(--gap-m); }
+@media (max-width: 34rem) {
+  .spec--rules { grid-template-columns: 5.5rem minmax(0, 1fr); }
+}
+/* Stacked, the term keeps the pair together above its sentence and the
+   divider would otherwise hang off the right edge with nothing beside it. */
+@media (max-width: 26rem) {
+  .spec--rules { grid-template-columns: minmax(0, 1fr); }
+  .spec--rules > dt { padding-block: 1.15rem 0; border-right: 0; }
+  .spec--rules > dd { padding-block: 0.35rem 1.15rem; }
+}
+
 @media (max-width: 34rem) {
   .spec { grid-template-columns: 6.5rem minmax(0, 1fr); }
   .spec > dd { padding-left: 0.75rem; }

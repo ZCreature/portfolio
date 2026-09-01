@@ -36,7 +36,7 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="../css/base.css?v=20260901a">
+<link rel="stylesheet" href="../css/base.css?v=20260901b">
 <style>
   .figure { margin: var(--gap-m) 0 0; }
   .figure img,
@@ -54,18 +54,6 @@
   .car--screens .car__track .car__item { width: min(100%, 52rem); }
   .car--screens .car__track .car__item img { width: 100%; height: auto; }
   .car--screens .car__item figcaption { max-width: 30rem; }
-  .rules { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--rule); margin-top: var(--gap-m); }
-  .rules > div { padding: 1.45rem 1.6rem 1.55rem; border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); }
-  .rules > div:nth-child(-n+2) { border-top: 0; }
-  .rules > div:nth-child(2n+1) { border-left: 0; }
-  .rule__num { font-family: var(--font-mono); font-size: 1.05rem; color: var(--ink); display: block; }
-  .rules h3 { font-size: 0.9375rem; letter-spacing: -0.01em; margin: 0.55rem 0 0.3rem; }
-  .prose .rules p { margin: 0; font-size: 0.9375rem; line-height: 1.55; color: var(--ink-3); }
-  @media (max-width: 40rem) {
-    .rules { grid-template-columns: 1fr; }
-    .rules > div { border-left: 0; border-top: 1px solid var(--rule); }
-    .rules > div:first-child { border-top: 0; }
-  }
   .figure figcaption {
     margin-top: 0.7rem;
     font-size: 0.8125rem;
@@ -246,28 +234,19 @@
         hold regional rap with a few thousand listeners.
       </p>
 
-      <div class="rules">
-        <div>
-          <span class="rule__num">own</span>
-          <h3>Files, not licenses</h3>
-          <p>A purchase is a file on your disk. A stream is permission, and permission gets revoked at the margins every year.</p>
-        </div>
-        <div>
-          <span class="rule__num">flac</span>
-          <h3>Quality, not throughput</h3>
-          <p>Lossless plays as ripped or bought. A stream meets a bitrate budget chosen for the network, not for the record.</p>
-        </div>
-        <div>
-          <span class="rule__num">eq</span>
-          <h3>Your room, not theirs</h3>
-          <p>One interface for everyone, or your own: band sliders, a vocal cut, a seat in the hall, palettes that survive color-vision deficiency.</p>
-        </div>
-        <div>
-          <span class="rule__num">disk</span>
-          <h3>Permanence</h3>
-          <p>A folder of files has outlived every player since Winamp. It will outlive this one too.</p>
-        </div>
-      </div>
+      <dl class="spec spec--rules">
+      <dt>own</dt>
+      <dd><b>Files, not licenses.</b> A purchase is a file on your disk. A stream is permission, and permission gets revoked at the margins every year.</dd>
+
+      <dt>flac</dt>
+      <dd><b>Quality, not throughput.</b> Lossless plays as ripped or bought. A stream meets a bitrate budget chosen for the network, not for the record.</dd>
+
+      <dt>eq</dt>
+      <dd><b>Your room, not theirs.</b> One interface for everyone, or your own: band sliders, a vocal cut, a seat in the hall, palettes that survive color-vision deficiency.</dd>
+
+      <dt>disk</dt>
+      <dd><b>Permanence.</b> A folder of files has outlived every player since Winamp. It will outlive this one too.</dd>
+      </dl>
     </div>
   </section>
 
@@ -294,43 +273,28 @@
         Structure first, then the specific thing you actually wanted.
       </p>
 
-      <div class="rules">
-        <div>
-          <span class="rule__num">01</span>
-          <h3>Charts, not rows</h3>
-          <p>Tempo, years, tags, loudness and origins drawn as charts, with a treemap and a sankey for the deep cuts.</p>
-        </div>
-        <div>
-          <span class="rule__num">02</span>
-          <h3>Mood shelves</h3>
-          <p>Boards built from the enriched mood field, so "the angry ones" is a place you can walk to rather than a search you have to remember.</p>
-        </div>
-        <div>
-          <span class="rule__num">03</span>
-          <h3>Ask the library</h3>
-          <p>Natural language over your own files: the hidden gems, the emotional run, the regional stuff nobody else knows.</p>
-        </div>
-        <div>
-          <span class="rule__num">04</span>
-          <h3>Lyrics, even unpublished</h3>
-          <p>Timed lyrics from an open database when they exist. When they do not, a local Whisper model transcribes the track itself. Nothing leaves the machine.</p>
-        </div>
-        <div>
-          <span class="rule__num">05</span>
-          <h3>The EQ room</h3>
-          <p>Band sliders, a vocal cut, a limiter with a ceiling you can drag, and a meter bridge that reads at arm's length.</p>
-        </div>
-        <div>
-          <span class="rule__num">06</span>
-          <h3>Every format on the shelf</h3>
-          <p>MP3, FLAC, M4A, WAV, AIFF, OGG. The formats a collection actually arrives in, played as they are.</p>
-        </div>
-        <div>
-          <span class="rule__num">07</span>
-          <h3>Playlists by hand</h3>
-          <p>A wall of covers curated deliberately, renamed freely, and a queue that remembers which view filled it.</p>
-        </div>
-      </div>
+      <dl class="spec spec--rules">
+      <dt>01</dt>
+      <dd><b>Charts, not rows.</b> Tempo, years, tags, loudness and origins drawn as charts, with a treemap and a sankey for the deep cuts.</dd>
+
+      <dt>02</dt>
+      <dd><b>Mood shelves.</b> Boards built from the enriched mood field, so "the angry ones" is a place you can walk to rather than a search you have to remember.</dd>
+
+      <dt>03</dt>
+      <dd><b>Ask the library.</b> Natural language over your own files: the hidden gems, the emotional run, the regional stuff nobody else knows.</dd>
+
+      <dt>04</dt>
+      <dd><b>Lyrics, even unpublished.</b> Timed lyrics from an open database when they exist. When they do not, a local Whisper model transcribes the track itself. Nothing leaves the machine.</dd>
+
+      <dt>05</dt>
+      <dd><b>The EQ room.</b> Band sliders, a vocal cut, a limiter with a ceiling you can drag, and a meter bridge that reads at arm's length.</dd>
+
+      <dt>06</dt>
+      <dd><b>Every format on the shelf.</b> MP3, FLAC, M4A, WAV, AIFF, OGG. The formats a collection actually arrives in, played as they are.</dd>
+
+      <dt>07</dt>
+      <dd><b>Playlists by hand.</b> A wall of covers curated deliberately, renamed freely, and a queue that remembers which view filled it.</dd>
+      </dl>
     </div>
   </section>
 
