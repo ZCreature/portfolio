@@ -321,23 +321,7 @@ section { padding-block: var(--gap-xl); }
   display: flex;
   align-items: center;
   gap: 0.85rem;
-}
-
-.rail__social { display: flex; align-items: center; gap: 0.7rem; }
-
-.rail__social a {
-  color: var(--ink-4);
-  display: grid;
-  place-items: center;
-  transition: color var(--t-fast) var(--ease);
-}
-
-.rail__social a:hover { color: var(--ink); }
-.rail__social svg { width: 16px; height: 16px; fill: currentColor; }
-
-
-
-.masthead__inner {
+}.masthead__inner {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -404,56 +388,9 @@ body { padding-left: var(--rail); }
 
 .theme-toggle svg { width: 16px; height: 16px; }
 .theme-toggle:hover { color: var(--ink); }
-.theme-toggle[aria-pressed="true"] svg { transform: rotate(180deg); }
-
-/* ---- 6. Nameplate ----------------------------------------
-   The masthead of a newspaper, not the hero of a landing page.
-   Name at full width between two rules; everything else is
-   filed underneath it as specification.                     */
-
-.nameplate {
-  padding-block: 0 clamp(0.75rem, 2vw, 1.5rem);
-}
-
-.nameplate h1 {
-  font-size: clamp(1.4rem, 5.4vw, 3.9rem);
-  line-height: 0.98;
-  /* SF Pro Display sets wider than Helvetica at this size, so the nameplate
-     needs more negative tracking to keep the same density. */
-  letter-spacing: -0.03em;
-  font-weight: 700;
-  text-transform: uppercase;
-  margin: 0;
-}
-
-.nameplate__sub {
-  /* An eyebrow above the name: small, uppercase and tracked, so it labels
-     the discipline without competing with the nameplate underneath. */
-  margin-bottom: 0.55rem;
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  line-height: 1.4;
-  color: var(--ink-3);
-}
-
-/* Short bio under the nameplate. Held to the prose measure so it reads as
-   a paragraph, not a banner. */
-.nameplate__bio {
-  margin-top: clamp(1rem, 2vw, 1.5rem);
-  max-width: 40rem;
-  font-size: clamp(0.9375rem, 1.15vw, 1.0625rem);
-  line-height: 1.55;
-  color: var(--ink-2);
-  text-wrap: pretty;
-}
-
-/* Below the width where it fits on one line, let it wrap rather than
+.theme-toggle[aria-pressed="true"] svg { transform: rotate(180deg); }/* Below the width where it fits on one line, let it wrap rather than
    overflow the page. */
-@media (max-width: 46rem) {
-  .nameplate__sub { white-space: normal; }
-}
+@media (max-width: 46rem) {}
 
 
 /* Specification block - label / value rows, the way a spec sheet
@@ -698,19 +635,15 @@ body { padding-left: var(--rail); }
    as matching blocks rather than reflowing independently. */
 .tiles--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .tiles--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.tiles--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 
-
-@media (max-width: 74rem) {
-  .tiles--4 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-}
+@media (max-width: 74rem) {}
 
 @media (max-width: 64rem) {
-  .tiles--3, .tiles--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tiles--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 30rem) {
-  .tiles--2, .tiles--3, .tiles--4 { grid-template-columns: minmax(0, 1fr); }
+  .tiles--2, .tiles--3 { grid-template-columns: minmax(0, 1fr); }
 }
 
 .tile {
@@ -800,12 +733,6 @@ body { padding-left: var(--rail); }
   object-position: center;
   padding: 6%;
 }
-
-/* Marks a tile whose thumbnail is an illustration, not a capture. */
-.tile--novisual .tile__thumb { display: grid; place-items: center; }
-.tile--novisual .tile__thumb svg { width: 78%; height: 78%; }
-
-
 .tile__body {
   padding: 1.1rem clamp(1rem, 2vw, 1.35rem) 1.35rem;
   display: flex;
@@ -850,28 +777,7 @@ body { padding-left: var(--rail); }
 
 .tile__tags { display: flex; flex-wrap: wrap; gap: 0.2rem; margin-top: auto; padding-top: 0.7rem; }
 
-.tile__link::before { content: ""; position: absolute; inset: 0; }
-
-/* Reserved slot. Holds the grid square until real work fills it - visibly
-   empty rather than a fake card, and skipped by assistive tech. */
-.tile--empty { background: var(--paper); }
-.tile--empty:hover { background: var(--paper); color: inherit; }
-.tile--empty .tile__thumb {
-  background: transparent;
-  background-image: repeating-linear-gradient(
-    45deg, var(--rule-soft) 0 7px, transparent 7px 14px);
-  border-bottom-color: var(--rule-soft);
-}
-.tile--empty .tile__body { min-height: 5.5rem; }
-
-/* Past work has no live data behind it yet - a ruled field holds the
-   slot until real assets land, rather than a fake image. */
-.tile--quiet .tile__thumb {
-  background-image: repeating-linear-gradient(
-    45deg, var(--rule-soft) 0 8px, transparent 8px 16px);
-}
-
-/* ---- 7c. Live embeds -------------------------------------
+.tile__link::before { content: ""; position: absolute; inset: 0; }/* ---- 7c. Live embeds -------------------------------------
    The real tool, running in the page. Sandboxed in an iframe
    so its own stylesheet can't leak into the portfolio's.    */
 
@@ -951,17 +857,6 @@ body { padding-left: var(--rail); }
      people to the full-screen version rather than a squeezed frame. */
   .embed__frame { height: 26rem; }
 }
-
-/* ---- 8. Tool cards --------------------------------------- */
-
-.grid-tools {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr));
-  gap: 1px;
-  background: var(--rule);
-  border: 1px solid var(--rule);
-}
-
 .tool {
   background: var(--paper);
   padding: var(--gap-m) clamp(1.25rem, 2.5vw, 1.75rem);
@@ -973,12 +868,7 @@ body { padding-left: var(--rail); }
   position: relative;
 }
 
-.tool:hover { background: var(--paper-2); }
-.tool__name { font-size: 1.0625rem; font-weight: 700; letter-spacing: -0.02em; }
-.tool__desc { font-size: 0.875rem; color: var(--ink-3); line-height: 1.5; }
-.tool__foot { margin-top: auto; padding-top: var(--gap-s); }
-
-/* ---- 9. Case study layout -------------------------------- */
+.tool:hover { background: var(--paper-2); }/* ---- 9. Case study layout -------------------------------- */
 
 .case-hero { padding-block: clamp(4rem, 12vw, 9rem) var(--gap-l); }
 
@@ -988,12 +878,7 @@ body { padding-left: var(--rail); }
   gap: var(--gap-m);
   padding-block: var(--gap-m);
   border-block: 1px solid var(--rule);
-}
-
-.fact__label { margin-bottom: 0.3rem; }
-.fact__value { font-size: 0.9375rem; color: var(--ink); line-height: 1.4; }
-
-/* Prose column for the written case study */
+}/* Prose column for the written case study */
 .prose { max-width: var(--measure); }
 .prose > * + * { margin-top: 1.15em; }
 .prose h2 {
@@ -1026,26 +911,7 @@ body { padding-left: var(--rail); }
   color: var(--ink);
   margin-block: 2.2em;
   max-width: 32rem;
-}
-
-/* Mark grid - logos shown as a set, two up, each in its own frame. */
-.marks {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
-  gap: var(--gap-s);
-}
-.marks figure { margin: 0; }
-.marks .figure__frame { aspect-ratio: 4 / 3; }
-.marks .figure__frame img { width: 100%; height: 100%; object-fit: cover; }
-.marks figcaption {
-  margin-top: 0.6rem;
-  font-size: 0.8125rem;
-  color: var(--ink-3);
-  line-height: 1.5;
-}
-.marks figcaption b { color: var(--ink-2); font-weight: 600; }
-
-/* Figure with mono caption, newsroom style */
+}/* Figure with mono caption, newsroom style */
 figure { margin: 0; }
 .figure { margin-block: var(--gap-l); }
 .figure__frame {
@@ -1141,18 +1007,6 @@ figure { margin: 0; }
 }
 
 .contact-line:hover::after { transform: scaleX(1); }
-
-.colophon {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--gap-s) var(--gap-m);
-  /* Only the link nav lives here now, so flex-end keeps it on the right
-     rather than collapsing to the left the way space-between would. */
-  justify-content: flex-end;
-  padding-block: var(--gap-m);
-  border-top: 1px solid var(--rule);
-}
-
 /* ---- 13. Reveal on scroll -------------------------------- */
 
 /* Elements arrive; they don't drift in. Short, flat, almost mechanical - a long floaty fade-up is the house style of every template on the web. */
@@ -1177,12 +1031,7 @@ figure { margin: 0; }
     transition-duration: 0.01ms !important;
   }
   [data-reveal] { opacity: 1; transform: none; }
-}
-
-/* ---- 15. Utilities --------------------------------------- */
-
-.muted { color: var(--ink-3); }
-.tight { max-width: var(--measure); }
+}.tight { max-width: var(--measure); }
 
 /* Available to assistive tech and search engines, absent visually. Used
    for the homepage h1, which the grid layout deliberately has no room for. */
@@ -1208,90 +1057,7 @@ figure { margin: 0; }
   color: var(--paper);
   padding: 0.6rem 1rem;
   border-radius: 0;
-}
-
-/* ---- 16. Locked section ----------------------------------
-   Client work that can't be shown openly. The card states what
-   is behind it; the page itself decrypts on the right password
-   rather than merely hiding markup. */
-
-.locked {
-  display: flex;
-  gap: clamp(1rem, 3vw, 2rem);
-  align-items: flex-start;
-  border: 1px solid var(--rule);
-  border-left: 2px solid var(--ink);
-  background: var(--paper-2);
-  padding: clamp(1.25rem, 3vw, 2rem);
-}
-
-.locked__mark { flex: none; color: var(--ink-3); padding-top: 0.15rem; }
-.locked__mark svg { width: 26px; height: 26px; }
-.locked__title { font-size: 1.0625rem; letter-spacing: -0.018em; }
-.locked__sub {
-  margin-top: 0.5rem;
-  max-width: 52ch;
-  font-size: 0.9375rem;
-  color: var(--ink-3);
-  line-height: 1.5;
-}
-
-/* ---- 14. Awaiting-copy placeholder ------------------------ */
-
-/* Marks a section whose text the author still has to supply. Deliberately
-   looks unfinished so it cannot be mistaken for published copy. */
-.impact-todo {
-  border: 1px dashed var(--rule);
-  background-image: repeating-linear-gradient(
-    45deg, var(--rule-soft) 0 8px, transparent 8px 16px);
-  padding: 1rem 1.1rem;
-  color: var(--ink-3);
-  font-size: 0.875rem;
-}
-.impact-todo::before {
-  content: "To fill";
-  display: inline-block;
-  margin-right: 0.6rem;
-  padding: 0.1rem 0.4rem;
-  border: 1px solid var(--rule);
-  background: var(--paper);
-  font-size: 0.625rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-
-/* ---- Editorial page gallery -------------------------------
-   A weekly page is a body of work, not a series of one-offs, so
-   these sit in a grid at a size you can read the headline from
-   rather than as a stack of full-width figures.             */
-
-.pages {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
-  gap: var(--gap-m) var(--gap-s);
-  margin-top: var(--gap-l);
-}
-
-.pages figure { margin: 0; }
-
-.pages img {
-  width: 100%;
-  border: 1px solid var(--rule);
-  background: #fff;
-}
-
-.pages figcaption {
-  margin-top: 0.55rem;
-  font-size: 0.8125rem;
-  line-height: 1.45;
-  color: var(--ink-3);
-}
-
-.pages figcaption b { color: var(--ink-2); font-weight: 600; display: block; }
-
-
-/* ---- Rail folds to a bar --------------------------------- */
+}/* ---- Rail folds to a bar --------------------------------- */
 
 @media (max-width: 64rem) {
   body { padding-left: 0; }
@@ -1388,56 +1154,22 @@ figure { margin: 0; }
 }
 
 
-
 /* ---- "Right now" feature ---------------------------------
    Replaces the old nameplate. The rail already carries the
    name, so repeating it at 4rem said nothing twice; a single
    current piece of work says more and gets the reader into
    the grid faster.                                        */
 
-.now { margin: 0; }
-
-.now__head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--gap-m);
-  padding-bottom: 0.85rem;
-  border-bottom: 1px solid var(--rule);
-  margin-bottom: var(--gap-m);
-}
-
-.now__frame {
-  border: 1px solid var(--rule);
-  background: var(--paper-2);
-  overflow: hidden;
-  aspect-ratio: 16 / 7;
-}
-
-.now__frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-.now figcaption {
+.now { margin: 0; }.now figcaption {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   gap: 0.5rem 1.25rem;
   margin-top: 1rem;
-}
-
-.now__title {
-  font-size: clamp(1.15rem, 2vw, 1.5rem);
-  font-weight: 700;
-  letter-spacing: -0.024em;
-}
-
-.now__note { color: var(--ink-3); font-size: 0.9375rem; max-width: 46ch; }
-
-/* Pills sit on their own line under the caption; the tile row's
+}/* Pills sit on their own line under the caption; the tile row's
    margin-top: auto is meaningless outside a flex column. */
 
-@media (max-width: 46rem) {
-  .now__frame { aspect-ratio: 4 / 3; }
-}
+@media (max-width: 46rem) {}
 
 
 /* ---- Carousel strip ------------------------------------------

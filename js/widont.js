@@ -39,11 +39,18 @@ function bind(el) {
   if (!node) return;
 
   const words = node.nodeValue.replace(/\s+$/, '');
-  const gap = words.lastIndexOf(' ');
 
-  if (gap > 0) {
+  /* The gap before the last word is usually a source line break plus its
+     indentation, not a single space. Collapse the WHOLE run: replacing only
+     the final space leaves the newline and the indent in place, and those
+     collapse to a rendered space that then sits beside the nbsp. The reader
+     sees a double space, which is the exact blemish this file exists to
+     prevent. */
+  const tail = words.match(/^([\s\S]*\S)\s+(\S+)$/);
+
+  if (tail) {
     // Ordinary case: the block ends in plain text.
-    node.nodeValue = words.slice(0, gap) + NBSP + words.slice(gap + 1);
+    node.nodeValue = tail[1] + NBSP + tail[2];
     return;
   }
 
@@ -60,10 +67,12 @@ function bind(el) {
     return null;
   })();
 
-  if (node.nodeValue.startsWith(' ')) {
-    node.nodeValue = NBSP + node.nodeValue.slice(1);
-  } else if (prevText && prevText.nodeValue.endsWith(' ')) {
-    prevText.nodeValue = prevText.nodeValue.slice(0, -1) + NBSP;
+  /* Same rule on both sides: swap the entire whitespace run, never one
+     character of it. */
+  if (/^\s/.test(node.nodeValue)) {
+    node.nodeValue = NBSP + node.nodeValue.replace(/^\s+/, '');
+  } else if (prevText && /\s$/.test(prevText.nodeValue)) {
+    prevText.nodeValue = prevText.nodeValue.replace(/\s+$/, '') + NBSP;
   }
 }
 
