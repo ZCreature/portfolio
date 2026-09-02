@@ -1308,3 +1308,86 @@ figure { margin: 0; }
 .car__btn svg { width: 12px; height: 12px; }
 .car__btn:hover { color: var(--ink); border-color: var(--ink-3); }
 .car__btn:disabled { opacity: 0.3; cursor: default; }
+
+/* ---- Lightbox --------------------------------------------
+   Backs js/lightbox.js. The scrim is fixed near-black in both
+   themes - an enlarged image reads best against dark, and it
+   spares this block a light/dark fork. The zoom-in cursor is
+   gated on [data-lightbox] so pages without the script never
+   advertise a click that does nothing. */
+
+[data-lightbox] .car__item img,
+[data-lightbox] .figure__frame img { cursor: zoom-in; }
+
+.lb {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3.5rem 1rem 2.5rem;
+  background: rgba(12, 12, 14, 0.92);
+}
+
+.lb__stage {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  max-width: min(94vw, 78rem);
+}
+
+.lb__img {
+  max-width: 100%;
+  max-height: 78vh;
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+
+.lb__cap {
+  max-width: 44rem;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.72);
+  text-align: center;
+}
+.lb__cap b { color: rgba(255, 255, 255, 0.92); font-weight: 600; }
+
+.lb__count {
+  position: absolute;
+  top: 1.1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.lb__btn {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 3px;
+  background: rgba(12, 12, 14, 0.6);
+  color: rgba(255, 255, 255, 0.85);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+}
+.lb__btn:hover { color: #fff; border-color: rgba(255, 255, 255, 0.6); }
+.lb__btn svg { width: 14px; height: 14px; }
+
+.lb__close { top: 1rem; right: 1rem; }
+.lb__prev { left: 1rem; top: 50%; transform: translateY(-50%); }
+.lb__next { right: 1rem; top: 50%; transform: translateY(-50%); }
+
+@media (max-width: 640px) {
+  .lb { padding: 3rem 0.5rem 4.5rem; }
+  .lb__prev { left: auto; right: 4.5rem; top: auto; bottom: 1rem; transform: none; }
+  .lb__next { top: auto; bottom: 1rem; transform: none; }
+}
