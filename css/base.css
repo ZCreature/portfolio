@@ -1319,6 +1319,8 @@ figure { margin: 0; }
 [data-lightbox] .car__item img,
 [data-lightbox] .figure__frame img { cursor: zoom-in; }
 
+.lb[hidden] { display: none; }
+
 .lb {
   position: fixed;
   inset: 0;
