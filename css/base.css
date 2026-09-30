@@ -557,89 +557,62 @@ body { padding-left: var(--rail); }
   max-width: 44ch;
 }
 
+/* ---- Tags: grain chips -----------------------------------
+   Monochrome on purpose. The work carries the colour; the chips
+   carry texture instead - a fine film grain over warm paper, so
+   they read as printed rather than rendered. The chart type leads
+   every tile, so it is the one chip set in ink.
+
+   The grain is an SVG turbulence tile multiplied over the fill
+   (soft-light on the dark chips), so it darkens or lifts the
+   ground without touching the text. Every ink clears 4.5:1 against
+   its chip at the grain's darkest point, in both themes.
+
+   One exception: Live. It is the only chip that says something
+   is running right now, so it alone gets colour - a grainy
+   teal-to-blue gradient. The tool / status / ai classes are kept
+   in the markup but style as plain paper chips.               */
+
+:root {
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --chip-fill: #e9e4da;  --chip-ink: #3f3b35;  --chip-blend: multiply;
+  --chip-lead-fill: #1f1f23;  --chip-lead-ink: #f3efe7;  --chip-lead-blend: soft-light;
+  --chip-live: linear-gradient(135deg, #bfeee0, #b0cdf8);  --chip-live-ink: #053b4a;  --chip-live-blend: multiply;
+}
+
+:root[data-theme="dark"] {
+  --chip-fill: #2c2a26;  --chip-ink: #d9d4ca;  --chip-blend: soft-light;
+  --chip-lead-fill: #ece7dd;  --chip-lead-ink: #1f1f23;  --chip-lead-blend: multiply;
+  --chip-live: linear-gradient(135deg, #0f3d36, #14305a);  --chip-live-ink: #bfeee0;  --chip-live-blend: soft-light;
+}
+
 .tag {
   font-family: var(--font-mono);
   font-size: 0.5625rem;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--ink-3);
-  background: transparent;
-  border: 1px solid var(--rule);
+  color: var(--chip-ink);
+  background-color: var(--chip-fill);
+  background-image: var(--grain);
+  background-size: 140px;
+  background-blend-mode: var(--chip-blend);
   border-radius: 3px;
-  padding: 0.16rem 0.38rem;
+  padding: 0.28rem 0.55rem;
   white-space: nowrap;
 }
 
-/* ---- Tag colour families ---------------------------------
-   The one place colour enters the interface. It is safe here
-   because it is REDUNDANT: the chip already reads "Live" or
-   "Tableau", so hue reinforces a label rather than carrying
-   meaning on its own, which is what WCAG 1.4.1 asks.
-
-   Derived, not picked. Every ink clears 4.5:1 against BOTH its
-   own fill and the page - so a label stays readable even if the
-   fill never paints. Measured: text/chip 5.0-5.1, text/page
-   5.4-6.0 in light, 5.5-5.6 in dark.
-
-   The three families sit at matched lightness, so they are
-   deliberately NOT separable in greyscale. That is the correct
-   trade here - they are siblings, and the word does the work.
-   Anywhere colour is the only channel, use the tile ladder
-   instead, which is built to survive greyscale.            */
-
-:root {
-  --tag-live-fill: #defaed;  --tag-live-line: #addcc7;  --tag-live-ink: #037757;
-  --tag-tool-fill: #d6ebfe;  --tag-tool-line: #b1d6f5;  --tag-tool-ink: #036793;
-  --tag-stat-fill: #ffe2d8;  --tag-stat-line: #f6c7b8;  --tag-stat-ink: #a14425;
-}
-
-:root[data-theme="dark"] {
-  --tag-live-fill: #0b261c;  --tag-live-line: #133e2f;  --tag-live-ink: #08a479;
-  --tag-tool-fill: #062232;  --tag-tool-line: #0d3b53;  --tag-tool-ink: #2597d1;
-  --tag-stat-fill: #301a12;  --tag-stat-line: #502e22;  --tag-stat-ink: #d07657;
-}
-
 .tag--live {
-  background: var(--tag-live-fill);
-  border-color: var(--tag-live-line);
-  color: var(--tag-live-ink);
+  color: var(--chip-live-ink);
+  background-image: var(--grain), var(--chip-live);
+  background-size: 140px, 100% 100%;
+  background-blend-mode: var(--chip-live-blend), normal;
 }
 
-.tag--tool {
-  background: var(--tag-tool-fill);
-  border-color: var(--tag-tool-line);
-  color: var(--tag-tool-ink);
-}
-
-.tag--status {
-  background: var(--tag-stat-fill);
-  border-color: var(--tag-stat-line);
-  color: var(--tag-stat-ink);
-}
-
-/* Chart type leads every tile, so it is the one facet that carries weight
-   rather than hue - a fifth colour would turn the grid into confetti, and
-   monochrome keeps the emphasis where the eye lands first. */
 .tag--type {
-  color: var(--ink);
-  border-color: var(--ink);
+  color: var(--chip-lead-ink);
+  background-color: var(--chip-lead-fill);
+  background-blend-mode: var(--chip-lead-blend);
   font-weight: 700;
-}
-
-/* Local AI. Violet reads as the machine-learning family by convention and
-   sits well clear of the other three inks - minimum ΔE 21.4 in light,
-   26.3 in dark, so it never reads as a shade of the tool blue. */
-:root {
-  --tag-ai-fill: #f0e7fe;  --tag-ai-line: #d9ccf0;  --tag-ai-ink: #6c54aa;
-}
-:root[data-theme="dark"] {
-  --tag-ai-fill: #251e31;  --tag-ai-line: #3c324f;  --tag-ai-ink: #9d81dc;
-}
-
-.tag--ai {
-  background: var(--tag-ai-fill);
-  border-color: var(--tag-ai-line);
-  color: var(--tag-ai-ink);
 }
 
 /* Full-card link target without nesting interactive elements */
@@ -823,7 +796,7 @@ body { padding-left: var(--rail); }
   margin-top: var(--gap-m);
 }
 
-.tile__tags { display: flex; flex-wrap: wrap; gap: 0.2rem; margin-top: auto; padding-top: 0.7rem; }
+.tile__tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: auto; padding-top: 0.7rem; }
 
 .tile__link::before { content: ""; position: absolute; inset: 0; }/* ---- 7c. Live embeds -------------------------------------
    The real tool, running in the page. Sandboxed in an iframe
