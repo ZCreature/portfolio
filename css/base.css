@@ -575,15 +575,16 @@ body { padding-left: var(--rail); }
 
 :root {
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  --chip-fill: #e9e4da;  --chip-ink: #3f3b35;  --chip-blend: multiply;
-  --chip-lead-fill: #1f1f23;  --chip-lead-ink: #f3efe7;  --chip-lead-blend: soft-light;
-  --chip-live: linear-gradient(135deg, #bfeee0, #b0cdf8);  --chip-live-ink: #053b4a;  --chip-live-blend: multiply;
+  --grain-soft: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.8 0 0 0 0 0.8 0 0 0 0 0.8 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --chip-fill: #ece8e0;  --chip-ink: #3f3b35;  --chip-blend: multiply;  --chip-grain: var(--grain-soft);
+  --chip-lead-fill: #38383e;  --chip-lead-ink: #f3efe7;  --chip-lead-blend: soft-light;
+  --chip-live: linear-gradient(135deg, #b4ecdc, #97bdff);  --chip-live-ink: #053b4a;  --chip-live-blend: multiply;
 }
 
 :root[data-theme="dark"] {
-  --chip-fill: #2c2a26;  --chip-ink: #d9d4ca;  --chip-blend: soft-light;
+  --chip-fill: #2c2a26;  --chip-ink: #d9d4ca;  --chip-blend: soft-light;  --chip-grain: var(--grain);
   --chip-lead-fill: #ece7dd;  --chip-lead-ink: #1f1f23;  --chip-lead-blend: multiply;
-  --chip-live: linear-gradient(135deg, #0f3d36, #14305a);  --chip-live-ink: #bfeee0;  --chip-live-blend: soft-light;
+  --chip-live: linear-gradient(135deg, #0f3d36, #123a7a);  --chip-live-ink: #bfeee0;  --chip-live-blend: soft-light;
 }
 
 .tag {
@@ -593,7 +594,7 @@ body { padding-left: var(--rail); }
   text-transform: uppercase;
   color: var(--chip-ink);
   background-color: var(--chip-fill);
-  background-image: var(--grain);
+  background-image: var(--chip-grain);
   background-size: 140px;
   background-blend-mode: var(--chip-blend);
   border-radius: 3px;
@@ -611,6 +612,7 @@ body { padding-left: var(--rail); }
 .tag--type {
   color: var(--chip-lead-ink);
   background-color: var(--chip-lead-fill);
+  background-image: var(--grain);
   background-blend-mode: var(--chip-lead-blend);
   font-weight: 700;
 }
