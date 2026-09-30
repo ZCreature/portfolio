@@ -617,6 +617,31 @@ body { padding-left: var(--rail); }
   font-weight: 700;
 }
 
+/* ---- Hero ink + specialty filters (js/hero-ink.js) ----------
+   The intro sentence starts at --ink-3, which still clears AA on the
+   page, and each word inks to full as the visitor scrolls; the ink then
+   runs on into the specialties. Only applies once the script has run
+   (.ink-ready), so without JS the hero reads exactly as before. */
+.ink-ready [data-ink] .ink-w { color: var(--ink-3); transition: color 0.35s ease; }
+.ink-ready [data-ink] .ink-w.is-inked { color: var(--ink); }
+
+.hero-filters a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.35s ease, border-color 0.35s ease;
+}
+.ink-ready .hero-filters a.is-inked,
+.hero-filters a:hover,
+.hero-filters a:focus-visible { color: var(--ink); border-bottom-color: var(--ink); }
+.hero-filters a[aria-pressed="true"] { color: var(--ink); font-weight: 700; border-bottom-color: var(--ink); }
+
+/* Tiles outside the chosen specialty step back. They keep the reveal
+   stagger, so the dimming ripples across the grid. */
+.tiles.is-filtering .tile:not(.is-match) { opacity: 0.28; }
+.tiles.is-filtering .tile:not(.is-match):hover,
+.tiles.is-filtering .tile:not(.is-match):focus-within { opacity: 0.7; }
+
 /* Full-card link target without nesting interactive elements */
 .entry__link::before {
   content: "";
