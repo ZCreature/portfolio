@@ -90,9 +90,8 @@ html {
 
 /* The masthead is sticky at 4rem, so in-page anchors have to clear it
    or the section heading lands underneath the bar. */
-/* Only needed while the nav is a bar overhead; the rail does not overlap. */
 :target,
-section[id] { scroll-margin-top: 1.5rem; }
+section[id] { scroll-margin-top: 5.5rem; }
 
 body {
   margin: 0;
@@ -194,23 +193,24 @@ section { padding-block: var(--gap-xl); }
 
 /* ---- 5. Site header -------------------------------------- */
 
-/* Navigation lives in a fixed rail down the left rather than a bar across
-   the top. On a page that is mostly a grid of work, a top bar competes with
-   the grid for the same horizontal band; a rail gets out of its way and
-   leaves the nav permanently in view without occupying reading width.
-
-   Below 64rem there is no room for a rail, so it folds back into a bar. */
+/* Navigation is a sticky bar across the top. (Until October 2026 it was a
+   fixed rail down the left; the bar gives the work grid the full width and
+   keeps the links in reach while scrolling.) At rest the bar is part of the
+   page and has no edge; js/motion.js stamps data-scrolled once content runs
+   underneath it, and only then does a hairline appear. */
 
 .masthead {
-  position: fixed;
-  inset: 0 auto 0 0;
-  width: var(--rail);
+  position: sticky;
+  top: 0;
   z-index: 50;
   background: var(--paper);
-  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--t-med) var(--ease);
 }
 
-/* Base nav. Also used by the footer link rows, so it lives outside the rail. */
+.masthead[data-scrolled="true"] { border-bottom-color: var(--rule); }
+
+/* Base nav. Also used by the footer link rows, so it lives outside the bar. */
 .nav {
   display: flex;
   gap: clamp(1rem, 2.5vw, 2rem);
@@ -225,67 +225,44 @@ section { padding-block: var(--gap-xl); }
 
 .nav a:hover, .nav a[aria-current="page"] { color: var(--ink); }
 
-/* The shell's max-width and centring are meaningless inside the rail. */
-.masthead .shell {
-  max-width: none;
-  padding-inline: var(--rail-pad);
+/* One row: mark and nameplate on the left, then the sections, the ways to
+   reach him, and the theme switch. The shell keeps the bar aligned with the
+   content edges below it. */
+.masthead__inner {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.4vw, 2rem);
+  height: 4.5rem;
 }
 
-.masthead .nav {
-  flex: 0 0 auto;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.99rem;                 /* 15.8px + 21.1px line box = the comp\'s 37px step */
-  margin-top: 2.03rem;           /* drops nav1 baseline from 405.5 to 438 */
-  width: 100%;
+.masthead .nav { flex: 0 1 auto; gap: clamp(1rem, 2.2vw, 1.9rem); }
+.masthead .nav a { font-size: 0.875rem; line-height: 1.4; }
+
+/* Elsewhere links: quieter, held apart from the sections by a hairline. */
+.masthead .nav--social {
+  gap: 0.9rem;
+  padding-left: clamp(1rem, 2.2vw, 1.9rem);
+  border-left: 1px solid var(--rule);
 }
-
-.masthead .nav a { font-size: 0.9282rem; line-height: 1.4; }
-
-/* Elsewhere links: same column, quieter voice, held apart from the
-   primary set by a clear step. */
-.masthead .nav--social { flex-direction: row; margin-top: 1.6rem; gap: 0.9rem; }
-.masthead .nav--social a { color: var(--ink-4); transition: color var(--t-fast) var(--ease); }
+.masthead .nav--social a { color: var(--ink-4); }
 .masthead .nav--social a:hover { color: var(--ink); }
 .masthead .nav--social svg { width: 15px; height: 15px; display: block; }
 
-/* At the foot of the rail, away from the links it is not one of. */
-.masthead .theme-toggle { margin-left: auto; margin-right: -0.35rem; }
+.masthead .theme-toggle { margin-right: -0.35rem; }
 
-/* ---- Rail contents ---------------------------------------
-   Mark, then name and role stacked, then the sections, with
-   About set apart because it is not one of them, and the ways
-   to reach him at the foot.                                */
+/* The mark links home. It duplicates the nameplate link beside it, so it
+   stays out of the tab order and the accessibility tree.
 
-/* The mark now runs full width, flush to the top edge, cropped to a
-   landscape frame rather than sitting inside the rail's padding. The
-   image is oversized inside it so the glow fills the frame the way the
-   Figma comp does. */
-/* The mark links home. It duplicates the nameplate link directly below it,
-   so it stays out of the tab order and the accessibility tree. */
+   Painted as a background rather than an <img>: if it is ever hidden, a
+   background image on a display:none element is never fetched. */
 .rail__mark {
-  width: calc(100% + 2 * var(--rail-pad));
-  margin: 0 calc(-1 * var(--rail-pad)) 0;
-  aspect-ratio: 264 / 228;
-  overflow: hidden;
-  display: block;
-}
-
-/* Painted as a background rather than an <img> on purpose. Below 64rem this
-   element is display:none, and a hidden <img> is still downloaded - 247 KB
-   that a phone never sees. Background images on a display:none element are
-   never fetched, so the rule below actually saves the bytes.
-
-   Figma places the 440px square at 241x241 inside the 264x228 frame, offset
-   (-5, -13). background-size is a share of the frame width: 241/264 = 91.29%.
-   background-position percentages align the same percentage point of image
-   and box, so each axis is offset / (box - image):
-     x  -5 / (264 - 241) = -21.739%
-     y -13 / (228 - 241) = 100% */
-.rail__mark {
+  flex: 0 0 auto;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-right: calc(-1 * clamp(0.35rem, 1vw, 0.9rem));
   background-image: url("../assets/img/mark.png?v=20260809f");
-  background-size: 91.29% auto;
-  background-position: -21.739% 100%;
+  background-size: 150% auto;
+  background-position: center;
   background-repeat: no-repeat;
 }
 
@@ -294,45 +271,32 @@ section { padding-block: var(--gap-xl); }
    the interface stays monochrome the way the rest of the site argues for. */
 :root[data-theme="dark"] .rail__mark { filter: grayscale(1); }
 
-.railmark { display: block; }
+/* Nameplate takes the slack, which pushes everything after it right. */
+.railmark { display: block; margin-right: auto; }
 
 .railmark__name {
   display: block;
-  font-size: 1.7936rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  line-height: 0.871;
-  letter-spacing: -0.022em;
+  line-height: 1;
+  letter-spacing: -0.015em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .railmark__role {
   display: block;
-  margin-top: 0.7125rem;
-  font-size: 0.7563rem;
+  margin-top: 0.3rem;
+  font-size: 0.625rem;
   font-weight: 700;
   letter-spacing: 0.075em;
   text-transform: uppercase;
   line-height: 1.3;
   color: var(--ink-3);
+  white-space: nowrap;
 }
 
-.rail__foot {
-  margin-top: auto;
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-}.masthead__inner {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: clamp(2rem, 4vw, 2.75rem);
-  height: 100%;
-  padding-block: 0 calc(var(--gap-m) + 0.15rem);
-}
-
-/* Content clears the rail. */
-body { padding-left: var(--rail); }
+.rail__foot { display: flex; align-items: center; }
 
 /* ---- 5b. Segmented control -------------------------------
    Shared by the masthead theme switch and every in-page demo
@@ -1105,57 +1069,11 @@ figure { margin: 0; }
   color: var(--paper);
   padding: 0.6rem 1rem;
   border-radius: 0;
-}/* ---- Rail folds to a bar --------------------------------- */
+}/* ---- Header on narrower screens ------------------------- */
 
+/* Tablets: the role line goes first, to keep the bar on one row. */
 @media (max-width: 64rem) {
-  body { padding-left: 0; }
-
-  /* No room for the full-bleed mark in a 4rem bar, and its negative-margin
-     crop breaks at these widths - the nameplate text leads instead. */
-  .rail__mark { display: none; }
-
-  /* Compact one-line nameplate for the bar. */
-  .railmark__name { font-size: 1.05rem; line-height: 1.1; white-space: nowrap; }
   .railmark__role { display: none; }
-
-  .masthead {
-    position: sticky;
-    inset: 0 0 auto 0;
-    width: auto;
-    border-right: 0;
-    border-bottom: 1px solid transparent;
-    transition: box-shadow var(--t-med) var(--ease),
-                border-color var(--t-med) var(--ease);
-  }
-
-  /* js/motion.js stamps this once the page has moved off the top. At rest the
-     bar is part of the page and wants no edge; only when content is running
-     underneath it does a separator have anything to separate. */
-  .masthead[data-scrolled="true"] { border-bottom-color: var(--rule); }
-
-  .masthead .shell { padding-inline: clamp(1.25rem, 5vw, 3.5rem); }
-
-  .masthead__inner {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: clamp(2rem, 4vw, 2.75rem);
-    height: 4rem;
-    padding-block: 0;
-  }
-
-  .masthead .nav {
-    flex: 0 1 auto;
-    flex-direction: row;
-    align-items: center;
-    gap: clamp(0.85rem, 2.5vw, 1.75rem);
-    width: auto;
-  }
-
-  .masthead .nav--social { margin-top: 0; }
-  .masthead .theme-toggle { margin-top: 0; margin-left: 0.25rem; }
-
-  :target, section[id] { scroll-margin-top: 5.5rem; }
 }
 
 /* Phones. The folded bar tried to hold the nameplate, four nav links, four
@@ -1173,7 +1091,8 @@ figure { margin: 0; }
 
   /* Row 1: name, then icons and the theme toggle. */
   .railmark { flex: 1 1 auto; }
-  .masthead .nav--social { order: 2; margin-left: auto; }
+  .masthead .nav--social { order: 2; margin-left: auto; padding-left: 0; border-left: 0; }
+  .rail__mark { width: 2.25rem; height: 2.25rem; }
   .masthead .rail__foot { order: 3; }
 
   /* Row 2: the primary links, wrapping rather than overflowing. */
