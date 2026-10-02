@@ -284,17 +284,6 @@ section { padding-block: var(--gap-xl); }
   white-space: nowrap;
 }
 
-.railmark__role {
-  display: block;
-  margin-top: 0.3rem;
-  font-size: 0.625rem;
-  font-weight: 700;
-  letter-spacing: 0.075em;
-  text-transform: uppercase;
-  line-height: 1.3;
-  color: var(--ink-3);
-  white-space: nowrap;
-}
 
 .rail__foot { display: flex; align-items: center; }
 
@@ -1070,11 +1059,6 @@ figure { margin: 0; }
   padding: 0.6rem 1rem;
   border-radius: 0;
 }/* ---- Header on narrower screens ------------------------- */
-
-/* Tablets: the role line goes first, to keep the bar on one row. */
-@media (max-width: 64rem) {
-  .railmark__role { display: none; }
-}
 
 /* Phones. The folded bar tried to hold the nameplate, four nav links, four
    social icons and the theme toggle on one 4rem line: it measured 585px
