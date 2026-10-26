@@ -78,6 +78,10 @@
   /* A step whose figure sits just above it: the figure IS the step's opening
      evidence, so no hairline between them - the pair reads as one section. */
   .case .step--joined { border-top: 0; padding-top: var(--gap-m); }
+  /* A figure inside a step, between its heading and its copy, is part of the
+     step: it takes the closer in-step gap rather than the 4rem a figure
+     standing on its own gets, so the heading stays attached to its image. */
+  .case .step > .figure { margin-block: var(--gap-m); }
   .case .case-hero { padding-block: clamp(4rem, 12vw, 9rem) var(--gap-l); }
   .case section:last-child { padding-bottom: var(--gap-xl); }
   /* Captions match the width of the figure they sit under. The 46ch site
@@ -404,39 +408,21 @@
       Greyscale printing and projector washout expose the same failure as
       CVD: color can no longer carry the information by itself.
     </p>
-
-    <p>Four rules came out of it, and they are the whole standard.</p>
-
-    <dl class="spec spec--rules">
-      <dt>4.5:1</dt>
-      <dd><b>Text on any fill.</b> AA contrast for body-size labels, checked at every tint step, not only at 100%.</dd>
-
-      <dt>3:1</dt>
-      <dd><b>Adjacent fills.</b> Non-text contrast between neighboring segments, so a boundary holds without an extra stroke.</dd>
-
-      <dt>&Delta;E&nbsp;10</dt>
-      <dd><b>Series separation.</b> A minimum perceptual distance between any two series after CVD simulation.</dd>
-
-      <dt>5</dt>
-      <dd><b>Categorical ceiling.</b> Past five series, color stops being a reliable encoding. Group, facet, or use position.</dd>
-    </dl>
   </div>
-  </section>
-
-  <section class="shell shell--narrow">
-    <div class="prose" data-reveal>
-      <p>
-        The conversation goes differently now. Nobody is being told their brand
-        color does not work. They are being shown what it does at 30% behind a
-        data label, and what the alternative is.
-      </p>
-    </div>
   </section>
 
   <section class="shell shell--narrow step">
     <div class="prose" data-reveal>
     <p class="meta">04 - Iteration and presentation</p>
     <h2>Four rounds, and what they are for</h2>
+  </div>
+    <figure class="figure" data-reveal>
+<div class="figure__frame">
+        <img src="../assets/img/work/healthcare/iteration-rounds.jpg?v=20260902b" alt="A Figma canvas holding many dated versions of the same mortality dashboard, laid out in columns by revision round, with the file list of client pages down the left." loading="lazy" decoding="async" width="1500" height="1054">
+      </div>
+      <figcaption><b>Four rounds, on the canvas.</b> Every revision kept and dated beside the one it replaced, so a later round argues against a version still on screen rather than from memory.</figcaption>
+    </figure>
+    <div class="prose" data-reveal>
     <p>
       Everything goes through internal review before a client sees it. Then
       it gets presented, and typically runs four revision cycles.
@@ -454,16 +440,6 @@
       relitigating it.
     </p>
   </div>
-  </section>
-
-
-  <section class="shell shell--narrow">
-    <figure class="figure" data-reveal>
-<div class="figure__frame">
-        <img src="../assets/img/work/healthcare/iteration-rounds.jpg?v=20260902b" alt="A Figma canvas holding many dated versions of the same mortality dashboard, laid out in columns by revision round, with the file list of client pages down the left." loading="lazy" decoding="async" width="1500" height="1054">
-      </div>
-      <figcaption><b>Four rounds, on the canvas.</b> Every revision kept and dated beside the one it replaced, so a later round argues against a version still on screen rather than from memory.</figcaption>
-    </figure>
   </section>
 
   <section class="shell shell--narrow step">
