@@ -25,6 +25,8 @@ No build step, no dependencies. Open `index.html` via a local server
     js/theme.js                   light/dark, light by default
     js/motion.js                  reveals + carousels + lazy video
     js/embed.js                   lazy iframe embeds (Tableau, Leaflet)
+    js/split-lens.js              CVD split view on the Color Accessibility
+                                  Checker tile, home page only
     assets/data/laps.json         lap data (currently a reconstruction)
     assets/data/editorial.json    tearsheet manifest — scaffold, not yet wired
 
