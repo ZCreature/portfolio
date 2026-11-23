@@ -284,6 +284,10 @@ section { padding-block: var(--gap-xl); }
   white-space: nowrap;
 }
 
+/* Home page only: the name moves down into the hero, so the bar keeps just
+   the mark, and the mark takes the slack the nameplate used to. */
+.masthead--home .rail__mark { margin-right: auto; }
+
 
 .rail__foot { display: flex; align-items: center; }
 
@@ -577,6 +581,17 @@ section { padding-block: var(--gap-xl); }
    (.ink-ready), so without JS the hero reads exactly as before. */
 .ink-ready [data-ink] .ink-w { color: var(--ink-3); transition: color 0.35s ease; }
 .ink-ready [data-ink] .ink-w.is-inked { color: var(--ink); }
+
+/* The name, set as the top-bar nameplate was, sitting over the role line. */
+.hero-name {
+  display: block;
+  margin-bottom: 0.9rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+}
 
 .hero-filters a {
   color: inherit;

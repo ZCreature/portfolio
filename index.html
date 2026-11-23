@@ -38,20 +38,16 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="css/base.css?v=20261002b">
+<link rel="stylesheet" href="css/base.css?v=20261123a">
 <noscript><style>[data-reveal]{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
 
 <a class="skip" href="#main">Skip to work</a>
 
-<header class="masthead">
+<header class="masthead masthead--home">
   <div class="shell masthead__inner">
     <a class="rail__mark" href="index.html" aria-hidden="true" tabindex="-1">
-    </a>
-
-    <a class="railmark" href="index.html">
-      <span class="railmark__name">Chris Almaguer</span>
     </a>
 
     <nav class="nav" aria-label="Primary">
@@ -86,13 +82,16 @@
 
 <main id="main" tabindex="-1">
 
-<!-- The rail carries the name, so the h1 carries the role. It is a real
-     heading rather than the sr-only one it replaces: the first thing a
-     recruiter reads should also be the first thing a crawler reads. -->
+<!-- On the home page the name sits here rather than in the top bar, set
+     just above the role inside the same h1, so the first thing a recruiter
+     reads is also the first thing a crawler reads: name, then role. -->
 <section class="shell case-hero" style="padding-bottom: var(--gap-m);">
   <!-- Smaller than the case-study .h1: this is a role line, not a headline,
        and it should not shout over the work it sits above. -->
-  <h1 class="h1" data-reveal style="font-size: clamp(1.45rem, 2.5vw, 2rem);">Senior Data Visualization Designer</h1>
+  <h1 class="h1" data-reveal style="font-size: clamp(1.45rem, 2.5vw, 2rem);">
+    <span class="hero-name">Chris Almaguer<span class="sr-only">,</span></span>
+    Senior Data Visualization Designer
+  </h1>
   <p class="lede" data-ink data-reveal style="--reveal-delay:70ms; margin-top: var(--gap-m); max-width: 42rem;">
     I design complex information systems, analytics products, and interfaces
     that make data easier to understand and act on.
