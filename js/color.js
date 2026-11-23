@@ -1,5 +1,5 @@
 /* ============================================================
-   color.js - the colour engine behind the Color Safety Lens
+   color.js - the colour engine behind the Color Accessibility Checker
    case study. Implemented in the page so the argument can be
    demonstrated rather than asserted.
 

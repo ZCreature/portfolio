@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
-  <title>Color Safety Lens, full screen tool - Chris Almaguer</title>
+  <title>Color Accessibility Checker, full screen tool - Chris Almaguer</title>
   <style>
     :root {
       color-scheme: light;
@@ -909,7 +909,7 @@
   </script>
 </head>
 <body>
-  <h1 class="sr-only">Color Safety Lens</h1>
+  <h1 class="sr-only">Color Accessibility Checker</h1>
   <button class="theme-toggle" id="themeToggle" title="Toggle dark mode" aria-label="Toggle dark mode">
     <svg class="ico-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 019.5 3.5a8.5 8.5 0 108.5 11z"/></svg>
     <svg class="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.5 4.5l2.1 2.1M17.4 17.4l2.1 2.1M19.5 4.5l-2.1 2.1M6.6 17.4l-2.1 2.1"/></svg>
@@ -970,7 +970,7 @@
                 <select id="heatmapColorA" aria-label="Left heatmap color"></select>
                 <select id="heatmapColorB" aria-label="Right heatmap color"></select>
               </div>
-              <div class="lens-controls" role="group" aria-label="Heatmap color safety lens">
+              <div class="lens-controls" role="group" aria-label="Heatmap vision lens">
                 <select id="heatmapVisionMode" aria-label="Heatmap vision simulation">
                   <option value="normal">RGB view</option>
                   <option value="protan">Protan</option>
@@ -1001,7 +1001,7 @@
               <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="2.8"/></svg>Vision Control</h2>
             </div>
             <div class="toolbar-actions">
-              <div class="lens-controls" role="group" aria-label="Tint matrix color safety lens">
+              <div class="lens-controls" role="group" aria-label="Tint matrix vision lens">
                 <select id="matrixVisionMode" aria-label="Tint matrix vision simulation">
                   <option value="normal">RGB view</option>
                   <option value="protan">Protan</option>
@@ -1639,7 +1639,7 @@
 
     function exportJsonTokens() {
       const data = {
-        name: "Color Safety Lens",
+        name: "Color Accessibility Checker",
         wcag: {
           textColor: "000000",
           aaNormalText: 4.5,
@@ -1657,7 +1657,7 @@
         }))
       };
 
-      downloadFile("color-safety-lens-tokens.json", "application/json;charset=utf-8", JSON.stringify(data, null, 2));
+      downloadFile("color-accessibility-tokens.json", "application/json;charset=utf-8", JSON.stringify(data, null, 2));
       copyBtn.textContent = "Saved";
       setTimeout(() => copyBtn.textContent = "JSON", 1200);
     }
@@ -1915,7 +1915,7 @@
     });
 
     copyBtn.addEventListener("click", exportJsonTokens);
-    svgExportBtn.addEventListener("click", () => downloadScreenSvg("color-safety-lens-current-screen.svg", svgExportBtn));
+    svgExportBtn.addEventListener("click", () => downloadScreenSvg("color-accessibility-current-screen.svg", svgExportBtn));
     heatmapScheme.addEventListener("change", () => update());
     heatmapColorA.addEventListener("change", () => update());
     heatmapColorB.addEventListener("change", () => update());
