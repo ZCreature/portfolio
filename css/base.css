@@ -582,16 +582,9 @@ section { padding-block: var(--gap-xl); }
 .ink-ready [data-ink] .ink-w { color: var(--ink-3); transition: color 0.35s ease; }
 .ink-ready [data-ink] .ink-w.is-inked { color: var(--ink); }
 
-/* The name, set as the top-bar nameplate was, sitting over the role line. */
-.hero-name {
-  display: block;
-  margin-bottom: 0.9rem;
-  font-size: 1.1rem;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.015em;
-  text-transform: uppercase;
-}
+/* Home hero: one line, one size. The role steps back a tone so the name
+   reads first; --ink-3 still clears AA on the page at this size. */
+.hero-role { color: var(--ink-3); }
 
 .hero-filters a {
   color: inherit;

@@ -38,7 +38,7 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="css/base.css?v=20261123a">
+<link rel="stylesheet" href="css/base.css?v=20261123b">
 <noscript><style>[data-reveal]{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
@@ -82,16 +82,15 @@
 
 <main id="main" tabindex="-1">
 
-<!-- On the home page the name sits here rather than in the top bar, set
-     just above the role inside the same h1, so the first thing a recruiter
-     reads is also the first thing a crawler reads: name, then role. -->
+<!-- On the home page the name sits here rather than in the top bar: name
+     and role as one line in one h1, so the first thing a recruiter reads is
+     also the first thing a crawler reads. The role steps back to grey so the
+     name reads first. The name and the role are each bound with
+     non-breaking spaces, so a narrow screen breaks after the dash. -->
 <section class="shell case-hero" style="padding-bottom: var(--gap-m);">
   <!-- Smaller than the case-study .h1: this is a role line, not a headline,
        and it should not shout over the work it sits above. -->
-  <h1 class="h1" data-reveal style="font-size: clamp(1.45rem, 2.5vw, 2rem);">
-    <span class="hero-name">Chris Almaguer<span class="sr-only">,</span></span>
-    Senior Data Visualization Designer
-  </h1>
+  <h1 class="h1" data-reveal style="font-size: clamp(1.45rem, 2.5vw, 2rem);">Chris&nbsp;Almaguer&nbsp;<span class="hero-role">&ndash; Data&nbsp;Visualization&nbsp;Designer</span></h1>
   <p class="lede" data-ink data-reveal style="--reveal-delay:70ms; margin-top: var(--gap-m); max-width: 42rem;">
     I design complex information systems, analytics products, and interfaces
     that make data easier to understand and act on.
