@@ -32,6 +32,24 @@ const SVGNS = 'http://www.w3.org/2000/svg';
 // light in the photograph comes from. Fractions of the photograph.
 const REST = [0.7, 0.3];
 
+// The laptop screen in healthcare-tile.jpg, in its 1200 x 750 pixels,
+// clockwise from top left. The lights are masked off it, so if the photo is
+// ever re-shot or re-cropped these four corners move with it: check them
+// with scripts/tile-plates/.
+export const SCREEN = [[323, 146.5], [804, 124], [801, 405], [329, 427]];
+
+// Full strength everywhere but the screen, 15% on it, with an edge softened
+// by two pixels so it never reads as a cut-out.
+function screenMask() {
+  const d = `M${SCREEN.map((p) => p.join(' ')).join('L')}Z`;
+  const svg =
+    "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 750' preserveAspectRatio='none'>" +
+    "<filter id='s'><feGaussianBlur stdDeviation='2'/></filter><g filter='url(#s)'>" +
+    `<path fill-rule='evenodd' d='M-20-20H1220V770H-20Z${d}'/><path fill-opacity='.15' d='${d}'/>` +
+    '</g></svg>';
+  return `url("data:image/svg+xml,${encodeURIComponent(svg)}") 0 0 / 100% 100% no-repeat`;
+}
+
 // The photograph eases in a little while lit, so the pointer has room to
 // move it without showing an edge. Held still under reduced motion.
 const ZOOM = REDUCED ? 0 : 0.045;
@@ -71,6 +89,11 @@ function init(thumb) {
   sun.className = 'sunlight__sun';
   const shade = layer('shade', leaves);
   const glow = layer('sun', sun);
+  const mask = screenMask();
+  for (const el of [shade, glow]) {
+    el.style.setProperty('-webkit-mask', mask);
+    el.style.setProperty('mask', mask);
+  }
   thumb.append(shade, glow);
 
   let lit = 0, litTo = 0;                       // 0 dark .. 1 lit

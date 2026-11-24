@@ -871,16 +871,14 @@ section { padding-block: var(--gap-xl); }
 .is-lighting .sunlight__layer,
 .is-lighting .sunlight__gobo,
 .is-lighting .sunlight__sun { will-change: transform, opacity; }
-/* One layer per light, each carrying its blend mode. The mask is the laptop
-   screen, measured on the 1200 x 750 photograph: the lights fall on the wall
-   and the shelf at full strength and on the dashboard at 15%. */
+/* One layer per light, each carrying its blend mode. js/sunlight.js gives
+   each layer a mask of the laptop screen, so the lights fall on the wall and
+   the shelf at full strength and on the dashboard at 15%. */
 .sunlight__layer {
   position: absolute;
   inset: 0;
   opacity: 0;
   pointer-events: none;
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 750' preserveAspectRatio='none'%3E%3Cfilter id='s'%3E%3CfeGaussianBlur stdDeviation='2'/%3E%3C/filter%3E%3Cg filter='url(%23s)'%3E%3Cpath fill-rule='evenodd' d='M-20-20H1220V770H-20ZM323 146.5L804 124L801 405L329 427Z'/%3E%3Cpath fill-opacity='.15' d='M323 146.5L804 124L801 405L329 427Z'/%3E%3C/g%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
-          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 750' preserveAspectRatio='none'%3E%3Cfilter id='s'%3E%3CfeGaussianBlur stdDeviation='2'/%3E%3C/filter%3E%3Cg filter='url(%23s)'%3E%3Cpath fill-rule='evenodd' d='M-20-20H1220V770H-20ZM323 146.5L804 124L801 405L329 427Z'/%3E%3Cpath fill-opacity='.15' d='M323 146.5L804 124L801 405L329 427Z'/%3E%3C/g%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
 }
 .sunlight__layer--shade { mix-blend-mode: multiply; }
 .sunlight__layer--sun { mix-blend-mode: soft-light; }
@@ -1364,6 +1362,10 @@ figure { margin: 0; }
 
 [data-lightbox] .car__item img,
 [data-lightbox] .figure__frame img { cursor: zoom-in; }
+/* The frames and the carousel track clip their overflow, so the focus ring
+   sits inside the image rather than around it. */
+[data-lightbox] .car__item img:focus-visible,
+[data-lightbox] .figure__frame img:focus-visible { outline: 3px solid var(--ink); outline-offset: -3px; }
 
 .lb[hidden] { display: none; }
 

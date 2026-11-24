@@ -6,6 +6,8 @@
    carousel's slides (buttons or arrow keys) and keeps the
    strip underneath in step, so closing lands on the slide you
    were reading. Esc, the close button, or the scrim closes.
+   Each image is also a keyboard control: Tab reaches it, Enter
+   or Space opens it, and closing hands focus back to it.
    Degrades to nothing: without JS the page is unchanged.
    ============================================================ */
 
@@ -102,9 +104,24 @@
 
   /* ---- Wiring -------------------------------------------- */
 
+  /* Every qualifying image becomes a button that opens the dialog. Its name
+     stays its alt text, so it still says what the image shows. */
+  document.querySelectorAll(`${SLIDE}, ${SOLO}`).forEach((el) => {
+    el.tabIndex = 0;
+    el.setAttribute('role', 'button');
+    el.setAttribute('aria-haspopup', 'dialog');
+  });
+
   document.addEventListener('click', (e) => {
     const hit = e.target.closest(`${SLIDE}, ${SOLO}`);
     if (hit) open(hit);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (!box.hidden || (e.key !== 'Enter' && e.key !== ' ')) return;
+    if (!e.target.matches?.(`${SLIDE}, ${SOLO}`)) return;
+    e.preventDefault();
+    open(e.target);
   });
 
   btnClose.addEventListener('click', close);

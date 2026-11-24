@@ -36,7 +36,7 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="../css/base.css?v=20261123d">
+<link rel="stylesheet" href="../css/base.css?v=20261123e">
 <style>
   /* Tableau sets x-frame-options: SAMEORIGIN, so a plain iframe is refused.
      Their embedding API mounts the viz in a shadow root instead. */
@@ -256,10 +256,15 @@
 
 </main>
 
-<script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
+<!-- Pinned to one release, with its hash: "latest" changes under the page
+     whenever Tableau ships, and runs with full access to it. To upgrade,
+     change the version and recompute the integrity value (sha384). -->
+<script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.17.0.min.js"
+        integrity="sha384-Sg/uNuA3UTi34C1h8Jpomoywxv2aVlGgeElx0uYZ0U+k2vuUV261uRiYfELQeotU"
+        crossorigin="anonymous"></script>
 <script src="../js/guard.js?v=20260817a"></script>
 <script src="../js/widont.js?v=20260901a"></script>
 <script src="../js/theme.js?v=20260809h"></script>
-<script type="module" src="../js/motion.js?v=20260826b"></script>
+<script type="module" src="../js/motion.js?v=20261123a"></script>
 </body>
 </html>

@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Tile plates</title>
+<link rel="icon" href="../../favicon.png" type="image/png">
+<style>
+  body { font: 15px/1.5 -apple-system, BlinkMacSystemFont, system-ui, sans-serif; color: #26262b; background: #fbfbfa; max-width: 64rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+  h1 { font-size: 1.5rem; margin: 0 0 0.5rem; letter-spacing: -0.02em; }
+  h2 { font-size: 1.05rem; margin: 2.5rem 0 0.4rem; }
+  p { max-width: 44rem; margin: 0.4rem 0; }
+  code { font: 13px ui-monospace, SFMono-Regular, Menlo, monospace; }
+  canvas { width: 100%; height: auto; display: block; background: #fff; border: 1px solid rgba(38, 38, 43, 0.13); margin-top: 0.75rem; }
+  .row { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin-top: 0.75rem; }
+  button, .save { font: inherit; font-size: 14px; padding: 0.4rem 0.8rem; border: 1px solid #26262b; background: #fff; color: #26262b; border-radius: 3px; cursor: pointer; text-decoration: none; }
+  button:disabled { opacity: 0.5; cursor: progress; }
+  pre { font: 13px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace; background: #f2f2f0; padding: 0.75rem; overflow-x: auto; white-space: pre-wrap; min-height: 1.45em; }
+</style>
+</head>
+<body>
+<h1>Tile plates</h1>
+<p>Two home page tiles animate their photographs by pixel position, so each depends on one exact image. This page rebuilds or checks what they measure. Serve the repo root locally (<code>python3 -m http.server</code>) and open <code>/scripts/tile-plates/</code>. Every value is read from the tile scripts themselves, so there is nothing to keep in step here.</p>
+
+<h2>Newsroom tile · <code>js/reprint.js</code> + <code>newsroom-blank.png</code></h2>
+<p><b>Check page boxes</b> matches each Data Dive page file against <code>newsroom.jpg</code> and compares the result with <code>PAGES</code>. <b>Build patch</b> lifts the paper light out of the photo and paints it over every mark in <code>MARKS</code>; the preview should show the two pages with no charts and every label still in place. Save it over <code>assets/img/tools/newsroom-blank.png</code> and bump its <code>?v=</code> in <code>index.html</code>.</p>
+<div class="row">
+  <button id="check" type="button">Check page boxes</button>
+  <button id="build" type="button">Build patch</button>
+  <a class="save" id="save" download="newsroom-blank.png" hidden>Save newsroom-blank.png</a>
+</div>
+<pre id="log" aria-live="polite"></pre>
+<canvas id="preview" width="1200" height="750"></canvas>
+
+<h2>Healthcare tile · <code>js/sunlight.js</code></h2>
+<p>The magenta outline is <code>SCREEN</code>, the area the light is kept off. It should sit exactly on the laptop's display. If it doesn't, adjust the four corners in <code>js/sunlight.js</code>.</p>
+<canvas id="screen" width="1200" height="750"></canvas>
+
+<script type="module">
+import { PAGES, MARKS } from '../../js/reprint.js';
+import { SCREEN } from '../../js/sunlight.js';
+
+const ROOT = '../../';
+const SRC_W = 910, SRC_H = 1200;
+const log = (msg) => { document.getElementById('log').textContent += `${msg}\n`; };
+const load = (src) => new Promise((ok, fail) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => fail(new Error(`could not load ${src}`)); i.src = ROOT + src; });
+function pixels(img, w, h) {
+  const c = new OffscreenCanvas(w, h), x = c.getContext('2d');
+  x.drawImage(img, 0, 0, w, h);
+  return x.getImageData(0, 0, w, h);
+}
+const darkness = (id) => { const d = id.data, g = new Float32Array(d.length / 4); for (let i = 0; i < g.length; i++) g[i] = 1 - (0.299 * d[i * 4] + 0.587 * d[i * 4 + 1] + 0.114 * d[i * 4 + 2]) / 255; return g; };
+
+/* ---- Page boxes: normalised cross-correlation, coarse then fine ---- */
+function ncc(A, aw, T, tw, th, ox, oy) {
+  let sa = 0, st = 0, saa = 0, stt = 0, sat = 0;
+  const n = tw * th;
+  for (let y = 0; y < th; y++) for (let x = 0; x < tw; x++) {
+    const a = A[(oy + y) * aw + ox + x], t = T[y * tw + x];
+    sa += a; st += t; saa += a * a; stt += t * t; sat += a * t;
+  }
+  return (sat - (sa * st) / n) / Math.sqrt((saa - (sa * sa) / n) * (stt - (st * st) / n) + 1e-9);
+}
+async function match(photo, page, box) {
+  const F = 4, W = 1200 / F, H = 750 / F, A = darkness(pixels(photo, W, H));
+  let best = { c: -2 };
+  for (let s = 0.40; s <= 0.62; s += 0.004) {
+    const tw = Math.round((SRC_W * s) / F), th = Math.round((SRC_H * s) / F), T = darkness(pixels(page, tw, th));
+    for (let oy = Math.max(0, Math.round(box.y / F) - 12); oy <= Math.min(H - th, Math.round(box.y / F) + 12); oy++)
+      for (let ox = Math.max(0, Math.round(box.x / F) - 12); ox <= Math.min(W - tw, Math.round(box.x / F) + 12); ox++) {
+        const c = ncc(A, W, T, tw, th, ox, oy);
+        if (c > best.c) best = { c, s, x: ox * F, y: oy * F };
+      }
+  }
+  const A1 = darkness(pixels(photo, 1200, 750));
+  let fine = { c: -2 };
+  for (let s = best.s - 0.006; s <= best.s + 0.006; s += 0.001) {
+    const tw = Math.round(SRC_W * s), th = Math.round(SRC_H * s), T = darkness(pixels(page, tw, th));
+    for (let oy = best.y - 6; oy <= best.y + 6; oy++) for (let ox = best.x - 6; ox <= best.x + 6; ox++) {
+      if (ox < 0 || oy < 0 || ox + tw > 1200 || oy + th > 750) continue;
+      const c = ncc(A1, 1200, T, tw, th, ox, oy);
+      if (c > fine.c) fine = { c, x: ox, y: oy, w: tw, h: th };
+    }
+  }
+  return fine;
+}
+
+/* ---- Paper light: photo divided by page, on clean paper only ---- */
+function paperLight(T, page, P) {
+  const { x: bx, y: by, w: bw, h: bh } = P;
+  const O = pixels(page, bw, bh).data;
+  const lum = new Float32Array(bw * bh);
+  for (let i = 0; i < bw * bh; i++) lum[i] = (O[i * 4] + O[i * 4 + 1] + O[i * 4 + 2]) / 765;
+  // Clean paper: the pixel and its 5 x 5 neighbourhood are all near white on the page file.
+  const clean = (X, y) => { for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++) { const xx = X + dx, yy = y + dy; if (xx < 0 || yy < 0 || xx >= bw || yy >= bh) continue; if (lum[yy * bw + xx] < 0.88) return false; } return true; };
+  const S = 2, gw = Math.ceil(bw / S), gh = Math.ceil(bh / S);
+  const acc = new Float32Array(gw * gh * 3), wt = new Float32Array(gw * gh);
+  for (let y = 0; y < bh; y++) for (let X = 0; X < bw; X++) {
+    if (!clean(X, y)) continue;
+    const o = (y * bw + X) * 4, t = ((by + y) * 1200 + bx + X) * 4;
+    const r = T.data[t] / Math.max(1, O[o]);
+    if (r < 0.55 || r > 1.08) continue;
+    const g = ((y / S) | 0) * gw + ((X / S) | 0);
+    for (let k = 0; k < 3; k++) acc[g * 3 + k] += Math.min(1.2, T.data[t + k] / Math.max(1, O[o + k]));
+    wt[g]++;
+  }
+  const blur = (rad) => {
+    const A2 = new Float32Array(acc.length), W2 = new Float32Array(wt.length);
+    for (let y = 0; y < gh; y++) for (let X = 0; X < gw; X++) {
+      let a0 = 0, a1 = 0, a2 = 0, ww = 0;
+      for (let dy = -rad; dy <= rad; dy++) for (let dx = -rad; dx <= rad; dx++) {
+        const yy = y + dy, xx = X + dx;
+        if (yy < 0 || xx < 0 || yy >= gh || xx >= gw) continue;
+        const g = yy * gw + xx; a0 += acc[g * 3]; a1 += acc[g * 3 + 1]; a2 += acc[g * 3 + 2]; ww += wt[g];
+      }
+      const g = y * gw + X; A2[g * 3] = a0; A2[g * 3 + 1] = a1; A2[g * 3 + 2] = a2; W2[g] = ww;
+    }
+    return [A2, W2];
+  };
+  // Sharp where there is enough clean paper, wider and wider where there is not.
+  const levels = [[1, 3], [6, 4], [16, 4], [40, 1]].map(([rad, need]) => [...blur(rad), need]);
+  const light = new Uint8ClampedArray(gw * gh * 3);
+  for (let g = 0; g < gw * gh; g++) {
+    const L = levels.find(([, W, need]) => W[g] >= need) || levels[levels.length - 1];
+    for (let k = 0; k < 3; k++) light[g * 3 + k] = L[1][g] < 1 ? 242 : Math.round(255 * Math.min(1, L[0][g * 3 + k] / L[1][g]));
+  }
+  return { light, gw, gh };
+}
+
+/* ---- Which page pixels belong to a mark ---- */
+function markMask(side, page) {
+  const id = pixels(page, SRC_W, SRC_H), d = id.data, m = new Uint8Array(SRC_W * SRC_H);
+  const c = new OffscreenCanvas(SRC_W, SRC_H), x = c.getContext('2d');
+  x.fillStyle = '#000';
+  for (const k of MARKS.filter((mk) => mk.page === side)) {
+    x.beginPath();
+    if (k.kind === 'arc') {
+      const a0 = k.dir < 0 ? Math.PI / 2 : -Math.PI / 2, a1 = a0 + Math.PI;
+      x.arc(k.c[0], k.c[1], k.rad, a0, a1); x.arc(k.c[0], k.c[1], k.inner, a1, a0, true); x.closePath(); x.fill();
+    } else if (k.kind === 'down') { const [a, b, w, h] = k.r; x.fillRect(a - 2, b + 1, w + 4, h + 2); }
+    else if (k.kind === 'up') { const [a, b, w, h] = k.r; x.fillRect(a - 2, b, w + 4, h); }
+    else if (k.kind === 'across') { const [a, b, w, h] = k.r; x.fillRect(a - 2, b - 2, w + 4, h + 4); }
+  }
+  const shapes = x.getImageData(0, 0, SRC_W, SRC_H).data;
+  for (let i = 0; i < SRC_W * SRC_H; i++) if (shapes[i * 4 + 3] > 0) m[i] = 1;
+  // Line charts: only the navy ink, grown by three pixels, so their value labels stay.
+  for (const k of MARKS.filter((mk) => mk.page === side && mk.kind === 'wipe')) {
+    const [a, b, w, h] = k.r;
+    for (let yy = b; yy < b + h; yy++) for (let xx = a; xx < a + w; xx++) {
+      const i = (yy * SRC_W + xx) * 4;
+      if (d[i + 2] - d[i] > 18 && d[i + 2] > 60) {
+        for (let dy = -3; dy <= 3; dy++) for (let dx = -3; dx <= 3; dx++) {
+          const X = xx + dx, Y = yy + dy;
+          if (X >= a - 3 && X < a + w + 3 && Y >= b - 3 && Y < b + h + 3) m[Y * SRC_W + X] = 1;
+        }
+      }
+    }
+  }
+  return m;
+}
+
+async function build() {
+  const photo = await load('assets/img/tools/newsroom.jpg');
+  const T = pixels(photo, 1200, 750);
+  const out = new ImageData(1200, 750);
+  let count = 0;
+  for (const side of ['L', 'R']) {
+    const P = PAGES[side], page = await load(P.file);
+    const { light, gw, gh } = paperLight(T, page, P);
+    const mask = markMask(side, page);
+    for (let y = P.y; y < P.y + P.h; y++) for (let x = P.x; x < P.x + P.w; x++) {
+      // A photo pixel covers about two page pixels; replace it if any of its neighbourhood is marked.
+      const u0 = Math.floor(((x - P.x) * SRC_W) / P.w), v0 = Math.floor(((y - P.y) * SRC_H) / P.h);
+      let hit = false;
+      for (let v = v0 - 1; v <= v0 + 2 && !hit; v++) for (let u = u0 - 1; u <= u0 + 2; u++) {
+        if (u >= 0 && v >= 0 && u < SRC_W && v < SRC_H && mask[v * SRC_W + u]) { hit = true; break; }
+      }
+      if (!hit) continue;
+      const su = Math.min(gw - 1, Math.floor(((x - P.x) / P.w) * gw)), sv = Math.min(gh - 1, Math.floor(((y - P.y) / P.h) * gh));
+      const si = (sv * gw + su) * 3, oi = (y * 1200 + x) * 4;
+      out.data[oi] = light[si]; out.data[oi + 1] = light[si + 1]; out.data[oi + 2] = light[si + 2]; out.data[oi + 3] = 255;
+      count++;
+    }
+  }
+  const patch = new OffscreenCanvas(1200, 750);
+  patch.getContext('2d').putImageData(out, 0, 0);
+  const view = document.getElementById('preview').getContext('2d');
+  view.drawImage(photo, 0, 0);
+  view.drawImage(patch, 0, 0);
+  const blob = await patch.convertToBlob({ type: 'image/png' });
+  const save = document.getElementById('save');
+  save.href = URL.createObjectURL(blob);
+  save.hidden = false;
+  window.__patch = out;  // for scripted checks
+  log(`Patch built: ${count.toLocaleString()} photo pixels repainted, ${Math.round(blob.size / 1024)} KB.`);
+}
+
+async function check() {
+  const photo = await load('assets/img/tools/newsroom.jpg');
+  for (const side of ['L', 'R']) {
+    const P = PAGES[side], page = await load(P.file), m = await match(photo, page, P);
+    const same = m.x === P.x && m.y === P.y && m.w === P.w && m.h === P.h;
+    log(`${side} page: found x ${m.x}, y ${m.y}, w ${m.w}, h ${m.h} (match ${m.c.toFixed(3)}). ${same ? 'Same as PAGES.' : `PAGES says x ${P.x}, y ${P.y}, w ${P.w}, h ${P.h}: update it.`}`);
+  }
+}
+
+function run(button, job) {
+  button.addEventListener('click', async () => {
+    button.disabled = true;
+    try { await job(); } catch (e) { log(`Failed: ${e.message}`); } finally { button.disabled = false; }
+  });
+}
+run(document.getElementById('build'), build);
+run(document.getElementById('check'), check);
+
+// The healthcare screen outline, drawn over its photo.
+load('assets/img/tools/healthcare-tile.jpg').then((img) => {
+  const x = document.getElementById('screen').getContext('2d');
+  x.drawImage(img, 0, 0, 1200, 750);
+  x.beginPath();
+  SCREEN.forEach(([px, py], i) => (i ? x.lineTo(px, py) : x.moveTo(px, py)));
+  x.closePath();
+  x.fillStyle = 'rgba(230, 0, 126, 0.18)'; x.fill();
+  x.lineWidth = 2; x.strokeStyle = '#e6007e'; x.stroke();
+}).catch((e) => log(`Failed: ${e.message}`));
+</script>
+</body>
+</html>

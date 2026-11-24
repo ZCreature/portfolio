@@ -26,25 +26,29 @@ const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const HOVER = window.matchMedia('(hover: hover)').matches;
 const DPR = Math.min(2, window.devicePixelRatio || 1);
 
-// The pages in the photograph's 1200 x 750 pixels; marks below are in the
-// 910 x 1200 pixels of the original page files.
-const PAGES = {
-  L: { x: 97, y: 58, w: 480, h: 632 },
-  R: { x: 647, y: 57, w: 479, h: 631 },
+// The pages in the photograph's 1200 x 750 pixels, found by matching each
+// original page file against it; marks below are in the 910 x 1200 pixels of
+// those files. Everything here is tied to newsroom.jpg: if the photo is ever
+// re-shot or re-cropped, check the boxes and rebuild newsroom-blank.png with
+// scripts/tile-plates/, which reads these same values.
+export const PAGES = {
+  L: { x: 97, y: 58, w: 480, h: 632, file: 'assets/img/work/editorial/c/dive-06.jpg' },
+  R: { x: 647, y: 57, w: 479, h: 631, file: 'assets/img/work/editorial/c/dive-19.jpg' },
 };
 const SRC_W = 910;
 const SRC_H = 1200;
 
 // kind: down hangs from a zero line, up stands on one, across grows to the
-// right, arc is a half donut sweeping from the top (dir -1 sweeps left),
-// wipe draws a line chart left to right. d is the start in ms.
+// right, arc is a half donut (inner and outer radius) sweeping from the top
+// (dir -1 sweeps left), wipe draws a line chart left to right. d is the
+// start in ms.
 const bars = (page, kind, rects, d0, step) =>
   rects.map((r, i) => ({ page, kind, r, d: d0 + i * step, dur: 620 }));
-const MARKS = [
+export const MARKS = [
   // Left: Local businesses slow to open and reopen in 2020.
   ...bars('L', 'down', [[515, 466, 41, 72], [563, 467, 43, 84], [634, 466, 42, 74], [682, 467, 43, 41], [753, 466, 42, 167], [802, 466, 43, 160]], 120, 70),
-  { page: 'L', kind: 'arc', c: [248.5, 641], rad: 160, dir: 1, d: 260, dur: 820 },
-  { page: 'L', kind: 'arc', c: [462, 1004], rad: 158, dir: -1, d: 760, dur: 820 },
+  { page: 'L', kind: 'arc', c: [248.5, 641], inner: 76, rad: 160, dir: 1, d: 260, dur: 820 },
+  { page: 'L', kind: 'arc', c: [462, 1004], inner: 76, rad: 158, dir: -1, d: 760, dur: 820 },
   { page: 'L', kind: 'up', r: [515, 900, 41, 6], d: 820, dur: 420 },
   ...bars('L', 'down', [[563, 907, 43, 26], [634, 906, 37, 14], [682, 907, 43, 75], [753, 906, 42, 150], [802, 907, 43, 169]], 880, 70),
   // Right: SV real estate took minor hits overall in 2021.

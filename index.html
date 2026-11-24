@@ -38,7 +38,7 @@
       document.documentElement.setAttribute('data-theme', 'dark');
   } catch (e) {}
 </script>
-<link rel="stylesheet" href="css/base.css?v=20261123d">
+<link rel="stylesheet" href="css/base.css?v=20261123e">
 <noscript><style>[data-reveal]{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
@@ -115,7 +115,10 @@
       <div class="tile__thumb" data-sunlight>
         <!-- The readmissions demo on the fictional Great State brand: every
              figure on screen is synthetic, which is what makes it showable on
-             the public front page. -->
+             the public front page.
+             js/sunlight.js keeps its light off the laptop screen by pixel
+             position in this photo. If the photo changes, re-check SCREEN
+             with scripts/tile-plates/. -->
         <img src="assets/img/tools/healthcare-tile.jpg?v=20260820d"
              width="1200" height="750" fetchpriority="high" decoding="async"
              alt="A laptop on a wooden wall shelf in dappled light, showing the readmissions dashboard for a demo hospital system: KPI cards across the top, a bubble scatter of readmit ratio against length-of-stay index, and a discharge status table.">
@@ -137,6 +140,9 @@
     </article>
       <article class="tile" data-reveal data-tags="dataviz">
       <div class="tile__thumb" data-reprint="assets/img/tools/newsroom-blank.png?v=20261123a">
+        <!-- js/reprint.js reveals the charts by pixel position in this photo,
+             and newsroom-blank.png is built from it. If the photo changes,
+             rebuild both with scripts/tile-plates/. -->
         <img src="assets/img/tools/newsroom.jpg?v=20260810c" width="1200" height="750" decoding="async" alt="Data Dive pages from the Sacramento Business Journal laid out as a set, each pairing a headline with the week's charts.">
       </div>
       <div class="tile__body">
@@ -352,10 +358,10 @@
 <script src="js/guard.js?v=20260817a"></script>
 <script src="js/widont.js?v=20260901a"></script>
 <script src="js/theme.js?v=20260809h"></script>
-<script type="module" src="js/motion.js?v=20260826b"></script>
+<script type="module" src="js/motion.js?v=20261123a"></script>
 <script type="module" src="js/hero-ink.js?v=20260930a"></script>
 <script type="module" src="js/split-lens.js?v=20261123a"></script>
-<script type="module" src="js/sunlight.js?v=20261123a"></script>
-<script type="module" src="js/reprint.js?v=20261123a"></script>
+<script type="module" src="js/sunlight.js?v=20261123b"></script>
+<script type="module" src="js/reprint.js?v=20261123b"></script>
 </body>
 </html>

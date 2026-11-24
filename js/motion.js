@@ -158,6 +158,10 @@ function initLazyVideo() {
 
   if (REDUCED) return;   // poster only; preload="none" means no fetch either
 
+  // A visitor whose browser asks to save data gets the poster too. Videos that
+  // carry controls can still be played from there; nothing loads until then.
+  if (navigator.connection?.saveData) return;
+
   const io = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
