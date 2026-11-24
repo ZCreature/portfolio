@@ -1015,7 +1015,7 @@ html[data-gp-theme] #map-veil { background: var(--plane) !important; }
 .gp-card { box-sizing: border-box; width: 100%; max-width: 1200px; padding: 24px; display: grid; gap: 18px;
   background: var(--card); border: 1px solid var(--hair); border-radius: 14px; box-shadow: var(--shadow); }
 .gp-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
-.gp-top h1 { margin: 0; font-size: 22px; font-weight: 600; line-height: 1.2; letter-spacing: -0.01em; }
+.gp-top h1 { margin: 0; font-size: 20px; font-weight: 600; line-height: 1.2; letter-spacing: -0.01em; }
 .gp-sub { margin: 3px 0 0; font-size: 12px; color: var(--ink-2); }
 .gp-icon-btn { flex: none; width: 32px; height: 32px; padding: 0; display: grid; place-items: center; cursor: pointer;
   border-radius: 8px; border: 1px solid var(--hair); background: var(--raise); color: var(--ink-2); }
@@ -1037,7 +1037,7 @@ html[data-gp-theme] #map-veil { background: var(--plane) !important; }
   border-top: 1px solid var(--hair); padding-top: 20px; }
 .gp-body[data-view="change"] { grid-template-areas: "chart hero" "chart map" "chart legend" "chart tiles" "chart ."; grid-template-rows: auto auto auto auto 1fr; }
 .gp-body[data-view="price"] { grid-template-areas: "map hero" "map tiles" "map regions" "plegend regions"; grid-template-rows: auto auto 1fr auto; }
-#gp-chart { grid-area: chart; min-width: 0; display: grid; gap: 10px; }
+#gp-chart { grid-area: chart; min-width: 0; display: grid; gap: 10px; position: relative; }
 .gp-hero { grid-area: hero; display: grid; gap: 2px; }
 #gp-map-slot { grid-area: map; }
 #gp-change-legend { grid-area: legend; }
@@ -1064,7 +1064,7 @@ html[data-gp-theme] #map-veil { background: var(--plane) !important; }
 .gp-tile { padding: 10px 12px; display: grid; gap: 2px; align-content: start; min-width: 0; }
 .gp-tile + .gp-tile { border-left: 1px solid var(--hair); }
 .gp-tile-lbl { font-size: 11px; color: var(--ink-2); }
-.gp-tile-val { font-size: 17px; font-weight: 600; line-height: 1.2; }
+.gp-tile-val { font-size: 20px; font-weight: 600; line-height: 1.2; }
 .gp-tile-sub { font-size: 11px; color: var(--ink-2); overflow-wrap: anywhere; }
 
 .gp-chart-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px 16px; flex-wrap: wrap; }
@@ -1079,17 +1079,29 @@ html[data-gp-theme] #map-veil { background: var(--plane) !important; }
 
 #gp-lolli { display: block; width: 100%; overflow: visible; }
 .gp-l-row { fill: transparent; }
-.gp-l-row.on { fill: var(--track); }
+.gp-l-g.on .gp-l-row { fill: var(--track); }
+/* hovered row: both dots grow from their centres */
+.gp-l-g .gp-l-then, .gp-l-g .gp-l-now { transform-box: fill-box; transform-origin: center; transition: transform 140ms ease-out; }
+.gp-l-g.on .gp-l-then, .gp-l-g.on .gp-l-now { transform: scale(1.5); }
+@media (prefers-reduced-motion: reduce) { .gp-l-g .gp-l-then, .gp-l-g .gp-l-now { transition: none; } }
 .gp-l-name { fill: var(--ink-1); font-size: 13px; }
 .gp-l-name.us, .gp-l-pct.us { font-weight: 600; }
 .gp-l-pct { fill: var(--ink-1); font-size: 12px; font-variant-numeric: tabular-nums; }
-.gp-l-tick { fill: var(--tick); font-size: 10px; font-variant-numeric: tabular-nums; }
+.gp-l-tick { fill: var(--tick); font-size: 11px; font-variant-numeric: tabular-nums; }
 .gp-l-grid { stroke: var(--grid); stroke-width: 1; }
 .gp-l-rule { stroke: var(--axis); stroke-width: 1; }
 .gp-l-bar { stroke: var(--axis); stroke-width: 2; }
 .gp-l-then { fill: var(--card); stroke: var(--ink-2); stroke-width: 1.5; }
 .gp-l-now { stroke: var(--card); stroke-width: 2; }
 .gp-l-now.up { fill: var(--d-up2); } .gp-l-now.down { fill: var(--d-down2); } .gp-l-now.flat { fill: var(--ink-2); }
+/* hover chip: name, then and now, change on one line, beside the row's dots */
+#gp-tip { position: absolute; z-index: 20; pointer-events: none; display: flex; align-items: center; gap: 10px; white-space: nowrap;
+  padding: 5px 10px; background: var(--raise); color: var(--ink-1); border: 1px solid var(--hair); border-radius: 8px; box-shadow: var(--shadow);
+  font: 12px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; font-variant-numeric: tabular-nums; }
+#gp-tip b { font-weight: 600; }
+#gp-tip .t-sep { width: 1px; height: 12px; background: var(--hair); }
+#gp-tip .t-arrow { font-size: 11px; margin-right: 4px; }
+#gp-tip .t-arrow.up { color: var(--d-up2); } #gp-tip .t-arrow.down { color: var(--d-down2); }
 table.gp-table { width: 100%; border-collapse: collapse; font-size: 12px; font-variant-numeric: tabular-nums; }
 .gp-table th, .gp-table td { padding: 4px 0; text-align: right; border-bottom: 1px solid var(--hair); }
 .gp-table th:first-child, .gp-table td:first-child { text-align: left; }
@@ -1097,7 +1109,7 @@ table.gp-table { width: 100%; border-collapse: collapse; font-size: 12px; font-v
 .gp-table tbody tr:first-child td { font-weight: 600; }
 
 .gp-legend { display: grid; gap: 6px; }
-.gp-legend-title { font-size: 11px; font-weight: 500; color: var(--ink-2); }
+.gp-legend-title { font-size: 12px; font-weight: 500; color: var(--ink-2); }
 .gp-bar { height: 10px; border-radius: 3px; }
 .gp-bar.change { background: linear-gradient(90deg, var(--d-down3), var(--d-down2) 16.5%, var(--d-down1) 33%, var(--d-mid) 50%,
   var(--d-up1) 67%, var(--d-up2) 83.5%, var(--d-up3)); }
@@ -1116,6 +1128,10 @@ table.gp-table { width: 100%; border-collapse: collapse; font-size: 12px; font-v
 #narrative-text b { color: var(--ink-1) !important; font-weight: 600; }
 #narrative-text [style*="#ff6b6b"] { color: var(--d-up2) !important; }
 .gp-source { margin: 0; font-size: 11px; line-height: 1.5; color: var(--ink-2); }
+/* credit: right column, bottom row. The price view's narrative spans both rows so the credit adds no height. */
+.gp-credit { grid-column: 2; justify-self: end; align-self: end; margin: 0; font-size: 9px; line-height: 1.2; font-weight: 500;
+  letter-spacing: 0.08em; color: var(--ink-2); }
+#narrative-text { grid-row: span 2; }
 
 /* Price by region tiles (rendered by the region-tile script) */
 #gp-price-side h2 { margin: 0; font-size: 14px; font-weight: 600; }
@@ -1169,6 +1185,8 @@ html[data-gp-theme] .leaflet-control-zoom a:hover { background: var(--raise) !im
 @media (max-width: 900px) {
   #gp-ui { padding: 12px; }
   .gp-body, .gp-foot { grid-template-columns: minmax(0, 1fr); }
+  .gp-credit { grid-column: 1; justify-self: start; }
+  #narrative-text { grid-row: auto; }
   .gp-body[data-view="change"] { grid-template-areas: "hero" "chart" "map" "legend" "tiles"; grid-template-rows: none; }
   .gp-body[data-view="price"] { grid-template-areas: "hero" "map" "plegend" "tiles" "regions"; grid-template-rows: none; }
   #gp-map-slot { height: 220px; }
@@ -1223,6 +1241,7 @@ html[data-gp-theme] .leaflet-control-zoom a:hover { background: var(--raise) !im
           </div>
         </div>
         <svg id="gp-lolli" role="img" aria-label="Price then and now for each area, ranked by change"></svg>
+        <div id="gp-tip" class="gp-hidden" role="tooltip"></div>
         <div id="gp-table" class="gp-hidden"></div>
       </div>
 
@@ -1263,9 +1282,9 @@ html[data-gp-theme] .leaflet-control-zoom a:hover { background: var(--raise) !im
     </div>
 
     <div class="gp-foot">
-      <p class="gp-text" id="gp-summary"></p>
       <div class="gp-text gp-hidden" id="narrative-text"></div>
       <p class="gp-source" id="gp-source"></p>
+      <p class="gp-credit">DESIGNED BY: CHRIS ALMAGUER</p>
     </div>
   </section>
 </div>
@@ -1379,17 +1398,11 @@ html[data-gp-theme] .leaflet-control-zoom a:hover { background: var(--raise) !im
     if (st.view === 'change') {
       var r = ranked(base), A = r.length, top = r[0], bot = r[A - 1];
       var upN = r.filter(function (k) { return change(k, base) > 0.05; }).length;
-      var within = r.filter(function (k) { return Math.abs(change(k, base)) < 5; }).length;
       tiles([
         ['Pricier', upN + ' of ' + A, 'areas'],
         [change(top, base) > 0.05 ? 'Biggest rise' : 'Smallest drop', pct(change(top, base)), shortName(top)],
         [change(bot, base) < -0.05 ? 'Biggest drop' : 'Smallest rise', pct(change(bot, base)), shortName(bot)]
       ]);
-      var hi = base, lo = base;
-      for (var i = base; i <= LAST; i++) { if (s.NUS[i] > s.NUS[hi]) hi = i; if (s.NUS[i] < s.NUS[lo]) lo = i; }
-      $('gp-summary').textContent = (within === 0 ? 'Every area moved more than 5% since ' : within === A ? 'Every area moved less than 5% either way since ' :
-        within + ' of ' + A + ' areas moved less than 5% either way since ') + dLong(W[base]) + '. In between, the U.S. average ran from ' + fmt(s.NUS[lo]) + ' (' + dLong(W[lo]) + ') to ' + fmt(s.NUS[hi]) + ' (' + dLong(W[hi]) +
-        '). Hover a row in the chart to find its cities on the map.';
       $('gp-source').textContent = 'Source: U.S. Energy Information Administration, weekly retail prices through ' + dLong(W[LAST]) +
         '. ' + ownSeries() + '; the rest use their region’s average.';
     } else {
@@ -1402,12 +1415,13 @@ html[data-gp-theme] .leaflet-control-zoom a:hover { background: var(--raise) !im
       $('gp-source').textContent = 'Source: U.S. average from the EIA, week of ' + dLong(W[LAST]) +
         '. City dots and region tiles are estimates from the March 2026 snapshot (AAA, EIA, curated international averages).';
     }
-    $('gp-summary').classList.toggle('gp-hidden', st.view !== 'change');
     $('narrative-text').classList.toggle('gp-hidden', st.view !== 'price');
   }
 
   /* ── dumbbell chart + table ── */
   function chart() {
+    if (tip) hideTip();
+    rowGeo = {};
     var base = idxYearsAgo(st.years), s = S(), rows = ['NUS'].concat(ranked(base));
     $('gp-range').textContent = dLong(W[base]) + ' → ' + dLong(W[LAST]) + ', ranked by change';
     $('gp-key-then').textContent = dLong(W[base]);
@@ -1429,15 +1443,16 @@ html[data-gp-theme] .leaflet-control-zoom a:hover { background: var(--raise) !im
     }
     rows.forEach(function (k, r) {
       var cy = top + r * rowH + rowH / 2, a = s[k][base], b = s[k][LAST], p = change(k, base), us = k === 'NUS';
-      var hit = el('rect', { x: -8, y: top + r * rowH, width: w + 16, height: rowH, rx: 4, 'class': 'gp-l-row' + (st.focus === k ? ' on' : '') }, svg);
-      hit.dataset.k = k;
-      hit.addEventListener('mouseenter', function () { setFocus(k); });
-      hit.addEventListener('mouseleave', function () { setFocus(null); });
-      el('text', { x: 0, y: cy + 4, 'class': 'gp-l-name' + (us ? ' us' : ''), 'pointer-events': 'none' }, svg).textContent = shortName(k);
-      el('line', { x1: x(Math.min(a, b)), x2: x(Math.max(a, b)), y1: cy, y2: cy, 'class': 'gp-l-bar', 'pointer-events': 'none' }, svg);
-      el('circle', { cx: x(a), cy: cy, r: wide ? 4.5 : 4, 'class': 'gp-l-then', 'pointer-events': 'none' }, svg);
-      el('circle', { cx: x(b), cy: cy, r: wide ? 5.5 : 4.5, 'class': 'gp-l-now ' + dir(p), 'pointer-events': 'none' }, svg);
-      el('text', { x: w, y: cy + 4, 'text-anchor': 'end', 'class': 'gp-l-pct' + (us ? ' us' : ''), 'pointer-events': 'none' }, svg).textContent = pct(p);
+      var g = el('g', { 'class': 'gp-l-g' + (st.focus === k ? ' on' : '') }, svg); g.dataset.k = k;
+      var hit = el('rect', { x: -8, y: top + r * rowH, width: w + 16, height: rowH, rx: 4, 'class': 'gp-l-row' }, g);
+      hit.addEventListener('mouseenter', function () { setFocus(k); tipFor(k); placeTip(k); });
+      hit.addEventListener('mouseleave', function () { setFocus(null); hideTip(); });
+      rowGeo[k] = { cy: cy, left: x(Math.min(a, b)) - 9, right: x(Math.max(a, b)) + 9 };
+      el('text', { x: 0, y: cy + 4, 'class': 'gp-l-name' + (us ? ' us' : ''), 'pointer-events': 'none' }, g).textContent = shortName(k);
+      el('line', { x1: x(Math.min(a, b)), x2: x(Math.max(a, b)), y1: cy, y2: cy, 'class': 'gp-l-bar', 'pointer-events': 'none' }, g);
+      el('circle', { cx: x(a), cy: cy, r: wide ? 4.5 : 4, 'class': 'gp-l-then', 'pointer-events': 'none' }, g);
+      el('circle', { cx: x(b), cy: cy, r: wide ? 5.5 : 4.5, 'class': 'gp-l-now ' + dir(p), 'pointer-events': 'none' }, g);
+      el('text', { x: w, y: cy + 4, 'text-anchor': 'end', 'class': 'gp-l-pct' + (us ? ' us' : ''), 'pointer-events': 'none' }, g).textContent = pct(p);
       if (us) el('line', { x1: 0, x2: w, y1: top + rowH, y2: top + rowH, 'class': 'gp-l-rule' }, svg);
     });
     // table view: the same numbers without hovering
@@ -1455,10 +1470,32 @@ html[data-gp-theme] .leaflet-control-zoom a:hover { background: var(--raise) !im
     svg.classList.toggle('gp-hidden', st.table);
     $('gp-table').classList.toggle('gp-hidden', !st.table);
   }
+  /* hover chip for a chart row: name, then and now, change. It sits on the row, beside its dots. */
+  var tip = $('gp-tip'), rowGeo = {};
+  function tipFor(k) {
+    var base = idxYearsAgo(st.years), s = S()[k], p = change(k, base), dd = dir(p);
+    function add(tag, cls, text, parent) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; (parent || tip).appendChild(e); return e; }
+    tip.replaceChildren();
+    add('b', null, NAMES[k]); add('span', 't-sep');
+    add('span', null, fmt(s[base]) + ' → ' + fmt(s[LAST])); add('span', 't-sep');
+    var c = add('span');
+    if (dd !== 'flat') add('span', 't-arrow ' + dd, dd === 'up' ? '▲' : '▼', c);
+    c.appendChild(document.createTextNode(pct(p)));
+    tip.classList.remove('gp-hidden');
+  }
+  function placeTip(k) {
+    var g = rowGeo[k]; if (!g) return;
+    var box = $('gp-chart').getBoundingClientRect(), r = $('gp-lolli').getBoundingClientRect(), t = tip.getBoundingClientRect();
+    var x0 = r.left - box.left, y0 = r.top - box.top, left = x0 + g.right + 12;
+    if (left + t.width > x0 + r.width - 60) left = x0 + g.left - 12 - t.width;   // keep clear of the % column
+    tip.style.left = Math.max(0, left) + 'px'; tip.style.top = (y0 + g.cy - t.height / 2) + 'px';
+  }
+  function hideTip() { tip.classList.add('gp-hidden'); }
+
   function setFocus(k) {
     if (st.focus === k) return;
     st.focus = k;
-    $('gp-lolli').querySelectorAll('.gp-l-row').forEach(function (r) { r.classList.toggle('on', r.dataset.k === k); });
+    $('gp-lolli').querySelectorAll('.gp-l-g').forEach(function (r) { r.classList.toggle('on', r.dataset.k === k); });
     if (st.view === 'change') paintMap();
   }
 
