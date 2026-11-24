@@ -27,6 +27,8 @@ No build step, no dependencies. Open `index.html` via a local server
     js/embed.js                   lazy iframe embeds (Tableau, Leaflet)
     js/split-lens.js              CVD split view on the Color Accessibility
                                   Checker tile, home page only
+    js/sunlight.js                passing light on the healthcare tile,
+                                  home page only
     assets/data/laps.json         lap data (currently a reconstruction)
     assets/data/editorial.json    tearsheet manifest — scaffold, not yet wired
 

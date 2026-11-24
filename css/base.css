@@ -786,7 +786,9 @@ section { padding-block: var(--gap-xl); }
 
 .tile__tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: auto; padding-top: 0.7rem; }
 
-.tile__link::before { content: ""; position: absolute; inset: 0; }/* ---- Split lens (js/split-lens.js) --------------------------
+.tile__link::before { content: ""; position: absolute; inset: 0; }
+
+/* ---- Split lens (js/split-lens.js) --------------------------
    The Color Accessibility Checker tile: hovering the recording
    drags a divider across it, normal vision on the left and a
    simulated colour vision deficiency on the right. The recording
@@ -853,6 +855,54 @@ section { padding-block: var(--gap-xl); }
 .split-lens__label.is-shown { opacity: 1; }
 .split-lens__label--left { left: 10px; }
 .split-lens__label--right { right: 10px; }
+
+/* ---- Sunlight (js/sunlight.js) ----------------------------
+   The healthcare tile: moving across the photograph moves the
+   sun. A warm hotspot follows the pointer, a set of leaf
+   shadows drifts against it, and the photograph shifts a few
+   pixels. Photographic light, so fixed warm values rather than
+   theme tokens - the photo is the same in both themes. */
+/* Positioned so the layers size to the photo, isolated so their blend
+   modes mix with the photo and not with the card behind it. */
+[data-sunlight] { position: relative; isolation: isolate; }
+[data-sunlight] img { transition: filter 500ms linear; }
+[data-sunlight].is-lit img { filter: saturate(1.08) contrast(1.03); }
+.is-lighting img,
+.is-lighting .sunlight__layer,
+.is-lighting .sunlight__gobo,
+.is-lighting .sunlight__sun { will-change: transform, opacity; }
+/* One layer per light, each carrying its blend mode. The mask is the laptop
+   screen, measured on the 1200 x 750 photograph: the lights fall on the wall
+   and the shelf at full strength and on the dashboard at 15%. */
+.sunlight__layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 750' preserveAspectRatio='none'%3E%3Cfilter id='s'%3E%3CfeGaussianBlur stdDeviation='2'/%3E%3C/filter%3E%3Cg filter='url(%23s)'%3E%3Cpath fill-rule='evenodd' d='M-20-20H1220V770H-20ZM323 146.5L804 124L801 405L329 427Z'/%3E%3Cpath fill-opacity='.15' d='M323 146.5L804 124L801 405L329 427Z'/%3E%3C/g%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 750' preserveAspectRatio='none'%3E%3Cfilter id='s'%3E%3CfeGaussianBlur stdDeviation='2'/%3E%3C/filter%3E%3Cg filter='url(%23s)'%3E%3Cpath fill-rule='evenodd' d='M-20-20H1220V770H-20ZM323 146.5L804 124L801 405L329 427Z'/%3E%3Cpath fill-opacity='.15' d='M323 146.5L804 124L801 405L329 427Z'/%3E%3C/g%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
+}
+.sunlight__layer--shade { mix-blend-mode: multiply; }
+.sunlight__layer--sun { mix-blend-mode: soft-light; }
+/* Oversized so the drift never shows an edge; the selector outranks
+   `.tile__thumb svg`, which would otherwise pin it to the frame. */
+.tile__thumb .sunlight__gobo {
+  position: absolute;
+  left: -30%;
+  top: -30%;
+  width: 160%;
+  height: 160%;
+}
+/* Twice the frame, centred, and moved with a transform rather than by
+   re-painting the gradient each frame. */
+.sunlight__sun {
+  position: absolute;
+  left: -50%;
+  top: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 214, 160, 0.85), rgba(255, 190, 120, 0) 40%);
+}
 
 /* ---- 7c. Live embeds -------------------------------------
    The real tool, running in the page. Sandboxed in an iframe
