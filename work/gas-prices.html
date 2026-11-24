@@ -98,6 +98,7 @@
     </p>
 
       <div class="case-tags" data-reveal style="--reveal-delay:200ms;">
+        <span class="tag tag--type">Dumbbell chart</span>
         <span class="tag tag--type">Symbol map</span>
         <span class="tag tag--live">Live</span>
         <span class="tag tag--tool">R</span>
@@ -111,14 +112,14 @@
       <h2>Fuel prices at two levels of detail at once</h2>
       <p>
         Fuel prices get reported either as a national average or as a local pump
-        price, and the two are rarely shown together. This map carries both:
-        country-level figures for the wider comparison, and US state figures from
-        AAA estimates in dollars per gallon underneath them.
+        price, and the two are rarely shown together. This piece carries both:
+        city estimates worldwide for the wider comparison, and four years of
+        weekly U.S. prices from the EIA, by state and region, underneath them.
       </p>
       <p>
         It runs in the page. The price data is baked into the document as 1,712
-        vector shapes, with no API key and no query at view time. Only the
-        basemap is fetched.
+        vector shapes, and the basemap is drawn from Natural Earth outlines that
+        ship with it, so there is no API key and no query at view time.
       </p>
     </div>
 
@@ -129,15 +130,14 @@
         <a class="btn" href="tools/gas-prices.html" target="_blank" rel="noopener">Open full screen<span class="sr-only"> (opens in a new tab)</span></a>
       </div>
       <div class="embed__frame">
-        <p class="embed__loading meta">Loading map…</p>
+        <p class="embed__loading meta">Loading prices…</p>
         <iframe src="tools/gas-prices.html" loading="lazy"
-                title="Interactive map of global gas prices"></iframe>
+                title="Interactive chart and map of global gas prices"></iframe>
       </div>
       <p class="embed__note">
-        Built for a 1440&nbsp;×&nbsp;900 viewport with no responsive breakpoints, so it
-        renders at full size and scales to fit instead of reflowing.
-        <span data-scale-out></span> Basemap tiles come from CartoDB, so this panel
-        needs a connection.
+        Laid out for a 1440&nbsp;×&nbsp;900 frame, so it renders at full size and
+        scales to fit instead of reflowing. <span data-scale-out></span> Everything
+        it draws ships with the page, so nothing is fetched from a third party.
       </p>
     </div>
   </section>
@@ -166,22 +166,24 @@
       <p class="meta">03 - Design</p>
       <h2>Four decisions, written down before they were prompted</h2>
       <p>
-        Bin breaks follow the distribution instead of equal intervals, so the
-        classes carry roughly comparable numbers of places instead of splitting
-        an empty range.
+        The change leads, not the map. Each area gets a dumbbell, this week's
+        price beside its price four years ago, ranked by how far it moved, and
+        the map shrinks to an inset that shows where those areas are.
       </p>
       <p>
-        The ramp is sequential instead of categorical, because price is a
-        quantity and a categorical set implies unordered groups.
+        Color answers one question. On the price map, blue is cheaper than the
+        U.S. average, red is pricier and gray sits at the average, because a
+        scale with a real midpoint says more than a ramp the reader has to decode.
       </p>
       <p>
-        Boundaries drop back to a hairline so the fill reads before the outline,
-        and labels appear only where they do not collide.
+        Boundaries drop back to a hairline and the dots lose their outlines, so
+        the data reads before the geography, and numbers appear on hover instead
+        of as labels competing for space.
       </p>
       <p>
-        The data is baked into the document instead of queried, which removes the
-        failure mode where the map is a blank basemap because an API is down or a
-        key has expired.
+        The data and the basemap are baked into the document instead of queried,
+        which removes the failure mode where the map is a blank basemap because
+        an API is down or a key has expired.
       </p>
     </div>
   </section>
@@ -196,8 +198,9 @@
       </p>
       <p>
         I got to something that ran in an afternoon and spent the evening on four
-        decisions that took one line each to state. Bin breaks, sequential ramp,
-        hairline boundaries, no runtime dependency. None of those are hard. They
+        decisions that took one line each to state. Change first, a color scale
+        with a real midpoint, hairline boundaries, no runtime dependency. None of
+        those are hard. They
         are just not defaults, and nothing was going to supply them for me.
       </p>
       <p>

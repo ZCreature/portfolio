@@ -38,7 +38,7 @@
 })();
 </script>
 <style>.leaflet-container{background:#0a0a0b !important;} /* ocean; land is drawn from world-50m.js */</style>
-  <title>Global gas prices, full screen map - Chris Almaguer</title>
+  <title>Global gas prices, interactive - Chris Almaguer</title>
 </head>
 <body>
 <div id="htmlwidget_container">
@@ -130,18 +130,7 @@
     priceMid = usAverage(id);
     styleGradeButtons();
 
-    // update narrative
-    var narrativeMap = {
-      '87': { sub: 'Regular 87 &nbsp;&middot;&nbsp; Broad-based increases', body: 'Increases are broad but <b style=\'color:#fff\'>not uniform</b> - the gap between regions is widening. The <b style=\'color:#fff\'>South and Mountain West</b> absorbed the steepest hikes, up <b style=\'color:#ff6b6b\'>25 to 27%</b>, driven by refinery constraints and rising crude. Texas jumped <b style=\'color:#ff6b6b\'>+29.9%</b> - the sharpest state-level move. The <b style=\'color:#fff\'>Pacific Coast</b> rose a modest <b style=\'color:#ff6b6b\'>17%</b> yet still commands <b style=\'color:#fff\'>$5.76/gal</b> in California. The <b style=\'color:#fff\'>Midwest and Northeast</b> sit at <b style=\'color:#ff6b6b\'>19 to 21%</b>. Vancouver tops North American city prices outside Hawaii at <b style=\'color:#fff\'>$5.43/gal</b> USD-equivalent.' },
-      '89': { sub: 'Midgrade 89 &nbsp;&middot;&nbsp; Spread narrowing', body: 'Midgrade demand has softened as consumers trade down to Regular. The <b style=\'color:#fff\'>price premium over Regular 87</b> narrowed to <b style=\'color:#ff6b6b\'>+$0.18/gal</b> nationally - the tightest spread in four years. Gulf Coast refiners are shifting mix toward Regular blend, while <b style=\'color:#fff\'>Midgrade supply in rural markets</b> is increasingly constrained. The <b style=\'color:#fff\'>Mountain West</b> still shows the steepest Midgrade increases at <b style=\'color:#ff6b6b\'>+26%</b> YoY. Availability at smaller independent stations continues to decline.' },
-      '91': { sub: 'Premium 91 &nbsp;&middot;&nbsp; Record coastal spreads', body: 'Premium commands a <b style=\'color:#ff6b6b\'>$0.54/gal premium over Regular</b> on the West Coast - near a record spread. California&rsquo;s CARB-specification requirements contribute disproportionately; the state accounts for <b style=\'color:#fff\'>38% of national Premium volume</b>. European-style pricing is emerging in coastal metros: San Francisco, NYC, and Boston all exceed <b style=\'color:#ff6b6b\'>$6.00/gal</b> for Premium. Luxury and European-import vehicle growth continues to drive demand despite price sensitivity in the segment.' },
-      'diesel': { sub: 'Diesel &nbsp;&middot;&nbsp; Supply tight ahead of planting', body: 'Diesel remains <b style=\'color:#fff\'>elevated relative to Regular</b>, with the national spread widening to <b style=\'color:#ff6b6b\'>+$0.42/gal</b>. <b style=\'color:#fff\'>Agricultural and logistics demand</b> is keeping inventories lean heading into planting season. The <b style=\'color:#fff\'>Great Plains and Midwest</b> show the tightest supply, with <b style=\'color:#ff6b6b\'>+31%</b> YoY gains in Kansas and Nebraska. Ultra-low-sulfur diesel (ULSD) refinery margins remain tight globally, sustaining premium pricing through Q2.' },
-      'flex': { sub: 'E85 Flex &nbsp;&middot;&nbsp; Best value for flex-fuel drivers', body: 'E85 offers the <b style=\'color:#fff\'>deepest discount to gasoline</b> at an average <b style=\'color:#ff6b6b\'>$2.28/gal</b> nationally - representing roughly <b style=\'color:#fff\'>37% savings</b> at the pump for flex-fuel drivers. The <b style=\'color:#fff\'>Corn Belt</b> (Iowa, Illinois, Minnesota) offers the best prices, often below <b style=\'color:#ff6b6b\'>$2.00/gal</b>. Note: lower energy content means ~27% more consumption per mile, narrowing effective savings. Blender pump availability has expanded to <b style=\'color:#fff\'>4,200 stations</b> nationally in 2025.' },
-    };
-    var nd = document.getElementById('narrative-text');
-    if (nd && narrativeMap[id]) {
-      nd.innerHTML = narrativeMap[id].body;
-    }
+    // the price-view write-up is computed by the UI script from the EIA data
     recolorDots();
   }
 
@@ -927,7 +916,7 @@
 
   var conts=[
     {k:'americas',lbl:'Americas'},{k:'europe',lbl:'Europe'},{k:'asia',lbl:'Asia'},
-    {k:'africa',lbl:'Africa'},{k:'mideast',lbl:'Mid East'}
+    {k:'africa',lbl:'Africa'},{k:'mideast',lbl:'Mideast, Oceania'}
   ];
   var wrap=document.getElementById('ctile-buttons');
   if(wrap){
@@ -1119,8 +1108,9 @@ table.gp-table { width: 100%; border-collapse: collapse; font-size: 12px; font-v
 
 /* Price by region tiles (rendered by the region-tile script) */
 #gp-price-side h2 { margin: 0; font-size: 14px; font-weight: 600; }
-#ctile-buttons { display: flex; flex-wrap: wrap; gap: 4px; }
-.cbtn { cursor: pointer; padding: 4px 7px; border-radius: 6px; border: 1px solid var(--hair); background: var(--raise);
+#gp-price-side .gp-h2-note { margin-left: 6px; font-size: 11px; font-weight: 400; color: var(--ink-2); }
+#ctile-buttons { display: flex; flex-wrap: wrap; gap: 3px; }
+.cbtn { cursor: pointer; padding: 4px 4px; border-radius: 6px; border: 1px solid var(--hair); background: var(--raise);
   color: var(--ink-2); font: 500 11px/1.2 system-ui, -apple-system, sans-serif; }
 .cbtn:hover { color: var(--ink-1); }
 .cbtn.active { background: var(--ink-1); color: var(--card); border-color: var(--ink-1); }
@@ -1247,7 +1237,7 @@ html[data-gp-theme] .leaflet-control-zoom a:hover { background: var(--raise) !im
       <div class="gp-tiles" id="gp-tiles"></div>
 
       <div id="gp-price-side" class="gp-hidden">
-        <h2>Price by region</h2>
+        <h2>Price by region <span class="gp-h2-note">estimates, March 2026</span></h2>
         <div id="ctile-buttons"></div>
         <div id="continent-tiles"></div>
       </div>
@@ -1259,7 +1249,7 @@ html[data-gp-theme] .leaflet-control-zoom a:hover { background: var(--raise) !im
           <div class="gp-ticks" id="gp-price-ticks"></div>
         </div>
         <div class="gp-legend">
-          <div class="gp-legend-title">Dot size: year-over-year change</div>
+          <div class="gp-legend-title">Dot size: year-over-year change, March 2026</div>
           <div class="gp-dot-key"><span><i style="width:7px;height:7px"></i>+5%</span><span><i style="width:14px;height:14px"></i>+15%</span><span><i style="width:24px;height:24px"></i>+30%</span></div>
         </div>
       </div>
@@ -1390,19 +1380,45 @@ html[data-gp-theme] .leaflet-control-zoom a:hover { background: var(--raise) !im
       $('gp-source').textContent = 'Source: U.S. Energy Information Administration, weekly retail prices through ' + dLong(W[LAST]) +
         '. ' + ownSeries() + '; the rest use their region’s average.';
     } else {
-      if (noData) tiles([]);
+      if (noData) { tiles([]); priceWriteUp(g); }
       else {
         var hiA = null, loA = null;
         areas().forEach(function (k) { if (!hiA || s[k][LAST] > s[hiA][LAST]) hiA = k; if (!loA || s[k][LAST] < s[loA][LAST]) loA = k; });
-        tiles([['Highest', fmt(s[hiA][LAST]), shortName(hiA)], ['Lowest', fmt(s[loA][LAST]), shortName(loA)], ['A year ago', fmt(s.NUS[y1]), dLong(W[y1])]]);
+        var third = g.key === 'regular' ? ['Spread', fmt(s[hiA][LAST] - s[loA][LAST]), 'difference']
+          : ['Over regular', '+' + fmt(s.NUS[LAST] - H.grades.regular.series.NUS[LAST]), 'U.S. average'];
+        tiles([['Highest', fmt(s[hiA][LAST]), shortName(hiA)], ['Lowest', fmt(s[loA][LAST]), shortName(loA)], third]);
+        priceWriteUp(g, s, hiA, loA, y1);
       }
       var mid = window.gpPriceMid ? window.gpPriceMid() : s.NUS[LAST];
-      $('gp-price-ticks').innerHTML = '<span>$2.50+ cheaper</span><span>U.S. ' + (noData ? 'est. ' : '') + fmt(mid) + '</span><span>$4+ dearer</span>';
-      $('gp-source').textContent = 'Source: EIA weekly retail prices, week of ' + dLong(W[LAST]) +
-        '. U.S. city dots use their state’s or region’s EIA average, keeping each city’s March 2026 gap to it. ' +
-        'Other cities and the region tiles are March 2026 estimates (AAA, curated international averages).';
+      $('gp-price-ticks').innerHTML = '<span>$2.50+ cheaper</span><span>U.S. ' + (noData ? 'est. ' : '') + fmt(mid) + '</span><span>$4+ pricier</span>';
+      $('gp-source').textContent = 'Sources: EIA weekly retail prices to ' + dLong(W[LAST]) + ' for the U.S.; ' +
+        'March 2026 estimates (AAA, curated international averages) for other cities and the region tiles.';
     }
     $('narrative-text').classList.toggle('gp-hidden', st.view !== 'price');
+  }
+
+  /* ── price view write-up, computed from this week's EIA data and the region estimates ── */
+  function priceWriteUp(g, s, hiA, loA, y1) {
+    var abroad = ' Abroad, the March 2026 estimates run from under <b>$1</b> in the Gulf states to nearly <b>$9</b> in Scandinavia.';
+    if (g.priceOnly) {
+      $('narrative-text').innerHTML = 'The EIA publishes no E85 average, so every dot here is an estimate set at <b>72%</b> of its city’s regular price.' + abroad;
+      return;
+    }
+    var now = s.NUS[LAST], ch = (now / s.NUS[y1] - 1) * 100;
+    var txt = '<b>' + g.label + '</b> averages <b>' + fmt(now) + '</b> a gallon across the U.S. this week, ' +
+      (Math.abs(ch) < 0.05 ? 'level with' : (ch > 0 ? 'up ' : 'down ') + Math.abs(ch).toFixed(1) + '% from') + ' a year ago. ' +
+      NAMES[hiA] + ' is the most expensive area at <b>' + fmt(s[hiA][LAST]) + '</b> and ' + NAMES[loA] + ' the cheapest at <b>' + fmt(s[loA][LAST]) + '</b>.';
+    if (g.key !== 'regular') txt += ' That is <b>' + fmt(now - H.grades.regular.series.NUS[LAST]) + '</b> more than regular.';
+    $('narrative-text').innerHTML = txt + abroad;
+  }
+  /* state outlines in the price view show this week's price for the chosen grade */
+  function priceStateTips() {
+    var g = grade(), key = g.priceOnly ? 'regular' : g.key;
+    states.forEach(function (l) {
+      var area = areaFor(key, l._gp.st), v = H.grades[key].series[area][LAST] * (g.priceOnly ? 0.72 : 1);
+      l.getTooltip().setContent('<b>' + stateName(l._gp.st) + '</b> ' + fmt(v) + '/gal' + (g.priceOnly ? ' (est.)' : '') +
+        "<br><span class='gp-tt-sub'>" + (area.charAt(0) === 'S' ? 'EIA state average' : NAMES[area] + ' EIA average') + ', ' + dLong(W[LAST]) + '</span>');
+    });
   }
 
   /* ── dumbbell chart + table ── */
@@ -1557,7 +1573,8 @@ html[data-gp-theme] .leaflet-control-zoom a:hover { background: var(--raise) !im
       if (l._gp.st) { if (l.getPopup && l.getPopup()) { l.closePopup(); l.unbindPopup(); } }
       else if (l._gp.popup && !l.getPopup()) l.bindPopup(l._gp.popup);
     });
-    states.forEach(function (l) { l.setStyle(l._gp.style); l.getTooltip().setContent(l._gp.tip); });
+    states.forEach(function (l) { l.setStyle(l._gp.style); });
+    priceStateTips();
     if (window.gpApplyGrade) window.gpApplyGrade(grade().priceId);   // price colours and tooltips
   }
   /* ── price view: U.S. city dots at this week's EIA prices. Each city keeps its March 2026 gap to its state's
@@ -1619,6 +1636,7 @@ html[data-gp-theme] .leaflet-control-zoom a:hover { background: var(--raise) !im
   function render() {
     story();
     if (st.view === 'change') { fitScale(); chart(); paintMap(); }
+    else if (map) priceStateTips();
   }
   $('gp-view').querySelectorAll('button').forEach(function (b) { b.addEventListener('click', function () { if (st.view !== b.dataset.view) setViewMode(b.dataset.view); }); });
   $('gp-compare').querySelectorAll('button').forEach(function (b) { b.addEventListener('click', function () { st.years = +b.dataset.years; pressed('gp-compare', 'years', st.years); render(); }); });
