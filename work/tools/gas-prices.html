@@ -59,50 +59,43 @@
   var activeId = '87';
   var layerData = [];  // only city circles
 
-  // Price ramp per theme. Dark: dim gold up to white. Light: gold down to dark brown, so the
-  // dearest dots stay visible on light grey land. Each is validated against its own land colour.
-  var PRICE_STOPS = {
-    dark: [
-      [3.0, [138, 104, 0  ]],   // floor lifted from #3d2e00, which vanished against the land
-      [4.0, [168, 126, 0  ]],
-      [5.0, [198, 150, 0  ]],
-      [6.0, [228, 182, 30 ]],
-      [7.0, [245, 220, 130]],
-      [8.0, [255, 255, 255]]
-    ],
-    light: [
-      [3.0, [199, 147, 0 ]],
-      [4.0, [171, 120, 0 ]],
-      [5.0, [143, 97,  0 ]],
-      [6.0, [113, 74,  0 ]],
-      [7.0, [84,  52,  0 ]],
-      [8.0, [58,  35,  0 ]]
-    ]
+  // Price colour: blue below the U.S. average for the chosen grade, red above, grey near it. Colour reaches
+  // full strength $2.50 below and $4 above. Stops come from the --rel-0..6 theme tokens in the UI styles.
+  var REL_FALLBACK = {
+    light: ['#0a4fd0', '#1a7df5', '#5aa8ff', '#a9a8a0', '#e5544a', '#c41d1d', '#7c0a0e'],
+    dark:  ['#8ccaff', '#3d97ff', '#1f66d6', '#4a4945', '#b01f1f', '#e63530', '#ff6b5e']
   };
+  var BELOW = 2.5, ABOVE = 4, relCache = {};
+  var GRADE_KEY = { '87': 'regular', '89': 'midgrade', '91': 'premium', 'diesel': 'diesel' };
+  function usAverage(id) {
+    var H = window.GP_HISTORY; if (!H) return 3.81;
+    var reg = H.grades.regular.series.NUS, last = reg.length - 1;
+    if (id === 'flex') return reg[last] * 0.72;      // no EIA E85 average; E85 dots are 72% of regular
+    return H.grades[GRADE_KEY[id] || 'regular'].series.NUS[last];
+  }
+  var priceMid = usAverage('87');
+  window.gpPriceMid = function () { return priceMid; };
+  function relStops() {
+    var th = window.gpThemeName ? window.gpThemeName() : 'dark';
+    if (!relCache[th]) relCache[th] = REL_FALLBACK[th].map(function (f, i) { return gpTok('--rel-' + i, f); });
+    return relCache[th];
+  }
+  function hexRGB(h) { return [1, 3, 5].map(function (i) { return parseInt(h.slice(i, i + 2), 16); }); }
   function colorFromPrice(p) {
-    var stops = PRICE_STOPS[window.gpThemeName ? window.gpThemeName() : 'dark'];
-    p = Math.max(stops[0][0], Math.min(stops[stops.length - 1][0], p));
-    for (var i = 1; i < stops.length; i++) {
-      if (p <= stops[i][0]) {
-        var t = (p - stops[i-1][0]) / (stops[i][0] - stops[i-1][0]);
-        var a = stops[i-1][1], b = stops[i][1];
-        return 'rgb(' + Math.round(a[0]+t*(b[0]-a[0])) + ',' +
-                        Math.round(a[1]+t*(b[1]-a[1])) + ',' +
-                        Math.round(a[2]+t*(b[2]-a[2])) + ')';
-      }
-    }
-    return 'rgb(' + stops[stops.length - 1][1].join(',') + ')';
+    var st = relStops(), n = st.length - 1;
+    var t = p < priceMid ? 0.5 * (1 - Math.min(1, (priceMid - p) / BELOW)) : 0.5 + 0.5 * Math.min(1, (p - priceMid) / ABOVE);
+    var i = Math.min(n - 1, Math.floor(t * n)), u = t * n - i, a = hexRGB(st[i]), b = hexRGB(st[i + 1]);
+    return 'rgb(' + [0, 1, 2].map(function (j) { return Math.round(a[j] + (b[j] - a[j]) * u); }).join(',') + ')';
   }
   window.gpColorFromPrice = colorFromPrice;  // shared with the international dots
 
   // Radius in px from YoY change as a fraction (0.27 = +27%). One scale for every dot,
-  // matching the legend: +5% = 3px, +15% = 5px, +30% = 8px.
-  window.gpDotRadius = function (yoy) { return Math.max(2.5, Math.min(9, 2 + yoy * 20)); };
+  // matching the legend: +5% = 3.7px, +15% = 7.1px, +30% = 12.2px.
+  window.gpDotRadius = function (yoy) { return Math.max(2.5, Math.min(13, 2 + yoy * 34)); };
 
-  // Solid fill plus a hairline in the ground colour keeps neighbouring dots separate.
+  // Half-opacity fill, no outline: overlapping dots build up where cities cluster.
   window.gpDotStyle = function (col) {
-    var light = window.gpThemeName && window.gpThemeName() === 'light';
-    return { fillColor: col, fillOpacity: light ? 0.9 : 0.85, stroke: true, color: gpTok('--land', light ? '#e6e5df' : '#1c1c1b'), weight: 0.75, opacity: 0.9 };
+    return { fillColor: col, fillOpacity: 0.5, stroke: false };
   };
 
   // Vector land layer from Natural Earth (world-50m.js). Replaces the CARTO raster tiles,
@@ -134,6 +127,7 @@
 
   function applyGrade(id) {
     activeId = id;
+    priceMid = usAverage(id);
     styleGradeButtons();
 
     // update narrative
@@ -151,33 +145,22 @@
     recolorDots();
   }
 
-  // Recolour every city dot for the active grade and the current theme.
+  // Recolour every city dot for the active grade and the current theme. U.S. cities take this week's price
+  // from window.gpCityPrice (EIA, set by the UI script); other cities keep their March 2026 estimate plus
+  // the grade's offset.
   function recolorDots() {
     var g = grades.find(function (x) { return x.id === activeId; });
-    // update city circle markers only
-    layerData.forEach(function (item) {
-      var newP = +(item.price * g.mult + g.add).toFixed(2);
-      var col  = colorFromPrice(newP);
-      item.layer.setStyle(window.gpDotStyle(col));
+    function paint(item) {
+      var us = window.gpCityPrice ? window.gpCityPrice(item.layer, item.price, activeId) : null;
+      var newP = us != null ? us : +(item.price * g.mult + g.add).toFixed(2);
+      item.layer.setStyle(window.gpDotStyle(colorFromPrice(newP)));
       var tt = item.layer.getTooltip ? item.layer.getTooltip() : null;
-      if (tt) {
-        tt.setContent(item.origContent.replace(/\$([\d.]+)\/gal/, '$' + newP.toFixed(2) + '/gal'));
-      }
-      var pp = item.layer.getPopup ? item.layer.getPopup() : null;
-      if (pp) {
-        pp.setContent(item.origPopup.replace(/\$([\d.]+)\/gal/g, '$' + newP.toFixed(2) + '/gal'));
-      }
-    });
-    // update international cities
-    (window._extraLayers || []).forEach(function (item) {
-      var newP = +(item.price * g.mult + g.add).toFixed(2);
-      var col  = colorFromPrice(newP);
-      item.layer.setStyle(window.gpDotStyle(col));
-      var tt = item.layer.getTooltip ? item.layer.getTooltip() : null;
-      if (tt) {
-        tt.setContent(item.origContent.replace(/\$([\d.]+)\/gal/, '$' + newP.toFixed(2) + '/gal'));
-      }
-    });
+      // a replacer function, so "$1…" in the new price is not read as a back-reference
+      if (tt) tt.setContent(item.origContent.replace(/\$([\d.]+)\/gal/, function () { return '$' + newP.toFixed(2) + '/gal'; }) +
+        (window.gpCityNote ? window.gpCityNote(item.layer, activeId) : ''));
+    }
+    layerData.forEach(paint);
+    (window._extraLayers || []).forEach(paint);
   }
 
   function processLayer(layer) {
@@ -988,7 +971,7 @@
   --ink-1: #0b0b0b; --ink-2: #52514e; --tick: #898781;
   --d-down3: #104281; --d-down2: #2a78d6; --d-down1: #86b6ef; --d-mid: #d8d7d0;   /* change: cheaper ← → pricier */
   --d-up1: #f89189; --d-up2: #ca4442; --d-up3: #791d1e;
-  --p0: #c79300; --p1: #ab7800; --p2: #8f6100; --p3: #714a00; --p4: #543400; --p5: #3a2300;  /* price, $3 → $8 */
+  --rel-0: #0a4fd0; --rel-1: #1a7df5; --rel-2: #5aa8ff; --rel-3: #a9a8a0; --rel-4: #e5544a; --rel-5: #c41d1d; --rel-6: #7c0a0e;  /* price vs U.S. average: cheaper ← → dearer */
   --shadow: 0 1px 2px rgba(11,11,11,0.06), 0 8px 28px rgba(11,11,11,0.10);
 }
 :root[data-gp-theme="dark"] {
@@ -999,7 +982,7 @@
   --ink-1: #f0efec; --ink-2: #c3c2b7; --tick: #898781;
   --d-down3: #86b6ef; --d-down2: #3987e5; --d-down1: #184f95; --d-mid: #383835;
   --d-up1: #8c2828; --d-up2: #da5450; --d-up3: #f89189;
-  --p0: #8a6800; --p1: #a87e00; --p2: #c69600; --p3: #e4b61e; --p4: #f5dc82; --p5: #ffffff;
+  --rel-0: #8ccaff; --rel-1: #3d97ff; --rel-2: #1f66d6; --rel-3: #4a4945; --rel-4: #b01f1f; --rel-5: #e63530; --rel-6: #ff6b5e;
   --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 28px rgba(0,0,0,0.45);
 }
 html[data-gp-theme] body { background: var(--plane) !important; margin: 0; }
@@ -1015,7 +998,7 @@ html[data-gp-theme] #map-veil { background: var(--plane) !important; }
 .gp-card { box-sizing: border-box; width: 100%; max-width: 1200px; padding: 24px; display: grid; gap: 18px;
   background: var(--card); border: 1px solid var(--hair); border-radius: 14px; box-shadow: var(--shadow); }
 .gp-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
-.gp-top h1 { margin: 0; font-size: 20px; font-weight: 600; line-height: 1.2; letter-spacing: -0.01em; }
+.gp-top h1 { margin: 0; font-size: 24px; font-weight: 600; line-height: 1.2; letter-spacing: -0.01em; }
 .gp-sub { margin: 3px 0 0; font-size: 12px; color: var(--ink-2); }
 .gp-icon-btn { flex: none; width: 32px; height: 32px; padding: 0; display: grid; place-items: center; cursor: pointer;
   border-radius: 8px; border: 1px solid var(--hair); background: var(--raise); color: var(--ink-2); }
@@ -1113,14 +1096,15 @@ table.gp-table { width: 100%; border-collapse: collapse; font-size: 12px; font-v
 .gp-bar { height: 10px; border-radius: 3px; }
 .gp-bar.change { background: linear-gradient(90deg, var(--d-down3), var(--d-down2) 16.5%, var(--d-down1) 33%, var(--d-mid) 50%,
   var(--d-up1) 67%, var(--d-up2) 83.5%, var(--d-up3)); }
-.gp-bar.price { background: linear-gradient(90deg, var(--p0), var(--p1) 20%, var(--p2) 40%, var(--p3) 60%, var(--p4) 80%, var(--p5)); }
+.gp-bar.price { opacity: 0.5; background: linear-gradient(90deg, var(--rel-0), var(--rel-1) 16.7%, var(--rel-2) 33.3%, var(--rel-3) 50%,
+  var(--rel-4) 66.7%, var(--rel-5) 83.3%, var(--rel-6)); }
 .gp-ticks { display: flex; justify-content: space-between; font-size: 11px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
 .gp-note { margin: 0; font-size: 11px; line-height: 1.45; color: var(--ink-2); }
 #gp-price-legend { display: flex; gap: 32px; align-items: end; flex-wrap: wrap; }
 #gp-price-legend .gp-legend { width: 300px; }
 .gp-dot-key { display: flex; align-items: center; gap: 14px; font-size: 11px; color: var(--ink-2); }
 .gp-dot-key span { display: inline-flex; align-items: center; gap: 6px; }
-.gp-dot-key i { display: inline-block; border-radius: 50%; background: var(--ink-2); }
+.gp-dot-key i { display: inline-block; border-radius: 50%; background: var(--ink-2); opacity: 0.5; }
 
 .gp-foot { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 8px 36px; align-items: start;
   border-top: 1px solid var(--hair); padding-top: 16px; }
@@ -1270,13 +1254,13 @@ html[data-gp-theme] .leaflet-control-zoom a:hover { background: var(--raise) !im
 
       <div id="gp-price-legend" class="gp-hidden">
         <div class="gp-legend">
-          <div class="gp-legend-title">Dot color: price per gallon</div>
+          <div class="gp-legend-title">Dot color: price compared with the U.S. average</div>
           <div class="gp-bar price"></div>
-          <div class="gp-ticks"><span>&le;$3</span><span>$4</span><span>$5</span><span>$6</span><span>$7</span><span>$8+</span></div>
+          <div class="gp-ticks" id="gp-price-ticks"></div>
         </div>
         <div class="gp-legend">
           <div class="gp-legend-title">Dot size: year-over-year change</div>
-          <div class="gp-dot-key"><span><i style="width:6px;height:6px"></i>+5%</span><span><i style="width:10px;height:10px"></i>+15%</span><span><i style="width:16px;height:16px"></i>+30%</span></div>
+          <div class="gp-dot-key"><span><i style="width:7px;height:7px"></i>+5%</span><span><i style="width:14px;height:14px"></i>+15%</span><span><i style="width:24px;height:24px"></i>+30%</span></div>
         </div>
       </div>
     </div>
@@ -1412,8 +1396,11 @@ html[data-gp-theme] .leaflet-control-zoom a:hover { background: var(--raise) !im
         areas().forEach(function (k) { if (!hiA || s[k][LAST] > s[hiA][LAST]) hiA = k; if (!loA || s[k][LAST] < s[loA][LAST]) loA = k; });
         tiles([['Highest', fmt(s[hiA][LAST]), shortName(hiA)], ['Lowest', fmt(s[loA][LAST]), shortName(loA)], ['A year ago', fmt(s.NUS[y1]), dLong(W[y1])]]);
       }
-      $('gp-source').textContent = 'Source: U.S. average from the EIA, week of ' + dLong(W[LAST]) +
-        '. City dots and region tiles are estimates from the March 2026 snapshot (AAA, EIA, curated international averages).';
+      var mid = window.gpPriceMid ? window.gpPriceMid() : s.NUS[LAST];
+      $('gp-price-ticks').innerHTML = '<span>$2.50+ cheaper</span><span>U.S. ' + (noData ? 'est. ' : '') + fmt(mid) + '</span><span>$4+ dearer</span>';
+      $('gp-source').textContent = 'Source: EIA weekly retail prices, week of ' + dLong(W[LAST]) +
+        '. U.S. city dots use their state’s or region’s EIA average, keeping each city’s March 2026 gap to it. ' +
+        'Other cities and the region tiles are March 2026 estimates (AAA, curated international averages).';
     }
     $('narrative-text').classList.toggle('gp-hidden', st.view !== 'price');
   }
@@ -1567,11 +1554,31 @@ html[data-gp-theme] .leaflet-control-zoom a:hover { background: var(--raise) !im
       var e = l.getElement ? l.getElement() : l._path;
       if (e) e.style.display = '';
       if (l._gp.r0) l.setRadius(l._gp.r0);
-      if (l._gp.popup && !l.getPopup()) l.bindPopup(l._gp.popup);
+      if (l._gp.st) { if (l.getPopup && l.getPopup()) { l.closePopup(); l.unbindPopup(); } }
+      else if (l._gp.popup && !l.getPopup()) l.bindPopup(l._gp.popup);
     });
     states.forEach(function (l) { l.setStyle(l._gp.style); l.getTooltip().setContent(l._gp.tip); });
     if (window.gpApplyGrade) window.gpApplyGrade(grade().priceId);   // price colours and tooltips
   }
+  /* ── price view: U.S. city dots at this week's EIA prices. Each city keeps its March 2026 gap to its state's
+     or region's regular average; that area's series for the chosen grade gives the price now. ── */
+  var SNAP = (function () { var t = Date.UTC(2026, 2, 23), b = 0; for (var i = 1; i < N; i++) if (Math.abs(toT(W[i]) - t) < Math.abs(toT(W[b]) - t)) b = i; return b; })();
+  var PRICE_KEY = { '87': 'regular', '89': 'midgrade', '91': 'premium', 'diesel': 'diesel', 'flex': 'e85' };
+  function areaFor(key, code) { return code === 'AK' || code === 'HI' ? 'R5XCA' : H.grades[key].stateSeries[code]; }
+  window.gpCityPrice = function (layer, snapPrice, id) {
+    var gp = layer._gp; if (!gp || !gp.st) return null;            // outside the U.S.: keep the estimate
+    var reg = H.grades.regular, home = areaFor('regular', gp.st), f = snapPrice / reg.series[home][SNAP];
+    var key = PRICE_KEY[id] || 'regular';
+    if (key === 'e85') return +(f * reg.series[home][LAST] * 0.72).toFixed(2);   // no EIA E85 series
+    return +(f * H.grades[key].series[areaFor(key, gp.st)][LAST]).toFixed(2);
+  };
+  window.gpCityNote = function (layer, id) {
+    var gp = layer._gp; if (!gp) return '';
+    if (!gp.st) return "<br><span class='gp-tt-sub'>Estimate, March 2026</span>";
+    var key = PRICE_KEY[id] || 'regular', area = areaFor(key === 'e85' ? 'regular' : key, gp.st);
+    return "<br><span class='gp-tt-sub'>" + stateName(gp.st) + ' · based on the ' + (area.charAt(0) === 'S' ? 'state' : NAMES[area]) +
+      ' EIA average' + (key === 'e85' ? ' (E85 estimated)' : '') + ', ' + dLong(W[LAST]) + '</span>';
+  };
   function fitMap() {
     if (!map) return;
     map.invalidateSize();
@@ -1656,7 +1663,7 @@ html[data-gp-theme] .leaflet-control-zoom a:hover { background: var(--raise) !im
     setViewMode(st.view);
     // the international dots (which include most northern and Californian U.S. cities) arrive about a second later
     (function waitExtras(n) {
-      if ((window._extraLayers || []).length) { collect(); paintMap(); return; }
+      if ((window._extraLayers || []).length) { collect(); paintMap(); if (st.view === 'price' && window.gpApplyGrade) window.gpApplyGrade(grade().priceId); return; }
       if (n < 50) setTimeout(function () { waitExtras(n + 1); }, 200);
     })(0);
   }
