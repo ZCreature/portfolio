@@ -29,6 +29,8 @@ No build step, no dependencies. Open `index.html` via a local server
                                   Checker tile, home page only
     js/sunlight.js                passing light on the healthcare tile,
                                   home page only
+    js/reprint.js                 reprints the charts on the newsroom tile,
+                                  home page only
     assets/data/laps.json         lap data (currently a reconstruction)
     assets/data/editorial.json    tearsheet manifest — scaffold, not yet wired
 
